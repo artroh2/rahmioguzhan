@@ -29,11 +29,11 @@ const educations: Education[] = [
   },
   {
     school: 'Nişantaşı Üniversitesi',
-    degree: { tr: 'Ön Lisans', en: "Associate's Degree" },
+    degree: { tr: 'Sertifika Programı', en: 'Certificate Program' },
     field: { tr: 'Ses Tasarımı ve Müzik Prodüksiyonu', en: 'Sound Design and Music Production' },
     location: 'İstanbul, Türkiye',
-    startYear: '2020',
-    endYear: '2022',
+    startYear: '2024',
+    endYear: '2025',
     description: {
       tr: 'Profesyonel ses mühendisliği, müzik prodüksiyonu ve stüdyo tekniklerinde uzmanlaşma.',
       en: 'Specialization in professional audio engineering, music production, and studio techniques.',
