@@ -64,7 +64,7 @@ const Footer = () => {
             </motion.a>
 
             <motion.a
-              href="#"
+              href="https://instagram.com/kelimelerdense"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -3, scale: 1.1 }}
