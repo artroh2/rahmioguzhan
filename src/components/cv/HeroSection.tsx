@@ -77,6 +77,13 @@ const HeroSection = () => {
           onClick={scrollToAbout}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer group"
         >
+          {/* Vertical Gold Line */}
+          <motion.div
+            initial={{ height: 0 }}
+            animate={{ height: 40 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+            className="w-px bg-primary"
+          />
           <span className="text-sm tracking-widest uppercase">{t('hero.scroll')}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
