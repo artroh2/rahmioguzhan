@@ -55,29 +55,6 @@ const HeroSection = () => {
 
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          onClick={scrollToAbout}
-          className="absolute bottom-0 left-1/2 -translate-x-[calc(50%+2rem)] flex flex-col items-center text-muted-foreground hover:text-primary transition-colors cursor-pointer group"
-        >
-          <span className="text-sm tracking-widest uppercase mb-4">{t('hero.scroll')}</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="w-6 h-6 group-hover:text-primary transition-colors" />
-          </motion.div>
-          {/* Vertical Gold Line connecting to About section */}
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: 48 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-            className="w-px bg-gradient-to-b from-primary to-primary/50 mt-2"
-          />
-        </motion.button>
       </div>
 
       {/* Side Decorations */}
