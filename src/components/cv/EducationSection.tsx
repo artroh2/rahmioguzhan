@@ -28,18 +28,6 @@ const educations: Education[] = [
     },
   },
   {
-    school: 'İstanbul Okan Üniversitesi',
-    degree: { tr: 'Lisans', en: "Bachelor's Degree" },
-    field: { tr: 'Bilişim Sistemleri ve Teknolojileri', en: 'Information Systems and Technologies' },
-    location: 'İstanbul, Türkiye',
-    startYear: '2018',
-    endYear: '2023',
-    description: {
-      tr: 'Yazılım geliştirme, veritabanı yönetimi ve sistem analizi konularında kapsamlı eğitim.',
-      en: 'Comprehensive education in software development, database management, and system analysis.',
-    },
-  },
-  {
     school: 'Nişantaşı Üniversitesi',
     degree: { tr: 'Ön Lisans', en: "Associate's Degree" },
     field: { tr: 'Ses Tasarımı ve Müzik Prodüksiyonu', en: 'Sound Design and Music Production' },
@@ -49,6 +37,18 @@ const educations: Education[] = [
     description: {
       tr: 'Profesyonel ses mühendisliği, müzik prodüksiyonu ve stüdyo tekniklerinde uzmanlaşma.',
       en: 'Specialization in professional audio engineering, music production, and studio techniques.',
+    },
+  },
+  {
+    school: 'İstanbul Okan Üniversitesi',
+    degree: { tr: 'Lisans', en: "Bachelor's Degree" },
+    field: { tr: 'Bilişim Sistemleri ve Teknolojileri', en: 'Information Systems and Technologies' },
+    location: 'İstanbul, Türkiye',
+    startYear: '2018',
+    endYear: '2023',
+    description: {
+      tr: 'Yazılım geliştirme, veritabanı yönetimi ve sistem analizi konularında kapsamlı eğitim.',
+      en: 'Comprehensive education in software development, database management, and system analysis.',
     },
   },
   {
