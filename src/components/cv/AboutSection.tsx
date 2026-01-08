@@ -8,7 +8,7 @@ const highlights = [
   { icon: Briefcase, label: { tr: '10+ Yıl Deneyim', en: '10+ Years Experience' } },
   { icon: GraduationCap, label: { tr: '3 Üniversite Derecesi', en: '3 University Degrees' } },
   { icon: Globe, label: { tr: 'Profesyonel İngilizce', en: 'Professional English' } },
-  { icon: Music, label: { tr: 'Müzik Prodüktörü', en: 'Music Producer' } },
+  { icon: Music, label: { tr: 'Multi-Disipliner Sanatçı', en: 'Multi-Disciplinary Artist' } },
 ];
 
 const AboutSection = () => {
