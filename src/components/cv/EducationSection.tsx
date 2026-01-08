@@ -28,7 +28,7 @@ const educations: Education[] = [
     },
   },
   {
-    school: 'Okan Üniversitesi',
+    school: 'İstanbul Okan Üniversitesi',
     degree: { tr: 'Lisans', en: "Bachelor's Degree" },
     field: { tr: 'Bilişim Sistemleri ve Teknolojileri', en: 'Information Systems and Technologies' },
     location: 'İstanbul, Türkiye',
