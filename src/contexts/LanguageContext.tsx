@@ -1,0 +1,126 @@
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+type Language = 'tr' | 'en';
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const translations: Record<Language, Record<string, string>> = {
+  tr: {
+    // Navigation
+    'nav.about': 'Hakkımda',
+    'nav.experience': 'Deneyim',
+    'nav.education': 'Eğitim',
+    'nav.skills': 'Yetenekler',
+    'nav.contact': 'İletişim',
+    'nav.download': 'CV İndir',
+
+    // Hero
+    'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
+    'hero.subtitle': 'Operasyon & Proje Yönetimi',
+    'hero.scroll': 'Keşfetmek için kaydırın',
+
+    // About
+    'about.title': 'Hakkımda',
+    'about.description': 'Operasyon yönetimi, proje koordinasyonu ve dijital çözümler konusunda deneyimli profesyonel. Çok disiplinli yaklaşım ve yaratıcı problem çözme becerileriyle karmaşık projeleri başarıyla yönetiyorum.',
+
+    // Experience
+    'experience.title': 'İş Deneyimi',
+    'experience.present': 'Günümüz',
+
+    // Education
+    'education.title': 'Eğitim',
+
+    // Skills
+    'skills.title': 'Yetenekler',
+    'skills.languages': 'Diller',
+    'skills.software': 'Yazılımlar',
+    'skills.technical': 'Teknik Beceriler',
+    'skills.hobbies': 'Hobiler',
+
+    // Contact
+    'contact.title': 'İletişim',
+    'contact.subtitle': 'Birlikte çalışmak ister misiniz?',
+    'contact.name': 'İsim',
+    'contact.email': 'E-posta',
+    'contact.message': 'Mesaj',
+    'contact.send': 'Gönder',
+    'contact.success': 'Mesajınız başarıyla gönderildi!',
+    'contact.location': 'Konum',
+
+    // Footer
+    'footer.rights': 'Tüm hakları saklıdır.',
+  },
+  en: {
+    // Navigation
+    'nav.about': 'About',
+    'nav.experience': 'Experience',
+    'nav.education': 'Education',
+    'nav.skills': 'Skills',
+    'nav.contact': 'Contact',
+    'nav.download': 'Download CV',
+
+    // Hero
+    'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
+    'hero.subtitle': 'Operations & Project Management',
+    'hero.scroll': 'Scroll to explore',
+
+    // About
+    'about.title': 'About Me',
+    'about.description': 'Experienced professional in operations management, project coordination, and digital solutions. Successfully managing complex projects with a multidisciplinary approach and creative problem-solving skills.',
+
+    // Experience
+    'experience.title': 'Work Experience',
+    'experience.present': 'Present',
+
+    // Education
+    'education.title': 'Education',
+
+    // Skills
+    'skills.title': 'Skills',
+    'skills.languages': 'Languages',
+    'skills.software': 'Software',
+    'skills.technical': 'Technical Skills',
+    'skills.hobbies': 'Hobbies',
+
+    // Contact
+    'contact.title': 'Contact',
+    'contact.subtitle': 'Would you like to work together?',
+    'contact.name': 'Name',
+    'contact.email': 'Email',
+    'contact.message': 'Message',
+    'contact.send': 'Send',
+    'contact.success': 'Your message has been sent successfully!',
+    'contact.location': 'Location',
+
+    // Footer
+    'footer.rights': 'All rights reserved.',
+  },
+};
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const [language, setLanguage] = useState<Language>('tr');
+
+  const t = (key: string): string => {
+    return translations[language][key] || key;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};
