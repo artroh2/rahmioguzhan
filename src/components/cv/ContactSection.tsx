@@ -12,14 +12,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: { tr: 'E-posta', en: 'Email' },
-    value: 'r.oguzhan.hacieyupoglu@gmail.com',
-    href: 'mailto:r.oguzhan.hacieyupoglu@gmail.com',
+    value: 'rahmioguzhanhacieyupoglu@gmail.com',
+    href: 'mailto:rahmioguzhanhacieyupoglu@gmail.com',
   },
   {
     icon: Phone,
     label: { tr: 'Telefon', en: 'Phone' },
-    value: '+90 553 197 47 43',
-    href: 'tel:+905531974743',
+    value: '+90 545 792 98 76',
+    href: 'tel:+905457929876',
   },
   {
     icon: MapPin,
