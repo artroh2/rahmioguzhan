@@ -25,7 +25,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: { tr: 'Konum', en: 'Location' },
-    value: 'Kartal, İstanbul',
+    value: 'Kartal, İstanbul, Türkiye',
     href: null,
   },
 ];
