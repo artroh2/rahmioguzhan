@@ -76,7 +76,7 @@ const Footer = () => {
             </motion.a>
 
             <motion.a
-              href="https://wa.me/905457929876?text=Merhaba%2C%20web%20sitenizden%20ula%C5%9F%C4%B1yorum."
+              href="https://wa.me/905457929876?text=Merhaba%20O%C4%9Fuzhan%20%2C%20seninle%20ileti%C5%9Fim%20kurmak%20istiyorum%20!"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -3, scale: 1.1 }}
