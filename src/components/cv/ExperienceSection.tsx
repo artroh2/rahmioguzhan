@@ -22,12 +22,12 @@ const experiences: Experience[] = [
     startDate: '2025',
     endDate: null,
     description: {
-      tr: 'Araç değerlendirme ve içerik platformunun kurucusu olarak stratejik yönetim ve iş geliştirme.',
-      en: 'Strategic management and business development as founder of vehicle evaluation and content platform.',
+      tr: 'Tüm operasyonlar, stratejik yönetim, iş ve model geliştirme. Fikir aşamasından nihai sonuca kadar tüm süreçleri yönettim. Tek kişilik bir operasyondur.',
+      en: 'All operations, strategic management, business and model development. I managed all processes from the idea stage to the final result. It is a one-person operation.',
     },
     highlights: {
-      tr: ['Platform geliştirme', 'İş stratejisi', 'İçerik yönetimi'],
-      en: ['Platform development', 'Business strategy', 'Content management'],
+      tr: ['Stratejik yönetim', 'İş geliştirme', 'Model geliştirme', 'Tüm operasyonlar'],
+      en: ['Strategic management', 'Business development', 'Model development', 'All operations'],
     },
   },
   {
