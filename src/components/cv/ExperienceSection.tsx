@@ -31,6 +31,21 @@ const experiences: Experience[] = [
     },
   },
   {
+    company: 'Freelance',
+    position: { tr: 'Serbest Çalışan', en: 'Freelancer' },
+    location: 'İstanbul, Türkiye',
+    startDate: '2022',
+    endDate: '2025',
+    description: {
+      tr: 'Freelance olarak farklı sektörlerde çeşitli projelerde görev aldım. Müşteri ihtiyaçlarını analiz ederek, taleplere uygun yaratıcı ve teknik çözümler geliştirdim, projeleri fikir aşamasından teslimata kadar başarıyla yönettim.',
+      en: 'Worked on various projects across different sectors as a freelancer. Analyzed customer needs, developed creative and technical solutions, and successfully managed projects from idea to delivery.',
+    },
+    highlights: {
+      tr: ['SolidWorks 3D modelleme', '3D yazıcı ile üretim', 'Sosyal medya yönetimi', 'Teknik sunumlar', 'Web tasarım desteği'],
+      en: ['SolidWorks 3D modeling', '3D printing production', 'Social media management', 'Technical presentations', 'Web design support'],
+    },
+  },
+  {
     company: 'Lazer Teknik',
     position: { tr: 'Satış Yöneticisi', en: 'Sales Manager' },
     location: 'İstanbul, Türkiye',
