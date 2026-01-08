@@ -22,7 +22,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <motion.a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/rahmioguzhan"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -3, scale: 1.1 }}
@@ -36,7 +36,7 @@ const Footer = () => {
             </motion.a>
 
             <motion.a
-              href="https://open.spotify.com"
+              href="https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk?si=Ms6HzdJRRva1rsW9TaArMw"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -3, scale: 1.1 }}
@@ -50,7 +50,7 @@ const Footer = () => {
             </motion.a>
 
             <motion.a
-              href="https://instagram.com"
+              href="https://instagram.com/rahmi.oguzhan2"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -3, scale: 1.1 }}
