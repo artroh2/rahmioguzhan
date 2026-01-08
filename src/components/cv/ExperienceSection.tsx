@@ -22,8 +22,8 @@ const experiences: Experience[] = [
     startDate: '2025',
     endDate: null,
     description: {
-      tr: 'Tüm operasyonlar, stratejik yönetim, iş ve model geliştirme. Fikir aşamasından nihai sonuca kadar tüm süreçleri yönettim. Tek kişilik bir operasyondur.',
-      en: 'All operations, strategic management, business and model development. I managed all processes from the idea stage to the final result. It is a one-person operation.',
+      tr: 'Tüm operasyonlar, stratejik yönetim, iş ve model geliştirme. Fikir aşamasından nihai sonuca kadar tüm süreçleri yönettim. Tek kişi olarak yönettiğim bir operasyon olması sebebi ile öne çıkmaktadır.',
+      en: 'All operations, strategic management, business and model development. I managed all processes from the idea stage to the final result. It stands out as an operation managed by a single person.',
     },
     highlights: {
       tr: ['Stratejik yönetim', 'İş geliştirme', 'Model geliştirme', 'Tüm operasyonlar'],
