@@ -31,18 +31,18 @@ const experiences: Experience[] = [
     },
   },
   {
-    company: 'PPL Pilotaj',
-    position: { tr: 'Operasyon Uzmanı', en: 'Operations Specialist' },
+    company: 'Lazer Teknik',
+    position: { tr: 'Satış Yöneticisi', en: 'Sales Manager' },
     location: 'İstanbul, Türkiye',
     startDate: '2022',
-    endDate: '2023',
+    endDate: '2022',
     description: {
-      tr: 'Havacılık sektöründe operasyon yönetimi ve müşteri ilişkileri.',
-      en: 'Operations management and customer relations in the aviation sector.',
+      tr: 'Polonya menşeli Eagle lazer metal sac kesim makinelerinin Türkiye distribütörü olarak, sac kesim yapan şirketlerle birebir görüşerek detaylı bilgilendirme ve sunum yapmak, satış süreçlerini yönetmek ve sosyal medya hesaplarını yönetmek.',
+      en: 'As the Turkey distributor of Polish Eagle laser metal sheet cutting machines, conducting detailed presentations with sheet cutting companies, managing sales processes and social media accounts.',
     },
     highlights: {
-      tr: ['Havacılık operasyonları', 'Müşteri ilişkileri', 'Kalite kontrol'],
-      en: ['Aviation operations', 'Customer relations', 'Quality control'],
+      tr: ['Satış ve pazarlama', 'Ürün sunumları', 'Sosyal medya yönetimi', 'Müşteri ilişkileri'],
+      en: ['Sales and marketing', 'Product presentations', 'Social media management', 'Customer relations'],
     },
   },
   {
