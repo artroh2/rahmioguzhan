@@ -31,18 +31,18 @@ const experiences: Experience[] = [
     },
   },
   {
-    company: 'Duosy',
-    position: { tr: 'Operasyon Koordinatörü', en: 'Operations Coordinator' },
+    company: 'Yılmaz Redüktör',
+    position: { tr: 'Satış Mühendisi', en: 'Sales Engineer' },
     location: 'İstanbul, Türkiye',
-    startDate: '2023',
-    endDate: '2024',
+    startDate: '2019',
+    endDate: '2021',
     description: {
-      tr: 'Operasyonel süreçlerin yönetimi, takım koordinasyonu ve proje takibi.',
-      en: 'Management of operational processes, team coordination, and project tracking.',
+      tr: 'Türkiye\'nin en büyük redüktör fabrikasında, İhracat Departmanında Satış Mühendisi olarak Orta Doğu ve Rusya\'nın redüktör taleplerini karşılamak için teklif aşamasından müşteri memnuniyetine kadar olan süreçleri yürüttüm.',
+      en: 'As a Sales Engineer in the Export Department of Turkey\'s largest gearbox factory, I managed processes from quotation to customer satisfaction for gearbox requests from the Middle East and Russia.',
     },
     highlights: {
-      tr: ['Süreç optimizasyonu', 'Takım yönetimi', 'Proje koordinasyonu'],
-      en: ['Process optimization', 'Team management', 'Project coordination'],
+      tr: ['Proforma hazırlığı', 'Ürün üretim takibi', 'Lojistik yönetimi', 'Banka yazışmaları'],
+      en: ['Proforma preparation', 'Product tracking', 'Logistics management', 'Bank correspondence'],
     },
   },
   {

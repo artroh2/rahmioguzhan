@@ -26,10 +26,16 @@ const Navigation = () => {
   };
 
   const handleDownloadCV = () => {
-    // Create a link to download the CV
+    const cvPath = language === 'tr' 
+      ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
+      : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
+    const fileName = language === 'tr'
+      ? 'Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
+      : 'Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
+    
     const link = document.createElement('a');
-    link.href = '/Rahmi_Oguzhan_Hacieyupoglu_CV.pdf';
-    link.download = 'Rahmi_Oguzhan_Hacieyupoglu_CV.pdf';
+    link.href = cvPath;
+    link.download = fileName;
     link.click();
   };
 
