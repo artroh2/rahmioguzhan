@@ -29,14 +29,9 @@ const Navigation = () => {
     const cvPath = language === 'tr' 
       ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
       : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
-    const fileName = language === 'tr'
-      ? 'Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
-      : 'Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
     
-    const link = document.createElement('a');
-    link.href = cvPath;
-    link.download = fileName;
-    link.click();
+    // Open PDF in new tab - user can download from there
+    window.open(cvPath, '_blank');
   };
 
   return (
