@@ -7,7 +7,7 @@ import EducationSection from '@/components/cv/EducationSection';
 import SkillsSection from '@/components/cv/SkillsSection';
 import ContactSection from '@/components/cv/ContactSection';
 import Footer from '@/components/cv/Footer';
-import WhatsAppButton from '@/components/cv/WhatsAppButton';
+
 
 const Index = () => {
   return (
@@ -21,7 +21,7 @@ const Index = () => {
         <SkillsSection />
         <ContactSection />
         <Footer />
-        <WhatsAppButton />
+        
       </main>
     </LanguageProvider>
   );
