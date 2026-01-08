@@ -95,7 +95,7 @@ const HeroSection = () => {
       </div>
 
       {/* Side Decorations */}
-      <div className="absolute left-8 bottom-32 hidden lg:flex flex-col gap-4">
+      <div className="absolute left-8 bottom-44 hidden lg:flex flex-col gap-4">
         <motion.div
           initial={{ height: 0 }}
           animate={{ height: 100 }}
@@ -103,7 +103,7 @@ const HeroSection = () => {
           className="w-px bg-gradient-to-b from-transparent via-primary to-transparent"
         />
       </div>
-      <div className="absolute right-8 bottom-32 hidden lg:flex flex-col gap-4">
+      <div className="absolute right-8 bottom-44 hidden lg:flex flex-col gap-4">
         <motion.div
           initial={{ height: 0 }}
           animate={{ height: 100 }}
