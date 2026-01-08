@@ -107,6 +107,28 @@ const ContactSection = () => {
                 </div>
               </motion.div>
             ))}
+
+            {/* Google Maps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="mt-6"
+            >
+              <div className="w-full aspect-square max-w-xs rounded-2xl overflow-hidden border border-border shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48193.22567595095!2d29.15!3d40.89!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac5894e2d0c61%3A0xd07d9d1e89deb463!2sKartal%2C%20%C4%B0stanbul!5e0!3m2!1str!2str!4v1704700000000!5m2!1str!2str"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Kartal, İstanbul"
+                />
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
