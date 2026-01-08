@@ -25,7 +25,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About
     'about.title': 'Hakkımda',
-    'about.description': 'Operasyon yönetimi, proje koordinasyonu ve dijital çözümler konusunda deneyimli profesyonel. Çok disiplinli yaklaşım ve yaratıcı problem çözme becerileriyle karmaşık projeleri başarıyla yönetiyorum.',
+    'about.description': 'Operasyon yönetimi, proje koordinasyonu ve dijital çözümler konusunda deneyimli profesyonel. Çok disiplinli yaklaşım ve yaratıcı problem çözme becerileriyle karmaşık projeleri başarıyla yönetiyorum. Birçok farklı sektörde edindiğim tecrübeleri ihtiyaç duyulan alanlarda uyguluyor, farklı bakış açısı ve pratik çözüm yeteneklerimle görevin başarı ile sonuçlanması için süreci yönetiyorum.',
 
     // Experience
     'experience.title': 'İş Deneyimi',
@@ -70,7 +70,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About
     'about.title': 'About Me',
-    'about.description': 'Experienced professional in operations management, project coordination, and digital solutions. Successfully managing complex projects with a multidisciplinary approach and creative problem-solving skills.',
+    'about.description': 'Experienced professional in operations management, project coordination, and digital solutions. Successfully managing complex projects with a multidisciplinary approach and creative problem-solving skills. I apply the experience I have gained in many different sectors to the areas needed, and I manage the process to successfully complete the task with my different perspectives and practical solution abilities.',
 
     // Experience
     'experience.title': 'Work Experience',
