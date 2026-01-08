@@ -16,14 +16,14 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: 'AraçYorumu.com',
-    position: { tr: 'Kurucu Ortak', en: 'Co-Founder' },
+    company: 'Arayor.com',
+    position: { tr: 'Kurucu & CEO', en: 'Founder & CEO' },
     location: 'İstanbul, Türkiye',
-    startDate: '2024',
+    startDate: '2025',
     endDate: null,
     description: {
-      tr: 'Araç değerlendirme ve içerik platformunun kurucu ortağı olarak stratejik yönetim ve iş geliştirme.',
-      en: 'Strategic management and business development as co-founder of vehicle evaluation and content platform.',
+      tr: 'Araç değerlendirme ve içerik platformunun kurucusu olarak stratejik yönetim ve iş geliştirme.',
+      en: 'Strategic management and business development as founder of vehicle evaluation and content platform.',
     },
     highlights: {
       tr: ['Platform geliştirme', 'İş stratejisi', 'İçerik yönetimi'],
