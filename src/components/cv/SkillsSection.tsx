@@ -26,7 +26,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: { tr: 'Tüm Microsoft Office Programları', en: 'All Microsoft Office Programs' }, level: 95 },
       { name: { tr: 'Adobe Creative Suite', en: 'Adobe Creative Suite' }, level: 80 },
-      { name: { tr: 'Yapay Zeka Yetkinliği', en: 'AI Proficiency' }, level: 85 },
+      { name: { tr: 'GPT Uygulamaları', en: 'GPT Applications' }, level: 85 },
       { name: { tr: 'IFS (ERP)', en: 'IFS (ERP)' }, level: 75 },
     ],
   },
