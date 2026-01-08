@@ -16,7 +16,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.education': 'Eğitim',
     'nav.skills': 'Yetenekler',
     'nav.contact': 'İletişim',
-    'nav.download': 'CV İndir',
+    'nav.download': 'CV Görüntüle',
 
     // Hero
     'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
@@ -61,7 +61,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.education': 'Education',
     'nav.skills': 'Skills',
     'nav.contact': 'Contact',
-    'nav.download': 'Download CV',
+    'nav.download': 'View CV',
 
     // Hero
     'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
