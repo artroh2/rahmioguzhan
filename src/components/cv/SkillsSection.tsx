@@ -34,10 +34,10 @@ const skillCategories: SkillCategory[] = [
     icon: Wrench,
     titleKey: 'skills.technical',
     skills: [
-      { name: { tr: 'Proje Yönetimi', en: 'Project Management' }, level: 90 },
+      { name: { tr: 'Proje Yönetimi', en: 'Project Management' }, level: 95 },
       { name: { tr: 'Prompt Mühendisliği ve Web Programlama', en: 'Prompt Engineering & Web Development' }, level: 85 },
       { name: { tr: 'SolidWorks ile 3D Modelleme', en: '3D Modeling with SolidWorks' }, level: 70 },
-      { name: { tr: 'Tek Motorlu Planör Uçak Operasyonları', en: 'Single Engine Glider Aircraft Operations' }, level: 65 },
+      { name: { tr: 'Tek Motorlu Planör Uçak Operasyonları', en: 'Single Engine Glider Aircraft Operations' }, level: 100 },
     ],
   },
   {
