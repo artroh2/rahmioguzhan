@@ -31,8 +31,8 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 md:py-32 px-4 relative overflow-hidden" ref={ref}>
-      {/* Background Decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-primary" />
+      {/* Background Decoration - connects with Hero scroll indicator */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-primary/50 to-primary" />
       
       <div className="container max-w-5xl mx-auto">
         <motion.div
