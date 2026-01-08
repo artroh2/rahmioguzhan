@@ -15,8 +15,9 @@ const skillCategories: SkillCategory[] = [
     icon: Globe,
     titleKey: 'skills.languages',
     skills: [
-      { name: { tr: 'Türkçe', en: 'Turkish' }, level: 100 },
+      { name: { tr: 'Türkçe (Anadil)', en: 'Turkish (Native)' }, level: 100 },
       { name: { tr: 'İngilizce (Profesyonel)', en: 'English (Professional)' }, level: 85 },
+      { name: { tr: 'İspanyolca (B1)', en: 'Spanish (B1)' }, level: 40 },
     ],
   },
   {
