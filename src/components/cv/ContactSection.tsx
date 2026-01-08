@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const contactInfo = [
   {
@@ -41,16 +42,35 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: language === 'tr' ? 'Başarılı!' : 'Success!',
-      description: t('contact.success'),
-    });
-    
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: language === 'tr' ? 'Başarılı!' : 'Success!',
+        description: t('contact.success'),
+      });
+      
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error: any) {
+      console.error('Error sending email:', error);
+      toast({
+        title: language === 'tr' ? 'Hata!' : 'Error!',
+        description: language === 'tr' 
+          ? 'Mesaj gönderilemedi. Lütfen tekrar deneyin.' 
+          : 'Failed to send message. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
