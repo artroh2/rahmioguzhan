@@ -31,21 +31,6 @@ const experiences: Experience[] = [
     },
   },
   {
-    company: 'Yılmaz Redüktör',
-    position: { tr: 'Satış Mühendisi', en: 'Sales Engineer' },
-    location: 'İstanbul, Türkiye',
-    startDate: '2019',
-    endDate: '2021',
-    description: {
-      tr: 'Türkiye\'nin en büyük redüktör fabrikasında, İhracat Departmanında Satış Mühendisi olarak Orta Doğu ve Rusya\'nın redüktör taleplerini karşılamak için teklif aşamasından müşteri memnuniyetine kadar olan süreçleri yürüttüm.',
-      en: 'As a Sales Engineer in the Export Department of Turkey\'s largest gearbox factory, I managed processes from quotation to customer satisfaction for gearbox requests from the Middle East and Russia.',
-    },
-    highlights: {
-      tr: ['Proforma hazırlığı', 'Ürün üretim takibi', 'Lojistik yönetimi', 'Banka yazışmaları'],
-      en: ['Proforma preparation', 'Product tracking', 'Logistics management', 'Bank correspondence'],
-    },
-  },
-  {
     company: 'PPL Pilotaj',
     position: { tr: 'Operasyon Uzmanı', en: 'Operations Specialist' },
     location: 'İstanbul, Türkiye',
@@ -58,6 +43,21 @@ const experiences: Experience[] = [
     highlights: {
       tr: ['Havacılık operasyonları', 'Müşteri ilişkileri', 'Kalite kontrol'],
       en: ['Aviation operations', 'Customer relations', 'Quality control'],
+    },
+  },
+  {
+    company: 'Yılmaz Redüktör',
+    position: { tr: 'Satış Mühendisi', en: 'Sales Engineer' },
+    location: 'İstanbul, Türkiye',
+    startDate: '2019',
+    endDate: '2021',
+    description: {
+      tr: 'Türkiye\'nin en büyük redüktör fabrikasında, İhracat Departmanında Satış Mühendisi olarak Orta Doğu ve Rusya\'nın redüktör taleplerini karşılamak için teklif aşamasından müşteri memnuniyetine kadar olan süreçleri yürüttüm.',
+      en: 'As a Sales Engineer in the Export Department of Turkey\'s largest gearbox factory, I managed processes from quotation to customer satisfaction for gearbox requests from the Middle East and Russia.',
+    },
+    highlights: {
+      tr: ['Proforma hazırlığı', 'Ürün üretim takibi', 'Lojistik yönetimi', 'Banka yazışmaları'],
+      en: ['Proforma preparation', 'Product tracking', 'Logistics management', 'Bank correspondence'],
     },
   },
   {
