@@ -32,13 +32,6 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
-          {/* Decorative Line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="w-24 h-0.5 bg-primary mx-auto"
-          />
 
           {/* Name */}
           <motion.h1
@@ -60,13 +53,6 @@ const HeroSection = () => {
             {t('hero.subtitle')}
           </motion.p>
 
-          {/* Decorative Line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="w-24 h-0.5 bg-primary mx-auto"
-          />
         </motion.div>
 
         {/* Scroll Indicator */}
