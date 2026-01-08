@@ -45,7 +45,7 @@ const skillCategories: SkillCategory[] = [
     titleKey: 'skills.hobbies',
     skills: [
       { name: { tr: 'Şiir Yazarlığı', en: 'Poetry Writing' }, level: 90 },
-      { name: { tr: 'Gitar ile Beste Yapımı', en: 'Composing with Guitar' }, level: 85 },
+      { name: { tr: 'Gitar ve Piano ile Beste Yapımı ve İcra', en: 'Composing and Performing with Guitar and Piano' }, level: 85 },
       { name: { tr: 'Elektronik Dans Müziği Prodüksiyonu', en: 'Electronic Dance Music Production' }, level: 80 },
       { name: { tr: 'Çeşitli Sportif Aktiviteler', en: 'Various Sports Activities' }, level: 75 },
     ],
