@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Download, Globe } from 'lucide-react';
+import { Eye, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 
 const navItems = [
   { id: 'about', labelKey: 'nav.about' },
@@ -25,14 +24,9 @@ const Navigation = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr');
   };
 
-  const handleDownloadCV = () => {
-    const cvPath = language === 'tr' 
-      ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
-      : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
-    
-    // Open PDF in new tab - user can download from there
-    window.open(cvPath, '_blank');
-  };
+  const cvPath = language === 'tr' 
+    ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
+    : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
 
   return (
     <motion.nav
@@ -80,15 +74,16 @@ const Navigation = () => {
               <span className="uppercase">{language === 'tr' ? 'EN' : 'TR'}</span>
             </motion.button>
 
-            {/* Download CV */}
-            <Button
-              onClick={handleDownloadCV}
-              size="sm"
-              className="hidden sm:flex bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+            {/* View CV - Using anchor tag to avoid popup blockers */}
+            <a
+              href={cvPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
             >
-              <Download className="w-4 h-4" />
+              <Eye className="w-4 h-4" />
               {t('nav.download')}
-            </Button>
+            </a>
           </div>
         </div>
       </div>
