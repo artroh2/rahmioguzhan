@@ -66,6 +66,9 @@ const ContactSection = () => {
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient">
             {t('contact.title')}
           </h2>
+          <p className="text-xl font-medium text-primary">
+            {language === 'tr' ? 'Benimle çalışmak ister misiniz?' : 'Would you like to work with me?'}
+          </p>
           <p className="text-lg text-muted-foreground">{t('contact.subtitle')}</p>
           <div className="section-divider" />
         </motion.div>
