@@ -51,6 +51,18 @@ const educations: Education[] = [
       en: 'Specialization in professional audio engineering, music production, and studio techniques.',
     },
   },
+  {
+    school: 'Ibertour Aviation Academy',
+    degree: { tr: 'PPL Pilotaj Eğitimi', en: 'PPL Pilot Training' },
+    field: { tr: 'Özel Pilot Lisansı', en: 'Private Pilot License' },
+    location: 'İspanya',
+    startYear: '2017',
+    endYear: '2017',
+    description: {
+      tr: 'Özel pilot lisansı (PPL) eğitimi ve uçuş sertifikasyonu.',
+      en: 'Private Pilot License (PPL) training and flight certification.',
+    },
+  },
 ];
 
 const EducationSection = () => {
