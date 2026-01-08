@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const highlights = [
   { icon: Briefcase, label: { tr: '10+ Yıl Deneyim', en: '10+ Years Experience' } },
-  { icon: GraduationCap, label: { tr: '2 Üniversite Derecesi', en: '2 University Degrees' } },
+  { icon: GraduationCap, label: { tr: '3 Üniversite Derecesi', en: '3 University Degrees' } },
   { icon: Globe, label: { tr: 'Profesyonel İngilizce', en: 'Professional English' } },
   { icon: Music, label: { tr: 'Müzik Prodüktörü', en: 'Music Producer' } },
 ];
