@@ -20,7 +20,7 @@ const educations: Education[] = [
     degree: { tr: 'Lisans (Devam Ediyor)', en: "Bachelor's Degree (In Progress)" },
     field: { tr: 'Uluslararası İlişkiler', en: 'International Relations' },
     location: 'Eskişehir, Türkiye',
-    startYear: '2024',
+    startYear: '2025',
     endYear: { tr: 'Devam Ediyor', en: 'Present' },
     description: {
       tr: '1. sınıf öğrencisi olarak uluslararası politika ve diplomasi alanlarında eğitim.',
@@ -44,8 +44,8 @@ const educations: Education[] = [
     degree: { tr: 'Lisans', en: "Bachelor's Degree" },
     field: { tr: 'Bilişim Sistemleri ve Teknolojileri', en: 'Information Systems and Technologies' },
     location: 'İstanbul, Türkiye',
-    startYear: '2018',
-    endYear: '2023',
+    startYear: '2009',
+    endYear: '2014',
     description: {
       tr: 'Yazılım geliştirme, veritabanı yönetimi ve sistem analizi konularında kapsamlı eğitim.',
       en: 'Comprehensive education in software development, database management, and system analysis.',
@@ -56,8 +56,8 @@ const educations: Education[] = [
     degree: { tr: 'PPL Pilotaj Eğitimi', en: 'PPL Pilot Training' },
     field: { tr: 'Özel Pilot Lisansı', en: 'Private Pilot License' },
     location: 'İspanya',
-    startYear: '2017',
-    endYear: '2017',
+    startYear: '2014',
+    endYear: '2015',
     description: {
       tr: 'Özel pilot lisansı (PPL) eğitimi ve uçuş sertifikasyonu.',
       en: 'Private Pilot License (PPL) training and flight certification.',
