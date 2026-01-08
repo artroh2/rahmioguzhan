@@ -44,10 +44,10 @@ const skillCategories: SkillCategory[] = [
     icon: Heart,
     titleKey: 'skills.hobbies',
     skills: [
-      { name: { tr: 'Gitar & Müzik', en: 'Guitar & Music' }, level: 90 },
-      { name: { tr: 'EDM Prodüksiyonu', en: 'EDM Production' }, level: 85 },
-      { name: { tr: 'Şiir Yazarlığı', en: 'Poetry Writing' }, level: 80 },
-      { name: { tr: 'Spor', en: 'Sports' }, level: 75 },
+      { name: { tr: 'Şiir Yazarlığı', en: 'Poetry Writing' }, level: 90 },
+      { name: { tr: 'Gitar ile Beste Yapımı', en: 'Composing with Guitar' }, level: 85 },
+      { name: { tr: 'Elektronik Dans Müziği Prodüksiyonu', en: 'Electronic Dance Music Production' }, level: 80 },
+      { name: { tr: 'Çeşitli Sportif Aktiviteler', en: 'Various Sports Activities' }, level: 75 },
     ],
   },
 ];
