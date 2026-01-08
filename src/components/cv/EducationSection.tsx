@@ -10,11 +10,23 @@ interface Education {
   field: { tr: string; en: string };
   location: string;
   startYear: string;
-  endYear: string;
+  endYear: string | { tr: string; en: string };
   description?: { tr: string; en: string };
 }
 
 const educations: Education[] = [
+  {
+    school: 'Anadolu Üniversitesi',
+    degree: { tr: 'Lisans (Devam Ediyor)', en: "Bachelor's Degree (In Progress)" },
+    field: { tr: 'Uluslararası İlişkiler', en: 'International Relations' },
+    location: 'Eskişehir, Türkiye',
+    startYear: '2024',
+    endYear: { tr: 'Devam Ediyor', en: 'Present' },
+    description: {
+      tr: '1. sınıf öğrencisi olarak uluslararası politika ve diplomasi alanlarında eğitim.',
+      en: 'First-year student studying international politics and diplomacy.',
+    },
+  },
   {
     school: 'Okan Üniversitesi',
     degree: { tr: 'Lisans', en: "Bachelor's Degree" },
@@ -91,7 +103,7 @@ const EducationSection = () => {
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  {edu.startYear} - {edu.endYear}
+                  {edu.startYear} - {typeof edu.endYear === 'string' ? edu.endYear : edu.endYear[language]}
                 </span>
                 <span className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
