@@ -117,8 +117,9 @@
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
-    padding-bottom: 0.15em;
-    line-height: 1.4;
+    padding-bottom: 0.25em;
+    line-height: 1.5;
+    display: inline-block;
   }
 
   .card-glow {
