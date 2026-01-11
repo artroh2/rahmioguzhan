@@ -80,14 +80,14 @@ const translations: Record<Language, Record<string, string>> = {
     'education.title': 'Education',
 
     // Skills
-    'skills.title': 'Skills',
+    'skills.title': 'Skills & Abilities',
     'skills.languages': 'Languages',
     'skills.software': 'Software',
     'skills.technical': 'Technical Skills',
     'skills.hobbies': 'Hobbies',
 
     // Contact
-    'contact.title': 'Contact',
+    'contact.title': 'Contact Information',
     'contact.subtitle': 'Would you like to work together?',
     'contact.name': 'Name',
     'contact.email': 'Email',

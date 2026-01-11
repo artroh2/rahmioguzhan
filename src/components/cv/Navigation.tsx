@@ -24,7 +24,9 @@ const Navigation = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr');
   };
 
-  const cvPath = '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf';
+  const cvPath = language === 'tr' 
+    ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
+    : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
 
   return (
     <motion.nav
@@ -61,8 +63,8 @@ const Navigation = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            {/* Language Toggle - Temporarily disabled */}
-            {/* <motion.button
+            {/* Language Toggle */}
+            <motion.button
               onClick={toggleLanguage}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -70,7 +72,7 @@ const Navigation = () => {
             >
               <Globe className="w-4 h-4" />
               <span className="uppercase">{language === 'tr' ? 'EN' : 'TR'}</span>
-            </motion.button> */}
+            </motion.button>
 
             {/* View CV - Using anchor tag to avoid popup blockers */}
             <a
