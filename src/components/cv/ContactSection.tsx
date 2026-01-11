@@ -97,7 +97,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-8 flex flex-col items-center lg:items-start"
           >
             {contactInfo.map((info, index) => (
               <motion.div
