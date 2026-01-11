@@ -76,22 +76,6 @@ const experiences: Experience[] = [
       en: ['Proforma preparation', 'Product tracking', 'Logistics management', 'Bank correspondence'],
     },
   },
-  {
-    company: 'Various Companies',
-    companyTr: 'Çeşitli Şirketler',
-    position: { tr: 'Proje & Operasyon Yönetimi', en: 'Project & Operations Management' },
-    location: 'İstanbul, Türkiye',
-    startDate: '2014',
-    endDate: '2022',
-    description: {
-      tr: 'Farklı sektörlerde proje yönetimi, operasyon koordinasyonu ve dijital çözümler geliştirme deneyimi.',
-      en: 'Experience in project management, operations coordination, and digital solutions development across various sectors.',
-    },
-    highlights: {
-      tr: ['Proje yönetimi', 'Dijital dönüşüm', 'Süreç geliştirme'],
-      en: ['Project management', 'Digital transformation', 'Process improvement'],
-    },
-  },
 ];
 
 const ExperienceCard = ({ experience, index }: { experience: Experience; index: number }) => {
