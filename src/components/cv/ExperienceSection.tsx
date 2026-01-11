@@ -17,7 +17,7 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: 'Arayor.com',
+    company: 'arayor.com & aracyorumu.com',
     position: { tr: 'Kurucu & CEO', en: 'Founder & CEO' },
     location: 'İstanbul, Türkiye',
     startDate: '2025',
