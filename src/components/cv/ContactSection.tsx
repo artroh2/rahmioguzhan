@@ -13,8 +13,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: { tr: 'E-posta', en: 'Email' },
-    value: 'rahmioguzhanhacieyupoglu@gmail.com',
-    href: 'mailto:rahmioguzhanhacieyupoglu@gmail.com',
+    value: 'rahmioguzhan@icloud.com',
+    href: 'mailto:rahmioguzhan@icloud.com',
   },
   {
     icon: Phone,
