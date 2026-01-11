@@ -28,7 +28,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.description': 'Operasyon yönetimi, proje koordinasyonu ve dijital çözümler konusunda deneyimli profesyonelim. Çok disiplinli yaklaşım ve yaratıcı problem çözme becerileriyle karmaşık projeleri başarıyla yönetiyorum. Birçok farklı sektörde edindiğim tecrübeleri ihtiyaç duyulan alanlarda uyguluyor, farklı bakış açısı ve pratik çözüm yeteneklerimle görevin başarı ile sonuçlanması için süreci yönetiyorum.',
 
     // Experience
-    'experience.title': 'İş Deneyimi',
+    'experience.title': 'İş Deneyimleri',
     'experience.present': 'Günümüz',
 
     // Education
