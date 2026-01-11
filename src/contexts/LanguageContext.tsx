@@ -35,7 +35,7 @@ const translations: Record<Language, Record<string, string>> = {
     'education.title': 'Eğitim',
 
     // Skills
-    'skills.title': 'Yetenekler',
+    'skills.title': 'Yetenekler ve Kabiliyetler',
     'skills.languages': 'Diller',
     'skills.software': 'Yazılımlar',
     'skills.technical': 'Teknik Beceriler',
