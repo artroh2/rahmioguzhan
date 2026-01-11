@@ -42,7 +42,7 @@ const translations: Record<Language, Record<string, string>> = {
     'skills.hobbies': 'Hobiler',
 
     // Contact
-    'contact.title': 'İletişim',
+    'contact.title': 'İletişim Bilgileri',
     'contact.subtitle': 'Birlikte çalışmak ister misiniz?',
     'contact.name': 'İsim',
     'contact.email': 'E-posta',
