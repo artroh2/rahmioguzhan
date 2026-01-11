@@ -6,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Experience {
   company: string;
+  companyTr?: string;
   position: { tr: string; en: string };
   location: string;
   startDate: string;
@@ -76,7 +77,8 @@ const experiences: Experience[] = [
     },
   },
   {
-    company: 'Çeşitli Şirketler',
+    company: 'Various Companies',
+    companyTr: 'Çeşitli Şirketler',
     position: { tr: 'Proje & Operasyon Yönetimi', en: 'Project & Operations Management' },
     location: 'İstanbul, Türkiye',
     startDate: '2014',
@@ -125,7 +127,9 @@ const ExperienceCard = ({ experience, index }: { experience: Experience; index: 
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-primary" />
-                <h3 className="font-display text-xl font-bold text-primary">{experience.company}</h3>
+                <h3 className="font-display text-xl font-bold text-primary">
+                  {language === 'tr' && experience.companyTr ? experience.companyTr : experience.company}
+                </h3>
               </div>
               <p className="text-lg font-medium text-foreground">{experience.position[language]}</p>
             </div>
