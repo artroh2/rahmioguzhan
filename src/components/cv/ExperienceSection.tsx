@@ -194,7 +194,7 @@ const ExperienceSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center space-y-4 mb-16"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient whitespace-nowrap">
             {t('experience.title')}
           </h2>
           <div className="section-divider" />

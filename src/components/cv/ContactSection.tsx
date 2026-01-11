@@ -107,7 +107,7 @@ const ContactSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ x: 10 }}
-                className="flex items-center gap-4 group"
+                className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 group text-center sm:text-left"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
                   <info.icon className="w-6 h-6 text-primary" />
