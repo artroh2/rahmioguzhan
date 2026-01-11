@@ -76,6 +76,22 @@ const experiences: Experience[] = [
       en: ['Proforma preparation', 'Product tracking', 'Logistics management', 'Bank correspondence'],
     },
   },
+  {
+    company: 'Other',
+    companyTr: 'Diğer',
+    position: { tr: 'Çeşitli Pozisyonlar', en: 'Various Positions' },
+    location: 'İstanbul, Türkiye',
+    startDate: '2014',
+    endDate: '2019',
+    description: {
+      tr: 'Farklı sektörlerde çeşitli projelerde görev aldım. Proje yönetimi, operasyon koordinasyonu ve dijital çözümler geliştirme deneyimi edindim.',
+      en: 'Worked on various projects across different sectors. Gained experience in project management, operations coordination, and digital solutions development.',
+    },
+    highlights: {
+      tr: ['Proje yönetimi', 'Operasyon koordinasyonu', 'Dijital çözümler'],
+      en: ['Project management', 'Operations coordination', 'Digital solutions'],
+    },
+  },
 ];
 
 const ExperienceCard = ({ experience, index }: { experience: Experience; index: number }) => {
