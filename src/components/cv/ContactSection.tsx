@@ -117,12 +117,12 @@ const ContactSection = () => {
                   {info.href ? (
                     <a
                       href={info.href}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                      className="text-base sm:text-lg font-medium text-foreground hover:text-primary transition-colors break-all sm:break-normal"
                     >
                       {info.value}
                     </a>
                   ) : (
-                    <p className="text-lg font-medium text-foreground">{info.value}</p>
+                    <p className="text-base sm:text-lg font-medium text-foreground">{info.value}</p>
                   )}
                 </div>
               </motion.div>
