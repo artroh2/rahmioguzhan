@@ -24,9 +24,9 @@ const skillCategories: SkillCategory[] = [
     icon: Code,
     titleKey: 'skills.software',
     skills: [
-      { name: { tr: 'Tüm Microsoft Office Programları', en: 'All Microsoft Office Programs' }, level: 95 },
-      { name: { tr: 'Adobe Creative Suite', en: 'Adobe Creative Suite' }, level: 80 },
       { name: { tr: 'GPT Uygulamaları', en: 'GPT Applications' }, level: 85 },
+      { name: { tr: 'Adobe Creative Suite', en: 'Adobe Creative Suite' }, level: 80 },
+      { name: { tr: 'Tüm Microsoft Office Programları', en: 'All Microsoft Office Programs' }, level: 95 },
       { name: { tr: 'IFS (ERP)', en: 'IFS (ERP)' }, level: 75 },
     ],
   },
