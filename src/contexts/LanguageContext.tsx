@@ -20,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
-    'hero.subtitle': 'Operasyon & Proje Yönetimi',
+    'hero.subtitle': 'Sanat & Operasyon & Proje Yönetimi ve Liderlik',
     'hero.scroll': 'Keşfetmek için kaydırın',
 
     // About
@@ -66,7 +66,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
-    'hero.subtitle': 'Operations & Project Management',
+    'hero.subtitle': 'Art & Operations & Project Management and Leadership',
     'hero.scroll': 'Scroll to explore',
 
     // About
