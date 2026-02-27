@@ -5,10 +5,10 @@ import { Briefcase, GraduationCap, Globe, Music } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const highlights = [
-  { icon: Briefcase, label: { tr: '10+ Yıl Deneyim', en: '10+ Years Experience' } },
+  { icon: Briefcase, label: { tr: '10+ Yıl İş Deneyimi', en: '10+ Years Work Experience' } },
   { icon: GraduationCap, label: { tr: '3 Üniversite Derecesi', en: '3 University Degrees' } },
   { icon: Globe, label: { tr: 'Profesyonel İngilizce', en: 'Professional English' } },
-  { icon: Music, label: { tr: 'Multi-Disipliner Sanatçı', en: 'Multi-Disciplinary Artist' } },
+  { icon: Music, label: { tr: 'Multi-Disipliner Sanatçı 20+ Yıl Deneyim', en: 'Multi-Disciplinary Artist 20+ Years Experience' } },
 ];
 
 const AboutSection = () => {
