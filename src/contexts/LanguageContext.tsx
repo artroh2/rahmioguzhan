@@ -26,6 +26,7 @@ const translations: Record<Language, Record<string, string>> = {
     // About
     'about.title': 'Hakkımda',
     'about.description': 'Operasyon yönetimi, proje koordinasyonu ve dijital çözümler konusunda deneyimli profesyonelim. Çok disiplinli yaklaşım ve yaratıcı problem çözme becerileriyle karmaşık projeleri başarıyla yönetiyorum. Birçok farklı sektörde edindiğim tecrübeleri ihtiyaç duyulan alanlarda uyguluyor, farklı bakış açısı ve pratik çözüm yeteneklerimle görevin başarı ile sonuçlanması için süreci yönetiyorum.',
+    'about.description2': 'Sanat ve üretimi konusunda 20+ yıl deneyim ile, 1500\'ün üzerinde şiir, şarkı sözü, dans müziğinin yanı sıra yapay zeka destekli dijital sanat ve yapay zeka desteği ile üretim konusunda Dünya\'ya katkı sağlamaya çalışıyorum.',
 
     // Experience
     'experience.title': 'İş Deneyimleri',
@@ -71,6 +72,7 @@ const translations: Record<Language, Record<string, string>> = {
     // About
     'about.title': 'About Me',
     'about.description': 'Experienced professional in operations management, project coordination, and digital solutions. Successfully managing complex projects with a multidisciplinary approach and creative problem-solving skills. I apply the experience I have gained in many different sectors to the areas needed, and I manage the process to successfully complete the task with my different perspectives and practical solution abilities.',
+    'about.description2': 'With 20+ years of experience in art and production, I strive to contribute to the world through over 1,500 poems, song lyrics, dance music, as well as AI-powered digital art and AI-assisted production.',
 
     // Experience
     'experience.title': 'Work Experience',

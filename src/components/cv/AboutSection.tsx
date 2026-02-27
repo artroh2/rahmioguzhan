@@ -57,6 +57,13 @@ const AboutSection = () => {
             {t('about.description')}
           </motion.p>
 
+          <motion.p
+            variants={itemVariants}
+            className="text-center text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+          >
+            {t('about.description2')}
+          </motion.p>
+
           {/* Highlights Grid */}
           <motion.div
             variants={itemVariants}
