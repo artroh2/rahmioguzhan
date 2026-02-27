@@ -40,7 +40,7 @@ const translations: Record<Language, Record<string, string>> = {
     'skills.languages': 'Diller',
     'skills.software': 'Yazılımlar',
     'skills.technical': 'Teknik Beceriler',
-    'skills.hobbies': 'Hobiler',
+    'skills.hobbies': 'Profesyonel Hobiler',
 
     // Contact
     'contact.title': 'İletişim Bilgileri',
@@ -86,7 +86,7 @@ const translations: Record<Language, Record<string, string>> = {
     'skills.languages': 'Languages',
     'skills.software': 'Software',
     'skills.technical': 'Technical Skills',
-    'skills.hobbies': 'Hobbies',
+    'skills.hobbies': 'Professional Hobbies',
 
     // Contact
     'contact.title': 'Contact Information',
