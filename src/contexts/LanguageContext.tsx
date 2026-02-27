@@ -53,7 +53,8 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.location': 'Konum',
 
     // Footer
-    'footer.rights': 'tarafından tasarlanmıştır. Tüm hakları saklıdır.',
+    'footer.designed': 'tarafından tasarlanmıştır.',
+    'footer.rights': 'Tüm hakları saklıdır.',
   },
   en: {
     // Navigation
@@ -99,7 +100,8 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.location': 'Location',
 
     // Footer
-    'footer.rights': 'Designed by Rahmi Oğuzhan Hacıeyüpoğlu. All rights reserved.',
+    'footer.designed': 'Designed by Rahmi Oğuzhan Hacıeyüpoğlu.',
+    'footer.rights': 'All rights reserved.',
   },
 };
 
