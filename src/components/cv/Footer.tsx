@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Copyright */}
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {currentYear} Rahmi Oğuzhan Hacıeyüpoğlu. {t('footer.rights')}
+            © {currentYear} Rahmi Oğuzhan Hacıeyüpoğlu {t('footer.rights')}
           </p>
 
           {/* Social Links */}
