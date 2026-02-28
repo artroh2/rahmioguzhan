@@ -33,6 +33,16 @@ const HeroSection = () => {
           className="space-y-6"
         >
 
+          {/* We Are 1 */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="font-display text-xl md:text-3xl lg:text-4xl font-bold tracking-tight underline underline-offset-8 decoration-2"
+          >
+            <span className="text-gradient">We Are 1</span>
+          </motion.p>
+
           {/* Name */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
