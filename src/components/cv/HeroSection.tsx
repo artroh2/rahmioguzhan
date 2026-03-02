@@ -80,21 +80,6 @@ const HeroSection = () => {
             {t('hero.subtitle')}
           </motion.p>
 
-          {/* Scroll hint */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="pt-6"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-6 h-10 rounded-full border-2 border-primary/40 flex items-start justify-center p-1.5"
-            >
-              <motion.div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            </motion.div>
-          </motion.div>
         </motion.div>
       </div>
 
