@@ -7,7 +7,6 @@ const navItems = [
   { id: 'experience', labelKey: 'nav.experience' },
   { id: 'education', labelKey: 'nav.education' },
   { id: 'skills', labelKey: 'nav.skills' },
-  { id: 'contact', labelKey: 'nav.contact' },
 ];
 
 const Navigation = () => {
