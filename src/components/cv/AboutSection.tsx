@@ -116,41 +116,26 @@ const AboutSection = () => {
           </motion.div>
 
           {/* Social Links */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-4"
-          >
+          <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
-              <motion.a
+              <a
                 key={index}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, y: -6, rotate: [0, -5, 5, 0] }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:shadow-lg"
+                className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer"
                 style={{
                   background: link.color
                     ? `${link.color}20`
                     : 'hsl(var(--foreground) / 0.1)',
                   color: link.color || 'hsl(var(--foreground))',
-                  boxShadow: 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 8px 25px ${link.color ? link.color + '40' : 'hsl(var(--foreground) / 0.2)'}`;
-                  e.currentTarget.style.background = link.color ? `${link.color}35` : 'hsl(var(--foreground) / 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.background = link.color ? `${link.color}20` : 'hsl(var(--foreground) / 0.1)';
                 }}
                 aria-label={link.label}
               >
                 {link.icon}
-              </motion.a>
+              </a>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
