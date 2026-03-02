@@ -2,7 +2,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navigation from '@/components/cv/Navigation';
 import HeroSection from '@/components/cv/HeroSection';
 import AboutSection from '@/components/cv/AboutSection';
-import ExperienceSection from '@/components/cv/ExperienceSection';
+
 import EducationSection from '@/components/cv/EducationSection';
 import SkillsSection from '@/components/cv/SkillsSection';
 
@@ -16,7 +16,7 @@ const Index = () => {
         <Navigation />
         <HeroSection />
         <AboutSection />
-        <ExperienceSection />
+        
         <EducationSection />
         <SkillsSection />
         
