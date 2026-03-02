@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Eye, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const navItems: { id: string; labelKey: string }[] = [];
@@ -18,9 +18,6 @@ const Navigation = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr');
   };
 
-  const cvPath = language === 'tr' 
-    ? '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_TR.pdf'
-    : '/cv/Rahmi_Oguzhan_Hacieyupoglu_CV_EN.pdf';
 
   return (
     <motion.nav
@@ -68,16 +65,6 @@ const Navigation = () => {
               <span className="uppercase">{language === 'tr' ? 'EN' : 'TR'}</span>
             </motion.button>
 
-            {/* View CV */}
-            <a
-              href={cvPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
-            >
-              <Eye className="w-4 h-4" />
-              {t('nav.download')}
-            </a>
           </div>
         </div>
       </div>
