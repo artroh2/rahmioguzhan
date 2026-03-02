@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const socialLinks = [
   {
-    href: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk?si=Ms6HzdJRRva1rsW9TaArMw',
+    href: 'https://open.spotify.com/intl-tr/album/0qsai0PajSX9TgzyyzlzR2?si=svW0Xz5KT7mdE5UCl1sB0A',
     label: 'Spotify',
     color: '#1DB954',
     icon: (
@@ -14,19 +14,19 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=vK7tYRe1RlyiH4rswIRqlA',
+    href: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=kqnHYZQHTACmv9YggEdp2g',
     label: 'Spotify Artist',
     color: '#1DB954',
     icon: <Headphones className="w-5 h-5" />,
   },
   {
-    href: 'https://youtube.com/@rahmioguzhan',
+    href: 'https://www.youtube.com/@Siir2.0',
     label: 'YouTube',
     color: '#FF0000',
     icon: <Youtube className="w-5 h-5" />,
   },
   {
-    href: 'https://instagram.com/rahmi.oguzhan2',
+    href: 'https://www.instagram.com/rahmi.oguzhan2',
     label: 'Instagram',
     color: '#E4405F',
     icon: (
@@ -34,9 +34,9 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://instagram.com/kelimelerdense',
-    label: 'Şiir Kitabı',
-    color: null,
+    href: 'https://www.instagram.com/siir2.0',
+    label: 'Şiir 2.0',
+    color: '#E4405F',
     icon: <BookOpen className="w-5 h-5" />,
   },
   {
@@ -48,7 +48,7 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://soundcloud.com/user-459086265/sets/we-are-1',
+    href: 'https://soundcloud.com/rahmioguzhan',
     label: 'SoundCloud',
     color: '#FF5500',
     icon: (
@@ -56,7 +56,7 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://linkedin.com/in/rahmioguzhan',
+    href: 'https://www.linkedin.com/in/rahmioguzhan/',
     label: 'LinkedIn',
     color: '#0A66C2',
     icon: (
