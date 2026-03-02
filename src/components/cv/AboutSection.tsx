@@ -31,8 +31,9 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 md:py-32 px-4 relative overflow-hidden" ref={ref}>
-      {/* Background Decoration - connects with Hero scroll indicator */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-primary/50 to-primary" />
+      {/* Warm ambient glow */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl" 
+        style={{ background: 'radial-gradient(circle, hsl(28 85% 55%), transparent)' }} />
       
       <div className="container max-w-5xl mx-auto">
         <motion.div
@@ -73,9 +74,10 @@ const AboutSection = () => {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="glass rounded-xl p-6 text-center space-y-3 card-glow-hover transition-all duration-300"
+                className="glass-warm rounded-2xl p-6 text-center space-y-3 card-glow-hover transition-all duration-300"
               >
-                <div className="w-12 h-12 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, hsl(28 85% 55% / 0.2), hsl(195 45% 50% / 0.15))' }}>
                   <item.icon className="w-6 h-6 text-primary" />
                 </div>
                 <p className="text-sm md:text-base font-medium text-foreground">
@@ -86,9 +88,6 @@ const AboutSection = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Bottom Decoration */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-primary to-transparent" />
     </section>
   );
 };
