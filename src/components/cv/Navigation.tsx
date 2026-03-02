@@ -2,12 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Eye, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const navItems = [
-  { id: 'about', labelKey: 'nav.about' },
-  
-  
-  
-];
+const navItems: { id: string; labelKey: string }[] = [];
 
 const Navigation = () => {
   const { t, language, setLanguage } = useLanguage();
