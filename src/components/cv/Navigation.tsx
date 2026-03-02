@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const navItems = [
   { id: 'about', labelKey: 'nav.about' },
   
-  { id: 'education', labelKey: 'nav.education' },
+  
   { id: 'skills', labelKey: 'nav.skills' },
 ];
 
