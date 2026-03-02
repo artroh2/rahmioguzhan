@@ -4,7 +4,7 @@ import HeroSection from '@/components/cv/HeroSection';
 import AboutSection from '@/components/cv/AboutSection';
 
 
-import SkillsSection from '@/components/cv/SkillsSection';
+
 
 import Footer from '@/components/cv/Footer';
 
@@ -18,7 +18,7 @@ const Index = () => {
         <AboutSection />
         
         
-        <SkillsSection />
+        
         
         <Footer />
         
