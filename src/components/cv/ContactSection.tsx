@@ -89,9 +89,13 @@ const ContactSection = () => {
           className="text-center space-y-4 mb-16"
         >
           <p className="text-lg text-muted-foreground">{t('contact.subtitle')}</p>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient">
-            {t('contact.title')}
-          </h2>
+          <div className="inline-flex items-center gap-4 mx-auto">
+            <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-primary/60" />
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient">
+              {t('contact.title')}
+            </h2>
+            <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-primary/60" />
+          </div>
           <div className="section-divider" />
         </motion.div>
 
