@@ -93,7 +93,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 md:py-32 px-4 relative overflow-hidden" ref={ref}>
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl" 
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none" 
         style={{ background: 'radial-gradient(circle, hsl(28 85% 55%), transparent)' }} />
       
       <div className="container max-w-5xl mx-auto">
@@ -116,7 +116,7 @@ const AboutSection = () => {
           </motion.div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 relative z-10">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
