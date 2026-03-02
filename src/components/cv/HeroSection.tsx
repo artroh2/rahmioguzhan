@@ -50,15 +50,6 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-5 max-w-2xl"
         >
-          {/* We Are 1 */}
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-display text-lg md:text-2xl lg:text-3xl font-bold tracking-tight"
-          >
-            <span className="text-gradient-cool border-b-2 border-accent/50 pb-1">We Are 1</span>
-          </motion.p>
 
           {/* Name */}
           <motion.h1
