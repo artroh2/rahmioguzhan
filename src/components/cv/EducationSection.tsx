@@ -71,9 +71,14 @@ const EducationSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="education" className="py-24 md:py-32 px-4 relative bg-secondary/30" ref={ref}>
+    <section id="education" className="py-24 md:py-32 px-4 relative" ref={ref}
+      style={{ background: 'linear-gradient(180deg, hsl(220 22% 9% / 0.5), transparent, hsl(220 22% 9% / 0.5))' }}>
+      
+      {/* Ambient glow */}
+      <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full opacity-5 blur-3xl"
+        style={{ background: 'radial-gradient(circle, hsl(28 85% 55%), transparent)' }} />
+      
       <div className="container max-w-5xl mx-auto">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -86,7 +91,6 @@ const EducationSection = () => {
           <div className="section-divider" />
         </motion.div>
 
-        {/* Education Cards */}
         <div className="grid md:grid-cols-2 gap-8">
           {educations.map((edu, index) => (
             <motion.div
@@ -96,14 +100,13 @@ const EducationSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               whileHover={{ y: -10 }}
-              className="glass rounded-2xl p-8 space-y-6 card-glow-hover transition-all duration-300"
+              className="glass-warm rounded-2xl p-8 space-y-6 card-glow-hover transition-all duration-300"
             >
-              {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, hsl(28 85% 55% / 0.2), hsl(195 45% 50% / 0.15))' }}>
                 <GraduationCap className="w-8 h-8 text-primary" />
               </div>
 
-              {/* Content */}
               <div className="space-y-3">
                 <h3 className="font-display text-2xl font-bold text-primary">{edu.school}</h3>
                 <p className="text-lg font-medium text-foreground">
@@ -111,7 +114,6 @@ const EducationSection = () => {
                 </p>
               </div>
 
-              {/* Meta */}
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
@@ -123,9 +125,8 @@ const EducationSection = () => {
                 </span>
               </div>
 
-              {/* Description */}
               {edu.description && (
-                <p className="text-muted-foreground leading-relaxed pt-4 border-t border-border">
+                <p className="text-muted-foreground leading-relaxed pt-4 border-t border-border/50">
                   {edu.description[language]}
                 </p>
               )}

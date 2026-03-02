@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["DM Sans", "system-ui", "sans-serif"],
         display: ["Playfair Display", "Georgia", "serif"],
       },
       colors: {
@@ -106,8 +106,12 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(43 74% 49% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(43 74% 49% / 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(28 85% 55% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(28 85% 55% / 0.5)" },
+        },
+        "warm-pulse": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.7" },
         },
       },
       animation: {
@@ -119,6 +123,7 @@ export default {
         shimmer: "shimmer 2s linear infinite",
         float: "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "warm-pulse": "warm-pulse 4s ease-in-out infinite",
       },
     },
   },

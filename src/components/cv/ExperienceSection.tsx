@@ -68,8 +68,8 @@ const experiences: Experience[] = [
     startDate: '2019',
     endDate: '2021',
     description: {
-      tr: 'Türkiye\'nin en büyük redüktör fabrikasında, İhracat Departmanında Satış Mühendisi olarak Orta Doğu ve Rusya\'nın redüktör taleplerini karşılamak için teklif aşamasından müşteri memnuniyetine kadar olan süreçleri yürüttüm.',
-      en: 'As a Sales Engineer in the Export Department of Turkey\'s largest gearbox factory, I managed processes from quotation to customer satisfaction for gearbox requests from the Middle East and Russia.',
+      tr: "Türkiye'nin en büyük redüktör fabrikasında, İhracat Departmanında Satış Mühendisi olarak Orta Doğu ve Rusya'nın redüktör taleplerini karşılamak için teklif aşamasından müşteri memnuniyetine kadar olan süreçleri yürüttüm.",
+      en: "As a Sales Engineer in the Export Department of Turkey's largest gearbox factory, I managed processes from quotation to customer satisfaction for gearbox requests from the Middle East and Russia.",
     },
     highlights: {
       tr: ['Proforma hazırlığı', 'Ürün üretim takibi', 'Lojistik yönetimi', 'Banka yazışmaları'],
@@ -113,13 +113,14 @@ const ExperienceCard = ({ experience, index }: { experience: Experience; index: 
       {/* Timeline Dot */}
       <motion.div
         whileHover={{ scale: 1.3 }}
-        className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background -translate-x-1/2 z-10 shadow-lg shadow-primary/30"
+        className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full border-4 border-background -translate-x-1/2 z-10"
+        style={{ background: 'linear-gradient(135deg, hsl(28 85% 55%), hsl(195 45% 50%))' }}
       />
 
       {/* Card */}
       <div className={`ml-8 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
         <motion.div
-          className="glass rounded-2xl p-6 space-y-4 card-glow-hover cursor-pointer transition-all duration-300"
+          className="glass-warm rounded-2xl p-6 space-y-4 card-glow-hover cursor-pointer transition-all duration-300"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           {/* Header */}
@@ -157,14 +158,14 @@ const ExperienceCard = ({ experience, index }: { experience: Experience; index: 
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="pt-4 border-t border-border space-y-4">
+            <div className="pt-4 border-t border-border/50 space-y-4">
               <p className="text-muted-foreground leading-relaxed">{experience.description[language]}</p>
               {experience.highlights && (
                 <div className="flex flex-wrap gap-2">
                   {experience.highlights[language].map((highlight, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30"
+                      className="px-3 py-1 rounded-full text-xs font-medium bg-primary/15 text-primary border border-primary/25"
                     >
                       {highlight}
                     </span>
@@ -186,8 +187,11 @@ const ExperienceSection = () => {
 
   return (
     <section id="experience" className="py-24 md:py-32 px-4 relative" ref={ref}>
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 right-0 w-72 h-72 rounded-full opacity-5 blur-3xl"
+        style={{ background: 'radial-gradient(circle, hsl(195 45% 50%), transparent)' }} />
+      
       <div className="container max-w-5xl mx-auto">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -200,7 +204,6 @@ const ExperienceSection = () => {
           <div className="section-divider" />
         </motion.div>
 
-        {/* Timeline */}
         <div className="relative space-y-8">
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} experience={experience} index={index} />

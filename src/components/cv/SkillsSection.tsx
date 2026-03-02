@@ -59,13 +59,14 @@ const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: 
         <span className="text-sm font-medium text-foreground">{name}</span>
         <span className="text-xs text-muted-foreground">{level}%</span>
       </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
+      <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full"
+          className="h-full rounded-full"
+          style={{ background: 'linear-gradient(90deg, hsl(28 85% 55%), hsl(195 45% 50%), hsl(28 85% 55%))' }}
         />
       </div>
     </div>
@@ -79,8 +80,11 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" className="py-24 md:py-32 px-4 relative" ref={ref}>
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-0 w-64 h-64 rounded-full opacity-5 blur-3xl"
+        style={{ background: 'radial-gradient(circle, hsl(195 45% 50%), transparent)' }} />
+      
       <div className="container max-w-6xl mx-auto">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -93,7 +97,6 @@ const SkillsSection = () => {
           <div className="section-divider" />
         </motion.div>
 
-        {/* Skills Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -103,11 +106,11 @@ const SkillsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               whileHover={{ y: -5 }}
-              className="glass rounded-2xl p-8 space-y-6 card-glow-hover transition-all duration-300"
+              className="glass-warm rounded-2xl p-8 space-y-6 card-glow-hover transition-all duration-300"
             >
-              {/* Header */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, hsl(28 85% 55% / 0.2), hsl(195 45% 50% / 0.15))' }}>
                   <category.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-primary">
@@ -115,7 +118,6 @@ const SkillsSection = () => {
                 </h3>
               </div>
 
-              {/* Skills */}
               <div className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
                   <SkillBar

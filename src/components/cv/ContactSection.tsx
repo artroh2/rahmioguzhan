@@ -74,9 +74,14 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-4 relative bg-secondary/30" ref={ref}>
+    <section id="contact" className="py-24 md:py-32 px-4 relative" ref={ref}
+      style={{ background: 'linear-gradient(180deg, transparent, hsl(220 22% 9% / 0.5), transparent)' }}>
+      
+      {/* Ambient glow */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full opacity-5 blur-3xl"
+        style={{ background: 'radial-gradient(circle, hsl(28 85% 55%), transparent)' }} />
+      
       <div className="container max-w-5xl mx-auto">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -109,7 +114,8 @@ const ContactSection = () => {
                 whileHover={{ x: 10 }}
                 className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 group text-center sm:text-left"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style={{ background: 'linear-gradient(135deg, hsl(28 85% 55% / 0.2), hsl(195 45% 50% / 0.15))' }}>
                   <info.icon className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -136,7 +142,7 @@ const ContactSection = () => {
               transition={{ duration: 0.4, delay: 0.4 }}
               className="mt-6"
             >
-              <div className="w-full aspect-square max-w-xs rounded-2xl overflow-hidden border border-border shadow-lg">
+              <div className="w-full aspect-square max-w-xs rounded-2xl overflow-hidden border border-border/50 shadow-lg">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48193.22567595095!2d29.15!3d40.89!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac5894e2d0c61%3A0xd07d9d1e89deb463!2sKartal%2C%20%C4%B0stanbul!5e0!3m2!1str!2str!4v1704700000000!5m2!1str!2str"
                   width="100%"
@@ -158,7 +164,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="glass rounded-2xl p-8 space-y-6"
+            className="glass-warm rounded-2xl p-8 space-y-6"
           >
             <div className="space-y-4">
               <div>
@@ -170,7 +176,7 @@ const ContactSection = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="bg-muted border-border focus:border-primary focus:ring-primary"
+                  className="bg-muted/30 border-border/50 focus:border-primary focus:ring-primary"
                 />
               </div>
               <div>
@@ -183,7 +189,7 @@ const ContactSection = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="bg-muted border-border focus:border-primary focus:ring-primary"
+                  className="bg-muted/30 border-border/50 focus:border-primary focus:ring-primary"
                 />
               </div>
               <div>
@@ -196,7 +202,7 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
-                  className="bg-muted border-border focus:border-primary focus:ring-primary resize-none"
+                  className="bg-muted/30 border-border/50 focus:border-primary focus:ring-primary resize-none"
                 />
               </div>
             </div>
@@ -204,7 +210,8 @@ const ContactSection = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
+              className="w-full font-medium py-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
+              style={{ background: 'linear-gradient(135deg, hsl(28 85% 55%), hsl(25 80% 45%))' }}
             >
               {isSubmitting ? (
                 <motion.div
