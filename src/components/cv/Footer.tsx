@@ -5,6 +5,9 @@ const Footer = () => {
         <p className="text-sm text-muted-foreground">
           Designed by Rahmi Oğuzhan Hacıeyüpoğlu
         </p>
+        <p className="text-sm text-muted-foreground mt-1">
+          All rights reserved.
+        </p>
       </div>
     </footer>
   );
