@@ -5,7 +5,7 @@ import AboutSection from '@/components/cv/AboutSection';
 import ExperienceSection from '@/components/cv/ExperienceSection';
 import EducationSection from '@/components/cv/EducationSection';
 import SkillsSection from '@/components/cv/SkillsSection';
-import ContactSection from '@/components/cv/ContactSection';
+
 import Footer from '@/components/cv/Footer';
 
 
@@ -19,7 +19,7 @@ const Index = () => {
         <ExperienceSection />
         <EducationSection />
         <SkillsSection />
-        <ContactSection />
+        
         <Footer />
         
       </main>
