@@ -19,7 +19,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.download': 'CV Görüntüle',
 
     // Hero
-    'hero.title': '2&Mir',
+    'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
     'hero.subtitle': 'Sanat & Operasyon & Proje Yönetimi ve Liderlik',
     'hero.scroll': 'Keşfetmek için kaydırın',
 
@@ -66,7 +66,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.download': 'View CV',
 
     // Hero
-    'hero.title': '2&Mir',
+    'hero.title': 'Rahmi Oğuzhan Hacıeyüpoğlu',
     'hero.subtitle': 'Art & Operations & Project Management and Leadership',
     'hero.scroll': 'Scroll to explore',
 
