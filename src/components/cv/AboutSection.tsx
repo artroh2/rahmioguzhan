@@ -109,17 +109,8 @@ const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Randomize positions once per mount
-  const wordPositions = useMemo(() => 
-    fallingWords.map((w, i) => ({
-      ...w,
-      left: 5 + (i * 37 + i * 13) % 90, // pseudo-random spread
-      delay: (i * 0.18) % 4.5,
-      duration: 6 + (i % 5) * 1.5,
-      fontSize: 0.7 + (i % 4) * 0.15,
-      opacity: 0.12 + (i % 5) * 0.06,
-    })),
-  []);
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
