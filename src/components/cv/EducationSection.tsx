@@ -4,6 +4,12 @@ import { useRef } from 'react';
 import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+const getBilingual = (obj: { tr: string; en: string }, lang: string) => {
+  if (lang === 'tr') return obj.tr;
+  if (lang === 'en') return obj.en;
+  return obj.en;
+};
+
 interface Education {
   school: string;
   degree: { tr: string; en: string };
@@ -114,14 +120,14 @@ const EducationSection = () => {
               <div className="space-y-3">
                 <h3 className="font-display text-2xl font-bold text-primary">{edu.school}</h3>
                 <p className="text-lg font-medium text-foreground">
-                  {edu.degree[language]} - {edu.field[language]}
+                  {getBilingual(edu.degree, language)} - {getBilingual(edu.field, language)}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  {edu.startYear} - {typeof edu.endYear === 'string' ? edu.endYear : edu.endYear[language]}
+                  {edu.startYear} - {typeof edu.endYear === 'string' ? edu.endYear : getBilingual(edu.endYear, language)}
                 </span>
                 <span className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
@@ -131,7 +137,7 @@ const EducationSection = () => {
 
               {edu.description && (
                 <p className="text-muted-foreground leading-relaxed pt-4 border-t border-border/50">
-                  {edu.description[language]}
+                  {getBilingual(edu.description, language)}
                 </p>
               )}
             </motion.div>

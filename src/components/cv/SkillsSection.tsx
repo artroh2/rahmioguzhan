@@ -126,7 +126,7 @@ const SkillsSection = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <SkillBar
                     key={skillIndex}
-                    name={skill.name[language]}
+                    name={skill.name[language as 'tr' | 'en'] || skill.name.en}
                     level={skill.level}
                     delay={categoryIndex * 0.1 + skillIndex * 0.1}
                   />
