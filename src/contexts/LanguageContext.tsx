@@ -83,14 +83,34 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'contact.location': { tr: 'Konum', en: 'Location' },
   'footer.designed': { tr: 'tarafından tasarlanmıştır.', en: 'Designed by Rahmi Oğuzhan Hacıeyüpoğlu.' },
   'footer.rights': { tr: 'Tüm hakları saklıdır.', en: 'All rights reserved.' },
+  // Social card descriptions
+  'social.spotify.desc': { tr: 'Tüm şarkılarımı bu platformdan dinleyebilirsiniz, üyelik gerektirmez. Üye değilseniz reklamlar keyfinizi etkiler.', en: 'You can listen to all my songs on this platform, no membership required. Ads may affect your experience if you\'re not a member.' },
+  'social.spotifyArtist.desc': { tr: 'Daha çok yabancı elektronik müzik çalışmalarım için ziyaret edebilirsiniz.', en: 'Visit for my international electronic music works.' },
+  'social.youtube.desc': { tr: 'Görsel içerikli çalışmalarım burada.', en: 'My visual content works are here.' },
+  'social.instagram.desc': { tr: 'Kişisel instagram sayfam.', en: 'My personal Instagram page.' },
+  'social.siir.desc': { tr: 'Şiir çalışmalarımı yayınladığım, sürekli güncellenen bir Instagram blog sayfası.', en: 'A continuously updated Instagram blog page where I publish my poetry works.' },
+  'social.x.desc': { tr: 'Tweetlere erişim buradan.', en: 'Access my tweets here.' },
+  'social.soundcloud.desc': { tr: 'Üyelik ve ücret istemeden tüm şarkıları bir arada bulabileceğiniz alternatif müzik platformu.', en: 'An alternative music platform where you can find all songs together without membership or fees.' },
+  'social.linkedin.desc': { tr: 'Profesyonel çalışma hayatımın bilgilerinin olduğu platform.', en: 'The platform with my professional career information.' },
+  'social.whatsapp.desc': { tr: 'WhatsApp numaram işte.', en: 'Here\'s my WhatsApp number.' },
+  'social.email.text': { tr: 'Rahmi Oğuzhan Hacıeyüpoğlu\'na E-Posta Gönder', en: 'Send Email to Rahmi Oğuzhan Hacıeyüpoğlu' },
 };
 
-const CACHE_KEY = 'translation_cache';
+const CACHE_KEY = 'translation_cache_v3'; // v3: added social card descriptions
 
 function loadCache(): Record<string, Record<string, string>> {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    // Clean out any empty cached entries from previous bugs
+    const cleaned: Record<string, Record<string, string>> = {};
+    for (const [lang, translations] of Object.entries(parsed)) {
+      if (translations && typeof translations === 'object' && Object.keys(translations as object).length > 0) {
+        cleaned[lang] = translations as Record<string, string>;
+      }
+    }
+    return cleaned;
   } catch {
     return {};
   }
@@ -112,8 +132,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const translateAll = useCallback(async (lang: Language) => {
     // Check cache first
     const cache = loadCache();
-    if (cache[lang] && Object.keys(cache[lang]).length >= Object.keys(baseTranslations).length * 0.8) {
-      setDynamicTranslations(cache);
+    if (cache[lang] && Object.keys(cache[lang]).length >= 10) {
+      setDynamicTranslations(prev => ({ ...prev, [lang]: cache[lang] }));
       return;
     }
 
@@ -134,16 +154,26 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase invoke error:', error);
+        throw error;
+      }
 
-      if (data?.translations) {
-        const newCache = { ...cache, [lang]: data.translations };
-        setDynamicTranslations(newCache);
+      console.log('Translation response data:', data);
+
+      const translations = data?.translations;
+      if (translations && typeof translations === 'object' && Object.keys(translations).length > 0) {
+        const newCache = { ...loadCache(), [lang]: translations };
+        setDynamicTranslations(prev => ({ ...prev, [lang]: translations }));
         saveCache(newCache);
+        console.log(`Cached ${Object.keys(translations).length} translations for ${lang}`);
+      } else {
+        console.warn('Empty translations received:', data);
+        toast.error('Translation returned empty. Please try again.');
       }
     } catch (e) {
       console.error('Translation error:', e);
-      toast.error('Translation failed. Falling back to Turkish.');
+      toast.error('Translation failed. Please try again.');
     } finally {
       setIsTranslating(false);
     }
