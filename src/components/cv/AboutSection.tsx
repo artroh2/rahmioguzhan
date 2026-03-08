@@ -83,7 +83,7 @@ const socialLinks = [
 ];
 
 const AboutSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -105,7 +105,7 @@ const AboutSection = () => {
       <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none" 
         style={{ background: 'radial-gradient(circle, hsl(28 85% 55%), transparent)' }} />
       
-      <div className="container max-w-5xl mx-auto">
+      <div className="container max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -124,24 +124,35 @@ const AboutSection = () => {
             <div className="section-divider" />
           </motion.div>
 
-          {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-4 relative z-10">
+          {/* Social Link Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer"
-                style={{
-                  background: link.color
-                    ? `${link.color}20`
-                    : 'hsl(var(--foreground) / 0.1)',
-                  color: link.color || 'hsl(var(--foreground))',
-                }}
-                aria-label={link.label}
+                className="glass-warm rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 card-glow-hover cursor-pointer group"
               >
-                {link.icon}
+                <div
+                  className="w-12 h-12 min-w-[3rem] rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                  style={{
+                    background: link.color
+                      ? `${link.color}20`
+                      : 'hsl(var(--foreground) / 0.1)',
+                    color: link.color || 'hsl(var(--foreground))',
+                  }}
+                >
+                  {link.icon}
+                </div>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className="font-display font-bold text-foreground text-sm">
+                    {link.label}
+                  </span>
+                  <span className="text-xs text-muted-foreground leading-relaxed">
+                    {link.description[language]}
+                  </span>
+                </div>
               </a>
             ))}
           </div>
