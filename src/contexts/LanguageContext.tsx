@@ -83,6 +83,17 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'contact.location': { tr: 'Konum', en: 'Location' },
   'footer.designed': { tr: 'tarafından tasarlanmıştır.', en: 'Designed by Rahmi Oğuzhan Hacıeyüpoğlu.' },
   'footer.rights': { tr: 'Tüm hakları saklıdır.', en: 'All rights reserved.' },
+  // Social card descriptions
+  'social.spotify.desc': { tr: 'Tüm şarkılarımı bu platformdan dinleyebilirsiniz, üyelik gerektirmez. Üye değilseniz reklamlar keyfinizi etkiler.', en: 'You can listen to all my songs on this platform, no membership required. Ads may affect your experience if you\'re not a member.' },
+  'social.spotifyArtist.desc': { tr: 'Daha çok yabancı elektronik müzik çalışmalarım için ziyaret edebilirsiniz.', en: 'Visit for my international electronic music works.' },
+  'social.youtube.desc': { tr: 'Görsel içerikli çalışmalarım burada.', en: 'My visual content works are here.' },
+  'social.instagram.desc': { tr: 'Kişisel instagram sayfam.', en: 'My personal Instagram page.' },
+  'social.siir.desc': { tr: 'Şiir çalışmalarımı yayınladığım, sürekli güncellenen bir Instagram blog sayfası.', en: 'A continuously updated Instagram blog page where I publish my poetry works.' },
+  'social.x.desc': { tr: 'Tweetlere erişim buradan.', en: 'Access my tweets here.' },
+  'social.soundcloud.desc': { tr: 'Üyelik ve ücret istemeden tüm şarkıları bir arada bulabileceğiniz alternatif müzik platformu.', en: 'An alternative music platform where you can find all songs together without membership or fees.' },
+  'social.linkedin.desc': { tr: 'Profesyonel çalışma hayatımın bilgilerinin olduğu platform.', en: 'The platform with my professional career information.' },
+  'social.whatsapp.desc': { tr: 'WhatsApp numaram işte.', en: 'Here\'s my WhatsApp number.' },
+  'social.email.text': { tr: 'Rahmi Oğuzhan Hacıeyüpoğlu\'na E-Posta Gönder', en: 'Send Email to Rahmi Oğuzhan Hacıeyüpoğlu' },
 };
 
 const CACHE_KEY = 'translation_cache_v2'; // v2: clear old broken cache
