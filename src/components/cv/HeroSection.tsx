@@ -35,10 +35,14 @@ const HeroSection = () => {
     return () => clearTimeout(fallTimer);
   }, []);
 
-  // Calculate how far letters need to fall (to bottom of page)
-  const getDropDistance = () => {
-    const docHeight = document.documentElement.scrollHeight;
-    return docHeight;
+  // Calculate drop target: just above the footer's top border
+  const getDropTarget = () => {
+    const footer = document.querySelector('footer');
+    if (footer) {
+      return footer.getBoundingClientRect().top + window.scrollY;
+    }
+    return document.documentElement.scrollHeight;
+  };
   };
 
   return (
