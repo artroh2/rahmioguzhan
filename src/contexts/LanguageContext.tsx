@@ -96,6 +96,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'social.tiktok.desc': { tr: 'Tiktoklar buradan gelecek. Mutlaka buluşacağımız yer, takip etmeyi unutmayın.', en: 'TikToks will come from here. A place where we will definitely meet, don\'t forget to follow.' },
   'social.facebook.desc': { tr: 'Facebook sayfam', en: 'My Facebook page' },
   'social.email.text': { tr: 'E-posta gönder', en: 'Send Email' },
+  'social.email.desc': { tr: 'Tüm e postalara yanıt veriyorum.', en: 'I respond to all emails.' },
 };
 
 const CACHE_KEY = 'translation_cache_v4'; // v4: added tiktok

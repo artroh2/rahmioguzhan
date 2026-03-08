@@ -189,9 +189,14 @@ const AboutSection = () => {
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </div>
-              <span className="font-display font-bold text-foreground text-sm">
-                {t('social.email.text')}
-              </span>
+              <div className="flex flex-col gap-1 min-w-0">
+                <span className="font-display font-bold text-foreground text-sm">
+                  {t('social.email.text')}
+                </span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  {t('social.email.desc')}
+                </span>
+              </div>
             </a>
           </div>
         </motion.div>
