@@ -145,7 +145,9 @@ const HeroSection = () => {
                 style={{
                   position: 'absolute',
                   left: letter.x,
-                  top: letter.y + window.scrollY,
+                  top: letter.y,
+                  width: letter.w,
+                  height: letter.h,
                 }}
                 initial={{ y: 0, rotate: 0, opacity: 1 }}
                 animate={{
