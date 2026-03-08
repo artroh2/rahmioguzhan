@@ -118,15 +118,6 @@ const HeroSection = () => {
             )}
           </div>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wide max-w-lg"
-          >
-            {t('hero.subtitle')}
-          </motion.p>
 
         </motion.div>
       </div>
