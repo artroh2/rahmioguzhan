@@ -112,7 +112,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const translateAll = useCallback(async (lang: Language) => {
     // Check cache first
     const cache = loadCache();
-    if (cache[lang] && Object.keys(cache[lang]).length === Object.keys(baseTranslations).length) {
+    if (cache[lang] && Object.keys(cache[lang]).length >= Object.keys(baseTranslations).length * 0.8) {
       setDynamicTranslations(cache);
       return;
     }
