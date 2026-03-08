@@ -96,7 +96,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'social.email.text': { tr: 'Rahmi Oğuzhan Hacıeyüpoğlu\'na E-Posta Gönder', en: 'Send Email to Rahmi Oğuzhan Hacıeyüpoğlu' },
 };
 
-const CACHE_KEY = 'translation_cache_v2'; // v2: clear old broken cache
+const CACHE_KEY = 'translation_cache_v3'; // v3: added social card descriptions
 
 function loadCache(): Record<string, Record<string, string>> {
   try {
