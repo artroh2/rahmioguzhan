@@ -149,36 +149,6 @@ const AboutSection = () => {
             <div className="section-divider" />
           </motion.div>
 
-          {/* Falling Words from World Languages */}
-          {isInView && (
-            <div className="relative h-48 md:h-64 overflow-hidden pointer-events-none -mt-4 -mb-4">
-              {/* Gradient fade at top */}
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-background to-transparent z-10" />
-              {/* Gradient fade at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-10" />
-              
-              {wordPositions.map((w, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute whitespace-nowrap select-none"
-                  style={{ left: `${w.left}%`, top: 0, fontSize: `${w.fontSize}rem` }}
-                  animate={{
-                    y: [-30, 250, 300],
-                    opacity: [0, w.opacity, 0],
-                  }}
-                  transition={{
-                    duration: w.duration,
-                    delay: w.delay,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                >
-                  <span className="font-display font-bold text-primary/40">{w.word}</span>
-                  <span className="text-muted-foreground/30 text-[0.6em] ml-1">{w.meaning}</span>
-                </motion.div>
-              ))}
-            </div>
-          )}
 
           {/* Social Link Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
