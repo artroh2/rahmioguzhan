@@ -10,6 +10,7 @@ const Footer = () => {
         <p className="text-sm text-muted-foreground mt-1">
           All rights reserved.
         </p>
+        <img src={goldenHeart} alt="Golden Heart" className="mx-auto mt-4 w-12 h-12 object-contain" />
       </div>
     </footer>
   );
