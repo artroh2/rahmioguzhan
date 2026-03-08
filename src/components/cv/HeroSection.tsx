@@ -43,7 +43,6 @@ const HeroSection = () => {
     }
     return document.documentElement.scrollHeight;
   };
-  };
 
   return (
     <>
