@@ -8,7 +8,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
   const [lettersFalling, setLettersFalling] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number }[]>([]);
+  const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
 
   const name = t('hero.title');
 
@@ -17,13 +17,15 @@ const HeroSection = () => {
       // Capture each letter's position before falling
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
-        const rects: { char: string; x: number; y: number }[] = [];
+        const rects: { char: string; x: number; y: number; w: number; h: number }[] = [];
         spans.forEach((span) => {
           const rect = span.getBoundingClientRect();
           rects.push({
             char: span.textContent || '',
             x: rect.left,
-            y: rect.top,
+            y: rect.top + window.scrollY,
+            w: rect.width,
+            h: rect.height,
           });
         });
         setLetterRects(rects);
@@ -143,7 +145,9 @@ const HeroSection = () => {
                 style={{
                   position: 'absolute',
                   left: letter.x,
-                  top: letter.y + window.scrollY,
+                  top: letter.y,
+                  width: letter.w,
+                  height: letter.h,
                 }}
                 initial={{ y: 0, rotate: 0, opacity: 1 }}
                 animate={{
