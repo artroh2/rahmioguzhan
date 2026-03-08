@@ -4,6 +4,12 @@ import { useRef } from 'react';
 import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+const getBilingual = (obj: { tr: string; en: string }, lang: string) => {
+  if (lang === 'tr') return obj.tr;
+  if (lang === 'en') return obj.en;
+  return obj.en;
+};
+
 interface Education {
   school: string;
   degree: { tr: string; en: string };
