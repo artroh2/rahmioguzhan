@@ -16,7 +16,7 @@ const socialLinks = [
   },
   {
     href: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=kqnHYZQHTACmv9YggEdp2g',
-    label: 'Spotify Oguzhan the 2',
+    label: 'Spotify - Oguzhan the 2',
     descKey: 'social.spotifyArtist.desc',
     color: '#1DB954',
     icon: (
