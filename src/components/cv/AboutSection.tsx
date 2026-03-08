@@ -7,7 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const socialLinks = [
   {
     href: 'https://open.spotify.com/intl-tr/album/0qsai0PajSX9TgzyyzlzR2?si=svW0Xz5KT7mdE5UCl1sB0A',
-    label: 'Spotify Rahmi Oguzhan',
+    label: 'Spotify Rahmi Oguzhan Rahmi Oguzhan',
     description: { tr: 'Tüm şarkılarımı bu platformdan dinleyebilirsiniz, üyelik gerektirmez. Üye değilseniz reklamlar keyfinizi etkiler.', en: 'You can listen to all my songs on this platform, no membership required. Ads may affect your experience if you\'re not a member.' },
     color: '#1DB954',
     icon: (
@@ -16,7 +16,7 @@ const socialLinks = [
   },
   {
     href: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=kqnHYZQHTACmv9YggEdp2g',
-    label: 'Spotify Artist',
+    laOguzhan the 2Spotify Artist',
     description: { tr: 'Daha çok yabancı elektronik müzik çalışmalarım için ziyaret edebilirsiniz.', en: 'Visit for my international electronic music works.' },
     color: '#1DB954',
     icon: <Headphones className="w-6 h-6" />,
