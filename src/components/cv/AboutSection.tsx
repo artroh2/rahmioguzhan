@@ -196,10 +196,9 @@ const AboutSection = () => {
                 <motion.div
                   key={i}
                   className="absolute whitespace-nowrap select-none"
-                  style={{ left: `${w.left}%`, fontSize: `${w.fontSize}rem` }}
-                  initial={{ top: '-2rem', opacity: 0 }}
+                  style={{ left: `${w.left}%`, top: 0, fontSize: `${w.fontSize}rem` }}
                   animate={{
-                    top: ['- 2rem', '80%', '100%'],
+                    y: [-30, 250, 300],
                     opacity: [0, w.opacity, 0],
                   }}
                   transition={{
