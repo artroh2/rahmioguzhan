@@ -114,7 +114,7 @@ const EducationSection = () => {
               <div className="space-y-3">
                 <h3 className="font-display text-2xl font-bold text-primary">{edu.school}</h3>
                 <p className="text-lg font-medium text-foreground">
-                  {edu.degree[language]} - {edu.field[language]}
+                  {edu.degree[language as 'tr' | 'en'] || edu.degree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.en}
                 </p>
               </div>
 
