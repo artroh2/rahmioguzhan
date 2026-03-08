@@ -16,7 +16,7 @@ const socialLinks = [
   },
   {
     href: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=kqnHYZQHTACmv9YggEdp2g',
-    laOguzhan the 2Spotify Artist',
+    label: 'Spotify Oguzhan the 2',
     description: { tr: 'Daha çok yabancı elektronik müzik çalışmalarım için ziyaret edebilirsiniz.', en: 'Visit for my international electronic music works.' },
     color: '#1DB954',
     icon: <Headphones className="w-6 h-6" />,
