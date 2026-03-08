@@ -150,7 +150,7 @@ const AboutSection = () => {
                     {link.label}
                   </span>
                   <span className="text-xs text-muted-foreground leading-relaxed">
-                    {link.description[language]}
+                    {link.description[language as 'tr' | 'en'] || link.description.en}
                   </span>
                 </div>
               </a>
