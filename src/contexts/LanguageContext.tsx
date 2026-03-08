@@ -88,7 +88,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'social.spotifyArtist.desc': { tr: 'Daha çok yabancı elektronik müzik çalışmalarım için ziyaret edebilirsiniz.', en: 'Visit for my international electronic music works.' },
   'social.youtube.desc': { tr: 'Görsel içerikli çalışmalarım burada.', en: 'My visual content works are here.' },
   'social.instagram.desc': { tr: 'Kişisel instagram sayfam.', en: 'My personal Instagram page.' },
-  'social.siir.desc': { tr: 'Şiir çalışmalarımı yayınladığım, sürekli güncellenen Instagram blog sayfam.', en: 'Myinuously updated Instagram blog page where I publish my poetry works.' },
+  'social.siir.desc': { tr: 'Şiir çalışmalarımı yayınladığım, sürekli güncellenen Instagram blog sayfam.', en: 'My continuously updated Instagram blog page where I publish my poetry works.' },
   'social.x.desc': { tr: 'Tweetlere erişim buradan.', en: 'Access my tweets here.' },
   'social.soundcloud.desc': { tr: 'Üyelik ve ücret istemeden tüm şarkıları bir arada bulabileceğiniz alternatif müzik platformu.', en: 'An alternative music platform where you can find all songs together without membership or fees.' },
   'social.linkedin.desc': { tr: 'Profesyonel çalışma hayatımın bilgilerinin olduğu platform.', en: 'The platform with my professional career information.' },
