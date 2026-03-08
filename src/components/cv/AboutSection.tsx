@@ -1,8 +1,34 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Headphones, BookOpen, Youtube } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef, useMemo } from 'react';
+import { Youtube } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+const fallingWords = [
+  { word: 'Amor', lang: 'İspanyolca', meaning: 'Aşk' },
+  { word: 'Saudade', lang: 'Portekizce', meaning: 'Özlem' },
+  { word: 'Meraki', lang: 'Yunanca', meaning: 'Tutkuyla yapmak' },
+  { word: '美', lang: 'Japonca', meaning: 'Güzellik' },
+  { word: 'Ubuntu', lang: 'Zuluca', meaning: 'İnsanlık' },
+  { word: 'Hygge', lang: 'Danca', meaning: 'Huzur' },
+  { word: 'Amore', lang: 'İtalyanca', meaning: 'Aşk' },
+  { word: '희망', lang: 'Korece', meaning: 'Umut' },
+  { word: 'Sehnsucht', lang: 'Almanca', meaning: 'Derin özlem' },
+  { word: 'Lumière', lang: 'Fransızca', meaning: 'Işık' },
+  { word: 'Свобода', lang: 'Rusça', meaning: 'Özgürlük' },
+  { word: 'Wabi-sabi', lang: 'Japonca', meaning: 'Kusurlu güzellik' },
+  { word: 'Aloha', lang: 'Hawaiice', meaning: 'Sevgi' },
+  { word: 'Âşk', lang: 'Farsça', meaning: 'Aşk' },
+  { word: '梦', lang: 'Çince', meaning: 'Rüya' },
+  { word: 'Ikigai', lang: 'Japonca', meaning: 'Yaşam amacı' },
+  { word: 'Felicità', lang: 'İtalyanca', meaning: 'Mutluluk' },
+  { word: 'Estrella', lang: 'İspanyolca', meaning: 'Yıldız' },
+  { word: 'Njëri', lang: 'Arnavutça', meaning: 'İnsan' },
+  { word: 'Βιβλίο', lang: 'Yunanca', meaning: 'Kitap' },
+  { word: 'Barış', lang: 'Türkçe', meaning: 'Barış' },
+  { word: 'Hakuna', lang: 'Svahilice', meaning: 'Sorun yok' },
+  { word: 'Carpe', lang: 'Latince', meaning: 'Yakala' },
+  { word: 'शांति', lang: 'Hintçe', meaning: 'Huzur' },
+];
 
 const socialLinks = [
   {
