@@ -40,7 +40,7 @@ const socialLinks = [
   {
     href: 'https://www.instagram.com/siir2.0',
     label: 'Şiir 2.0',
-    description: { tr: 'Açıklama ekleyin', en: 'Add description' },
+    description: { tr: 'Şiir çalışmalarımı yayınladığım, sürekli güncellenen bir Instagram blog sayfası.', en: 'A continuously updated Instagram blog page where I publish my poetry works.' },
     color: '#E4405F',
     icon: <BookOpen className="w-6 h-6" />,
   },
