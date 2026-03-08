@@ -121,7 +121,7 @@ const HeroSection = () => {
                   opacity: 1,
                 }}
                 transition={{
-                  duration: 2.5 + Math.random() * 1.5,
+                  duration: 5 + Math.random() * 3,
                   delay: Math.random() * 0.8,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
