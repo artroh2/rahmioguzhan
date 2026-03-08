@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Youtube } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
