@@ -168,7 +168,7 @@ const AboutSection = () => {
             {/* Email Card */}
             <a
               href="mailto:rahmioguzhanhacieyupoglu@gmail.com"
-              className="glass-warm rounded-2xl p-5 flex items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 card-glow-hover cursor-pointer group sm:col-span-2 lg:col-span-3"
+              className="glass-warm rounded-2xl p-5 flex items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 card-glow-hover cursor-pointer group"
             >
               <div
                 className="w-12 h-12 min-w-[3rem] rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
