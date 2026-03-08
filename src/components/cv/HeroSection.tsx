@@ -141,7 +141,8 @@ const HeroSection = () => {
       {lettersFalling && letterRects.length > 0 && createPortal(
         <div className="pointer-events-none" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible' }}>
           {letterRects.map((letter, i) => {
-            const dropTo = getDropDistance() - letter.y - 40 + (Math.random() * 30 - 15);
+            const footerTop = getDropTarget();
+            const dropTo = footerTop - letter.y - letter.h - (Math.random() * 15);
             return (
               <motion.span
                 key={`fall-${i}`}
