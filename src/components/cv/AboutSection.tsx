@@ -24,7 +24,7 @@ const socialLinks = [
   {
     href: 'https://www.youtube.com/@Siir2.0',
     label: 'YouTube',
-    description: { tr: 'Açıklama ekleyin', en: 'Add description' },
+    description: { tr: 'Görsel içerikli çalışmalarım burada.', en: 'My visual content works are here.' },
     color: '#FF0000',
     icon: <Youtube className="w-6 h-6" />,
   },
