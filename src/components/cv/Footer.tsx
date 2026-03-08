@@ -1,3 +1,5 @@
+import goldenHeart from '@/assets/golden-heart.png';
+
 const Footer = () => {
   return (
     <footer className="py-12 px-4 relative border-t border-border">
