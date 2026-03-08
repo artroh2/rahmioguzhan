@@ -87,11 +87,42 @@ const HeroSection = () => {
               ref={nameRef}
               className={`font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${lettersFalling ? 'invisible' : ''}`}
             >
-              {name.split('').map((char, i) => (
-                <span key={i} data-letter className="text-gradient inline-block" style={{ minWidth: char === ' ' ? '0.3em' : undefined }}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
+              {(() => {
+                const parts = name.split(' ');
+                const firstLine = parts.length >= 3 ? parts.slice(0, 2).join(' ') : parts[0];
+                const secondLine = parts.length >= 3 ? parts.slice(2).join(' ') : parts.slice(1).join(' ');
+                let charIndex = 0;
+                return (
+                  <>
+                    <span className="inline lg:inline">
+                      {firstLine.split('').map((char, i) => {
+                        const idx = charIndex++;
+                        return (
+                          <span key={idx} data-letter className="text-gradient inline-block" style={{ minWidth: char === ' ' ? '0.3em' : undefined }}>
+                            {char === ' ' ? '\u00A0' : char}
+                          </span>
+                        );
+                      })}
+                    </span>
+                    <br className="lg:hidden" />
+                    <span className="hidden lg:inline">
+                      {(() => { charIndex++; return (
+                        <span data-letter className="text-gradient inline-block" style={{ minWidth: '0.3em' }}>{'\u00A0'}</span>
+                      ); })()}
+                    </span>
+                    <span className="inline lg:inline">
+                      {secondLine.split('').map((char, i) => {
+                        const idx = charIndex++;
+                        return (
+                          <span key={idx} data-letter className="text-gradient inline-block" style={{ minWidth: char === ' ' ? '0.3em' : undefined }}>
+                            {char === ' ' ? '\u00A0' : char}
+                          </span>
+                        );
+                      })}
+                    </span>
+                  </>
+                );
+              })()}
             </h1>
           </motion.div>
         </div>
