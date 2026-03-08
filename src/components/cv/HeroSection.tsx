@@ -1,8 +1,76 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
+
+// Interactive letter component - becomes draggable/hoverable after landing
+const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, fallRotate }: {
+  char: string; x: number; y: number; w: number; h: number;
+  dropTo: number; fallDuration: number; fallDelay: number; fallRotate: number;
+}) => {
+  const [landed, setLanded] = useState(false);
+  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: fallRotate });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const landTime = (fallDuration + fallDelay) * 1000;
+    const timer = setTimeout(() => setLanded(true), landTime);
+    return () => clearTimeout(timer);
+  }, [fallDuration, fallDelay]);
+
+  const handleHover = useCallback(() => {
+    if (!landed) return;
+    const randomX = (Math.random() - 0.5) * 200;
+    const randomY = (Math.random() - 0.5) * 120;
+    const randomRotate = (Math.random() - 0.5) * 360;
+    setNudge(prev => ({
+      x: prev.x + randomX,
+      y: prev.y + randomY,
+      rotate: prev.rotate + randomRotate,
+    }));
+  }, [landed]);
+
+  return (
+    <motion.span
+      className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing"
+      style={{
+        position: 'absolute',
+        left: x,
+        top: y,
+        width: w,
+        height: h,
+        pointerEvents: landed ? 'auto' : 'none',
+      }}
+      initial={{ y: 0, rotate: 0, opacity: 1 }}
+      animate={landed ? {
+        y: dropTo + nudge.y,
+        rotate: nudge.rotate,
+        x: nudge.x,
+        opacity: 1,
+      } : {
+        y: dropTo,
+        rotate: fallRotate,
+        opacity: 1,
+      }}
+      transition={landed ? {
+        type: 'spring',
+        stiffness: 150,
+        damping: 12,
+        mass: 0.8,
+      } : {
+        duration: fallDuration,
+        delay: fallDelay,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      onMouseEnter={handleHover}
+      onTouchStart={handleHover}
+      whileHover={landed ? { scale: 1.2 } : undefined}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </motion.span>
+  );
+};
 
 const HeroSection = () => {
   const { t } = useLanguage();
