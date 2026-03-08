@@ -85,7 +85,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'footer.rights': { tr: 'Tüm hakları saklıdır.', en: 'All rights reserved.' },
 };
 
-const CACHE_KEY = 'translation_cache';
+const CACHE_KEY = 'translation_cache_v2'; // v2: clear old broken cache
 
 function loadCache(): Record<string, Record<string, string>> {
   try {
