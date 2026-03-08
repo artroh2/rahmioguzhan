@@ -8,7 +8,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
   const [lettersFalling, setLettersFalling] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number }[]>([]);
+  const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
 
   const name = t('hero.title');
 
