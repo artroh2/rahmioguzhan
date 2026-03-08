@@ -93,6 +93,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'social.soundcloud.desc': { tr: 'Üyelik ve ücret istemeden tüm şarkıları bir arada bulabileceğiniz alternatif müzik platformu.', en: 'An alternative music platform where you can find all songs together without membership or fees.' },
   'social.linkedin.desc': { tr: 'Profesyonel çalışma hayatımın bilgilerinin olduğu platform.', en: 'The platform with my professional career information.' },
   'social.whatsapp.desc': { tr: 'WhatsApp numaram işte.', en: 'Here\'s my WhatsApp number.' },
+  'social.tiktok.desc': { tr: 'Tiktoklar buradan gelecek. Mutlaka buluşacağımız yer, takip etmeyi unutmayın.', en: 'TikToks will come from here. A place where we will definitely meet, don\'t forget to follow.' },
   'social.email.text': { tr: 'Rahmi Oğuzhan Hacıeyüpoğlu\'na E-Posta Gönder', en: 'Send Email to Rahmi Oğuzhan Hacıeyüpoğlu' },
 };
 
