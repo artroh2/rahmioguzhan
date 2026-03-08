@@ -90,7 +90,16 @@ const CACHE_KEY = 'translation_cache';
 function loadCache(): Record<string, Record<string, string>> {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    // Clean out any empty cached entries from previous bugs
+    const cleaned: Record<string, Record<string, string>> = {};
+    for (const [lang, translations] of Object.entries(parsed)) {
+      if (translations && typeof translations === 'object' && Object.keys(translations as object).length > 0) {
+        cleaned[lang] = translations as Record<string, string>;
+      }
+    }
+    return cleaned;
   } catch {
     return {};
   }
@@ -112,8 +121,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const translateAll = useCallback(async (lang: Language) => {
     // Check cache first
     const cache = loadCache();
-    if (cache[lang] && Object.keys(cache[lang]).length >= Object.keys(baseTranslations).length * 0.8) {
-      setDynamicTranslations(cache);
+    if (cache[lang] && Object.keys(cache[lang]).length >= 10) {
+      setDynamicTranslations(prev => ({ ...prev, [lang]: cache[lang] }));
       return;
     }
 
@@ -134,16 +143,26 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase invoke error:', error);
+        throw error;
+      }
 
-      if (data?.translations) {
-        const newCache = { ...cache, [lang]: data.translations };
-        setDynamicTranslations(newCache);
+      console.log('Translation response data:', data);
+
+      const translations = data?.translations;
+      if (translations && typeof translations === 'object' && Object.keys(translations).length > 0) {
+        const newCache = { ...loadCache(), [lang]: translations };
+        setDynamicTranslations(prev => ({ ...prev, [lang]: translations }));
         saveCache(newCache);
+        console.log(`Cached ${Object.keys(translations).length} translations for ${lang}`);
+      } else {
+        console.warn('Empty translations received:', data);
+        toast.error('Translation returned empty. Please try again.');
       }
     } catch (e) {
       console.error('Translation error:', e);
-      toast.error('Translation failed. Falling back to Turkish.');
+      toast.error('Translation failed. Please try again.');
     } finally {
       setIsTranslating(false);
     }
