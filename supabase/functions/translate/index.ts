@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 serve(async (req) => {
@@ -13,7 +13,9 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    const textsJson = JSON.stringify(texts);
+    // Build a simple key-value list for translation
+    const keys = Object.keys(texts);
+    const entries = keys.map((k, i) => `${i}. ${texts[k]}`).join("\n");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -26,34 +28,13 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are a professional translator. Translate the given JSON object values from Turkish to ${targetLanguageName} (${targetLanguage}). Keep the JSON keys exactly the same. Return ONLY the translated JSON object, no markdown, no explanation. Maintain the same JSON structure. Translate naturally, not word-by-word. For proper nouns like personal names, company names, university names, and city names, keep them as-is unless there is a well-known translation in the target language.`
+            content: `You are a translator. Translate each numbered line from Turkish to ${targetLanguageName}. Return ONLY a JSON object where the keys are the line numbers (as strings) and values are the translations. No markdown, no explanation, just the JSON object. Keep proper nouns (names, companies) as-is.`
           },
           {
             role: "user",
-            content: `Translate these texts to ${targetLanguageName}:\n${textsJson}`
+            content: entries
           }
         ],
-        tools: [
-          {
-            type: "function",
-            function: {
-              name: "return_translations",
-              description: "Return the translated texts as a JSON object with the same keys",
-              parameters: {
-                type: "object",
-                properties: {
-                  translations: {
-                    type: "object",
-                    description: "Object with same keys as input, values translated to target language"
-                  }
-                },
-                required: ["translations"],
-                additionalProperties: false
-              }
-            }
-          }
-        ],
-        tool_choice: { type: "function", function: { name: "return_translations" } }
       }),
     });
 
@@ -70,23 +51,34 @@ serve(async (req) => {
       }
       const t = await response.text();
       console.error("AI gateway error:", response.status, t);
-      throw new Error("AI gateway error");
+      throw new Error("AI gateway error: " + response.status);
     }
 
     const data = await response.json();
-    const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
+    const content = data.choices?.[0]?.message?.content || "";
+    console.log("AI response:", content);
+
+    // Extract JSON from response (handle markdown code blocks)
+    const cleaned = content.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
     
-    if (toolCall) {
-      const parsed = JSON.parse(toolCall.function.arguments);
-      return new Response(JSON.stringify({ translations: parsed.translations }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    let indexedTranslations: Record<string, string>;
+    try {
+      indexedTranslations = JSON.parse(cleaned);
+    } catch (e) {
+      console.error("Failed to parse AI response:", cleaned);
+      throw new Error("Failed to parse translation response");
     }
 
-    // Fallback: try to parse content directly
-    const content = data.choices?.[0]?.message?.content || "{}";
-    const cleaned = content.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    return new Response(JSON.stringify({ translations: JSON.parse(cleaned) }), {
+    // Map back to original keys
+    const translations: Record<string, string> = {};
+    keys.forEach((key, i) => {
+      const val = indexedTranslations[String(i)] || indexedTranslations[i];
+      if (val) translations[key] = val;
+    });
+
+    console.log("Translations mapped:", Object.keys(translations).length, "of", keys.length);
+
+    return new Response(JSON.stringify({ translations }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
