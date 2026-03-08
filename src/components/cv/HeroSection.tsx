@@ -17,13 +17,15 @@ const HeroSection = () => {
       // Capture each letter's position before falling
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
-        const rects: { char: string; x: number; y: number }[] = [];
+        const rects: { char: string; x: number; y: number; w: number; h: number }[] = [];
         spans.forEach((span) => {
           const rect = span.getBoundingClientRect();
           rects.push({
             char: span.textContent || '',
             x: rect.left,
-            y: rect.top,
+            y: rect.top + window.scrollY,
+            w: rect.width,
+            h: rect.height,
           });
         });
         setLetterRects(rects);
