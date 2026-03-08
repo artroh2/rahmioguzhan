@@ -1,9 +1,28 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const [lettersFalling, setLettersFalling] = useState(false);
+  const [showNormal, setShowNormal] = useState(false);
+
+  const name = t('hero.title');
+
+  useEffect(() => {
+    // 2 saniye sonra harfler dökülsün
+    const fallTimer = setTimeout(() => setLettersFalling(true), 2000);
+    // Harfler düştükten sonra normal yazı geri gelsin
+    const resetTimer = setTimeout(() => {
+      setLettersFalling(false);
+      setShowNormal(true);
+    }, 4500);
+    return () => {
+      clearTimeout(fallTimer);
+      clearTimeout(resetTimer);
+    };
+  }, []);
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
@@ -51,15 +70,53 @@ const HeroSection = () => {
           className="space-y-5 max-w-2xl"
         >
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
-          >
-            <span className="text-gradient">{t('hero.title')}</span>
-          </motion.h1>
+          {/* Name with falling letters effect */}
+          <div className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight relative overflow-visible">
+            {!lettersFalling && !showNormal && (
+              <motion.h1
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <span className="text-gradient">{name}</span>
+              </motion.h1>
+            )}
+
+            {lettersFalling && (
+              <h1 className="flex flex-wrap" aria-label={name}>
+                {name.split('').map((char, i) => (
+                  <motion.span
+                    key={`fall-${i}`}
+                    className="text-gradient inline-block"
+                    style={{ minWidth: char === ' ' ? '0.3em' : undefined }}
+                    initial={{ y: 0, opacity: 1, rotate: 0 }}
+                    animate={{
+                      y: [0, 300 + Math.random() * 200],
+                      opacity: [1, 1, 0],
+                      rotate: [0, (Math.random() - 0.5) * 120],
+                    }}
+                    transition={{
+                      duration: 1.2 + Math.random() * 0.8,
+                      delay: Math.random() * 0.6,
+                      ease: [0.2, 0, 0.8, 1],
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
+              </h1>
+            )}
+
+            {showNormal && (
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <span className="text-gradient">{name}</span>
+              </motion.h1>
+            )}
+          </div>
 
           {/* Subtitle */}
           <motion.p

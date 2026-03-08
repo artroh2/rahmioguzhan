@@ -1,34 +1,8 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Youtube } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const fallingWords = [
-  { word: 'Amor', lang: 'İspanyolca', meaning: 'Aşk' },
-  { word: 'Saudade', lang: 'Portekizce', meaning: 'Özlem' },
-  { word: 'Meraki', lang: 'Yunanca', meaning: 'Tutkuyla yapmak' },
-  { word: '美', lang: 'Japonca', meaning: 'Güzellik' },
-  { word: 'Ubuntu', lang: 'Zuluca', meaning: 'İnsanlık' },
-  { word: 'Hygge', lang: 'Danca', meaning: 'Huzur' },
-  { word: 'Amore', lang: 'İtalyanca', meaning: 'Aşk' },
-  { word: '희망', lang: 'Korece', meaning: 'Umut' },
-  { word: 'Sehnsucht', lang: 'Almanca', meaning: 'Derin özlem' },
-  { word: 'Lumière', lang: 'Fransızca', meaning: 'Işık' },
-  { word: 'Свобода', lang: 'Rusça', meaning: 'Özgürlük' },
-  { word: 'Wabi-sabi', lang: 'Japonca', meaning: 'Kusurlu güzellik' },
-  { word: 'Aloha', lang: 'Hawaiice', meaning: 'Sevgi' },
-  { word: 'Âşk', lang: 'Farsça', meaning: 'Aşk' },
-  { word: '梦', lang: 'Çince', meaning: 'Rüya' },
-  { word: 'Ikigai', lang: 'Japonca', meaning: 'Yaşam amacı' },
-  { word: 'Felicità', lang: 'İtalyanca', meaning: 'Mutluluk' },
-  { word: 'Estrella', lang: 'İspanyolca', meaning: 'Yıldız' },
-  { word: 'Njëri', lang: 'Arnavutça', meaning: 'İnsan' },
-  { word: 'Βιβλίο', lang: 'Yunanca', meaning: 'Kitap' },
-  { word: 'Barış', lang: 'Türkçe', meaning: 'Barış' },
-  { word: 'Hakuna', lang: 'Svahilice', meaning: 'Sorun yok' },
-  { word: 'Carpe', lang: 'Latince', meaning: 'Yakala' },
-  { word: 'शांति', lang: 'Hintçe', meaning: 'Huzur' },
-];
 
 const socialLinks = [
   {
@@ -135,17 +109,8 @@ const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Randomize positions once per mount
-  const wordPositions = useMemo(() => 
-    fallingWords.map((w, i) => ({
-      ...w,
-      left: 5 + (i * 37 + i * 13) % 90, // pseudo-random spread
-      delay: (i * 0.18) % 4.5,
-      duration: 6 + (i % 5) * 1.5,
-      fontSize: 0.7 + (i % 4) * 0.15,
-      opacity: 0.12 + (i % 5) * 0.06,
-    })),
-  []);
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -184,36 +149,6 @@ const AboutSection = () => {
             <div className="section-divider" />
           </motion.div>
 
-          {/* Falling Words from World Languages */}
-          {isInView && (
-            <div className="relative h-48 md:h-64 overflow-hidden pointer-events-none -mt-4 -mb-4">
-              {/* Gradient fade at top */}
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-background to-transparent z-10" />
-              {/* Gradient fade at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-10" />
-              
-              {wordPositions.map((w, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute whitespace-nowrap select-none"
-                  style={{ left: `${w.left}%`, top: 0, fontSize: `${w.fontSize}rem` }}
-                  animate={{
-                    y: [-30, 250, 300],
-                    opacity: [0, w.opacity, 0],
-                  }}
-                  transition={{
-                    duration: w.duration,
-                    delay: w.delay,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                >
-                  <span className="font-display font-bold text-primary/40">{w.word}</span>
-                  <span className="text-muted-foreground/30 text-[0.6em] ml-1">{w.meaning}</span>
-                </motion.div>
-              ))}
-            </div>
-          )}
 
           {/* Social Link Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
