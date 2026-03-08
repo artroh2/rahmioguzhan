@@ -25,10 +25,10 @@ const Footer = () => {
         <p className="text-sm text-muted-foreground mt-1">
           All rights reserved.
         </p>
-        <div className="mt-4 flex items-center justify-center gap-3">
-          <span className="text-xs italic" style={{ color: '#d4a017' }}>We are one</span>
-          <img src={goldenHeart} alt="Golden Heart" className="w-12 h-12 object-contain" />
-          <span className="text-xs italic" style={{ color: '#d4a017' }}>We are full of expectations</span>
+        <div className="mt-4 flex items-center justify-center">
+          <span className="text-xs italic text-right" style={{ color: '#d4a017', width: '140px' }}>We are one</span>
+          <img src={goldenHeart} alt="Golden Heart" className="w-12 h-12 object-contain mx-3" />
+          <span className="text-xs italic text-left" style={{ color: '#d4a017', width: '140px' }}>We are full of expectations</span>
         </div>
 
         {/* Music Player */}
