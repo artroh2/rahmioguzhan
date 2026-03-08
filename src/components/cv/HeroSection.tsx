@@ -11,7 +11,8 @@ const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, 
 }) => {
   const [landed, setLanded] = useState(false);
   const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: fallRotate });
-  const controls = useAnimation();
+  const lastMouse = useRef({ x: 0, y: 0, time: 0 });
+  const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const landTime = (fallDuration + fallDelay) * 1000;
@@ -19,21 +20,55 @@ const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, 
     return () => clearTimeout(timer);
   }, [fallDuration, fallDelay]);
 
-  const handleHover = useCallback(() => {
+  // Track mouse velocity globally
+  useEffect(() => {
     if (!landed) return;
-    const randomX = (Math.random() - 0.5) * 200;
-    const randomY = (Math.random() - 0.5) * 120;
-    const randomRotate = (Math.random() - 0.5) * 360;
+    const handleMouseMove = (e: MouseEvent) => {
+      lastMouse.current = { x: e.clientX, y: e.clientY, time: Date.now() };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [landed]);
+
+  const handleHover = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (!landed) return;
+
+    // Calculate mouse velocity for force
+    const now = Date.now();
+    const dt = now - lastMouse.current.time;
+    let velocityX = 0;
+    let velocityY = 0;
+
+    if (dt > 0 && dt < 100) {
+      const clientX = 'clientX' in e ? e.clientX : (e as React.TouchEvent).touches[0]?.clientX || 0;
+      const clientY = 'clientY' in e ? e.clientY : (e as React.TouchEvent).touches[0]?.clientY || 0;
+      velocityX = (clientX - lastMouse.current.x) / dt;
+      velocityY = (clientY - lastMouse.current.y) / dt;
+    }
+
+    const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+    // Scale force based on speed: gentle hover = small nudge, fast swipe = big fling
+    const force = Math.min(Math.max(speed * 80, 40), 800);
+
+    const angle = speed > 0.5
+      ? Math.atan2(velocityY, velocityX) // fling in mouse direction
+      : Math.random() * Math.PI * 2;     // random if slow
+
+    const flingX = Math.cos(angle) * force * (0.8 + Math.random() * 0.4);
+    const flingY = Math.sin(angle) * force * (0.8 + Math.random() * 0.4);
+    const spin = (Math.random() - 0.5) * force * 2;
+
     setNudge(prev => ({
-      x: prev.x + randomX,
-      y: prev.y + randomY,
-      rotate: prev.rotate + randomRotate,
+      x: prev.x + flingX,
+      y: prev.y + flingY,
+      rotate: prev.rotate + spin,
     }));
   }, [landed]);
 
   return (
     <motion.span
-      className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing"
+      ref={spanRef}
+      className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing select-none"
       style={{
         position: 'absolute',
         left: x,
@@ -55,9 +90,9 @@ const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, 
       }}
       transition={landed ? {
         type: 'spring',
-        stiffness: 150,
-        damping: 12,
-        mass: 0.8,
+        stiffness: 80,
+        damping: 8,
+        mass: 0.5,
       } : {
         duration: fallDuration,
         delay: fallDelay,
@@ -65,7 +100,7 @@ const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, 
       }}
       onMouseEnter={handleHover}
       onTouchStart={handleHover}
-      whileHover={landed ? { scale: 1.2 } : undefined}
+      whileHover={landed ? { scale: 1.15 } : undefined}
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
