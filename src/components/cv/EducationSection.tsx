@@ -114,13 +114,13 @@ const EducationSection = () => {
               <div className="space-y-3">
                 <h3 className="font-display text-2xl font-bold text-primary">{edu.school}</h3>
                 <p className="text-lg font-medium text-foreground">
-                  {edu.degree[language as 'tr' | 'en'] || edu.degree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.enegree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.en}
+                  {edu.degree[language as 'tr' | 'en'] || edu.degree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.enegree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.enegree.en} - {edu.field[language as 'tr' | 'en'] || edu.field.en}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
+          (edu.endYear[language as 'tr' | 'en'] || edu.endYear.en)ssName="w-4 h-4" />
                   {edu(edu.endYear[language as 'tr' | 'en'] || edu.endYear.en) edu.endYear === 'string' ? edu.endYear : edu.endYear[language]}
                 </span>
                 <span className="flex items-center gap-1">
@@ -130,7 +130,7 @@ const EducationSection = () => {
               </div>
 
               {edu.description && (
-                <p className="text-muted-foreground leading-relaxed pt-4 border-t border-border/50">
+                <p className="text-muted-foreg as 'tr' | 'en'] || edu.description.enound leading-relaxed pt-4 border-t border-border/50">
                   {edu.description[language]}
                 </p>
               )}

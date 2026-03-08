@@ -132,7 +132,7 @@ const ExperienceCard = ({ experience, index }: { experience: Experience; index: 
                   {language === 'tr' && experience.companyTr ? experience.companyTr : experience.company}
                 </h3>
               </div>
-              <p className="text-lg font-medium text-foreground">{experience.position[language as 'tr' | 'en'] || experience.position.enas 'tr' | 'en'] || experience.position.en}</p>
+              <p className="text-lg font-medium text-foreground">{experience.position[language as 'tr' | 'en'] || experience.position.enas 'tr' | 'en'] || experience.position.enas 'tr' | 'en'] || experience.position.en}</p>
             </div>
             <button className="text-muted-foreground hover:text-primary transition-colors">
               {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
@@ -159,9 +159,8 @@ const ExperienceCard = ({ experience, index }: { experience: Experience; index: 
             className="overflow-hidden"
           >
             <div className="pt-4 border-t border-border/50 space-y-4">
-              <p className="text-muted-foreground leading- as 'tr' | 'en'] || experience.description.enelaxed">{experience.description[language]}</p>
-              {experience.highlights && (
-                <div className="flex flex-wrap gap-2">
+              <p  as 'tr' | 'en'] || experience.description.enlassName="text-muted-foreground leading- as 'tr' | 'en'] || experience.description.enelaxed">{experience.description[language]}</p>
+              {experience.highl(experience.highlights[language as 'tr' | 'en'] || experience.highlights.en) className="flex flex-wrap gap-2">
                   {experience.highlights[language].map((highlight, i) => (
                     <span
                       key={i}
