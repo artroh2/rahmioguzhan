@@ -155,6 +155,22 @@ const AboutSection = () => {
                 </div>
               </a>
             ))}
+
+            {/* Email Card */}
+            <a
+              href="mailto:rahmioguzhanhacieyupoglu@gmail.com"
+              className="glass-warm rounded-2xl p-5 flex items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 card-glow-hover cursor-pointer group sm:col-span-2 lg:col-span-3"
+            >
+              <div
+                className="w-12 h-12 min-w-[3rem] rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style={{ background: 'hsl(var(--primary) / 0.15)', color: 'hsl(var(--primary))' }}
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <span className="font-display font-bold text-foreground text-sm">
+                {language === 'tr' ? "Rahmi Oğuzhan Hacıeyüpoğlu'na E-Posta Gönder" : "Send Email to Rahmi Oğuzhan Hacıeyüpoğlu"}
+              </span>
+            </a>
           </div>
         </motion.div>
       </div>
