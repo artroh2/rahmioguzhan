@@ -183,10 +183,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const setLanguage = useCallback(async (lang: Language) => {
-    setLanguageState(lang);
     if (lang !== 'tr' && lang !== 'en') {
+      // Fetch translations BEFORE switching language so users never see English fallback
       await translateAll(lang);
     }
+    setLanguageState(lang);
   }, [translateAll]);
 
   const t = useCallback((key: string): string => {
