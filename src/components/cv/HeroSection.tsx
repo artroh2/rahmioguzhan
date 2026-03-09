@@ -279,8 +279,8 @@ const HeroSection = () => {
   const getButtonY = () => {
     const footer = document.querySelector('footer');
     return footer
-      ? footer.getBoundingClientRect().top + window.scrollY - 50
-      : window.innerHeight - 60;
+      ? footer.getBoundingClientRect().top + window.scrollY - 25
+      : window.innerHeight - 40;
   };
 
   const buttonStyle = (extra?: React.CSSProperties): React.CSSProperties => ({
