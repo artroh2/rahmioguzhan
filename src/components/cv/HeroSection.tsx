@@ -164,7 +164,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
   const [gameKey, setGameKey] = useState(0);
   const [lettersFalling, setLettersFalling] = useState(false);
-  const [resetToOrigin, setResetToOrigin] = useState(false);
+  const [assembleTargets, setAssembleTargets] = useState<Map<number, { x: number; y: number }> | null>(null);
   const [allLanded, setAllLanded] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
@@ -179,7 +179,7 @@ const HeroSection = () => {
     letterPositions.current.clear();
     landedCount.current = 0;
     setLettersFalling(false);
-    setResetToOrigin(false);
+    setAssembleTargets(null);
     setAllLanded(false);
     const fallTimer = setTimeout(() => {
       if (nameRef.current) {
@@ -202,10 +202,10 @@ const HeroSection = () => {
     return () => clearTimeout(fallTimer);
   }, [gameKey]);
 
-  // Check if letters are arranged in the correct order (left-to-right)
+  // Check if letters are arranged in the correct order
   const checkNameCompletion = useCallback(() => {
     if (checkTimeout.current) clearTimeout(checkTimeout.current);
-    if (resetToOrigin) return;
+    if (assembleTargets) return;
     checkTimeout.current = setTimeout(() => {
       const positions = letterPositions.current;
       const nonSpaceIndices: number[] = [];
@@ -214,7 +214,6 @@ const HeroSection = () => {
       });
       if (positions.size < nonSpaceIndices.length) return;
 
-      // Check if sorted by x position matches original order
       const sortedByX = [...nonSpaceIndices].sort((a, b) => {
         const posA = positions.get(a);
         const posB = positions.get(b);
@@ -228,24 +227,45 @@ const HeroSection = () => {
         const yValues = nonSpaceIndices.map(i => positions.get(i)?.y || 0);
         const minY = Math.min(...yValues);
         const maxY = Math.max(...yValues);
-        // More forgiving: 150px vertical tolerance
         if (maxY - minY < 150) {
-          // Animate letters back to original positions
-          setResetToOrigin(true);
-          // After animation completes, hide falling letters and show original h1
-          setTimeout(() => {
-            setLettersFalling(false);
-            letterPositions.current.clear();
-            // Re-trigger explosion after a pause
-            setTimeout(() => {
-              setResetToOrigin(false);
-              setGameKey(k => k + 1);
-            }, 2000);
-          }, 1500);
+          triggerAssemble();
         }
       }
     }, 500);
-  }, [letterRects, resetToOrigin]);
+  }, [letterRects, assembleTargets]);
+
+  // Calculate assembly positions: center the text near the footer
+  const triggerAssemble = useCallback(() => {
+    const footer = document.querySelector('footer');
+    const assembleY = footer
+      ? footer.getBoundingClientRect().top + window.scrollY - 80
+      : window.innerHeight - 80;
+
+    // Calculate total width of all letters
+    const totalWidth = letterRects.reduce((sum, l) => sum + l.w, 0);
+    const screenW = window.innerWidth;
+    let startX = (screenW - totalWidth) / 2;
+
+    const targets = new Map<number, { x: number; y: number }>();
+    let curX = startX;
+    letterRects.forEach((letter, i) => {
+      targets.set(i, { x: curX, y: assembleY });
+      curX += letter.w;
+    });
+
+    setAssembleTargets(targets);
+    setAllLanded(false);
+
+    // After animation, restart
+    setTimeout(() => {
+      setLettersFalling(false);
+      letterPositions.current.clear();
+      setTimeout(() => {
+        setAssembleTargets(null);
+        setGameKey(k => k + 1);
+      }, 2000);
+    }, 2000);
+  }, [letterRects]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
     const isFirstReport = !letterPositions.current.has(id);
@@ -260,14 +280,8 @@ const HeroSection = () => {
   }, [checkNameCompletion, letterRects.length]);
 
   const handleFixClick = useCallback(() => {
-    setResetToOrigin(true);
-    setTimeout(() => {
-      setLettersFalling(false);
-      letterPositions.current.clear();
-      setTimeout(() => {
-        setResetToOrigin(false);
-        setGameKey(k => k + 1);
-      }, 2000);
+    triggerAssemble();
+  }, [triggerAssemble]);
     }, 1500);
   }, []);
 
