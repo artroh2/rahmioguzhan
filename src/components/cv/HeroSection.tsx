@@ -5,23 +5,19 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
 
 // ─── Draggable letter with physics explosion + drag-to-arrange ───
-interface LetterState {
-  x: number; y: number; rotate: number;
-  phase: 'idle' | 'physics' | 'landed';
-}
-
 const DraggableLetter = ({
   char, originX, originY, w, h,
   explodeAngle, explodeForce, explodeDelay,
-  onPositionUpdate, letterId,
+  onPositionUpdate, letterId, resetToOrigin,
 }: {
   char: string; originX: number; originY: number; w: number; h: number;
   explodeAngle: number; explodeForce: number; explodeDelay: number;
   onPositionUpdate: (id: number, absX: number, absY: number) => void;
   letterId: number;
+  resetToOrigin: boolean;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed'>('idle');
+  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'returning'>('idle');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
@@ -31,6 +27,7 @@ const DraggableLetter = ({
 
   // Physics explosion + gravity
   useEffect(() => {
+    if (resetToOrigin) return; // don't start physics during reset
     const startDelay = setTimeout(() => {
       setPhase('physics');
       const speed = explodeForce * 2.5;
@@ -86,7 +83,16 @@ const DraggableLetter = ({
       return () => cancelAnimationFrame(rafId);
     }, explodeDelay * 1000);
     return () => clearTimeout(startDelay);
-  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate]);
+  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, resetToOrigin]);
+
+  // When resetToOrigin becomes true, animate back to original position
+  useEffect(() => {
+    if (resetToOrigin && phase === 'landed') {
+      setPhase('returning');
+      // Animate to 0,0,0 with CSS transition
+      setPos({ x: 0, y: 0, rotate: 0 });
+    }
+  }, [resetToOrigin, phase]);
 
   // Drag handlers
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
@@ -119,11 +125,11 @@ const DraggableLetter = ({
     dragging.current = false;
     const el = ref.current;
     if (el) el.releasePointerCapture(e.pointerId);
-    // Report final position
     onPositionUpdate(letterId, originX + pos.x, originY + pos.y);
   }, [letterId, originX, originY, pos.x, pos.y, onPositionUpdate]);
 
   const isLanded = phase === 'landed';
+  const isReturning = phase === 'returning';
 
   return (
     <span
@@ -138,7 +144,7 @@ const DraggableLetter = ({
         pointerEvents: isLanded ? 'auto' : 'none',
         cursor: isLanded ? 'grab' : 'default',
         transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotate}deg)`,
-        transition: dragging.current ? 'none' : undefined,
+        transition: dragging.current ? 'none' : isReturning ? 'transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
         zIndex: isLanded ? 10000 : 9999,
         touchAction: 'none',
       }}
@@ -154,20 +160,21 @@ const DraggableLetter = ({
 // ─── Main Hero Section ───
 const HeroSection = () => {
   const { t } = useLanguage();
-  const [gameKey, setGameKey] = useState(0); // increment to restart
+  const [gameKey, setGameKey] = useState(0);
   const [lettersFalling, setLettersFalling] = useState(false);
+  const [resetToOrigin, setResetToOrigin] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
   const letterPositions = useRef<Map<number, { x: number; y: number }>>(new Map());
   const checkTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   const name = t('hero.title');
-  const targetChars = name.replace(/\s+/g, '').split('');
 
   // Capture letter positions and start explosion
   useEffect(() => {
     letterPositions.current.clear();
     setLettersFalling(false);
+    setResetToOrigin(false);
     const fallTimer = setTimeout(() => {
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
@@ -192,17 +199,14 @@ const HeroSection = () => {
   // Check if letters are arranged in the correct order (left-to-right)
   const checkNameCompletion = useCallback(() => {
     if (checkTimeout.current) clearTimeout(checkTimeout.current);
+    if (resetToOrigin) return;
     checkTimeout.current = setTimeout(() => {
       const positions = letterPositions.current;
-      // Need all non-space letters positioned
-      const nonSpaceLetters = letterRects.filter(l => l.char.trim() !== '');
-      if (positions.size < nonSpaceLetters.length) return;
-
-      // Get indices of non-space letters
       const nonSpaceIndices: number[] = [];
       letterRects.forEach((l, i) => {
         if (l.char.trim() !== '') nonSpaceIndices.push(i);
       });
+      if (positions.size < nonSpaceIndices.length) return;
 
       // Check if sorted by x position matches original order
       const sortedByX = [...nonSpaceIndices].sort((a, b) => {
@@ -212,25 +216,30 @@ const HeroSection = () => {
         return posA.x - posB.x;
       });
 
-      // Check if order matches original
       const isCorrectOrder = nonSpaceIndices.every((idx, i) => sortedByX[i] === idx);
 
-      // Also check they're roughly on the same horizontal line (within 80px)
       if (isCorrectOrder) {
         const yValues = nonSpaceIndices.map(i => positions.get(i)?.y || 0);
         const minY = Math.min(...yValues);
         const maxY = Math.max(...yValues);
-        if (maxY - minY < 80) {
-          // Success! Restart the game
+        // More forgiving: 150px vertical tolerance
+        if (maxY - minY < 150) {
+          // Animate letters back to original positions
+          setResetToOrigin(true);
+          // After animation completes, hide falling letters and show original h1
           setTimeout(() => {
             setLettersFalling(false);
             letterPositions.current.clear();
-            setTimeout(() => setGameKey(k => k + 1), 500);
-          }, 800);
+            // Re-trigger explosion after a pause
+            setTimeout(() => {
+              setResetToOrigin(false);
+              setGameKey(k => k + 1);
+            }, 2000);
+          }, 1500);
         }
       }
-    }, 300);
-  }, [letterRects]);
+    }, 500);
+  }, [letterRects, resetToOrigin]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
     letterPositions.current.set(id, { x: absX, y: absY });
@@ -349,6 +358,7 @@ const HeroSection = () => {
                 explodeForce={explodeForce}
                 explodeDelay={explodeDelay}
                 onPositionUpdate={handlePositionUpdate}
+                resetToOrigin={resetToOrigin}
               />
             );
           })}
