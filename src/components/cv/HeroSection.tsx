@@ -12,6 +12,7 @@ interface LetterCommand {
   angle: number;
   force: number;
   delay: number;
+  epoch: number; // unique id to distinguish repeated explosions
 }
 
 const PhysicsLetter = ({
@@ -29,15 +30,15 @@ const PhysicsLetter = ({
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
-  const commandRef = useRef(command);
+  const explodeEpoch = useRef(0);
 
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
   // React to new explode commands
   useEffect(() => {
-    if (!command || command === commandRef.current) return;
-    commandRef.current = command;
+    if (!command || command.epoch === explodeEpoch.current) return;
+    explodeEpoch.current = command.epoch;
 
     if (command.type === 'explode') {
       const timeout = setTimeout(() => {
@@ -223,6 +224,7 @@ const HeroSection = () => {
         angle: (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8,
         force: 200 + Math.random() * 400,
         delay: Math.random() * 0.3,
+        epoch,
       });
     }
     setCommands(cmds);
