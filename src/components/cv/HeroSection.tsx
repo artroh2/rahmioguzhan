@@ -8,16 +8,17 @@ import heroPhoto from '@/assets/hero-photo.png';
 const DraggableLetter = ({
   char, originX, originY, w, h,
   explodeAngle, explodeForce, explodeDelay,
-  onPositionUpdate, letterId, resetToOrigin,
+  onPositionUpdate, letterId,
+  assembleTarget,
 }: {
   char: string; originX: number; originY: number; w: number; h: number;
   explodeAngle: number; explodeForce: number; explodeDelay: number;
   onPositionUpdate: (id: number, absX: number, absY: number) => void;
   letterId: number;
-  resetToOrigin: boolean;
+  assembleTarget: { x: number; y: number } | null;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'returning'>('idle');
+  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'assembling'>('idle');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
@@ -27,7 +28,7 @@ const DraggableLetter = ({
 
   // Physics explosion + gravity
   useEffect(() => {
-    if (resetToOrigin) return; // don't start physics during reset
+    if (assembleTarget) return;
     const startDelay = setTimeout(() => {
       setPhase('physics');
       const speed = explodeForce * 2.5;
@@ -70,8 +71,7 @@ const DraggableLetter = ({
         if (cy >= floorY - 1 && totalSpeed < 15) {
           settled++;
           if (settled > 10) {
-            const finalPos = { x: cx, y: floorY, rotate: 0 };
-            setPos(finalPos);
+            setPos({ x: cx, y: floorY, rotate: 0 });
             setPhase('landed');
             onPositionUpdate(letterId, originX + cx, originY + floorY);
             return;
@@ -83,16 +83,20 @@ const DraggableLetter = ({
       return () => cancelAnimationFrame(rafId);
     }, explodeDelay * 1000);
     return () => clearTimeout(startDelay);
-  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, resetToOrigin]);
+  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, assembleTarget]);
 
-  // When resetToOrigin becomes true, animate back to original position
+  // When assembleTarget is set, animate to that position
   useEffect(() => {
-    if (resetToOrigin && phase === 'landed') {
-      setPhase('returning');
-      // Animate to 0,0,0 with CSS transition
-      setPos({ x: 0, y: 0, rotate: 0 });
+    if (assembleTarget && phase === 'landed') {
+      setPhase('assembling');
+      // Target is absolute position, convert to offset from origin
+      setPos({
+        x: assembleTarget.x - originX,
+        y: assembleTarget.y - originY,
+        rotate: 0,
+      });
     }
-  }, [resetToOrigin, phase]);
+  }, [assembleTarget, phase, originX, originY]);
 
   // Drag handlers
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
@@ -111,12 +115,10 @@ const DraggableLetter = ({
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!dragging.current) return;
     e.preventDefault();
-    const newAbsX = e.clientX - dragOffset.current.x;
-    const newAbsY = e.clientY - dragOffset.current.y;
     setPos(prev => ({
       ...prev,
-      x: newAbsX - originX,
-      y: newAbsY - originY,
+      x: e.clientX - dragOffset.current.x - originX,
+      y: e.clientY - dragOffset.current.y - originY,
     }));
   }, [originX, originY]);
 
@@ -129,7 +131,7 @@ const DraggableLetter = ({
   }, [letterId, originX, originY, pos.x, pos.y, onPositionUpdate]);
 
   const isLanded = phase === 'landed';
-  const isReturning = phase === 'returning';
+  const isAssembling = phase === 'assembling';
 
   return (
     <span
@@ -144,7 +146,7 @@ const DraggableLetter = ({
         pointerEvents: isLanded ? 'auto' : 'none',
         cursor: isLanded ? 'grab' : 'default',
         transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotate}deg)`,
-        transition: dragging.current ? 'none' : isReturning ? 'transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
+        transition: dragging.current ? 'none' : isAssembling ? 'transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
         zIndex: isLanded ? 10000 : 9999,
         touchAction: 'none',
       }}
