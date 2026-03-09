@@ -385,6 +385,40 @@ const HeroSection = () => {
               />
             );
           })}
+          {/* "Fix it" button - appears after all letters land */}
+          {allLanded && !resetToOrigin && (() => {
+            const footer = document.querySelector('footer');
+            const btnTop = footer
+              ? footer.getBoundingClientRect().top + window.scrollY - 50
+              : window.innerHeight - 60;
+            return (
+              <button
+                onClick={handleFixClick}
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: btnTop,
+                  transform: 'translateX(-50%)',
+                  pointerEvents: 'auto',
+                  zIndex: 10001,
+                  padding: '8px 24px',
+                  borderRadius: '9999px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: 'hsl(var(--background))',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))',
+                  border: 'none',
+                  cursor: 'pointer',
+                  opacity: 0.85,
+                  transition: 'opacity 0.2s, transform 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)'; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateX(-50%) scale(1)'; }}
+              >
+                {t('hero.fix')}
+              </button>
+            );
+          })()}
         </div>,
         document.body
       )}
