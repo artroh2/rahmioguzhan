@@ -4,112 +4,123 @@ import { createPortal } from 'react-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
 
-// ─── Draggable letter with physics explosion + drag-to-arrange ───
-const DraggableLetter = ({
-  char, originX, originY, w, h,
-  explodeAngle, explodeForce, explodeDelay,
-  onPositionUpdate, letterId,
-  assembleTarget,
+// ─── Physics Letter ───
+// Each letter knows its "origin" (where it was in the h1), and maintains an offset (pos).
+// Commands: 'explode' → physics sim, 'assemble' → animate to assembleTarget, 'idle' → draggable
+interface LetterCommand {
+  type: 'explode';
+  angle: number;
+  force: number;
+  delay: number;
+}
+
+const PhysicsLetter = ({
+  char, originX, originY, w, h, letterId,
+  command, assembleTarget, onLanded, onDragEnd,
 }: {
-  char: string; originX: number; originY: number; w: number; h: number;
-  explodeAngle: number; explodeForce: number; explodeDelay: number;
-  onPositionUpdate: (id: number, absX: number, absY: number) => void;
-  letterId: number;
+  char: string; originX: number; originY: number; w: number; h: number; letterId: number;
+  command: LetterCommand | null;
   assembleTarget: { x: number; y: number } | null;
+  onLanded: (id: number) => void;
+  onDragEnd: (id: number, absX: number, absY: number) => void;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'assembling'>('idle');
+  const [phase, setPhase] = useState<'waiting' | 'physics' | 'landed' | 'assembling'>('waiting');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
+  const commandRef = useRef(command);
 
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  // Physics explosion + gravity
+  // React to new explode commands
   useEffect(() => {
-    if (assembleTarget) return;
-    const startDelay = setTimeout(() => {
-      setPhase('physics');
-      const speed = explodeForce * 2.5;
-      let vx = Math.cos(explodeAngle) * speed;
-      let vy = Math.sin(explodeAngle) * speed - 200;
-      let vr = (Math.random() - 0.5) * 600;
-      let cx = 0, cy = 0, cr = 0;
+    if (!command || command === commandRef.current) return;
+    commandRef.current = command;
 
-      const gravity = 980;
-      const airDrag = 0.995;
-      const bounceDamping = 0.4;
-      const floorFriction = 0.92;
-      const rotationDamping = 0.97;
+    if (command.type === 'explode') {
+      const timeout = setTimeout(() => {
+        setPhase('physics');
+        const speed = command.force * 2.5;
+        let vx = Math.cos(command.angle) * speed;
+        let vy = Math.sin(command.angle) * speed - 200;
+        let vr = (Math.random() - 0.5) * 600;
+        // Start from current position
+        let cx = pos.x, cy = pos.y, cr = pos.rotate;
 
-      const footer = document.querySelector('footer');
-      const floorY = footer
-        ? footer.getBoundingClientRect().top + window.scrollY - originY - h - 2
-        : screenH - originY - h - 20;
-      const wallLeft = -originX + 5;
-      const wallRight = screenW - originX - w - 5;
+        const gravity = 980;
+        const airDrag = 0.995;
+        const bounceDamping = 0.4;
+        const floorFriction = 0.92;
+        const rotationDamping = 0.97;
 
-      let lastTime = performance.now();
-      let settled = 0;
-      let rafId: number;
+        const footer = document.querySelector('footer');
+        const floorY = footer
+          ? footer.getBoundingClientRect().top + window.scrollY - originY - h - 2
+          : screenH - originY - h - 20;
+        const wallLeft = -originX + 5;
+        const wallRight = screenW - originX - w - 5;
 
-      const step = (now: number) => {
-        const dt = Math.min((now - lastTime) / 1000, 0.033);
-        lastTime = now;
-        vy += gravity * dt;
-        vx *= airDrag; vy *= airDrag; vr *= rotationDamping;
-        cx += vx * dt; cy += vy * dt; cr += vr * dt;
+        let lastTime = performance.now();
+        let settled = 0;
 
-        if (cy >= floorY) { cy = floorY; vy = -Math.abs(vy) * bounceDamping; vx *= floorFriction; vr *= 0.7; }
-        if (cx <= wallLeft) { cx = wallLeft; vx = Math.abs(vx) * bounceDamping; }
-        else if (cx >= wallRight) { cx = wallRight; vx = -Math.abs(vx) * bounceDamping; }
+        const step = (now: number) => {
+          const dt = Math.min((now - lastTime) / 1000, 0.033);
+          lastTime = now;
+          vy += gravity * dt;
+          vx *= airDrag; vy *= airDrag; vr *= rotationDamping;
+          cx += vx * dt; cy += vy * dt; cr += vr * dt;
 
-        setPos({ x: cx, y: cy, rotate: cr });
+          if (cy >= floorY) { cy = floorY; vy = -Math.abs(vy) * bounceDamping; vx *= floorFriction; vr *= 0.7; }
+          if (cx <= wallLeft) { cx = wallLeft; vx = Math.abs(vx) * bounceDamping; }
+          else if (cx >= wallRight) { cx = wallRight; vx = -Math.abs(vx) * bounceDamping; }
 
-        const totalSpeed = Math.abs(vx) + Math.abs(vy) + Math.abs(vr);
-        if (cy >= floorY - 1 && totalSpeed < 15) {
-          settled++;
-          if (settled > 10) {
-            setPos({ x: cx, y: floorY, rotate: 0 });
-            setPhase('landed');
-            onPositionUpdate(letterId, originX + cx, originY + floorY);
-            return;
-          }
-        } else { settled = 0; }
-        rafId = requestAnimationFrame(step);
-      };
-      rafId = requestAnimationFrame(step);
-      return () => cancelAnimationFrame(rafId);
-    }, explodeDelay * 1000);
-    return () => clearTimeout(startDelay);
-  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, assembleTarget]);
+          setPos({ x: cx, y: cy, rotate: cr });
 
-  // When assembleTarget is set, animate to that position
+          const totalSpeed = Math.abs(vx) + Math.abs(vy) + Math.abs(vr);
+          if (cy >= floorY - 1 && totalSpeed < 15) {
+            settled++;
+            if (settled > 10) {
+              setPos({ x: cx, y: floorY, rotate: 0 });
+              setPhase('landed');
+              onLanded(letterId);
+              return;
+            }
+          } else { settled = 0; }
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, command.delay * 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [command]);
+
+  // React to assemble target
   useEffect(() => {
-    if (assembleTarget && phase === 'landed') {
+    if (assembleTarget && (phase === 'landed' || phase === 'waiting')) {
       setPhase('assembling');
-      // Target is absolute position, convert to offset from origin
       setPos({
         x: assembleTarget.x - originX,
         y: assembleTarget.y - originY,
         rotate: 0,
       });
+      // After animation, mark as landed
+      const t = setTimeout(() => {
+        setPhase('landed');
+        onLanded(letterId);
+      }, 1600);
+      return () => clearTimeout(t);
     }
-  }, [assembleTarget, phase, originX, originY]);
+  }, [assembleTarget]);
 
-  // Drag handlers
+  // Drag
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     if (phase !== 'landed') return;
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     dragging.current = true;
-    const el = ref.current;
-    if (el) el.setPointerCapture(e.pointerId);
-    dragOffset.current = {
-      x: e.clientX - (originX + pos.x),
-      y: e.clientY - (originY + pos.y),
-    };
+    ref.current?.setPointerCapture(e.pointerId);
+    dragOffset.current = { x: e.clientX - (originX + pos.x), y: e.clientY - (originY + pos.y) };
   }, [phase, originX, originY, pos.x, pos.y]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -125,10 +136,9 @@ const DraggableLetter = ({
   const handlePointerUp = useCallback((e: React.PointerEvent) => {
     if (!dragging.current) return;
     dragging.current = false;
-    const el = ref.current;
-    if (el) el.releasePointerCapture(e.pointerId);
-    onPositionUpdate(letterId, originX + pos.x, originY + pos.y);
-  }, [letterId, originX, originY, pos.x, pos.y, onPositionUpdate]);
+    ref.current?.releasePointerCapture(e.pointerId);
+    onDragEnd(letterId, originX + pos.x, originY + pos.y);
+  }, [letterId, originX, originY, pos.x, pos.y, onDragEnd]);
 
   const isLanded = phase === 'landed';
   const isAssembling = phase === 'assembling';
@@ -147,7 +157,7 @@ const DraggableLetter = ({
         cursor: isLanded ? 'grab' : 'default',
         transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotate}deg)`,
         transition: dragging.current ? 'none' : isAssembling ? 'transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
-        zIndex: isLanded ? 10000 : 9999,
+        zIndex: isLanded || isAssembling ? 10000 : 9999,
         touchAction: 'none',
       }}
       onPointerDown={handlePointerDown}
@@ -162,26 +172,21 @@ const DraggableLetter = ({
 // ─── Main Hero Section ───
 const HeroSection = () => {
   const { t } = useLanguage();
-  const [gameKey, setGameKey] = useState(0);
-  const [lettersFalling, setLettersFalling] = useState(false);
-  const [assembleTargets, setAssembleTargets] = useState<Map<number, { x: number; y: number }> | null>(null);
-  const [allLanded, setAllLanded] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
-  const letterPositions = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const [active, setActive] = useState(false); // letters portal is active
+  const [commands, setCommands] = useState<(LetterCommand | null)[]>([]);
+  const [assembleTargets, setAssembleTargets] = useState<({ x: number; y: number } | null)[]>([]);
+  const [showButtons, setShowButtons] = useState(false);
+  const [isAssembled, setIsAssembled] = useState(false);
   const landedCount = useRef(0);
-  const checkTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const commandEpoch = useRef(0); // to create unique command objects
 
   const name = t('hero.title');
 
-  // Capture letter positions and start explosion
+  // Initial capture + first explosion after 5s
   useEffect(() => {
-    letterPositions.current.clear();
-    landedCount.current = 0;
-    setLettersFalling(false);
-    setAssembleTargets(null);
-    setAllLanded(false);
-    const fallTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
         const rects: { char: string; x: number; y: number; w: number; h: number }[] = [];
@@ -196,90 +201,97 @@ const HeroSection = () => {
           });
         });
         setLetterRects(rects);
+        setActive(true);
+        // Trigger first explosion
+        triggerExplode(rects.length);
       }
-      setLettersFalling(true);
     }, 5000);
-    return () => clearTimeout(fallTimer);
-  }, [gameKey]);
+    return () => clearTimeout(timer);
+  }, []);
 
-  // Check if letters are arranged in the correct order
-  const checkNameCompletion = useCallback(() => {
-    if (checkTimeout.current) clearTimeout(checkTimeout.current);
-    if (assembleTargets) return;
-    checkTimeout.current = setTimeout(() => {
-      const positions = letterPositions.current;
-      const nonSpaceIndices: number[] = [];
-      letterRects.forEach((l, i) => {
-        if (l.char.trim() !== '') nonSpaceIndices.push(i);
+  const triggerExplode = useCallback((count: number) => {
+    commandEpoch.current += 1;
+    const epoch = commandEpoch.current;
+    landedCount.current = 0;
+    setShowButtons(false);
+    setIsAssembled(false);
+    setAssembleTargets([]);
+    const cmds: LetterCommand[] = [];
+    for (let i = 0; i < count; i++) {
+      cmds.push({
+        type: 'explode',
+        angle: (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8,
+        force: 200 + Math.random() * 400,
+        delay: Math.random() * 0.3,
       });
-      if (positions.size < nonSpaceIndices.length) return;
+    }
+    setCommands(cmds);
+  }, []);
 
-      const sortedByX = [...nonSpaceIndices].sort((a, b) => {
-        const posA = positions.get(a);
-        const posB = positions.get(b);
-        if (!posA || !posB) return 0;
-        return posA.x - posB.x;
-      });
+  const handleLanded = useCallback(() => {
+    landedCount.current += 1;
+    if (landedCount.current >= letterRects.length && letterRects.length > 0) {
+      setShowButtons(true);
+    }
+  }, [letterRects.length]);
 
-      const isCorrectOrder = nonSpaceIndices.every((idx, i) => sortedByX[i] === idx);
+  const handleDragEnd = useCallback((_id: number, _absX: number, _absY: number) => {
+    // Could be used for manual puzzle detection in the future
+  }, []);
 
-      if (isCorrectOrder) {
-        const yValues = nonSpaceIndices.map(i => positions.get(i)?.y || 0);
-        const minY = Math.min(...yValues);
-        const maxY = Math.max(...yValues);
-        if (maxY - minY < 150) {
-          triggerAssemble();
-        }
-      }
-    }, 500);
-  }, [letterRects, assembleTargets]);
+  // "Düzelt" - assemble letters into name near footer
+  const handleFix = useCallback(() => {
+    setShowButtons(false);
+    setCommands([]); // clear explode commands
 
-  // Calculate assembly positions: center the text near the footer
-  const triggerAssemble = useCallback(() => {
     const footer = document.querySelector('footer');
     const assembleY = footer
       ? footer.getBoundingClientRect().top + window.scrollY - 80
       : window.innerHeight - 80;
 
-    // Calculate total width of all letters
     const totalWidth = letterRects.reduce((sum, l) => sum + l.w, 0);
     const screenW = window.innerWidth;
     let startX = (screenW - totalWidth) / 2;
 
-    const targets = new Map<number, { x: number; y: number }>();
+    const targets: ({ x: number; y: number } | null)[] = [];
     let curX = startX;
-    letterRects.forEach((letter, i) => {
-      targets.set(i, { x: curX, y: assembleY });
+    letterRects.forEach((letter) => {
+      targets.push({ x: curX, y: assembleY });
       curX += letter.w;
     });
 
+    landedCount.current = 0;
     setAssembleTargets(targets);
-    setAllLanded(false);
-
-    // After animation completes, keep assembled text visible, then re-explode
-    setTimeout(() => {
-      // Re-trigger explosion from assembled position
-      letterPositions.current.clear();
-      setAssembleTargets(null);
-      setGameKey(k => k + 1);
-    }, 4000);
+    setIsAssembled(true);
   }, [letterRects]);
 
-  const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
-    const isFirstReport = !letterPositions.current.has(id);
-    letterPositions.current.set(id, { x: absX, y: absY });
-    if (isFirstReport) {
-      landedCount.current += 1;
-      if (landedCount.current >= letterRects.length) {
-        setAllLanded(true);
-      }
-    }
-    checkNameCompletion();
-  }, [checkNameCompletion, letterRects.length]);
+  // "Patlat" - re-explode
+  const handleExplode = useCallback(() => {
+    setShowButtons(false);
+    setAssembleTargets([]);
+    setIsAssembled(false);
+    triggerExplode(letterRects.length);
+  }, [letterRects.length, triggerExplode]);
 
-  const handleFixClick = useCallback(() => {
-    triggerAssemble();
-  }, [triggerAssemble]);
+  // Calculate button position
+  const getButtonY = () => {
+    const footer = document.querySelector('footer');
+    return footer
+      ? footer.getBoundingClientRect().top + window.scrollY - 50
+      : window.innerHeight - 60;
+  };
+
+  const buttonStyle = (extra?: React.CSSProperties): React.CSSProperties => ({
+    pointerEvents: 'auto',
+    padding: '8px 24px',
+    borderRadius: '9999px',
+    fontSize: '14px',
+    fontWeight: 600,
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s, transform 0.2s',
+    ...extra,
+  });
 
   return (
     <>
@@ -317,7 +329,7 @@ const HeroSection = () => {
           />
         </div>
 
-        {/* Content */}
+        {/* Content - Name (visible until first explosion) */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 md:px-12 lg:px-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -327,7 +339,7 @@ const HeroSection = () => {
           >
             <h1
               ref={nameRef}
-              className={`font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${lettersFalling ? 'invisible' : ''}`}
+              className={`font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${active ? 'invisible' : ''}`}
             >
               {(() => {
                 const parts = name.split(' ');
@@ -373,62 +385,68 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       </section>
 
-      {/* Exploding & draggable letters */}
-      {lettersFalling && letterRects.length > 0 && createPortal(
-        <div key={gameKey} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible', pointerEvents: 'none' }}>
-          {letterRects.map((letter, i) => {
-            const explodeAngle = (Math.PI * 2 * i) / letterRects.length + (Math.random() - 0.5) * 0.8;
-            const explodeForce = 200 + Math.random() * 400;
-            const explodeDelay = Math.random() * 0.3;
+      {/* Letters portal - always active once triggered */}
+      {active && letterRects.length > 0 && createPortal(
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible', pointerEvents: 'none' }}>
+          {letterRects.map((letter, i) => (
+            <PhysicsLetter
+              key={`letter-${i}`}
+              letterId={i}
+              char={letter.char}
+              originX={letter.x}
+              originY={letter.y}
+              w={letter.w}
+              h={letter.h}
+              command={commands[i] || null}
+              assembleTarget={assembleTargets[i] || null}
+              onLanded={handleLanded}
+              onDragEnd={handleDragEnd}
+            />
+          ))}
+
+          {/* Buttons */}
+          {showButtons && (() => {
+            const btnY = getButtonY();
             return (
-              <DraggableLetter
-                key={`${gameKey}-${i}`}
-                letterId={i}
-                char={letter.char}
-                originX={letter.x}
-                originY={letter.y}
-                w={letter.w}
-                h={letter.h}
-                explodeAngle={explodeAngle}
-                explodeForce={explodeForce}
-                explodeDelay={explodeDelay}
-                onPositionUpdate={handlePositionUpdate}
-                assembleTarget={assembleTargets?.get(i) || null}
-              />
-            );
-          })}
-          {/* "Fix it" button - appears after all letters land */}
-          {allLanded && !assembleTargets && (() => {
-            const footer = document.querySelector('footer');
-            const btnTop = footer
-              ? footer.getBoundingClientRect().top + window.scrollY - 50
-              : window.innerHeight - 60;
-            return (
-              <button
-                onClick={handleFixClick}
-                style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: btnTop,
-                  transform: 'translateX(-50%)',
-                  pointerEvents: 'auto',
-                  zIndex: 10001,
-                  padding: '8px 24px',
-                  borderRadius: '9999px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: 'hsl(var(--background))',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold-light)), hsl(var(--primary)))',
-                  border: 'none',
-                  cursor: 'pointer',
-                  opacity: 0.85,
-                  transition: 'opacity 0.2s, transform 0.2s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)'; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateX(-50%) scale(1)'; }}
-              >
-                {t('hero.fix')}
-              </button>
+              <div style={{
+                position: 'absolute',
+                left: '50%',
+                top: btnY,
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                gap: '12px',
+                zIndex: 10001,
+                pointerEvents: 'auto',
+              }}>
+                {!isAssembled && (
+                  <button
+                    onClick={handleFix}
+                    className="text-gradient-button"
+                    style={buttonStyle({
+                      color: 'hsl(var(--background))',
+                      background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold-light)), hsl(var(--primary)))',
+                    })}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'scale(1)'; }}
+                  >
+                    {t('hero.fix')}
+                  </button>
+                )}
+                {isAssembled && (
+                  <button
+                    onClick={handleExplode}
+                    className="text-gradient-button"
+                    style={buttonStyle({
+                      color: 'hsl(var(--background))',
+                      background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold-light)), hsl(var(--primary)))',
+                    })}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'scale(1)'; }}
+                  >
+                    {t('hero.explode')}
+                  </button>
+                )}
+              </div>
             );
           })()}
         </div>,
