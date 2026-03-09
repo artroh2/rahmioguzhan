@@ -420,7 +420,7 @@ const HeroSection = () => {
                   fontSize: '14px',
                   fontWeight: 600,
                   color: 'hsl(var(--background))',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold-light)), hsl(var(--primary)))',
                   border: 'none',
                   cursor: 'pointer',
                   opacity: 0.85,
