@@ -246,9 +246,28 @@ const HeroSection = () => {
   }, [letterRects, resetToOrigin]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
+    const isFirstReport = !letterPositions.current.has(id);
     letterPositions.current.set(id, { x: absX, y: absY });
+    if (isFirstReport) {
+      landedCount.current += 1;
+      if (landedCount.current >= letterRects.length) {
+        setAllLanded(true);
+      }
+    }
     checkNameCompletion();
-  }, [checkNameCompletion]);
+  }, [checkNameCompletion, letterRects.length]);
+
+  const handleFixClick = useCallback(() => {
+    setResetToOrigin(true);
+    setTimeout(() => {
+      setLettersFalling(false);
+      letterPositions.current.clear();
+      setTimeout(() => {
+        setResetToOrigin(false);
+        setGameKey(k => k + 1);
+      }, 2000);
+    }, 1500);
+  }, []);
 
   return (
     <>
