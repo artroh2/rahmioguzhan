@@ -98,6 +98,7 @@ const baseTranslations: Record<string, { tr: string; en: string }> = {
   'social.email.text': { tr: 'E-posta gönder', en: 'Send Email' },
   'social.email.desc': { tr: 'Tüm e postalara yanıt veriyorum.', en: 'I respond to all emails.' },
   'hero.fix': { tr: 'Düzelt', en: 'Fix it' },
+  'hero.explode': { tr: 'Patlat', en: 'Explode' },
 };
 
 const CACHE_KEY = 'translation_cache_v4'; // v4: added tiktok
