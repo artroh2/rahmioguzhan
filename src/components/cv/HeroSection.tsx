@@ -9,79 +9,104 @@ const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explo
   char: string; x: number; y: number; w: number; h: number;
   explodeAngle: number; explodeForce: number; explodeDelay: number;
 }) => {
-  const [phase, setPhase] = useState<'idle' | 'explode' | 'gravity' | 'landed'>('idle');
-  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: 0 });
+  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed'>('idle');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
+  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: 0 });
   const lastMouse = useRef({ x: 0, y: 0, time: 0 });
-  const gravityRef = useRef<number>(0);
-  const velRef = useRef({ x: 0, y: 0 });
+  const physicsRef = useRef({ vx: 0, vy: 0, vr: 0 });
 
-  // Explosion target position (clamped to screen)
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
-  const explodeX = Math.cos(explodeAngle) * explodeForce;
-  const explodeY = Math.sin(explodeAngle) * explodeForce;
-  const explodeRotate = (Math.random() - 0.5) * 720;
 
-  // Clamp explosion target to screen bounds
-  const clampedExplodeX = Math.max(-x + 10, Math.min(screenW - x - w - 10, explodeX));
-  const clampedExplodeY = Math.max(-y + 10, Math.min(screenH - y - h - 10, explodeY));
-
+  // Full physics simulation: explosion → arc → gravity → bounce → settle
   useEffect(() => {
-    // Start explosion after delay
-    const t1 = setTimeout(() => setPhase('explode'), explodeDelay * 1000);
-    // After explosion settles, start gravity
-    const t2 = setTimeout(() => {
-      setPhase('gravity');
-    }, (explodeDelay + 0.8) * 1000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [explodeDelay]);
+    const startDelay = setTimeout(() => {
+      setPhase('physics');
 
-  // Gravity phase: animate falling with requestAnimationFrame
-  useEffect(() => {
-    if (phase !== 'gravity') return;
-    let raf: number;
-    let lastTime = performance.now();
-    const startX = clampedExplodeX;
-    let curX = startX;
-    let curY = clampedExplodeY;
-    let curRotate = explodeRotate;
-    let vy = 0;
-    const gravity = 600; // px/s²
+      // Initial explosion velocity
+      const speed = explodeForce * 2.5;
+      let vx = Math.cos(explodeAngle) * speed;
+      let vy = Math.sin(explodeAngle) * speed - 200; // upward bias for arc
+      let vr = (Math.random() - 0.5) * 600;
+      let cx = 0, cy = 0, cr = 0;
 
-    // Find footer top for floor
-    const footer = document.querySelector('footer');
-    const floorY = footer
-      ? footer.getBoundingClientRect().top + window.scrollY - y - h - 5
-      : screenH - y - h - 20;
+      const gravity = 980;
+      const airDrag = 0.995;
+      const bounceDamping = 0.4;
+      const floorFriction = 0.92;
+      const rotationDamping = 0.97;
 
-    const step = (now: number) => {
-      const dt = Math.min((now - lastTime) / 1000, 0.05);
-      lastTime = now;
-      vy += gravity * dt;
-      curY += vy * dt;
-      curRotate += vy * dt * 0.3;
+      const footer = document.querySelector('footer');
+      const floorY = footer
+        ? footer.getBoundingClientRect().top + window.scrollY - y - h - 2
+        : screenH - y - h - 20;
+      const wallLeft = -x + 5;
+      const wallRight = screenW - x - w - 5;
 
-      if (curY >= floorY) {
-        curY = floorY;
-        vy = -vy * 0.3; // bounce
-        if (Math.abs(vy) < 30) {
-          // Settled
-          setPos({ x: curX, y: curY, rotate: curRotate });
-          velRef.current = { x: 0, y: 0 };
-          setPhase('landed');
-          return;
+      let lastTime = performance.now();
+      let settled = 0;
+
+      const step = (now: number) => {
+        const dt = Math.min((now - lastTime) / 1000, 0.033);
+        lastTime = now;
+
+        // Apply gravity
+        vy += gravity * dt;
+
+        // Air resistance
+        vx *= airDrag;
+        vy *= airDrag;
+        vr *= rotationDamping;
+
+        // Update position
+        cx += vx * dt;
+        cy += vy * dt;
+        cr += vr * dt;
+
+        // Floor collision with bounce
+        if (cy >= floorY) {
+          cy = floorY;
+          vy = -Math.abs(vy) * bounceDamping;
+          vx *= floorFriction;
+          vr *= 0.7;
+          // Add slight random spin on bounce
+          vr += (Math.random() - 0.5) * 50;
         }
-      }
 
-      setPos({ x: curX, y: curY, rotate: curRotate });
-      raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [phase]);
+        // Wall collisions
+        if (cx <= wallLeft) {
+          cx = wallLeft;
+          vx = Math.abs(vx) * bounceDamping;
+          vr += (Math.random() - 0.5) * 80;
+        } else if (cx >= wallRight) {
+          cx = wallRight;
+          vx = -Math.abs(vx) * bounceDamping;
+          vr += (Math.random() - 0.5) * 80;
+        }
 
-  // Mouse velocity tracking for interactive fling
+        setPos({ x: cx, y: cy, rotate: cr });
+
+        // Check if settled
+        const totalSpeed = Math.abs(vx) + Math.abs(vy) + Math.abs(vr);
+        if (cy >= floorY - 1 && totalSpeed < 15) {
+          settled++;
+          if (settled > 10) {
+            setPos({ x: cx, y: floorY, rotate: cr });
+            setPhase('landed');
+            return;
+          }
+        } else {
+          settled = 0;
+        }
+
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, explodeDelay * 1000);
+    return () => clearTimeout(startDelay);
+  }, [explodeAngle, explodeForce, explodeDelay, x, y, w, h, screenW, screenH]);
+
+  // Mouse tracking for interactive fling
   useEffect(() => {
     if (phase !== 'landed') return;
     const handleMouseMove = (e: MouseEvent) => {
@@ -114,24 +139,6 @@ const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explo
 
   const isLanded = phase === 'landed';
 
-  const getAnimateProps = () => {
-    if (phase === 'idle') return { x: 0, y: 0, rotate: 0, opacity: 1 };
-    if (phase === 'explode') return { x: clampedExplodeX, y: clampedExplodeY, rotate: explodeRotate, opacity: 1 };
-    // gravity & landed use direct pos
-    return {
-      x: pos.x + (isLanded ? nudge.x : 0),
-      y: pos.y + (isLanded ? nudge.y : 0),
-      rotate: pos.rotate + (isLanded ? nudge.rotate : 0),
-      opacity: 1,
-    };
-  };
-
-  const getTransition = () => {
-    if (phase === 'explode') return { duration: 0.5, ease: [0.2, 0.8, 0.3, 1] as [number, number, number, number] };
-    if (isLanded) return { type: 'spring' as const, stiffness: 80, damping: 8, mass: 0.5 };
-    return { duration: 0 };
-  };
-
   return (
     <motion.span
       className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing select-none"
@@ -142,10 +149,17 @@ const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explo
         width: w,
         height: h,
         pointerEvents: isLanded ? 'auto' : 'none',
+        transform: phase !== 'idle'
+          ? `translate(${pos.x + (isLanded ? nudge.x : 0)}px, ${pos.y + (isLanded ? nudge.y : 0)}px) rotate(${pos.rotate + (isLanded ? nudge.rotate : 0)}deg)`
+          : undefined,
       }}
-      initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
-      animate={getAnimateProps()}
-      transition={getTransition()}
+      initial={{ opacity: 1 }}
+      animate={isLanded ? {
+        x: pos.x + nudge.x,
+        y: pos.y + nudge.y,
+        rotate: pos.rotate + nudge.rotate,
+      } : undefined}
+      transition={isLanded ? { type: 'spring', stiffness: 80, damping: 8, mass: 0.5 } : undefined}
       onMouseEnter={handleHover}
       onTouchStart={handleHover}
       whileHover={isLanded ? { scale: 1.15 } : undefined}
