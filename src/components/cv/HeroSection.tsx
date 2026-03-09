@@ -256,15 +256,13 @@ const HeroSection = () => {
     setAssembleTargets(targets);
     setAllLanded(false);
 
-    // After animation, restart
+    // After animation completes, keep assembled text visible, then re-explode
     setTimeout(() => {
-      setLettersFalling(false);
+      // Re-trigger explosion from assembled position
       letterPositions.current.clear();
-      setTimeout(() => {
-        setAssembleTargets(null);
-        setGameKey(k => k + 1);
-      }, 2000);
-    }, 2000);
+      setAssembleTargets(null);
+      setGameKey(k => k + 1);
+    }, 4000);
   }, [letterRects]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
