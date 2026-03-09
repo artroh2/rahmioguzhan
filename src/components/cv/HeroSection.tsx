@@ -291,11 +291,9 @@ const HeroSection = () => {
       {lettersFalling && letterRects.length > 0 && createPortal(
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible', pointerEvents: 'none' }}>
           {letterRects.map((letter, i) => {
-            const footerTop = getDropTarget();
-            const dropTo = footerTop - letter.y - letter.h - (Math.random() * 15);
-            const fallDuration = 5 + Math.random() * 3;
-            const fallDelay = Math.random() * 0.8;
-            const fallRotate = (Math.random() - 0.5) * 180;
+            const explodeAngle = (Math.PI * 2 * i) / letterRects.length + (Math.random() - 0.5) * 0.8;
+            const explodeForce = 200 + Math.random() * 400;
+            const explodeDelay = Math.random() * 0.3;
             return (
               <InteractiveLetter
                 key={`fall-${i}`}
@@ -304,10 +302,9 @@ const HeroSection = () => {
                 y={letter.y}
                 w={letter.w}
                 h={letter.h}
-                dropTo={dropTo}
-                fallDuration={fallDuration}
-                fallDelay={fallDelay}
-                fallRotate={fallRotate}
+                explodeAngle={explodeAngle}
+                explodeForce={explodeForce}
+                explodeDelay={explodeDelay}
               />
             );
           })}
