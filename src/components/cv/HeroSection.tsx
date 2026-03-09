@@ -175,8 +175,10 @@ const HeroSection = () => {
   // Capture letter positions and start explosion
   useEffect(() => {
     letterPositions.current.clear();
+    landedCount.current = 0;
     setLettersFalling(false);
     setResetToOrigin(false);
+    setAllLanded(false);
     const fallTimer = setTimeout(() => {
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
