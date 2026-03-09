@@ -29,15 +29,14 @@ const PhysicsLetter = ({
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
-  const commandRef = useRef(command);
+  const explodeEpoch = useRef(0);
 
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
   // React to new explode commands
   useEffect(() => {
-    if (!command || command === commandRef.current) return;
-    commandRef.current = command;
+    if (!command) return;
 
     if (command.type === 'explode') {
       const timeout = setTimeout(() => {
