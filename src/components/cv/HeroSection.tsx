@@ -1,32 +1,41 @@
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
 
-// Interactive letter component - becomes draggable/hoverable after landing
-const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explodeDelay }: {
-  char: string; x: number; y: number; w: number; h: number;
+// ─── Draggable letter with physics explosion + drag-to-arrange ───
+interface LetterState {
+  x: number; y: number; rotate: number;
+  phase: 'idle' | 'physics' | 'landed';
+}
+
+const DraggableLetter = ({
+  char, originX, originY, w, h,
+  explodeAngle, explodeForce, explodeDelay,
+  onPositionUpdate, letterId,
+}: {
+  char: string; originX: number; originY: number; w: number; h: number;
   explodeAngle: number; explodeForce: number; explodeDelay: number;
+  onPositionUpdate: (id: number, absX: number, absY: number) => void;
+  letterId: number;
 }) => {
+  const ref = useRef<HTMLSpanElement>(null);
   const [phase, setPhase] = useState<'idle' | 'physics' | 'landed'>('idle');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
-  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: 0 });
-  const lastMouse = useRef({ x: 0, y: 0, time: 0 });
-  const physicsRef = useRef({ vx: 0, vy: 0, vr: 0 });
+  const dragging = useRef(false);
+  const dragOffset = useRef({ x: 0, y: 0 });
 
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  // Full physics simulation: explosion → arc → gravity → bounce → settle
+  // Physics explosion + gravity
   useEffect(() => {
     const startDelay = setTimeout(() => {
       setPhase('physics');
-
-      // Initial explosion velocity
       const speed = explodeForce * 2.5;
       let vx = Math.cos(explodeAngle) * speed;
-      let vy = Math.sin(explodeAngle) * speed - 200; // upward bias for arc
+      let vy = Math.sin(explodeAngle) * speed - 200;
       let vr = (Math.random() - 0.5) * 600;
       let cx = 0, cy = 0, cr = 0;
 
@@ -38,148 +47,128 @@ const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explo
 
       const footer = document.querySelector('footer');
       const floorY = footer
-        ? footer.getBoundingClientRect().top + window.scrollY - y - h - 2
-        : screenH - y - h - 20;
-      const wallLeft = -x + 5;
-      const wallRight = screenW - x - w - 5;
+        ? footer.getBoundingClientRect().top + window.scrollY - originY - h - 2
+        : screenH - originY - h - 20;
+      const wallLeft = -originX + 5;
+      const wallRight = screenW - originX - w - 5;
 
       let lastTime = performance.now();
       let settled = 0;
+      let rafId: number;
 
       const step = (now: number) => {
         const dt = Math.min((now - lastTime) / 1000, 0.033);
         lastTime = now;
-
-        // Apply gravity
         vy += gravity * dt;
+        vx *= airDrag; vy *= airDrag; vr *= rotationDamping;
+        cx += vx * dt; cy += vy * dt; cr += vr * dt;
 
-        // Air resistance
-        vx *= airDrag;
-        vy *= airDrag;
-        vr *= rotationDamping;
-
-        // Update position
-        cx += vx * dt;
-        cy += vy * dt;
-        cr += vr * dt;
-
-        // Floor collision with bounce
-        if (cy >= floorY) {
-          cy = floorY;
-          vy = -Math.abs(vy) * bounceDamping;
-          vx *= floorFriction;
-          vr *= 0.7;
-          // Add slight random spin on bounce
-          vr += (Math.random() - 0.5) * 50;
-        }
-
-        // Wall collisions
-        if (cx <= wallLeft) {
-          cx = wallLeft;
-          vx = Math.abs(vx) * bounceDamping;
-          vr += (Math.random() - 0.5) * 80;
-        } else if (cx >= wallRight) {
-          cx = wallRight;
-          vx = -Math.abs(vx) * bounceDamping;
-          vr += (Math.random() - 0.5) * 80;
-        }
+        if (cy >= floorY) { cy = floorY; vy = -Math.abs(vy) * bounceDamping; vx *= floorFriction; vr *= 0.7; }
+        if (cx <= wallLeft) { cx = wallLeft; vx = Math.abs(vx) * bounceDamping; }
+        else if (cx >= wallRight) { cx = wallRight; vx = -Math.abs(vx) * bounceDamping; }
 
         setPos({ x: cx, y: cy, rotate: cr });
 
-        // Check if settled
         const totalSpeed = Math.abs(vx) + Math.abs(vy) + Math.abs(vr);
         if (cy >= floorY - 1 && totalSpeed < 15) {
           settled++;
           if (settled > 10) {
-            setPos({ x: cx, y: floorY, rotate: cr });
+            const finalPos = { x: cx, y: floorY, rotate: 0 };
+            setPos(finalPos);
             setPhase('landed');
+            onPositionUpdate(letterId, originX + cx, originY + floorY);
             return;
           }
-        } else {
-          settled = 0;
-        }
-
-        requestAnimationFrame(step);
+        } else { settled = 0; }
+        rafId = requestAnimationFrame(step);
       };
-      requestAnimationFrame(step);
+      rafId = requestAnimationFrame(step);
+      return () => cancelAnimationFrame(rafId);
     }, explodeDelay * 1000);
     return () => clearTimeout(startDelay);
-  }, [explodeAngle, explodeForce, explodeDelay, x, y, w, h, screenW, screenH]);
+  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate]);
 
-  // Mouse tracking for interactive fling
-  useEffect(() => {
+  // Drag handlers
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
     if (phase !== 'landed') return;
-    const handleMouseMove = (e: MouseEvent) => {
-      lastMouse.current = { x: e.clientX, y: e.clientY, time: Date.now() };
+    e.preventDefault();
+    e.stopPropagation();
+    dragging.current = true;
+    const el = ref.current;
+    if (el) el.setPointerCapture(e.pointerId);
+    dragOffset.current = {
+      x: e.clientX - (originX + pos.x),
+      y: e.clientY - (originY + pos.y),
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [phase]);
+  }, [phase, originX, originY, pos.x, pos.y]);
 
-  const handleHover = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    if (phase !== 'landed') return;
-    const now = Date.now();
-    const dt = now - lastMouse.current.time;
-    let velocityX = 0, velocityY = 0;
-    if (dt > 0 && dt < 100) {
-      const clientX = 'clientX' in e ? e.clientX : (e as React.TouchEvent).touches[0]?.clientX || 0;
-      const clientY = 'clientY' in e ? e.clientY : (e as React.TouchEvent).touches[0]?.clientY || 0;
-      velocityX = (clientX - lastMouse.current.x) / dt;
-      velocityY = (clientY - lastMouse.current.y) / dt;
-    }
-    const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-    const force = Math.min(Math.max(speed * 80, 40), 800);
-    const angle = speed > 0.5 ? Math.atan2(velocityY, velocityX) : Math.random() * Math.PI * 2;
-    setNudge(prev => ({
-      x: prev.x + Math.cos(angle) * force * (0.8 + Math.random() * 0.4),
-      y: prev.y + Math.sin(angle) * force * (0.8 + Math.random() * 0.4),
-      rotate: prev.rotate + (Math.random() - 0.5) * force * 2,
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    e.preventDefault();
+    const newAbsX = e.clientX - dragOffset.current.x;
+    const newAbsY = e.clientY - dragOffset.current.y;
+    setPos(prev => ({
+      ...prev,
+      x: newAbsX - originX,
+      y: newAbsY - originY,
     }));
-  }, [phase]);
+  }, [originX, originY]);
+
+  const handlePointerUp = useCallback((e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    const el = ref.current;
+    if (el) el.releasePointerCapture(e.pointerId);
+    // Report final position
+    onPositionUpdate(letterId, originX + pos.x, originY + pos.y);
+  }, [letterId, originX, originY, pos.x, pos.y, onPositionUpdate]);
 
   const isLanded = phase === 'landed';
 
   return (
-    <motion.span
-      className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing select-none"
+    <span
+      ref={ref}
+      className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block select-none"
       style={{
         position: 'absolute',
-        left: x,
-        top: y,
+        left: originX,
+        top: originY,
         width: w,
         height: h,
         pointerEvents: isLanded ? 'auto' : 'none',
-        transform: phase !== 'idle'
-          ? `translate(${pos.x + (isLanded ? nudge.x : 0)}px, ${pos.y + (isLanded ? nudge.y : 0)}px) rotate(${pos.rotate + (isLanded ? nudge.rotate : 0)}deg)`
-          : undefined,
+        cursor: isLanded ? 'grab' : 'default',
+        transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotate}deg)`,
+        transition: dragging.current ? 'none' : undefined,
+        zIndex: isLanded ? 10000 : 9999,
+        touchAction: 'none',
       }}
-      initial={{ opacity: 1 }}
-      animate={isLanded ? {
-        x: pos.x + nudge.x,
-        y: pos.y + nudge.y,
-        rotate: pos.rotate + nudge.rotate,
-      } : undefined}
-      transition={isLanded ? { type: 'spring', stiffness: 80, damping: 8, mass: 0.5 } : undefined}
-      onMouseEnter={handleHover}
-      onTouchStart={handleHover}
-      whileHover={isLanded ? { scale: 1.15 } : undefined}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
     >
       {char === ' ' ? '\u00A0' : char}
-    </motion.span>
+    </span>
   );
 };
 
+// ─── Main Hero Section ───
 const HeroSection = () => {
   const { t } = useLanguage();
+  const [gameKey, setGameKey] = useState(0); // increment to restart
   const [lettersFalling, setLettersFalling] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
+  const letterPositions = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const checkTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   const name = t('hero.title');
+  const targetChars = name.replace(/\s+/g, '').split('');
 
+  // Capture letter positions and start explosion
   useEffect(() => {
+    letterPositions.current.clear();
+    setLettersFalling(false);
     const fallTimer = setTimeout(() => {
-      // Capture each letter's position before falling
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
         const rects: { char: string; x: number; y: number; w: number; h: number }[] = [];
@@ -198,16 +187,55 @@ const HeroSection = () => {
       setLettersFalling(true);
     }, 5000);
     return () => clearTimeout(fallTimer);
-  }, []);
+  }, [gameKey]);
 
-  // Calculate drop target: just above the footer's top border
-  const getDropTarget = () => {
-    const footer = document.querySelector('footer');
-    if (footer) {
-      return footer.getBoundingClientRect().top + window.scrollY;
-    }
-    return document.documentElement.scrollHeight;
-  };
+  // Check if letters are arranged in the correct order (left-to-right)
+  const checkNameCompletion = useCallback(() => {
+    if (checkTimeout.current) clearTimeout(checkTimeout.current);
+    checkTimeout.current = setTimeout(() => {
+      const positions = letterPositions.current;
+      // Need all non-space letters positioned
+      const nonSpaceLetters = letterRects.filter(l => l.char.trim() !== '');
+      if (positions.size < nonSpaceLetters.length) return;
+
+      // Get indices of non-space letters
+      const nonSpaceIndices: number[] = [];
+      letterRects.forEach((l, i) => {
+        if (l.char.trim() !== '') nonSpaceIndices.push(i);
+      });
+
+      // Check if sorted by x position matches original order
+      const sortedByX = [...nonSpaceIndices].sort((a, b) => {
+        const posA = positions.get(a);
+        const posB = positions.get(b);
+        if (!posA || !posB) return 0;
+        return posA.x - posB.x;
+      });
+
+      // Check if order matches original
+      const isCorrectOrder = nonSpaceIndices.every((idx, i) => sortedByX[i] === idx);
+
+      // Also check they're roughly on the same horizontal line (within 80px)
+      if (isCorrectOrder) {
+        const yValues = nonSpaceIndices.map(i => positions.get(i)?.y || 0);
+        const minY = Math.min(...yValues);
+        const maxY = Math.max(...yValues);
+        if (maxY - minY < 80) {
+          // Success! Restart the game
+          setTimeout(() => {
+            setLettersFalling(false);
+            letterPositions.current.clear();
+            setTimeout(() => setGameKey(k => k + 1), 500);
+          }, 800);
+        }
+      }
+    }, 300);
+  }, [letterRects]);
+
+  const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
+    letterPositions.current.set(id, { x: absX, y: absY });
+    checkNameCompletion();
+  }, [checkNameCompletion]);
 
   return (
     <>
@@ -265,7 +293,7 @@ const HeroSection = () => {
                 return (
                   <>
                     <span className="inline lg:inline">
-                      {firstLine.split('').map((char, i) => {
+                      {firstLine.split('').map((char) => {
                         const idx = charIndex++;
                         return (
                           <span key={idx} data-letter className="text-gradient inline-block" style={{ minWidth: char === ' ' ? '0.3em' : undefined }}>
@@ -281,7 +309,7 @@ const HeroSection = () => {
                       ); })()}
                     </span>
                     <span className="inline lg:inline">
-                      {secondLine.split('').map((char, i) => {
+                      {secondLine.split('').map((char) => {
                         const idx = charIndex++;
                         return (
                           <span key={idx} data-letter className="text-gradient inline-block" style={{ minWidth: char === ' ' ? '0.3em' : undefined }}>
@@ -301,24 +329,26 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       </section>
 
-      {/* Falling letters - rendered as fixed overlay so they can travel across the entire page */}
+      {/* Exploding & draggable letters */}
       {lettersFalling && letterRects.length > 0 && createPortal(
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible', pointerEvents: 'none' }}>
+        <div key={gameKey} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, overflow: 'visible', pointerEvents: 'none' }}>
           {letterRects.map((letter, i) => {
             const explodeAngle = (Math.PI * 2 * i) / letterRects.length + (Math.random() - 0.5) * 0.8;
             const explodeForce = 200 + Math.random() * 400;
             const explodeDelay = Math.random() * 0.3;
             return (
-              <InteractiveLetter
-                key={`fall-${i}`}
+              <DraggableLetter
+                key={`${gameKey}-${i}`}
+                letterId={i}
                 char={letter.char}
-                x={letter.x}
-                y={letter.y}
+                originX={letter.x}
+                originY={letter.y}
                 w={letter.w}
                 h={letter.h}
                 explodeAngle={explodeAngle}
                 explodeForce={explodeForce}
                 explodeDelay={explodeDelay}
+                onPositionUpdate={handlePositionUpdate}
               />
             );
           })}
