@@ -395,12 +395,12 @@ const HeroSection = () => {
                 explodeForce={explodeForce}
                 explodeDelay={explodeDelay}
                 onPositionUpdate={handlePositionUpdate}
-                resetToOrigin={resetToOrigin}
+                assembleTarget={assembleTargets?.get(i) || null}
               />
             );
           })}
           {/* "Fix it" button - appears after all letters land */}
-          {allLanded && !resetToOrigin && (() => {
+          {allLanded && !assembleTargets && (() => {
             const footer = document.querySelector('footer');
             const btnTop = footer
               ? footer.getBoundingClientRect().top + window.scrollY - 50
