@@ -163,9 +163,11 @@ const HeroSection = () => {
   const [gameKey, setGameKey] = useState(0);
   const [lettersFalling, setLettersFalling] = useState(false);
   const [resetToOrigin, setResetToOrigin] = useState(false);
+  const [allLanded, setAllLanded] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
   const letterPositions = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const landedCount = useRef(0);
   const checkTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   const name = t('hero.title');
@@ -173,8 +175,10 @@ const HeroSection = () => {
   // Capture letter positions and start explosion
   useEffect(() => {
     letterPositions.current.clear();
+    landedCount.current = 0;
     setLettersFalling(false);
     setResetToOrigin(false);
+    setAllLanded(false);
     const fallTimer = setTimeout(() => {
       if (nameRef.current) {
         const spans = nameRef.current.querySelectorAll('span[data-letter]');
@@ -242,9 +246,28 @@ const HeroSection = () => {
   }, [letterRects, resetToOrigin]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
+    const isFirstReport = !letterPositions.current.has(id);
     letterPositions.current.set(id, { x: absX, y: absY });
+    if (isFirstReport) {
+      landedCount.current += 1;
+      if (landedCount.current >= letterRects.length) {
+        setAllLanded(true);
+      }
+    }
     checkNameCompletion();
-  }, [checkNameCompletion]);
+  }, [checkNameCompletion, letterRects.length]);
+
+  const handleFixClick = useCallback(() => {
+    setResetToOrigin(true);
+    setTimeout(() => {
+      setLettersFalling(false);
+      letterPositions.current.clear();
+      setTimeout(() => {
+        setResetToOrigin(false);
+        setGameKey(k => k + 1);
+      }, 2000);
+    }, 1500);
+  }, []);
 
   return (
     <>
@@ -362,6 +385,40 @@ const HeroSection = () => {
               />
             );
           })}
+          {/* "Fix it" button - appears after all letters land */}
+          {allLanded && !resetToOrigin && (() => {
+            const footer = document.querySelector('footer');
+            const btnTop = footer
+              ? footer.getBoundingClientRect().top + window.scrollY - 50
+              : window.innerHeight - 60;
+            return (
+              <button
+                onClick={handleFixClick}
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: btnTop,
+                  transform: 'translateX(-50%)',
+                  pointerEvents: 'auto',
+                  zIndex: 10001,
+                  padding: '8px 24px',
+                  borderRadius: '9999px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: 'hsl(var(--background))',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))',
+                  border: 'none',
+                  cursor: 'pointer',
+                  opacity: 0.85,
+                  transition: 'opacity 0.2s, transform 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)'; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateX(-50%) scale(1)'; }}
+              >
+                {t('hero.fix')}
+              </button>
+            );
+          })()}
         </div>,
         document.body
       )}
