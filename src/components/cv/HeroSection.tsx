@@ -5,69 +5,135 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import heroPhoto from '@/assets/hero-photo.png';
 
 // Interactive letter component - becomes draggable/hoverable after landing
-const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, fallRotate }: {
+const InteractiveLetter = ({ char, x, y, w, h, explodeAngle, explodeForce, explodeDelay }: {
   char: string; x: number; y: number; w: number; h: number;
-  dropTo: number; fallDuration: number; fallDelay: number; fallRotate: number;
+  explodeAngle: number; explodeForce: number; explodeDelay: number;
 }) => {
-  const [landed, setLanded] = useState(false);
-  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: fallRotate });
+  const [phase, setPhase] = useState<'idle' | 'explode' | 'gravity' | 'landed'>('idle');
+  const [nudge, setNudge] = useState({ x: 0, y: 0, rotate: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const lastMouse = useRef({ x: 0, y: 0, time: 0 });
-  const spanRef = useRef<HTMLSpanElement>(null);
+  const gravityRef = useRef<number>(0);
+  const velRef = useRef({ x: 0, y: 0 });
+
+  // Explosion target position (clamped to screen)
+  const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
+  const explodeX = Math.cos(explodeAngle) * explodeForce;
+  const explodeY = Math.sin(explodeAngle) * explodeForce;
+  const explodeRotate = (Math.random() - 0.5) * 720;
+
+  // Clamp explosion target to screen bounds
+  const clampedExplodeX = Math.max(-x + 10, Math.min(screenW - x - w - 10, explodeX));
+  const clampedExplodeY = Math.max(-y + 10, Math.min(screenH - y - h - 10, explodeY));
 
   useEffect(() => {
-    const landTime = (fallDuration + fallDelay) * 1000;
-    const timer = setTimeout(() => setLanded(true), landTime);
-    return () => clearTimeout(timer);
-  }, [fallDuration, fallDelay]);
+    // Start explosion after delay
+    const t1 = setTimeout(() => setPhase('explode'), explodeDelay * 1000);
+    // After explosion settles, start gravity
+    const t2 = setTimeout(() => {
+      setPhase('gravity');
+    }, (explodeDelay + 0.8) * 1000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [explodeDelay]);
 
-  // Track mouse velocity globally
+  // Gravity phase: animate falling with requestAnimationFrame
   useEffect(() => {
-    if (!landed) return;
+    if (phase !== 'gravity') return;
+    let raf: number;
+    let lastTime = performance.now();
+    const startX = clampedExplodeX;
+    let curX = startX;
+    let curY = clampedExplodeY;
+    let curRotate = explodeRotate;
+    let vy = 0;
+    const gravity = 600; // px/s²
+
+    // Find footer top for floor
+    const footer = document.querySelector('footer');
+    const floorY = footer
+      ? footer.getBoundingClientRect().top + window.scrollY - y - h - 5
+      : screenH - y - h - 20;
+
+    const step = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+      vy += gravity * dt;
+      curY += vy * dt;
+      curRotate += vy * dt * 0.3;
+
+      if (curY >= floorY) {
+        curY = floorY;
+        vy = -vy * 0.3; // bounce
+        if (Math.abs(vy) < 30) {
+          // Settled
+          setPos({ x: curX, y: curY, rotate: curRotate });
+          velRef.current = { x: 0, y: 0 };
+          setPhase('landed');
+          return;
+        }
+      }
+
+      setPos({ x: curX, y: curY, rotate: curRotate });
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [phase]);
+
+  // Mouse velocity tracking for interactive fling
+  useEffect(() => {
+    if (phase !== 'landed') return;
     const handleMouseMove = (e: MouseEvent) => {
       lastMouse.current = { x: e.clientX, y: e.clientY, time: Date.now() };
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [landed]);
+  }, [phase]);
 
   const handleHover = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    if (!landed) return;
-
-    // Calculate mouse velocity for force
+    if (phase !== 'landed') return;
     const now = Date.now();
     const dt = now - lastMouse.current.time;
-    let velocityX = 0;
-    let velocityY = 0;
-
+    let velocityX = 0, velocityY = 0;
     if (dt > 0 && dt < 100) {
       const clientX = 'clientX' in e ? e.clientX : (e as React.TouchEvent).touches[0]?.clientX || 0;
       const clientY = 'clientY' in e ? e.clientY : (e as React.TouchEvent).touches[0]?.clientY || 0;
       velocityX = (clientX - lastMouse.current.x) / dt;
       velocityY = (clientY - lastMouse.current.y) / dt;
     }
-
     const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-    // Scale force based on speed: gentle hover = small nudge, fast swipe = big fling
     const force = Math.min(Math.max(speed * 80, 40), 800);
-
-    const angle = speed > 0.5
-      ? Math.atan2(velocityY, velocityX) // fling in mouse direction
-      : Math.random() * Math.PI * 2;     // random if slow
-
-    const flingX = Math.cos(angle) * force * (0.8 + Math.random() * 0.4);
-    const flingY = Math.sin(angle) * force * (0.8 + Math.random() * 0.4);
-    const spin = (Math.random() - 0.5) * force * 2;
-
+    const angle = speed > 0.5 ? Math.atan2(velocityY, velocityX) : Math.random() * Math.PI * 2;
     setNudge(prev => ({
-      x: prev.x + flingX,
-      y: prev.y + flingY,
-      rotate: prev.rotate + spin,
+      x: prev.x + Math.cos(angle) * force * (0.8 + Math.random() * 0.4),
+      y: prev.y + Math.sin(angle) * force * (0.8 + Math.random() * 0.4),
+      rotate: prev.rotate + (Math.random() - 0.5) * force * 2,
     }));
-  }, [landed]);
+  }, [phase]);
+
+  const isLanded = phase === 'landed';
+
+  const getAnimateProps = () => {
+    if (phase === 'idle') return { x: 0, y: 0, rotate: 0, opacity: 1 };
+    if (phase === 'explode') return { x: clampedExplodeX, y: clampedExplodeY, rotate: explodeRotate, opacity: 1 };
+    // gravity & landed use direct pos
+    return {
+      x: pos.x + (isLanded ? nudge.x : 0),
+      y: pos.y + (isLanded ? nudge.y : 0),
+      rotate: pos.rotate + (isLanded ? nudge.rotate : 0),
+      opacity: 1,
+    };
+  };
+
+  const getTransition = () => {
+    if (phase === 'explode') return { duration: 0.5, ease: [0.2, 0.8, 0.3, 1] as [number, number, number, number] };
+    if (isLanded) return { type: 'spring' as const, stiffness: 80, damping: 8, mass: 0.5 };
+    return { duration: 0 };
+  };
 
   return (
     <motion.span
-      ref={spanRef}
       className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-gradient inline-block cursor-grab active:cursor-grabbing select-none"
       style={{
         position: 'absolute',
@@ -75,32 +141,14 @@ const InteractiveLetter = ({ char, x, y, w, h, dropTo, fallDuration, fallDelay, 
         top: y,
         width: w,
         height: h,
-        pointerEvents: landed ? 'auto' : 'none',
+        pointerEvents: isLanded ? 'auto' : 'none',
       }}
-      initial={{ y: 0, rotate: 0, opacity: 1 }}
-      animate={landed ? {
-        y: dropTo + nudge.y,
-        rotate: nudge.rotate,
-        x: nudge.x,
-        opacity: 1,
-      } : {
-        y: dropTo,
-        rotate: fallRotate,
-        opacity: 1,
-      }}
-      transition={landed ? {
-        type: 'spring',
-        stiffness: 80,
-        damping: 8,
-        mass: 0.5,
-      } : {
-        duration: fallDuration,
-        delay: fallDelay,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
+      initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+      animate={getAnimateProps()}
+      transition={getTransition()}
       onMouseEnter={handleHover}
       onTouchStart={handleHover}
-      whileHover={landed ? { scale: 1.15 } : undefined}
+      whileHover={isLanded ? { scale: 1.15 } : undefined}
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
