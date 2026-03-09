@@ -12,6 +12,7 @@ interface LetterCommand {
   angle: number;
   force: number;
   delay: number;
+  epoch: number; // unique id to distinguish repeated explosions
 }
 
 const PhysicsLetter = ({
