@@ -223,6 +223,7 @@ const HeroSection = () => {
         angle: (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8,
         force: 200 + Math.random() * 400,
         delay: Math.random() * 0.3,
+        epoch,
       });
     }
     setCommands(cmds);
