@@ -163,9 +163,11 @@ const HeroSection = () => {
   const [gameKey, setGameKey] = useState(0);
   const [lettersFalling, setLettersFalling] = useState(false);
   const [resetToOrigin, setResetToOrigin] = useState(false);
+  const [allLanded, setAllLanded] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
   const letterPositions = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const landedCount = useRef(0);
   const checkTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   const name = t('hero.title');
