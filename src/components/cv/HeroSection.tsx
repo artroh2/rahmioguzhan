@@ -282,8 +282,6 @@ const HeroSection = () => {
   const handleFixClick = useCallback(() => {
     triggerAssemble();
   }, [triggerAssemble]);
-    }, 1500);
-  }, []);
 
   return (
     <>
