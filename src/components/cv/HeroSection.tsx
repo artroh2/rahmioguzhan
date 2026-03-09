@@ -8,16 +8,17 @@ import heroPhoto from '@/assets/hero-photo.png';
 const DraggableLetter = ({
   char, originX, originY, w, h,
   explodeAngle, explodeForce, explodeDelay,
-  onPositionUpdate, letterId, resetToOrigin,
+  onPositionUpdate, letterId,
+  assembleTarget,
 }: {
   char: string; originX: number; originY: number; w: number; h: number;
   explodeAngle: number; explodeForce: number; explodeDelay: number;
   onPositionUpdate: (id: number, absX: number, absY: number) => void;
   letterId: number;
-  resetToOrigin: boolean;
+  assembleTarget: { x: number; y: number } | null;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'returning'>('idle');
+  const [phase, setPhase] = useState<'idle' | 'physics' | 'landed' | 'assembling'>('idle');
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
@@ -27,7 +28,7 @@ const DraggableLetter = ({
 
   // Physics explosion + gravity
   useEffect(() => {
-    if (resetToOrigin) return; // don't start physics during reset
+    if (assembleTarget) return;
     const startDelay = setTimeout(() => {
       setPhase('physics');
       const speed = explodeForce * 2.5;
@@ -70,8 +71,7 @@ const DraggableLetter = ({
         if (cy >= floorY - 1 && totalSpeed < 15) {
           settled++;
           if (settled > 10) {
-            const finalPos = { x: cx, y: floorY, rotate: 0 };
-            setPos(finalPos);
+            setPos({ x: cx, y: floorY, rotate: 0 });
             setPhase('landed');
             onPositionUpdate(letterId, originX + cx, originY + floorY);
             return;
@@ -83,16 +83,20 @@ const DraggableLetter = ({
       return () => cancelAnimationFrame(rafId);
     }, explodeDelay * 1000);
     return () => clearTimeout(startDelay);
-  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, resetToOrigin]);
+  }, [explodeAngle, explodeForce, explodeDelay, originX, originY, w, h, screenW, screenH, letterId, onPositionUpdate, assembleTarget]);
 
-  // When resetToOrigin becomes true, animate back to original position
+  // When assembleTarget is set, animate to that position
   useEffect(() => {
-    if (resetToOrigin && phase === 'landed') {
-      setPhase('returning');
-      // Animate to 0,0,0 with CSS transition
-      setPos({ x: 0, y: 0, rotate: 0 });
+    if (assembleTarget && phase === 'landed') {
+      setPhase('assembling');
+      // Target is absolute position, convert to offset from origin
+      setPos({
+        x: assembleTarget.x - originX,
+        y: assembleTarget.y - originY,
+        rotate: 0,
+      });
     }
-  }, [resetToOrigin, phase]);
+  }, [assembleTarget, phase, originX, originY]);
 
   // Drag handlers
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
@@ -111,12 +115,10 @@ const DraggableLetter = ({
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!dragging.current) return;
     e.preventDefault();
-    const newAbsX = e.clientX - dragOffset.current.x;
-    const newAbsY = e.clientY - dragOffset.current.y;
     setPos(prev => ({
       ...prev,
-      x: newAbsX - originX,
-      y: newAbsY - originY,
+      x: e.clientX - dragOffset.current.x - originX,
+      y: e.clientY - dragOffset.current.y - originY,
     }));
   }, [originX, originY]);
 
@@ -129,7 +131,7 @@ const DraggableLetter = ({
   }, [letterId, originX, originY, pos.x, pos.y, onPositionUpdate]);
 
   const isLanded = phase === 'landed';
-  const isReturning = phase === 'returning';
+  const isAssembling = phase === 'assembling';
 
   return (
     <span
@@ -144,7 +146,7 @@ const DraggableLetter = ({
         pointerEvents: isLanded ? 'auto' : 'none',
         cursor: isLanded ? 'grab' : 'default',
         transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotate}deg)`,
-        transition: dragging.current ? 'none' : isReturning ? 'transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
+        transition: dragging.current ? 'none' : isAssembling ? 'transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)' : undefined,
         zIndex: isLanded ? 10000 : 9999,
         touchAction: 'none',
       }}
@@ -162,7 +164,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
   const [gameKey, setGameKey] = useState(0);
   const [lettersFalling, setLettersFalling] = useState(false);
-  const [resetToOrigin, setResetToOrigin] = useState(false);
+  const [assembleTargets, setAssembleTargets] = useState<Map<number, { x: number; y: number }> | null>(null);
   const [allLanded, setAllLanded] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [letterRects, setLetterRects] = useState<{ char: string; x: number; y: number; w: number; h: number }[]>([]);
@@ -177,7 +179,7 @@ const HeroSection = () => {
     letterPositions.current.clear();
     landedCount.current = 0;
     setLettersFalling(false);
-    setResetToOrigin(false);
+    setAssembleTargets(null);
     setAllLanded(false);
     const fallTimer = setTimeout(() => {
       if (nameRef.current) {
@@ -200,10 +202,10 @@ const HeroSection = () => {
     return () => clearTimeout(fallTimer);
   }, [gameKey]);
 
-  // Check if letters are arranged in the correct order (left-to-right)
+  // Check if letters are arranged in the correct order
   const checkNameCompletion = useCallback(() => {
     if (checkTimeout.current) clearTimeout(checkTimeout.current);
-    if (resetToOrigin) return;
+    if (assembleTargets) return;
     checkTimeout.current = setTimeout(() => {
       const positions = letterPositions.current;
       const nonSpaceIndices: number[] = [];
@@ -212,7 +214,6 @@ const HeroSection = () => {
       });
       if (positions.size < nonSpaceIndices.length) return;
 
-      // Check if sorted by x position matches original order
       const sortedByX = [...nonSpaceIndices].sort((a, b) => {
         const posA = positions.get(a);
         const posB = positions.get(b);
@@ -226,24 +227,45 @@ const HeroSection = () => {
         const yValues = nonSpaceIndices.map(i => positions.get(i)?.y || 0);
         const minY = Math.min(...yValues);
         const maxY = Math.max(...yValues);
-        // More forgiving: 150px vertical tolerance
         if (maxY - minY < 150) {
-          // Animate letters back to original positions
-          setResetToOrigin(true);
-          // After animation completes, hide falling letters and show original h1
-          setTimeout(() => {
-            setLettersFalling(false);
-            letterPositions.current.clear();
-            // Re-trigger explosion after a pause
-            setTimeout(() => {
-              setResetToOrigin(false);
-              setGameKey(k => k + 1);
-            }, 2000);
-          }, 1500);
+          triggerAssemble();
         }
       }
     }, 500);
-  }, [letterRects, resetToOrigin]);
+  }, [letterRects, assembleTargets]);
+
+  // Calculate assembly positions: center the text near the footer
+  const triggerAssemble = useCallback(() => {
+    const footer = document.querySelector('footer');
+    const assembleY = footer
+      ? footer.getBoundingClientRect().top + window.scrollY - 80
+      : window.innerHeight - 80;
+
+    // Calculate total width of all letters
+    const totalWidth = letterRects.reduce((sum, l) => sum + l.w, 0);
+    const screenW = window.innerWidth;
+    let startX = (screenW - totalWidth) / 2;
+
+    const targets = new Map<number, { x: number; y: number }>();
+    let curX = startX;
+    letterRects.forEach((letter, i) => {
+      targets.set(i, { x: curX, y: assembleY });
+      curX += letter.w;
+    });
+
+    setAssembleTargets(targets);
+    setAllLanded(false);
+
+    // After animation, restart
+    setTimeout(() => {
+      setLettersFalling(false);
+      letterPositions.current.clear();
+      setTimeout(() => {
+        setAssembleTargets(null);
+        setGameKey(k => k + 1);
+      }, 2000);
+    }, 2000);
+  }, [letterRects]);
 
   const handlePositionUpdate = useCallback((id: number, absX: number, absY: number) => {
     const isFirstReport = !letterPositions.current.has(id);
@@ -258,16 +280,8 @@ const HeroSection = () => {
   }, [checkNameCompletion, letterRects.length]);
 
   const handleFixClick = useCallback(() => {
-    setResetToOrigin(true);
-    setTimeout(() => {
-      setLettersFalling(false);
-      letterPositions.current.clear();
-      setTimeout(() => {
-        setResetToOrigin(false);
-        setGameKey(k => k + 1);
-      }, 2000);
-    }, 1500);
-  }, []);
+    triggerAssemble();
+  }, [triggerAssemble]);
 
   return (
     <>
@@ -381,12 +395,12 @@ const HeroSection = () => {
                 explodeForce={explodeForce}
                 explodeDelay={explodeDelay}
                 onPositionUpdate={handlePositionUpdate}
-                resetToOrigin={resetToOrigin}
+                assembleTarget={assembleTargets?.get(i) || null}
               />
             );
           })}
           {/* "Fix it" button - appears after all letters land */}
-          {allLanded && !resetToOrigin && (() => {
+          {allLanded && !assembleTargets && (() => {
             const footer = document.querySelector('footer');
             const btnTop = footer
               ? footer.getBoundingClientRect().top + window.scrollY - 50
@@ -406,7 +420,7 @@ const HeroSection = () => {
                   fontSize: '14px',
                   fontWeight: 600,
                   color: 'hsl(var(--background))',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold-light)), hsl(var(--primary)))',
                   border: 'none',
                   cursor: 'pointer',
                   opacity: 0.85,
