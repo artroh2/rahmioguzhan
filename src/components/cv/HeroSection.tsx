@@ -37,7 +37,8 @@ const PhysicsLetter = ({
 
   // React to new explode commands
   useEffect(() => {
-    if (!command) return;
+    if (!command || command.epoch === explodeEpoch.current) return;
+    explodeEpoch.current = command.epoch;
 
     if (command.type === 'explode') {
       const timeout = setTimeout(() => {
