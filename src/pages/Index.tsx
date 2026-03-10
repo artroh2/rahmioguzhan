@@ -1,29 +1,18 @@
-import { LanguageProvider } from '@/contexts/LanguageContext';
-import Navigation from '@/components/cv/Navigation';
-import HeroSection from '@/components/cv/HeroSection';
-import AboutSection from '@/components/cv/AboutSection';
-
-
-
-
-import Footer from '@/components/cv/Footer';
-
+import HeroSection from '@/components/manifesto/HeroSection';
+import EmpireSection from '@/components/manifesto/EmpireSection';
+import SoulSection from '@/components/manifesto/SoulSection';
+import CTASection from '@/components/manifesto/CTASection';
+import FooterMinimal from '@/components/manifesto/FooterMinimal';
 
 const Index = () => {
   return (
-    <LanguageProvider>
-      <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        <Navigation />
-        <HeroSection />
-        <AboutSection />
-        
-        
-        
-        
-        <Footer />
-        
-      </main>
-    </LanguageProvider>
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <HeroSection />
+      <EmpireSection />
+      <SoulSection />
+      <CTASection />
+      <FooterMinimal />
+    </main>
   );
 };
 
