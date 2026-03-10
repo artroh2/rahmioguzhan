@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Music, Cloud, Headphones, Camera, Feather, Twitter, Youtube, Video, Facebook, Mail } from 'lucide-react';
+import { Music, Cloud, Headphones, Camera, Feather, Twitter, Youtube, Video, Facebook, Linkedin, Mail } from 'lucide-react';
 import LinkCard from './LinkCard';
 
 const container = {
@@ -95,6 +95,13 @@ const groups = [
     title: 'Contact',
     subtitle: '',
     cards: [
+      {
+        icon: Linkedin,
+        title: 'LinkedIn',
+        description: 'Profesyonel ağ ve kariyer.',
+        link: 'https://www.linkedin.com/in/rahmioguzhan/',
+        glowColor: '#3b82f6',
+      },
       {
         icon: Mail,
         title: 'Email',
