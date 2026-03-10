@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
-import SocialCard from './SocialCard';
+
 import { Brain, Swords } from 'lucide-react';
 
 const container = {
@@ -58,46 +58,6 @@ const BentoGrid = () => {
         <MusicCard />
       </motion.div>
 
-      {/* Social cards */}
-      <motion.div variants={item}>
-        <SocialCard
-          platform="Instagram"
-          handle="@oguzhan"
-          quote="Frames of silence"
-          link="https://instagram.com/oguzhanthesecond"
-          brandColor="hsl(330 70% 50%)"
-        />
-      </motion.div>
-
-      <motion.div variants={item}>
-        <SocialCard
-          platform="X"
-          handle="@oguzhan"
-          quote="Disrupting in 280 chars"
-          link="https://x.com"
-          brandColor="hsl(210 10% 90%)"
-        />
-      </motion.div>
-
-      <motion.div variants={item}>
-        <SocialCard
-          platform="TikTok"
-          handle="@oguzhan"
-          quote="Dark creativity, short form"
-          link="https://tiktok.com"
-          brandColor="hsl(180 80% 60%)"
-        />
-      </motion.div>
-
-      <motion.div variants={item}>
-        <SocialCard
-          platform="Spotify"
-          handle="Rahmi Oguzhan"
-          quote="6 Languages, 1 Truth"
-          link="https://open.spotify.com/artist/5fMkXpuritdfqjDKrJzJhT"
-          brandColor="hsl(140 60% 50%)"
-        />
-      </motion.div>
     </motion.div>
   );
 };
