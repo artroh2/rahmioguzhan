@@ -120,7 +120,7 @@ const LinkMatrix = () => {
           {/* Group header */}
           <div className="mb-4 px-1">
             <h2 className="text-lg font-bold text-foreground tracking-tight">{group.title}</h2>
-            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">{group.subtitle}</p>
+            {group.subtitle && <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">{group.subtitle}</p>}
           </div>
 
           {/* Cards grid */}

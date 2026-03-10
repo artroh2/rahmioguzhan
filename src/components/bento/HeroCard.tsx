@@ -7,14 +7,11 @@ const HeroCard = () => {
       }} />
 
       <div className="relative z-10">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-none mb-4">
-          Rahmi<br />Oğuzhan
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none mb-4">
+          Rahmi<br />Oğuzhan<br />Hacıeyüpoğlu
         </h1>
-        <p className="text-sm tracking-[0.4em] uppercase text-primary font-medium mb-6">
-          The Architect&nbsp;&nbsp;|&nbsp;&nbsp;2
-        </p>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md italic">
-          "While the world makes noise, I build the silence."
+        <p className="text-sm tracking-[0.4em] uppercase text-primary font-medium">
+          2
         </p>
       </div>
     </div>

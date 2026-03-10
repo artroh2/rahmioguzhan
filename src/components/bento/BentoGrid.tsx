@@ -42,11 +42,11 @@ const BentoGrid = () => {
         />
       </motion.div>
 
-      {/* AIQrace */}
-      <motion.div variants={item}>
+      {/* AIQrace - inactive */}
+      <motion.div variants={item} className="opacity-40 pointer-events-none">
         <ProjectCard
           title="AIQrace"
-          subtitle="The AGI Arena"
+          subtitle="Yapay zeka arenası, yolda..."
           icon={Swords}
           link="#"
           accentClass="accent-red"
