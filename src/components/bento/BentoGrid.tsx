@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
-import SocialCard from './SocialCard';
+
 import { Brain, Swords } from 'lucide-react';
 
 const container = {

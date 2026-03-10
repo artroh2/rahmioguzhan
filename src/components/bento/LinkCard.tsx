@@ -23,8 +23,8 @@ const LinkCard = ({ icon: Icon, title, description, link, glowColor }: LinkCardP
         style={{ background: `${glowColor}15` }}
       >
         <Icon
-          className="w-5 h-5 transition-colors duration-500"
-          style={{ color: 'hsl(var(--muted-foreground))' }}
+          className="w-5 h-5 text-muted-foreground transition-colors duration-500 group-hover:drop-shadow-lg"
+          style={{ '--tw-drop-shadow': `drop-shadow(0 0 6px ${glowColor})` } as React.CSSProperties}
           strokeWidth={1.5}
         />
       </div>
