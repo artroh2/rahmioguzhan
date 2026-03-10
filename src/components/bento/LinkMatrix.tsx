@@ -96,6 +96,13 @@ const groups = [
     subtitle: '',
     cards: [
       {
+        icon: Linkedin,
+        title: 'LinkedIn',
+        description: 'Profesyonel ağ ve kariyer.',
+        link: 'https://www.linkedin.com/in/rahmioguzhan/',
+        glowColor: '#3b82f6',
+      },
+      {
         icon: Mail,
         title: 'Email',
         description: 'İş birlikleri ve teklifler.',
