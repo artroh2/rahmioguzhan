@@ -1,17 +1,9 @@
-import HeroSection from '@/components/manifesto/HeroSection';
-import EmpireSection from '@/components/manifesto/EmpireSection';
-import SoulSection from '@/components/manifesto/SoulSection';
-import CTASection from '@/components/manifesto/CTASection';
-import FooterMinimal from '@/components/manifesto/FooterMinimal';
+import BentoGrid from '@/components/bento/BentoGrid';
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <HeroSection />
-      <EmpireSection />
-      <SoulSection />
-      <CTASection />
-      <FooterMinimal />
+    <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-4 md:p-8">
+      <BentoGrid />
     </main>
   );
 };
