@@ -46,15 +46,6 @@ const LinkCard = ({ icon: Icon, title, description, link, glowColor }: LinkCardP
         style={{ boxShadow: `inset 0 0 40px -15px ${glowColor}, 0 0 20px -10px ${glowColor}40` }}
       />
 
-      {/* Icon glow on hover */}
-      <style>{`
-        a:hover .shrink-0:first-child {
-          background: ${glowColor}25 !important;
-        }
-        a:hover .shrink-0:first-child svg {
-          color: ${glowColor} !important;
-        }
-      `}</style>
     </a>
   );
 };
