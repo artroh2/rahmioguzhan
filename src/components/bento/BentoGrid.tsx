@@ -3,8 +3,7 @@ import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
 
-import { Swords } from 'lucide-react';
-import arayorLogo from '@/assets/arayor-logo.png';
+import { Brain, Swords } from 'lucide-react';
 
 const container = {
   hidden: { opacity: 0 },
@@ -37,7 +36,7 @@ const BentoGrid = () => {
         <ProjectCard
           title="arayor.com"
           subtitle="AI Automotive Oracle"
-          iconImage={arayorLogo}
+          icon={Brain}
           link="https://arayor.com"
           accentClass="accent-cyan"
         />
