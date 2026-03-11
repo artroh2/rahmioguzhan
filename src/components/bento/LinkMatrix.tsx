@@ -93,7 +93,7 @@ const groups = [
     ],
   },
   {
-    title: 'Contact',
+    title: 'İletişim',
     subtitle: '',
     cards: [
       {
