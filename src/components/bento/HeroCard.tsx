@@ -8,11 +8,8 @@ const HeroCard = () => {
 
       <div className="relative z-10">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none mb-4">
-          Rahmi<br />Oğuzhan<br />Hacıeyüpoğlu
+          Rahmi<br />Oğ<span className="relative inline-block">u<span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.4em]">"2"</span></span>zhan<br />Hacıeyüpoğlu
         </h1>
-        <p className="text-sm tracking-[0.4em] uppercase text-primary font-medium">
-          2
-        </p>
       </div>
     </div>
   );
