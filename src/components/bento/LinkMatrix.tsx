@@ -48,6 +48,7 @@ const groups = [
   {
     title: 'Sosyal Medya Hesapları ve Vizyon',
     subtitle: '',
+    note: 'Takip etmeyi unutmayın, beğenileriniz çalışmalarıma yön veriyor...',
     cards: [
       {
         icon: InstagramIcon,
