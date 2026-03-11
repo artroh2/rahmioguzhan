@@ -10,8 +10,8 @@ const HeroCard = () => {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none mb-4">
           Rahmi<br />Oğuzhan<br />Hacıeyüpoğlu
         </h1>
-        <p className="text-sm tracking-[0.4em] uppercase text-primary font-medium text-right">
-          2
+        <p className="text-2xl tracking-[0.4em] uppercase text-primary font-medium text-right">
+          "2"
         </p>
       </div>
     </div>
