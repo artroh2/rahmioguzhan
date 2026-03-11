@@ -45,7 +45,7 @@ const groups = [
     ],
   },
   {
-    title: 'Social & Vision',
+    title: 'Sosyal Medya Hesapları ve Vizyon',
     subtitle: '',
     cards: [
       {
