@@ -19,7 +19,7 @@ const ProjectCard = ({ title, subtitle, icon: Icon, iconImage, link, accentClass
     >
       <div className="flex items-start justify-between">
         {iconImage ? (
-          <img src={iconImage} alt="" className="w-7 h-7 object-contain" />
+          <img src={iconImage} alt="" className="w-[210px] h-[210px] object-contain" />
         ) : Icon ? (
           <Icon className="w-7 h-7 text-muted-foreground group-hover:text-[var(--card-accent)] transition-colors duration-500" strokeWidth={1.5} />
         ) : null}
