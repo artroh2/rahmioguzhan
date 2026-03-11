@@ -77,7 +77,7 @@ const groups = [
         glowColor: '#dc2626',
       },
       {
-        icon: Video,
+        icon: TikTokIcon,
         title: 'TikTok',
         description: 'Kısa form içerikler.',
         link: 'https://www.tiktok.com/@siir2.0',
