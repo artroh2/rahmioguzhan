@@ -20,6 +20,7 @@ const groups = [
   {
     title: 'Müzik',
     subtitle: '',
+    note: 'Eğer kullandığınız farklı bir müzik dinleme uygulaması varsa, şarkılara ilgili programda "Rahmi Oguzhan" yazarak ulaşabilirsiniz...',
     cards: [
       {
         icon: SpotifyIcon,
@@ -146,6 +147,10 @@ const LinkMatrix = () => {
               </motion.div>
             ))}
           </div>
+
+          {group.note && (
+            <p className="text-xs text-muted-foreground/70 italic mt-3 px-1">{group.note}</p>
+          )}
         </motion.div>
       ))}
     </div>
