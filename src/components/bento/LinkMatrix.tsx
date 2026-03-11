@@ -103,6 +103,13 @@ const groups = [
         glowColor: '#3b82f6',
       },
       {
+        icon: Send,
+        title: 'Telegram',
+        description: 'Anlık iletişim.',
+        link: 'https://t.me/roguzhanh',
+        glowColor: '#29b6f6',
+      },
+      {
         icon: Mail,
         title: 'Email',
         description: 'İş birlikleri ve teklifler.',
