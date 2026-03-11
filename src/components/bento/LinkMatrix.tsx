@@ -49,7 +49,7 @@ const groups = [
     subtitle: '',
     cards: [
       {
-        icon: Camera,
+        icon: InstagramIcon,
         title: 'Instagram',
         description: 'Kişisel hesap ve görsel paylaşımlar.',
         link: 'https://www.instagram.com/rahmi.oguzhan2',
