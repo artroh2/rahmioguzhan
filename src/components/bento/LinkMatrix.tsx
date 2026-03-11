@@ -97,7 +97,8 @@ const groups = [
   {
     title: 'İletişim',
     subtitle: '',
-    note: '7/24/365',
+    note: '24 / 7 / 365',
+    noStar: true,
     cards: [
       {
         icon: Linkedin,
@@ -151,7 +152,7 @@ const LinkMatrix = () => {
           </div>
 
           {group.note && (
-            <p className="text-xs text-primary italic mt-3 px-1 text-center">* {group.note}</p>
+            <p className="text-xs text-primary italic mt-3 px-1 text-center">{group.noStar ? '' : '* '}{group.note}</p>
           )}
         </motion.div>
       ))}
