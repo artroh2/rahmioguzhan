@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Music, Cloud, Headphones, Camera, Feather, Twitter, Youtube, Video, Facebook, Linkedin, Mail } from 'lucide-react';
+import { Music, Cloud, Headphones, Camera, Feather, Twitter, Youtube, Video, Facebook, Linkedin, Mail, Send } from 'lucide-react';
 import LinkCard from './LinkCard';
 
 const container = {
