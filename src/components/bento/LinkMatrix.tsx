@@ -147,6 +147,10 @@ const LinkMatrix = () => {
               </motion.div>
             ))}
           </div>
+
+          {group.note && (
+            <p className="text-xs text-muted-foreground/70 italic mt-3 px-1">{group.note}</p>
+          )}
         </motion.div>
       ))}
     </div>
