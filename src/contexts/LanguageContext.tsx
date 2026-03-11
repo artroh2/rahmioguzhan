@@ -129,10 +129,23 @@ function saveCache(cache: Record<string, Record<string, string>>) {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const AUTO_LANG_KEY = 'lang_auto_detected';
+
+function detectBrowserLanguage(): Language {
+  try {
+    const browserLang = navigator.language?.split('-')[0]?.toLowerCase();
+    const supported = languages.find(l => l.code === browserLang);
+    return supported ? supported.code : 'tr';
+  } catch {
+    return 'tr';
+  }
+}
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>('tr');
   const [dynamicTranslations, setDynamicTranslations] = useState<Record<string, Record<string, string>>>(loadCache());
   const [isTranslating, setIsTranslating] = useState(false);
+  const [initialized, setInitialized] = useState(false);
 
   const translateAll = useCallback(async (lang: Language) => {
     // Check cache first
