@@ -197,9 +197,21 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  // Auto-detect browser language on first visit
+  useEffect(() => {
+    const alreadyDetected = localStorage.getItem(AUTO_LANG_KEY);
+    if (!alreadyDetected) {
+      const detectedLang = detectBrowserLanguage();
+      localStorage.setItem(AUTO_LANG_KEY, 'true');
+      if (detectedLang !== 'tr') {
+        setLanguage(detectedLang);
+      }
+    }
+    setInitialized(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const setLanguage = useCallback(async (lang: Language) => {
     if (lang !== 'tr' && lang !== 'en') {
-      // Fetch translations BEFORE switching language so users never see English fallback
       await translateAll(lang);
     }
     setLanguageState(lang);
