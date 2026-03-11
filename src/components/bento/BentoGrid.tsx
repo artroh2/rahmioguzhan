@@ -37,7 +37,7 @@ const BentoGrid = () => {
         <ProjectCard
           title="arayor.com"
           subtitle="AI Automotive Oracle"
-          icon={Brain}
+          iconImage={arayorLogo}
           link="https://arayor.com"
           accentClass="accent-cyan"
         />
