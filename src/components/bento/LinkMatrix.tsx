@@ -113,7 +113,7 @@ const groups = [
         icon: Mail,
         title: 'Email',
         description: 'İş birlikleri ve teklifler.',
-        link: 'mailto:rahmioguzhanhacieyupoglu@gmail.com',
+        link: 'mailto:roh@rahmioguzhan.com',
         glowColor: '#94a3b8',
       },
     ],
