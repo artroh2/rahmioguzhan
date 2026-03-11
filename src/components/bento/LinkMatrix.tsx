@@ -97,6 +97,7 @@ const groups = [
   {
     title: 'İletişim',
     subtitle: '',
+    note: '7/24',
     cards: [
       {
         icon: Linkedin,
