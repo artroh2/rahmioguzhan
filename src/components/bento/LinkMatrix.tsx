@@ -18,18 +18,18 @@ const item = {
 
 const groups = [
   {
-    title: 'Music & Audio',
+    title: 'Müzik',
     subtitle: '',
     cards: [
       {
-        icon: Music,
+        icon: SpotifyIcon,
         title: 'Rahmi Oğuzhan',
-        description: 'Tüm şarkılarımı bu platformdan dinleyebilirsiniz.',
+        description: 'Lansmanı yapılmış tüm şarkılar.',
         link: 'https://open.spotify.com/intl-tr/album/0qsai0PajSX9TgzyyzlzR2?si=svW0Xz5KT7mdE5UCl1sB0A&nd=1&dlsi=ba59d998bd96485e',
         glowColor: '#22c55e',
       },
       {
-        icon: Headphones,
+        icon: SpotifyIcon,
         title: 'Oguzhan the 2',
         description: 'Deneysel ve elektronik prodüksiyonlar.',
         link: 'https://open.spotify.com/intl-tr/artist/0whSI742dh4gkq4ktJsGCW?si=kqnHYZQHTACmv9YggEdp2g&nd=1&dlsi=215be945e3734a23',
