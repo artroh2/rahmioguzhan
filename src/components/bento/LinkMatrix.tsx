@@ -63,7 +63,7 @@ const groups = [
         glowColor: '#8b5cf6',
       },
       {
-        icon: Twitter,
+        icon: XIcon,
         title: 'X / Twitter',
         description: 'Düşünceler ve paylaşımlar.',
         link: 'https://x.com/roguzhanh',
