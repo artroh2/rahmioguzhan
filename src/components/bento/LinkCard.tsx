@@ -1,7 +1,8 @@
-import { LucideIcon, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { ComponentType, SVGProps } from 'react';
 
 interface LinkCardProps {
-  icon: LucideIcon;
+  icon: ComponentType<any>;
   title: string;
   description: string;
   link: string;

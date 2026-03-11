@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Music, Cloud, Headphones, Camera, Feather, Twitter, Youtube, Video, Facebook, Linkedin, Mail, Send } from 'lucide-react';
+import { Music, Cloud, Headphones, Feather, Youtube, Facebook, Linkedin, Mail, Send } from 'lucide-react';
+import { InstagramIcon, XIcon, TikTokIcon } from '../icons/BrandIcons';
 import LinkCard from './LinkCard';
 
 const container = {
@@ -48,7 +49,7 @@ const groups = [
     subtitle: '',
     cards: [
       {
-        icon: Camera,
+        icon: InstagramIcon,
         title: 'Instagram',
         description: 'Kişisel hesap ve görsel paylaşımlar.',
         link: 'https://www.instagram.com/rahmi.oguzhan2',
@@ -62,7 +63,7 @@ const groups = [
         glowColor: '#8b5cf6',
       },
       {
-        icon: Twitter,
+        icon: XIcon,
         title: 'X / Twitter',
         description: 'Düşünceler ve paylaşımlar.',
         link: 'https://x.com/roguzhanh',
@@ -76,7 +77,7 @@ const groups = [
         glowColor: '#dc2626',
       },
       {
-        icon: Video,
+        icon: TikTokIcon,
         title: 'TikTok',
         description: 'Kısa form içerikler.',
         link: 'https://www.tiktok.com/@siir2.0',
