@@ -20,6 +20,7 @@ const groups = [
   {
     title: 'Müzik',
     subtitle: '',
+    note: 'Eğer kullandığınız farklı bir müzik dinleme uygulaması varsa, şarkılara ilgili programda "Rahmi Oguzhan" yazarak ulaşabilirsiniz...',
     cards: [
       {
         icon: SpotifyIcon,
