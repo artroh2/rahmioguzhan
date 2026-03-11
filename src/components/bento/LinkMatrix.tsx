@@ -149,7 +149,7 @@ const LinkMatrix = () => {
           </div>
 
           {group.note && (
-            <p className="text-xs text-primary italic mt-3 px-1">{group.note}</p>
+            <p className="text-xs text-primary italic mt-3 px-1 text-center">* {group.note}</p>
           )}
         </motion.div>
       ))}
