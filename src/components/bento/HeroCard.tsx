@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 const HeroCard = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bento-card h-full flex flex-col justify-end p-8 md:p-12 relative overflow-hidden group">
       {/* Ambient glow */}
@@ -12,7 +16,7 @@ const HeroCard = () => {
         </h1>
         <div className="flex items-center justify-between mt-4">
           <p className="text-sm md:text-base text-muted-foreground tracking-wide">"yapay zeka mimarı"</p>
-          <p className="text-2xl tracking-[0.4em] uppercase text-primary font-medium">"2"</p>
+          <button onClick={() => navigate('/manifesto')} className="text-2xl tracking-[0.4em] uppercase text-primary font-medium hover:glow-red transition-all duration-300 cursor-pointer bg-transparent border-none">"2"</button>
         </div>
       </div>
     </div>
