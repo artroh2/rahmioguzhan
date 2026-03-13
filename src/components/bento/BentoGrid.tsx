@@ -46,7 +46,7 @@ const BentoGrid = () => {
       {/* AIQrace */}
       <motion.div variants={item}>
         <ProjectCard
-          title="AIQrace"
+          title={<>AIQ<span className="text-primary">race</span></>}
           subtitle="Yapay zeka arenası, yolda..."
           iconImage={aiqraceLogo}
           link="https://aiqrace.com"

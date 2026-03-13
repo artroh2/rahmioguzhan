@@ -1,7 +1,8 @@
 import { ExternalLink, LucideIcon } from 'lucide-react';
+import { ReactNode } from 'react';
 
 interface ProjectCardProps {
-  title: string;
+  title: ReactNode;
   subtitle: string;
   icon?: LucideIcon;
   iconImage?: string;
