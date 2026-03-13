@@ -3,7 +3,8 @@ import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
 
-import { Brain, Swords } from 'lucide-react';
+import { Swords } from 'lucide-react';
+import arayorLogo from '@/assets/arayor-logo.png';
 
 const container = {
   hidden: { opacity: 0 },
