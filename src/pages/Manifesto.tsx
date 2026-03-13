@@ -239,9 +239,9 @@ const Manifesto = () => {
         <span className="text-xs tracking-[0.3em] uppercase hidden md:inline">Geri</span>
       </motion.button>
 
-      {/* Subtle ambient glow */}
+      {/* Ambient red glow */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 600px 400px at 50% 30%, hsl(0 72% 51% / 0.04), transparent)'
+        background: 'radial-gradient(ellipse 800px 500px at 50% 20%, hsl(0 72% 51% / 0.08), transparent), radial-gradient(ellipse 500px 600px at 80% 70%, hsl(0 72% 51% / 0.04), transparent)'
       }} />
 
       <article className="max-w-[600px] w-full font-mono text-base leading-[1.8] tracking-wide relative z-10 pt-8">
