@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 const HeroCard = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bento-card h-full flex flex-col justify-end p-8 md:p-12 relative overflow-hidden group">
       {/* Ambient glow */}
