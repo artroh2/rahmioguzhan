@@ -36,7 +36,7 @@ const BentoGrid = () => {
       <motion.div variants={item}>
         <ProjectCard
           title="arayor.com"
-          subtitle="AI Automotive Oracle"
+          subtitle="AI Otomotiv İnceleme"
           iconImage={arayorLogo}
           link="https://arayor.com"
           accentClass="accent-cyan"
