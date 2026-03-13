@@ -3,8 +3,8 @@ import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
 
-import { Swords } from 'lucide-react';
 import arayorLogo from '@/assets/arayor-logo.png';
+import aiqraceLogo from '@/assets/aiqrace-logo.png';
 
 const container = {
   hidden: { opacity: 0 },
@@ -48,7 +48,7 @@ const BentoGrid = () => {
         <ProjectCard
           title="AIQrace"
           subtitle="Yapay zeka arenası, yolda..."
-          icon={Swords}
+          iconImage={aiqraceLogo}
           link="#"
           accentClass="accent-red"
         />
