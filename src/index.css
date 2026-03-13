@@ -168,16 +168,17 @@
 
 @keyframes neon-pulse {
   0%, 100% {
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4), 0 0 60px hsl(var(--primary) / 0.2);
+    text-shadow: 0 0 8px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.15);
+    color: hsl(0 72% 51%);
   }
   50% {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.9), 0 0 50px hsl(var(--primary) / 0.6), 0 0 100px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 20px hsl(var(--primary) / 1), 0 0 60px hsl(var(--primary) / 0.8), 0 0 120px hsl(var(--primary) / 0.5), 0 0 200px hsl(var(--primary) / 0.2);
+    color: hsl(0 85% 65%);
   }
 }
 
 .neon-pulse-red {
-  animation: neon-pulse 2s ease-in-out infinite;
-  color: hsl(var(--primary));
+  animation: neon-pulse 1.2s ease-in-out infinite;
 }
 
 @keyframes cursor-blink {
