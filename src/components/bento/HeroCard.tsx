@@ -16,7 +16,7 @@ const HeroCard = () => {
         </h1>
         <div className="flex items-center justify-between mt-4">
           <p className="text-sm md:text-base text-muted-foreground tracking-wide">"yapay zeka mimarı"</p>
-          <button onClick={() => navigate('/manifesto')} className="text-2xl tracking-[0.4em] uppercase text-primary font-medium hover:glow-red transition-all duration-300 cursor-pointer bg-transparent border-none">"2"</button>
+          <button onClick={() => navigate('/manifesto')} className="text-2xl tracking-[0.4em] uppercase font-medium neon-pulse-red cursor-pointer bg-transparent border-none outline-none">"2"</button>
         </div>
       </div>
     </div>
