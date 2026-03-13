@@ -1,17 +1,19 @@
 import { Music } from 'lucide-react';
 
+const bars = [30, 60, 45, 80, 35, 70, 50, 90, 40, 65, 55, 75, 38, 85, 48];
+
 const MusicCard = () => {
   return (
     <div className="bento-card h-full flex flex-col md:flex-row items-start md:items-center gap-6 p-6 md:p-8 group">
-      {/* Waveform mockup */}
+      {/* Equalizer */}
       <div className="flex items-end gap-[3px] h-12 shrink-0">
-        {[30, 60, 45, 80, 35, 70, 50, 90, 40, 65, 55, 75, 38, 85, 48].map((h, i) => (
+        {bars.map((h, i) => (
           <div
             key={i}
-            className="w-[3px] rounded-full bg-primary/40 group-hover:bg-primary/70 transition-colors duration-500"
+            className="w-[3px] rounded-full bg-primary/40 group-hover:bg-primary/70 group-hover:animate-[eq-bounce_0.8s_ease-in-out_infinite_alternate] transition-colors duration-500"
             style={{
               height: `${h}%`,
-              animationDelay: `${i * 0.1}s`,
+              animationDelay: `${i * 0.12}s`,
             }}
           />
         ))}
