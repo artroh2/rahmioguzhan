@@ -48,7 +48,7 @@ const BentoGrid = () => {
         <ProjectCard
           title="AIQrace"
           subtitle="Yapay zeka arenası, yolda..."
-          icon={Swords}
+          iconImage={aiqraceLogo}
           link="#"
           accentClass="accent-red"
         />
