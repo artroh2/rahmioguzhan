@@ -10,10 +10,10 @@ const HeroCard = () => {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none mb-1">
           Rahmi<br />Oğuzhan<br />Hacıeyüpoğlu
         </h1>
-        <p className="text-sm md:text-base text-muted-foreground tracking-wide mb-4">yapay zeka mimarı</p>
-        <p className="text-2xl tracking-[0.4em] uppercase text-primary font-medium text-right">
-          "2"
-        </p>
+        <div className="flex items-center justify-between mt-4">
+          <p className="text-sm md:text-base text-muted-foreground tracking-wide">"yapay zeka mimarı"</p>
+          <p className="text-2xl tracking-[0.4em] uppercase text-primary font-medium">"2"</p>
+        </div>
       </div>
     </div>
   );
