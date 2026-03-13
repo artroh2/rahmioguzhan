@@ -148,7 +148,7 @@ const Manifesto = () => {
         const content = lineBuffer;
         lineBuffer = '';
         elements.push(
-          <span key={key} className={`block ${isItalic ? 'italic text-white/70' : 'text-white/90'}`}>
+          <span key={key} className={`block ${isItalic ? 'italic text-primary/70' : 'text-white/90'}`}>
             {content}
           </span>
         );
