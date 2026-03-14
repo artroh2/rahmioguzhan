@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      current_status: {
+        Row: {
+          emoji: string
+          id: string
+          status_text: string
+          updated_at: string
+        }
+        Insert: {
+          emoji?: string
+          id?: string
+          status_text?: string
+          updated_at?: string
+        }
+        Update: {
+          emoji?: string
+          id?: string
+          status_text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
