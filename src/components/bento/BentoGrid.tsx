@@ -78,7 +78,7 @@ const BentoGrid = () => {
         />
       </motion.div>
       {/* Music - spans 2 cols */}
-      <motion.div variants={item} className="md:col-span-2">
+      <motion.div variants={item} className="md:col-span-3 lg:col-span-4">
         <MusicCard />
       </motion.div>
 
