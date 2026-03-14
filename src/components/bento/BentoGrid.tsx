@@ -5,6 +5,8 @@ import MusicCard from './MusicCard';
 
 import arayorLogo from '@/assets/arayor-logo.png';
 import aiqraceLogo from '@/assets/aiqrace-logo.png';
+import worldmeetsLogo from '@/assets/worldmeets-logo.png';
+import mulkexLogo from '@/assets/mulkex-logo.png';
 
 const container = {
   hidden: { opacity: 0 },
@@ -54,6 +56,27 @@ const BentoGrid = () => {
         />
       </motion.div>
 
+      {/* Worldmeets */}
+      <motion.div variants={item}>
+        <ProjectCard
+          title="Worldmeets"
+          subtitle="Küresel haber platformu"
+          iconImage={worldmeetsLogo}
+          link="https://worldmeets.org"
+          accentClass="accent-blue"
+        />
+      </motion.div>
+
+      {/* Mulkex */}
+      <motion.div variants={item}>
+        <ProjectCard
+          title="Mulkex"
+          subtitle="Gayrimenkul teknolojisi"
+          iconImage={mulkexLogo}
+          link="https://mulkex.com"
+          accentClass="accent-gold"
+        />
+      </motion.div>
       {/* Music - spans 2 cols */}
       <motion.div variants={item} className="md:col-span-2">
         <MusicCard />
