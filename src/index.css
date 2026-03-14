@@ -117,6 +117,14 @@
   .accent-red {
     --card-accent: hsl(0 72% 51%);
   }
+
+  .accent-blue {
+    --card-accent: hsl(215 80% 55%);
+  }
+
+  .accent-gold {
+    --card-accent: hsl(43 60% 52%);
+  }
 }
 
 @layer utilities {
