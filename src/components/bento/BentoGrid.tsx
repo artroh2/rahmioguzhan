@@ -73,10 +73,6 @@ const BentoGrid = () => {
         <StatusCard />
       </motion.div>
 
-      {/* Social Follow Card */}
-      <motion.div variants={item}>
-        <SocialFollowCard />
-      </motion.div>
 
       {/* Music - spans 2 cols */}
       <motion.div variants={item} className="md:col-span-2">
