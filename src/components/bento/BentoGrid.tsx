@@ -34,8 +34,8 @@ const BentoGrid = () => {
         <HeroCard />
       </motion.div>
 
-      {/* Arayor */}
-      <motion.div variants={item}>
+      {/* Projects 2x2 grid */}
+      <motion.div variants={item} className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ProjectCard
           title="Arayor"
           subtitle="AI Otomotiv İnceleme"
@@ -43,10 +43,6 @@ const BentoGrid = () => {
           link="https://arayor.com"
           accentClass="accent-cyan"
         />
-      </motion.div>
-
-      {/* AIQrace */}
-      <motion.div variants={item}>
         <ProjectCard
           title={<>AIQ<span className="text-primary">race</span></>}
           subtitle="Yapay zeka arenası"
@@ -54,10 +50,6 @@ const BentoGrid = () => {
           link="https://aiqrace.com"
           accentClass="accent-red"
         />
-      </motion.div>
-
-      {/* Worldmeets */}
-      <motion.div variants={item}>
         <ProjectCard
           title="Worldmeets"
           subtitle="Küresel toplantı salonu"
@@ -65,10 +57,6 @@ const BentoGrid = () => {
           link="https://worldmeets.org"
           accentClass="accent-blue"
         />
-      </motion.div>
-
-      {/* Mulkex */}
-      <motion.div variants={item}>
         <ProjectCard
           title="MülkEx"
           subtitle="AI Gayrimenkul Teknolojisi"
