@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
+import StatusCard from './StatusCard';
+import SocialFollowCard from './SocialFollowCard';
 
 import arayorLogo from '@/assets/arayor-logo.png';
 import aiqraceLogo from '@/assets/aiqrace-logo.png';
@@ -65,11 +67,21 @@ const BentoGrid = () => {
           accentClass="accent-gold"
         />
       </motion.div>
+
+      {/* Status Card */}
+      <motion.div variants={item}>
+        <StatusCard />
+      </motion.div>
+
+      {/* Social Follow Card */}
+      <motion.div variants={item}>
+        <SocialFollowCard />
+      </motion.div>
+
       {/* Music - spans 2 cols */}
       <motion.div variants={item} className="md:col-span-2">
         <MusicCard />
       </motion.div>
-
     </motion.div>
   );
 };
