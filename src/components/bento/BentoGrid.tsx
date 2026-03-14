@@ -70,7 +70,7 @@ const BentoGrid = () => {
       {/* Mulkex */}
       <motion.div variants={item}>
         <ProjectCard
-          title="Mulkex"
+          title="MülkEx"
           subtitle="Gayrimenkul teknolojisi"
           iconImage={mulkexLogo}
           link="https://mulkex.com"
