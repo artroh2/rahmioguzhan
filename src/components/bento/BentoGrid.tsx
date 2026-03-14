@@ -60,7 +60,7 @@ const BentoGrid = () => {
       <motion.div variants={item}>
         <ProjectCard
           title="Worldmeets"
-          subtitle="Küresel haber platformu"
+          subtitle="Küresel toplantı salonu"
           iconImage={worldmeetsLogo}
           link="https://worldmeets.org"
           accentClass="accent-blue"
