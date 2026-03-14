@@ -5,6 +5,8 @@ import MusicCard from './MusicCard';
 
 import arayorLogo from '@/assets/arayor-logo.png';
 import aiqraceLogo from '@/assets/aiqrace-logo.png';
+import worldmeetsLogo from '@/assets/worldmeets-logo.png';
+import mulkexLogo from '@/assets/mulkex-logo.png';
 
 const container = {
   hidden: { opacity: 0 },
