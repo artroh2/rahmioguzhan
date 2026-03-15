@@ -36,50 +36,49 @@ const BentoGrid = () => {
         <HeroCard />
       </motion.div>
 
-      {/* Projects 2x2 grid */}
-      <motion.div variants={item} className="md:col-span-2 flex flex-col gap-4">
-        <h2 className="text-lg font-bold text-foreground tracking-tight px-1">Girişim Projelerim</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <ProjectCard
-          title="Arayor"
-          subtitle="AI Otomotiv İnceleme"
-          iconImage={arayorLogo}
-          link="https://arayor.com"
-          accentClass="accent-cyan"
-        />
-        <ProjectCard
-          title={<>AIQ<span className="text-primary">race</span></>}
-          subtitle="Yapay zeka arenası"
-          iconImage={aiqraceLogo}
-          link="https://aiqrace.com"
-          accentClass="accent-red"
-        />
-        <ProjectCard
-          title="Worldmeets"
-          subtitle="Küresel toplantı salonu"
-          iconImage={worldmeetsLogo}
-          link="https://worldmeets.org"
-          accentClass="accent-blue"
-        />
-        <ProjectCard
-          title="MülkEx"
-          subtitle="AI Gayrimenkul Teknolojisi"
-          iconImage={mulkexLogo}
-          link="https://mulkex.com"
-          accentClass="accent-gold"
-        />
-        </div>
-      </motion.div>
-
       {/* Status Card */}
       <motion.div variants={item}>
         <StatusCard />
       </motion.div>
 
-
       {/* Music - spans 2 cols */}
       <motion.div variants={item} className="md:col-span-2">
         <MusicCard />
+      </motion.div>
+
+      {/* Projects 2x2 grid */}
+      <motion.div variants={item} className="md:col-span-2 lg:col-span-4 flex flex-col gap-4">
+        <h2 className="text-lg font-bold text-foreground tracking-tight px-1">Girişim Projelerim</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <ProjectCard
+            title="Arayor"
+            subtitle="AI Otomotiv İnceleme"
+            iconImage={arayorLogo}
+            link="https://arayor.com"
+            accentClass="accent-cyan"
+          />
+          <ProjectCard
+            title={<>AIQ<span className="text-primary">race</span></>}
+            subtitle="Yapay zeka arenası"
+            iconImage={aiqraceLogo}
+            link="https://aiqrace.com"
+            accentClass="accent-red"
+          />
+          <ProjectCard
+            title="Worldmeets"
+            subtitle="Küresel toplantı salonu"
+            iconImage={worldmeetsLogo}
+            link="https://worldmeets.org"
+            accentClass="accent-blue"
+          />
+          <ProjectCard
+            title="MülkEx"
+            subtitle="AI Gayrimenkul Teknolojisi"
+            iconImage={mulkexLogo}
+            link="https://mulkex.com"
+            accentClass="accent-gold"
+          />
+        </div>
       </motion.div>
     </motion.div>
   );
