@@ -38,7 +38,7 @@ const BentoGrid = () => {
 
       {/* Projects 2x2 grid */}
       <motion.div variants={item} className="md:col-span-2 flex flex-col gap-4">
-        <h2 className="text-sm font-medium text-muted-foreground tracking-wide uppercase">Girişim Projelerim</h2>
+        <h2 className="text-lg font-bold text-foreground tracking-tight px-1">Girişim Projelerim</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ProjectCard
           title="Arayor"
