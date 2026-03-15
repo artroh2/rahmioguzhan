@@ -68,6 +68,7 @@ const BentoGrid = () => {
           link="https://mulkex.com"
           accentClass="accent-gold"
         />
+        </div>
       </motion.div>
 
       {/* Status Card */}
