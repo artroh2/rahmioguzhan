@@ -39,7 +39,7 @@ const groups = [
       {
         icon: Cloud,
         title: 'SoundCloud',
-        description: 'Yayınlanmamış ve alternatif parçalar.',
+        description: 'Şarkılarımı dinlemek için alternatif platform.',
         link: 'https://soundcloud.com/rahmioguzhan',
         glowColor: '#f97316',
       },
