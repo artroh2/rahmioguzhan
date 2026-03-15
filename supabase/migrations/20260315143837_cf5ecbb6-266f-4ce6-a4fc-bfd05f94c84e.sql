@@ -1,0 +1,1 @@
+UPDATE current_status SET status_text = 'Mobil Uygulama üzerinde çalışılıyor', emoji = '📱', updated_at = now() WHERE id = 'aac84ff9-b3f9-4f7a-9f22-fd70107b439a';
