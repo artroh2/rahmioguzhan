@@ -79,6 +79,7 @@ const BentoGrid = () => {
             accentClass="accent-gold"
           />
         </div>
+        <p className="text-xs text-primary italic mt-3 px-1 text-center">* Projeler hakkındaki geri bildirimleriniz çok değerli</p>
       </motion.div>
     </motion.div>
   );
