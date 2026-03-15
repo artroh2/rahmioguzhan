@@ -16,7 +16,7 @@ const AlbumCard = () => {
         <div className="flex items-start gap-3">
           <span className="text-3xl">🎵</span>
           <div>
-            <p className="text-sm text-foreground font-medium leading-relaxed">Yeni Albüm üzerinde çalışılıyor</p>
+            <p className="text-sm text-foreground font-medium leading-relaxed">Yapay zeka çalışmaları devam ediyor</p>
             <p className="text-xs text-muted-foreground mt-1">Çok yakında...</p>
           </div>
         </div>
