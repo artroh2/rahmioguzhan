@@ -3,6 +3,7 @@ import HeroCard from './HeroCard';
 import ProjectCard from './ProjectCard';
 import MusicCard from './MusicCard';
 import StatusCard from './StatusCard';
+import AlbumCard from './AlbumCard';
 import SocialFollowCard from './SocialFollowCard';
 
 import arayorLogo from '@/assets/arayor-logo.png';
