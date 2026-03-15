@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 const StatusCard = () => {
-  const [emoji, setEmoji] = useState('💻');
-  const [statusText, setStatusText] = useState('AIQrace & Mülkex geliştiriyorum');
+  const [emoji, setEmoji] = useState('📱');
+  const [statusText, setStatusText] = useState('Mobil Uygulama üzerinde çalışılıyor');
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
 
   useEffect(() => {
