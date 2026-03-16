@@ -187,7 +187,7 @@ const AboutTab = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-16 text-center text-xs text-muted-foreground"
         >
-          İKİ © 2025 — Tüm hakları saklıdır
+          ROH2 © 2026 — Tüm hakları saklıdır
         </motion.p>
       </div>
     </div>
