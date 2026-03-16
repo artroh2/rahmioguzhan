@@ -23,7 +23,7 @@ const MusicTab = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="bg-card rounded-2xl overflow-hidden border border-border mb-4"
+        className="block bg-card rounded-2xl overflow-hidden border border-border mb-4 group hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
       >
         <div className="aspect-square bg-gradient-to-br from-primary/30 via-card to-card flex items-center justify-center relative overflow-hidden">
           <iframe
@@ -49,7 +49,7 @@ const MusicTab = () => {
           href={SPOTIFY_ALBUM}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 bg-[#1DB954] hover:bg-[#1DB954]/90 text-primary-foreground font-semibold py-3.5 rounded-xl transition-all duration-300 text-sm"
+          className="flex items-center justify-center gap-2 bg-[#1DB954] hover:bg-[#1DB954]/80 hover:shadow-[0_0_20px_#1DB95440] hover:scale-[1.03] text-primary-foreground font-semibold py-3.5 rounded-xl transition-all duration-300 text-sm active:scale-95"
         >
           <Music size={16} />
           Spotify'da Dinle
@@ -58,7 +58,7 @@ const MusicTab = () => {
           href={APPLE_ALBUM}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 bg-card hover:bg-secondary text-foreground font-semibold py-3.5 rounded-xl border border-border transition-all duration-300 text-sm"
+          className="flex items-center justify-center gap-2 bg-card hover:bg-secondary hover:border-primary/50 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.2)] hover:scale-[1.03] text-foreground font-semibold py-3.5 rounded-xl border border-border transition-all duration-300 text-sm active:scale-95"
         >
           <Headphones size={16} />
           Apple Music
@@ -77,7 +77,7 @@ const MusicTab = () => {
             href={SPOTIFY_ARTIST}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
+            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#1DB954]/20 flex items-center justify-center">
@@ -97,7 +97,7 @@ const MusicTab = () => {
             href={APPLE_ARTIST}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
+            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
