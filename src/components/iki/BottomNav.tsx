@@ -1,7 +1,6 @@
-import { Home, Music, PenLine, Briefcase, User } from 'lucide-react';
+import { Home, Music, PenLine, Briefcase, Mail } from 'lucide-react';
 
 export type TabId = 'home' | 'muzik' | 'siirler' | 'projeler' | 'ben';
-
 interface BottomNavProps {
   active: TabId;
   onChange: (tab: TabId) => void;
@@ -12,7 +11,7 @@ const tabs: { id: TabId; label: string; icon: typeof Music }[] = [
   { id: 'muzik', label: 'MÜZİK', icon: Music },
   { id: 'siirler', label: 'ŞİİRLER', icon: PenLine },
   { id: 'projeler', label: 'PROJELER', icon: Briefcase },
-  { id: 'ben', label: 'BEN', icon: User },
+  { id: 'ben', label: 'İLETİŞİM', icon: Mail },
 ];
 
 const BottomNav = ({ active, onChange }: BottomNavProps) => {

@@ -1,18 +1,6 @@
-import { ExternalLink, Music, Download } from 'lucide-react';
+import { ExternalLink, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const projects = [
-  {
-    title: 'AIQrace',
-    description: 'Yapay zeka arenası',
-    link: 'https://aiqrace.com',
-  },
-  {
-    title: 'aracyorumu.com',
-    description: 'AI otomotiv inceleme',
-    link: 'https://aracyorumu.com',
-  },
-];
+import heroBg from '@/assets/hero-bg.jpg';
 
 const getStoreLink = (ios: string, android: string) => {
   const ua = navigator.userAgent || '';
@@ -60,91 +48,65 @@ const appLinks = [
 
 const AboutTab = () => {
   return (
-    <div className="min-h-screen pb-24 px-6 pt-12">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-10"
-      >
-        <h1 className="font-display text-7xl font-bold text-primary mb-3">2</h1>
-        <h2 className="text-lg font-semibold text-foreground mb-2">Rahmi Oğuzhan Hacıeyüpoğlu</h2>
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          Şair. Müzisyen. Yapay zeka ile inşa edip üreten.
-          <br />
-          Sessizlik mimarı, kelimelerle mühendis.
-        </p>
-      </motion.div>
+    <div className="relative min-h-screen pb-24">
+      {/* Background */}
+      <div className="absolute inset-0">
+        <img src={heroBg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
+      </div>
 
-      {/* Projects */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">Projeler</h2>
-        <div className="space-y-2">
-          {projects.map((p) => (
-            <a
-              key={p.title}
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-200 group"
-            >
-              <div>
-                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {p.title}
-                </h3>
-                <p className="text-xs text-muted-foreground">{p.description}</p>
-              </div>
-              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-          ))}
-        </div>
-      </motion.div>
+      <div className="relative z-10 px-6 pt-12">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <h1 className="font-display text-7xl font-bold text-primary mb-3">2</h1>
+          <h2 className="text-lg font-semibold text-foreground">Rahmi Oğuzhan Hacıeyüpoğlu</h2>
+        </motion.div>
 
-      {/* Download Apps */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mt-10"
-      >
-        <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 flex items-center gap-2">
-          <Download size={12} />
-          Uygulamaları İndir
-        </h2>
-        <div className="flex gap-3 justify-center">
-          {appLinks.map((app) => (
-            <a
-              key={app.name}
-              href={getStoreLink(app.ios, app.android)}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${app.name} İndir`}
-              className="flex flex-col items-center gap-2 bg-card px-5 py-4 rounded-xl border border-border hover:border-primary/30 transition-all duration-200 group"
-              style={{ color: app.color }}
-            >
-              <div className="group-hover:scale-110 transition-transform duration-200">
-                {app.icon}
-              </div>
-              <span className="text-[10px] text-muted-foreground tracking-wider">{app.name}</span>
-            </a>
-          ))}
-        </div>
-      </motion.div>
+        {/* Download Apps */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 flex items-center gap-2">
+            <Download size={12} />
+            Uygulamaları İndir
+          </h2>
+          <div className="flex gap-3 justify-center">
+            {appLinks.map((app) => (
+              <a
+                key={app.name}
+                href={getStoreLink(app.ios, app.android)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${app.name} İndir`}
+                className="flex flex-col items-center gap-2 bg-card/80 backdrop-blur-xl px-5 py-4 rounded-xl border border-border hover:border-primary/30 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)] transition-all duration-300 group"
+                style={{ color: app.color }}
+              >
+                <div className="group-hover:scale-110 transition-transform duration-200">
+                  {app.icon}
+                </div>
+                <span className="text-[10px] text-muted-foreground tracking-wider">{app.name}</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
 
-      {/* Footer */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-        className="mt-16 text-center text-xs text-muted-foreground"
-      >
-        İKİ © 2025 — Tüm hakları saklıdır
-      </motion.p>
+        {/* Footer */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-16 text-center text-xs text-muted-foreground"
+        >
+          İKİ © 2025 — Tüm hakları saklıdır
+        </motion.p>
+      </div>
     </div>
   );
 };
