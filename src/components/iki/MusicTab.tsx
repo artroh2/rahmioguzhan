@@ -23,7 +23,7 @@ const MusicTab = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="bg-card rounded-2xl overflow-hidden border border-border mb-4"
+        className="block bg-card rounded-2xl overflow-hidden border border-border mb-4 group hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
       >
         <div className="aspect-square bg-gradient-to-br from-primary/30 via-card to-card flex items-center justify-center relative overflow-hidden">
           <iframe
