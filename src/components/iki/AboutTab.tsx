@@ -156,8 +156,8 @@ const AboutTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 flex items-center gap-2">
-            <Download size={12} />
+          <h2 className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-5 flex items-center justify-center gap-2 font-semibold">
+            <Download size={14} />
             Uygulamaları İndir
           </h2>
           <div className="flex gap-3 justify-center">
