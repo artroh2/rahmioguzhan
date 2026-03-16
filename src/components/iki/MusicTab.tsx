@@ -1,46 +1,10 @@
-import { Play, ExternalLink } from 'lucide-react';
+import { ExternalLink, Music, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const SPOTIFY_ARTIST = 'https://open.spotify.com/artist/2uoOCTF68KrEajGqSFNsrj';
-const SPOTIFY_ALBUM = 'https://open.spotify.com/intl-tr/album/0qsai0PajSX9TgzyyzlzR2';
-
-const songs = [
-  {
-    title: 'Sessiz Limanı',
-    album: 'Global Episode',
-    date: '2025',
-    lyric: '"Dünya gürültü yaparken, ben sessizliği inşa ettim..."',
-    link: SPOTIFY_ALBUM,
-  },
-  {
-    title: 'Gece Mimarı',
-    album: 'Global Episode',
-    date: '2025',
-    lyric: '"Karanlık çökerken yükselir, görünmez tuğlalar..."',
-    link: SPOTIFY_ALBUM,
-  },
-  {
-    title: 'Karanlık Şiir',
-    album: 'Global Episode',
-    date: '2025',
-    lyric: '"Mürekkep damarlardan akar, kâğıda değil..."',
-    link: SPOTIFY_ALBUM,
-  },
-  {
-    title: 'Son Kod',
-    album: 'Global Episode',
-    date: '2025',
-    lyric: '"Bir ve sıfır arasında, insanlık gizli..."',
-    link: SPOTIFY_ALBUM,
-  },
-  {
-    title: 'We Are One',
-    album: 'Global Episode',
-    date: '2025',
-    lyric: '"Otuz dilde bir ses, tek bir kalp atışı..."',
-    link: SPOTIFY_ALBUM,
-  },
-];
+const SPOTIFY_ALBUM = 'https://open.spotify.com/intl-tr/album/1RfaeAivtLiIjmvti9TOGv?si=M0qLvRK7RHOz2ZXZ-6YxWQ';
+const APPLE_ALBUM = 'https://music.apple.com/tr/album/ne-mi-derdiniz/1885350416?l=tr';
+const SPOTIFY_ARTIST = 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk?si=a2OzNdQ7RQavn3XLUxTZuA';
+const APPLE_ARTIST = 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707?l=tr';
 
 const MusicTab = () => {
   return (
@@ -50,81 +14,106 @@ const MusicTab = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="font-display text-3xl font-bold text-foreground mb-1">Müzik</h1>
-        <p className="text-sm text-muted-foreground mb-8">Tüm şarkılar ve şiirler</p>
+        <h1 className="font-sans text-3xl font-bold text-foreground mb-1">Müzik</h1>
+        <p className="text-sm text-muted-foreground mb-8">Şarkılar ve albümler</p>
       </motion.div>
 
       {/* Featured Release */}
-      <motion.a
-        href={SPOTIFY_ALBUM}
-        target="_blank"
-        rel="noopener noreferrer"
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="block bg-card rounded-2xl overflow-hidden border border-border mb-8 group hover:border-primary/30 transition-colors duration-300"
+        className="bg-card rounded-2xl overflow-hidden border border-border mb-4"
       >
-        <div className="aspect-[2/1] bg-gradient-to-br from-primary/20 via-card to-card flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-          <div className="relative z-10 text-center">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-2">Son Albüm</p>
-            <h2 className="font-display text-3xl font-bold text-foreground">Global Episode</h2>
-            <p className="text-sm text-muted-foreground mt-1">2 · 2025</p>
-          </div>
+        <div className="aspect-square bg-gradient-to-br from-primary/30 via-card to-card flex items-center justify-center relative overflow-hidden">
+          <iframe
+            src="https://open.spotify.com/embed/album/1RfaeAivtLiIjmvti9TOGv?utm_source=generator&theme=0"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            className="rounded-t-2xl"
+            title="Ne Mi Derdiniz - Spotify Embed"
+          />
         </div>
-        <div className="p-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <Play size={18} fill="hsl(0 0% 100%)" className="text-primary-foreground ml-0.5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground">Spotify'da Dinle</p>
-              <p className="text-xs text-muted-foreground">5 parça · 30 dil</p>
-            </div>
-          </div>
-          <ExternalLink size={16} className="text-muted-foreground" />
-        </div>
-      </motion.a>
+      </motion.div>
 
-      {/* Song List */}
-      <div className="space-y-3">
-        {songs.map((song, i) => (
-          <motion.a
-            key={song.title}
-            href={song.link}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.25 }}
+        className="grid grid-cols-2 gap-3 mb-10"
+      >
+        <a
+          href={SPOTIFY_ALBUM}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 bg-[#1DB954] hover:bg-[#1DB954]/90 text-primary-foreground font-semibold py-3.5 rounded-xl transition-all duration-300 text-sm"
+        >
+          <Music size={16} />
+          Spotify'da Dinle
+        </a>
+        <a
+          href={APPLE_ALBUM}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 bg-card hover:bg-secondary text-foreground font-semibold py-3.5 rounded-xl border border-border transition-all duration-300 text-sm"
+        >
+          <Headphones size={16} />
+          Apple Music
+        </a>
+      </motion.div>
+
+      {/* All Music Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">Tüm Albümler ve Şarkılar</h2>
+        <div className="space-y-3">
+          <a
+            href={SPOTIFY_ARTIST}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-            className="block bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
+            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
-                  {song.title}
-                </h3>
-                <p className="text-xs text-muted-foreground mt-0.5">{song.album} · {song.date}</p>
-                <p className="text-xs text-secondary-foreground italic mt-2 leading-relaxed">{song.lyric}</p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1DB954]/20 flex items-center justify-center">
+                <Music size={18} className="text-[#1DB954]" />
               </div>
-              <Play size={14} className="text-muted-foreground group-hover:text-primary mt-1 ml-3 flex-shrink-0 transition-colors" />
+              <div>
+                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                  Spotify — Tüm Müzikler
+                </h3>
+                <p className="text-xs text-muted-foreground">Tüm albümler ve tekli parçalar</p>
+              </div>
             </div>
-          </motion.a>
-        ))}
-      </div>
+            <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
 
-      {/* Spotify CTA */}
-      <motion.a
-        href={SPOTIFY_ARTIST}
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="block text-center mt-8 py-4 text-sm text-primary font-medium hover:underline"
-      >
-        Tüm müzikleri Spotify'da keşfet →
-      </motion.a>
+          <a
+            href={APPLE_ARTIST}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
+                <Headphones size={18} className="text-foreground/70" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                  Apple Music — Tüm Müzikler
+                </h3>
+                <p className="text-xs text-muted-foreground">Apple Music kütüphanesi</p>
+              </div>
+            </div>
+            <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
+        </div>
+      </motion.div>
     </div>
   );
 };
