@@ -1,7 +1,5 @@
 import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
 import heroBg from '@/assets/hero-bg.jpg';
 
 const getStoreLink = (ios: string, android: string) => {
@@ -48,47 +46,17 @@ const appLinks = [
   },
 ];
 
+const MAILTO = 'mailto:roh@rahmioguzhan.com?subject=İletişim — İKİ&body=Merhaba Oğuzhan,';
+
 const AboutTab = () => {
-  const [name, setName] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !subject.trim() || !message.trim()) return;
-
-    setSending(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: { name: name.trim(), subject: subject.trim(), message: message.trim() },
-      });
-      if (error) throw error;
-      setSent(true);
-      setName('');
-      setSubject('');
-      setMessage('');
-      toast.success('Mesajınız gönderildi!');
-      setTimeout(() => setSent(false), 4000);
-    } catch (err: any) {
-      toast.error('Gönderilemedi, lütfen tekrar deneyin.');
-      console.error(err);
-    } finally {
-      setSending(false);
-    }
-  };
-
   return (
     <div className="relative min-h-screen pb-24">
-      {/* Background */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
       </div>
 
       <div className="relative z-10 px-6 pt-12">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,7 +66,7 @@ const AboutTab = () => {
           <p className="text-[20px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Rahmi Oğuzhan Hacıeyüpoğlu ile iletişime geçin</p>
         </motion.div>
 
-        {/* Contact Form */}
+        {/* Mail Button */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -106,49 +74,18 @@ const AboutTab = () => {
           className="mb-10"
         >
           <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">İletişim</h2>
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <input
-              type="text"
-              placeholder="İsim *"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              maxLength={100}
-              className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300"
-            />
-            <input
-              type="text"
-              placeholder="Konu *"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-              maxLength={200}
-              className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300"
-            />
-            <textarea
-              placeholder="Mesajınız *"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-              maxLength={1000}
-              rows={4}
-              className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300 resize-none"
-            />
-            <button
-              type="submit"
-              disabled={sending || !name.trim() || !subject.trim() || !message.trim()}
-              className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)] disabled:opacity-40 disabled:hover:shadow-none text-primary-foreground font-semibold py-3 rounded-xl transition-all duration-300 text-sm active:scale-[0.98]"
-            >
-              {sending ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : sent ? (
-                <CheckCircle size={16} />
-              ) : (
-                <Send size={16} />
-              )}
-              {sending ? 'Gönderiliyor...' : sent ? 'Gönderildi!' : 'Gönder'}
-            </button>
-          </form>
+          <a
+            href={MAILTO}
+            className="w-full flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] text-black font-semibold py-3 rounded-xl transition-all duration-300 text-sm active:scale-[0.98]"
+          >
+            ✉️ Mail Gönder
+          </a>
+          <a
+            href={MAILTO}
+            className="block mt-3 text-center text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
+          >
+            roh@rahmioguzhan.com
+          </a>
         </motion.div>
 
         {/* Download Apps */}
@@ -181,7 +118,6 @@ const AboutTab = () => {
           </div>
         </motion.div>
 
-        {/* Footer */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
