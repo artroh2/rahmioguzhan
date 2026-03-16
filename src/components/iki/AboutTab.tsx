@@ -110,24 +110,27 @@ const AboutTab = () => {
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="text"
-              placeholder="İsim"
+              placeholder="İsim *"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
               maxLength={100}
               className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300"
             />
             <input
               type="text"
-              placeholder="Konu"
+              placeholder="Konu *"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
+              required
               maxLength={200}
               className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300"
             />
             <textarea
-              placeholder="Mesajınız"
+              placeholder="Mesajınız *"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              required
               maxLength={1000}
               rows={4}
               className="w-full bg-card/80 backdrop-blur-xl border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-all duration-300 resize-none"
