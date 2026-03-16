@@ -97,7 +97,7 @@ const MusicTab = () => {
             href={APPLE_ARTIST}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary transition-all duration-300 group"
+            className="flex items-center justify-between bg-card rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center">
