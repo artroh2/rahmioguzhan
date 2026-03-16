@@ -37,12 +37,12 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to site owner
     const notificationEmail = await resend.emails.send({
       from: "İletişim Formu <onboarding@resend.dev>",
-      to: ["rahmioguzhanhacieyupoglu@gmail.com"],
-      subject: `Yeni İletişim Mesajı: ${name}`,
+      to: ["roh@rahmioguzhan.com"],
+      subject: `${subject} — ${name}`,
       html: `
-        <h2>Yeni İletişim Formu Mesajı</h2>
+        <h2>Yeni İletişim Mesajı</h2>
         <p><strong>İsim:</strong> ${name}</p>
-        <p><strong>E-posta:</strong> ${email}</p>
+        <p><strong>Konu:</strong> ${subject}</p>
         <p><strong>Mesaj:</strong></p>
         <p style="background: #f5f5f5; padding: 15px; border-radius: 8px;">${message.replace(/\n/g, '<br>')}</p>
         <hr>
