@@ -94,10 +94,9 @@ const AboutTab = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
         >
-          <h1 className="font-display text-7xl font-bold text-primary mb-3">2</h1>
-          <h2 className="text-lg font-semibold text-foreground">Rahmi Oğuzhan Hacıeyüpoğlu</h2>
+          <h1 className="font-display text-5xl font-bold text-primary mb-1">2</h1>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Rahmi Oğuzhan Hacıeyüpoğlu ile iletişime geçin</p>
         </motion.div>
 
         {/* Contact Form */}
