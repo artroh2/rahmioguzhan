@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Download, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
