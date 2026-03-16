@@ -17,7 +17,18 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col px-6 pt-safe justify-end pb-24">
+      <div className="relative z-10 flex-1 flex flex-col px-6 pt-12 pb-24">
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="font-display text-5xl font-bold text-primary mb-1">2</h1>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8">iki</p>
+        </motion.div>
+
+        <div className="flex-1" />
         {/* Welcome Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
