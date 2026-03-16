@@ -49,7 +49,7 @@ const MusicTab = () => {
           href={SPOTIFY_ALBUM}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 bg-[#1DB954] hover:bg-[#1DB954]/90 text-primary-foreground font-semibold py-3.5 rounded-xl transition-all duration-300 text-sm"
+          className="flex items-center justify-center gap-2 bg-[#1DB954] hover:bg-[#1DB954]/80 hover:shadow-[0_0_20px_#1DB95440] hover:scale-[1.03] text-primary-foreground font-semibold py-3.5 rounded-xl transition-all duration-300 text-sm active:scale-95"
         >
           <Music size={16} />
           Spotify'da Dinle
