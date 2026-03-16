@@ -11,7 +11,7 @@ const corsHeaders = {
 
 interface ContactEmailRequest {
   name: string;
-  email: string;
+  subject: string;
   message: string;
 }
 
