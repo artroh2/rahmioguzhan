@@ -11,7 +11,7 @@ const tabs: { id: TabId; label: string; icon: typeof Music }[] = [
   { id: 'muzik', label: 'MÜZİK', icon: Music },
   { id: 'siirler', label: 'ŞİİRLER', icon: PenLine },
   { id: 'projeler', label: 'PROJELER', icon: Briefcase },
-  { id: 'ben', label: 'BEN', icon: User },
+  { id: 'ben', label: 'İLETİŞİM', icon: Mail },
 ];
 
 const BottomNav = ({ active, onChange }: BottomNavProps) => {
