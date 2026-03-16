@@ -22,12 +22,11 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, message }: ContactEmailRequest = await req.json();
+    const { name, subject, message }: ContactEmailRequest = await req.json();
 
-    // Validate input
-    if (!name || !email || !message) {
+    if (!name || !subject || !message) {
       return new Response(
-        JSON.stringify({ error: "Name, email and message are required" }),
+        JSON.stringify({ error: "Name, subject and message are required" }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
