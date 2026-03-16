@@ -58,7 +58,7 @@ const MusicTab = () => {
           href={APPLE_ALBUM}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 bg-card hover:bg-secondary text-foreground font-semibold py-3.5 rounded-xl border border-border transition-all duration-300 text-sm"
+          className="flex items-center justify-center gap-2 bg-card hover:bg-secondary hover:border-primary/50 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.2)] hover:scale-[1.03] text-foreground font-semibold py-3.5 rounded-xl border border-border transition-all duration-300 text-sm active:scale-95"
         >
           <Headphones size={16} />
           Apple Music
