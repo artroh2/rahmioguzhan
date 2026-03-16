@@ -1,6 +1,6 @@
-import { Home, Music, PenLine, User } from 'lucide-react';
+import { Home, Music, PenLine, Briefcase, User } from 'lucide-react';
 
-export type TabId = 'home' | 'muzik' | 'siirler' | 'ben';
+export type TabId = 'home' | 'muzik' | 'siirler' | 'projeler' | 'ben';
 
 interface BottomNavProps {
   active: TabId;
@@ -11,6 +11,7 @@ const tabs: { id: TabId; label: string; icon: typeof Music }[] = [
   { id: 'home', label: 'ANA SAYFA', icon: Home },
   { id: 'muzik', label: 'MÜZİK', icon: Music },
   { id: 'siirler', label: 'ŞİİRLER', icon: PenLine },
+  { id: 'projeler', label: 'PROJELER', icon: Briefcase },
   { id: 'ben', label: 'BEN', icon: User },
 ];
 
@@ -25,21 +26,21 @@ const BottomNav = ({ active, onChange }: BottomNavProps) => {
             <button
               key={tab.id}
               onClick={() => onChange(tab.id)}
-              className="flex flex-col items-center gap-1 px-4 py-2 transition-colors duration-200"
+              className="flex flex-col items-center gap-1 px-3 py-2 transition-all duration-300 hover:scale-110 active:scale-95 group"
             >
               <div className="relative">
                 <Icon
-                  size={20}
+                  size={19}
                   strokeWidth={isActive ? 2.5 : 1.5}
-                  className={isActive ? 'text-primary' : 'text-muted-foreground'}
+                  className={`transition-colors duration-300 ${isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary/70'}`}
                 />
                 {isActive && (
                   <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
                 )}
               </div>
               <span
-                className={`text-[9px] tracking-widest font-medium ${
-                  isActive ? 'text-primary' : 'text-muted-foreground'
+                className={`text-[8px] tracking-widest font-medium transition-colors duration-300 ${
+                  isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary/70'
                 }`}
               >
                 {tab.label}

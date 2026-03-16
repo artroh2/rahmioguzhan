@@ -17,23 +17,7 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col px-6 pt-safe">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="pt-10 pb-4"
-        >
-          <h1 className="font-display text-5xl font-bold text-primary">
-            2
-          </h1>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mt-1">İKİ</p>
-        </motion.div>
-
-        {/* Spacer */}
-        <div className="flex-1" />
-
+      <div className="relative z-10 flex-1 flex flex-col px-6 pt-safe justify-end pb-24">
         {/* Welcome Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -41,12 +25,12 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-8"
         >
-          <div className="bg-card/80 backdrop-blur-xl rounded-2xl p-6 border-l-2 border-primary">
+          <div className="bg-card/80 backdrop-blur-xl rounded-2xl p-6 border-l-2 border-primary hover:border-primary/80 hover:bg-card/90 hover:shadow-[0_0_30px_hsl(34_66%_47%/0.15)] transition-all duration-500">
             <h2 className="font-sans text-xl font-bold text-foreground leading-tight mb-2">
-              Rahmi Oğuzhan
+              Rahmi Oğuzhan Hacıeyüpoğlu
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Şair. Müzisyen. Yapay zeka ile inşa edip üreten.
+              Şair. Müzisyen. Yapay Zeka dostu.
             </p>
           </div>
         </motion.div>
@@ -60,14 +44,14 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
         >
           <button
             onClick={() => onNavigate('muzik')}
-            className="flex items-center justify-center gap-2.5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm"
+            className="flex items-center justify-center gap-2.5 bg-primary hover:bg-primary/80 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.4)] hover:scale-[1.03] text-primary-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm active:scale-95"
           >
             <Music size={18} />
             Müzik
           </button>
           <button
             onClick={() => onNavigate('siirler')}
-            className="flex items-center justify-center gap-2.5 bg-card hover:bg-secondary text-foreground font-semibold py-4 rounded-xl border border-border transition-all duration-300 text-sm"
+            className="flex items-center justify-center gap-2.5 bg-card hover:bg-secondary hover:border-primary/50 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.2)] hover:scale-[1.03] text-foreground font-semibold py-4 rounded-xl border border-border transition-all duration-300 text-sm active:scale-95"
           >
             <PenLine size={18} />
             Şiirler
@@ -79,9 +63,9 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="text-center text-xs text-muted-foreground tracking-[0.4em] pb-24"
+          className="text-center text-xs text-muted-foreground tracking-[0.4em]"
         >
-          şiir · müzik · 2
+          şiir · müzik · yapay zeka · 2
         </motion.p>
       </div>
     </div>
