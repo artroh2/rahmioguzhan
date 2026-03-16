@@ -1,7 +1,6 @@
-import { Home, Music, PenLine, Briefcase, User } from 'lucide-react';
+import { Home, Music, PenLine, Briefcase, Mail } from 'lucide-react';
 
 export type TabId = 'home' | 'muzik' | 'siirler' | 'projeler' | 'ben';
-
 interface BottomNavProps {
   active: TabId;
   onChange: (tab: TabId) => void;
