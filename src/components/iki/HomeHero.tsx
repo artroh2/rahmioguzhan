@@ -41,7 +41,10 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
               Rahmi Oğuzhan Hacıeyüpoğlu
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Şair. Müzisyen. Yapay Zeka İçerik Üreticisi.
+              Şair. Müzisyen. Yapay Zeka ile İnşa Edip Üreten.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Sessizlik Mimarı, Kelimelerle Mühendis.
             </p>
           </div>
         </motion.div>
