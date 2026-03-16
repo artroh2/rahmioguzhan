@@ -48,8 +48,8 @@ const ProjectsTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="font-display text-5xl font-bold text-primary mb-1">Projeler</h1>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Girişimler</p>
+          <h1 className="font-display text-8xl font-bold text-primary mb-1">Projeler</h1>
+          <p className="text-[20px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Girişimler</p>
         </motion.div>
 
         <div className="space-y-3">
