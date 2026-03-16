@@ -7,7 +7,12 @@ import PoemsTab from '@/components/iki/PoemsTab';
 import AboutTab from '@/components/iki/AboutTab';
 
 const Index = () => {
-  const [tab, setTab] = useState<TabId | 'home'>('home');
+  const [tab, setTab] = useState<TabId>('home');
+
+  const handleNav = (id: TabId) => {
+    setTab(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const renderTab = () => {
     switch (tab) {
@@ -18,13 +23,8 @@ const Index = () => {
       case 'ben':
         return <AboutTab />;
       default:
-        return <HomeHero />;
+        return <HomeHero onNavigate={handleNav} />;
     }
-  };
-
-  const handleNav = (id: TabId) => {
-    setTab(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -40,7 +40,7 @@ const Index = () => {
           {renderTab()}
         </motion.div>
       </AnimatePresence>
-      <BottomNav active={tab === 'home' ? 'muzik' : tab} onChange={handleNav} />
+      <BottomNav active={tab} onChange={handleNav} />
     </main>
   );
 };

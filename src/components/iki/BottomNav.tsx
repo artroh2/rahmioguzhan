@@ -1,6 +1,6 @@
-import { Music, PenLine, User } from 'lucide-react';
+import { Home, Music, PenLine, User } from 'lucide-react';
 
-export type TabId = 'muzik' | 'siirler' | 'ben';
+export type TabId = 'home' | 'muzik' | 'siirler' | 'ben';
 
 interface BottomNavProps {
   active: TabId;
@@ -8,6 +8,7 @@ interface BottomNavProps {
 }
 
 const tabs: { id: TabId; label: string; icon: typeof Music }[] = [
+  { id: 'home', label: 'ANA SAYFA', icon: Home },
   { id: 'muzik', label: 'MÜZİK', icon: Music },
   { id: 'siirler', label: 'ŞİİRLER', icon: PenLine },
   { id: 'ben', label: 'BEN', icon: User },
@@ -24,7 +25,7 @@ const BottomNav = ({ active, onChange }: BottomNavProps) => {
             <button
               key={tab.id}
               onClick={() => onChange(tab.id)}
-              className="flex flex-col items-center gap-1 px-6 py-2 transition-colors duration-200"
+              className="flex flex-col items-center gap-1 px-4 py-2 transition-colors duration-200"
             >
               <div className="relative">
                 <Icon
@@ -37,7 +38,7 @@ const BottomNav = ({ active, onChange }: BottomNavProps) => {
                 )}
               </div>
               <span
-                className={`text-[10px] tracking-widest font-medium ${
+                className={`text-[9px] tracking-widest font-medium ${
                   isActive ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >

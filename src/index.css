@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,44 +6,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
+    --background: 20 30% 3%;
+    --foreground: 30 30% 92%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 25 25% 10%;
+    --card-foreground: 30 30% 92%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 25 25% 10%;
+    --popover-foreground: 30 30% 92%;
 
-    --primary: 0 100% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 34 66% 47%;
+    --primary-foreground: 20 30% 3%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 67%;
+    --secondary: 25 15% 15%;
+    --secondary-foreground: 30 15% 65%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 56%;
+    --muted: 25 15% 15%;
+    --muted-foreground: 30 10% 50%;
 
-    --accent: 0 100% 40%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 34 66% 47%;
+    --accent-foreground: 20 30% 3%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 12%;
-    --ring: 0 100% 40%;
+    --border: 25 15% 18%;
+    --input: 25 15% 15%;
+    --ring: 34 66% 47%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 0 100% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 16%;
-    --sidebar-ring: 0 100% 40%;
+    --sidebar-background: 20 30% 3%;
+    --sidebar-foreground: 30 30% 92%;
+    --sidebar-primary: 34 66% 47%;
+    --sidebar-primary-foreground: 20 30% 3%;
+    --sidebar-accent: 25 15% 15%;
+    --sidebar-accent-foreground: 30 30% 92%;
+    --sidebar-border: 25 15% 18%;
+    --sidebar-ring: 34 66% 47%;
   }
 }
 
@@ -72,10 +72,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(0 0% 20%);
+  background: hsl(25 15% 25%);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(0 100% 40% / 0.5);
+  background: hsl(34 66% 47% / 0.5);
 }
