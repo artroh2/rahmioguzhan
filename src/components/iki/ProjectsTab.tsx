@@ -9,7 +9,7 @@ import mulkexLogo from '@/assets/mulkex-logo.png';
 const projects = [
   {
     title: 'AIQrace',
-    description: 'Yapay zeka arenası',
+    description: 'AI arena',
     link: 'https://aiqrace.com',
     logo: aiqraceLogo,
   },
