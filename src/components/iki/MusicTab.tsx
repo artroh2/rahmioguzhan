@@ -31,16 +31,16 @@ const MusicTab = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-8 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
         >
-          <div className="aspect-[3/4]">
+          <div className="aspect-square">
             <iframe
-              src="https://open.spotify.com/embed/artist/4fQ8VbreLSA4Eaiwm1Elfk?utm_source=generator&theme=0"
+              src="https://open.spotify.com/embed/album/0qsai0PajSX9TgzyyzlzR2?utm_source=generator&theme=0"
               width="100%"
               height="100%"
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
               className="rounded-t-2xl"
-              title="Rahmi Oğuzhan - Spotify Embed"
+              title="Spotify Album Embed"
             />
           </div>
         </motion.div>
