@@ -9,25 +9,25 @@ import mulkexLogo from '@/assets/mulkex-logo.png';
 const projects = [
   {
     title: 'AIQrace',
-    description: 'Yapay zeka arenası',
+    description: 'AI arena',
     link: 'https://aiqrace.com',
     logo: aiqraceLogo,
   },
   {
     title: 'Arayor',
-    description: 'AI Otomotiv İnceleme',
+    description: 'AI Automotive Review',
     link: 'https://arayor.com',
     logo: arayorLogo,
   },
   {
     title: 'Worldmeets',
-    description: 'Küresel toplantı salonu',
+    description: 'Global meeting room',
     link: 'https://worldmeets.org',
     logo: worldmeetsLogo,
   },
   {
     title: 'MülkEx',
-    description: 'AI Gayrimenkul Teknolojisi',
+    description: 'AI Real Estate Technology',
     link: 'https://mulkex.com',
     logo: mulkexLogo,
   },
@@ -48,8 +48,8 @@ const ProjectsTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="font-display text-8xl font-bold text-primary mb-1">Projeler</h1>
-          <p className="text-[20px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Girişimler</p>
+          <h1 className="font-display text-8xl font-bold text-primary mb-1">Projects</h1>
+          <p className="text-[20px] tracking-[0.4em] uppercase text-muted-foreground mb-8">Ventures</p>
         </motion.div>
 
         <div className="space-y-3">
