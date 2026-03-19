@@ -1,20 +1,9 @@
-import { useState } from 'react';
-import { ExternalLink, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 
 const INSTAGRAM_SIIR = 'https://www.instagram.com/siir2.0';
 const INSTAGRAM_PERSONAL = 'https://www.instagram.com/rahmi.oguzhan2';
-
-const POEMS = [
-  { id: '1', title: 'Sessizliğin Mimarı', excerpt: 'Kelimeler sustu, sessizlik konuştu…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-  { id: '2', title: 'Gece ve Ben', excerpt: 'Karanlık çökerken yıldızlar uyandı…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-  { id: '3', title: 'Kayıp Zaman', excerpt: 'Saatler durdu, anılar akmaya devam etti…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-  { id: '4', title: 'Rüzgârın Sesi', excerpt: 'Yapraklar fısıldadı, rüzgâr dinledi…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-  { id: '5', title: 'Son Mektup', excerpt: 'Mürekkep kurudu ama söz bitmedi…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-  { id: '6', title: 'Yağmurun Ardından', excerpt: 'Gökyüzü ağladı, toprak güldü…', postUrl: 'https://www.instagram.com/p/siir2.0/' },
-];
 
 const InstagramIcon = ({ size = 18, className = '' }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -25,8 +14,6 @@ const InstagramIcon = ({ size = 18, className = '' }: { size?: number; className
 );
 
 const PoemsTab = () => {
-  const [selectedPoem, setSelectedPoem] = useState<typeof POEMS[0] | null>(null);
-
   return (
     <div className="relative min-h-screen pb-24">
       <div className="absolute inset-0">
@@ -44,33 +31,11 @@ const PoemsTab = () => {
           <p className="text-[20px] tracking-[0.4em] uppercase text-muted-foreground mb-8">@siir2.0</p>
         </motion.div>
 
-        {/* Poem Cards Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-2 gap-3 mb-6"
-        >
-          {POEMS.map((poem, i) => (
-            <motion.button
-              key={poem.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
-              onClick={() => setSelectedPoem(poem)}
-              className="text-left bg-card/80 backdrop-blur-xl rounded-xl p-4 border border-border hover:border-primary/40 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.15)] transition-all duration-300 active:scale-95"
-            >
-              <h3 className="text-sm font-semibold text-foreground mb-1.5 line-clamp-1">{poem.title}</h3>
-              <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{poem.excerpt}</p>
-            </motion.button>
-          ))}
-        </motion.div>
-
         {/* Instagram Embed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-6 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
         >
           <div style={{ height: '480px' }}>
@@ -94,7 +59,7 @@ const PoemsTab = () => {
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#833AB4] via-[#C13584] to-[#E1306C] hover:opacity-90 hover:shadow-[0_0_25px_#C1358440] hover:scale-[1.02] text-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm mb-8 w-full active:scale-95"
         >
           <InstagramIcon size={18} />
@@ -106,7 +71,7 @@ const PoemsTab = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">Personal Profile</h2>
           <a
@@ -130,31 +95,6 @@ const PoemsTab = () => {
           </a>
         </motion.div>
       </div>
-
-      {/* Poem Modal */}
-      <Dialog open={!!selectedPoem} onOpenChange={(open) => !open && setSelectedPoem(null)}>
-        <DialogContent className="bg-card/95 backdrop-blur-2xl border-border max-w-md mx-auto rounded-2xl p-0 overflow-hidden">
-          <DialogTitle className="sr-only">{selectedPoem?.title}</DialogTitle>
-          {selectedPoem && (
-            <div className="p-8 pt-10">
-              <h2 className="font-display text-3xl font-bold text-primary mb-4">{selectedPoem.title}</h2>
-              <p className="text-base text-foreground/90 leading-relaxed whitespace-pre-line mb-6">
-                {selectedPoem.excerpt}
-              </p>
-              <a
-                href={INSTAGRAM_SIIR}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                <InstagramIcon size={16} />
-                Read full poem on Instagram
-                <ExternalLink size={12} />
-              </a>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
