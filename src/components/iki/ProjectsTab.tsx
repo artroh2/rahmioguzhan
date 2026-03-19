@@ -21,7 +21,7 @@ const projects = [
   },
   {
     title: 'Worldmeets',
-    description: 'Küresel toplantı salonu',
+    description: 'Global meeting room',
     link: 'https://worldmeets.org',
     logo: worldmeetsLogo,
   },
