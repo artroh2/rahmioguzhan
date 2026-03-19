@@ -78,34 +78,6 @@ const AboutTab = () => {
           </a>
         </motion.div>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-5 text-center font-semibold">
-            Beni Takip Et
-          </h2>
-          <div className="flex gap-3 justify-center">
-            {socialLinks.map((s) => (
-              <a
-                key={s.name}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.name}
-                className="flex flex-col items-center gap-2 bg-card/80 backdrop-blur-xl px-5 py-4 rounded-xl border border-border hover:border-primary/30 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)] transition-all duration-300 group"
-                style={{ color: s.color }}
-              >
-                <div className="group-hover:scale-110 transition-transform duration-200">
-                  {s.icon}
-                </div>
-                <span className="text-[10px] text-muted-foreground tracking-wider">{s.name}</span>
-              </a>
-            ))}
-          </div>
-        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
