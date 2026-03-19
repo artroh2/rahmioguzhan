@@ -53,46 +53,54 @@ const PoemsTab = () => {
           </div>
         </motion.div>
 
-        <motion.a
-          href={INSTAGRAM_SIIR}
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#833AB4] via-[#C13584] to-[#E1306C] hover:opacity-90 hover:shadow-[0_0_25px_#C1358440] hover:scale-[1.02] text-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm mb-8 w-full active:scale-95"
-        >
-          <InstagramIcon size={18} />
-          Follow on Instagram
-        </motion.a>
-
-        <div className="border-t border-border mb-8" />
+        <div className="border-t border-border mb-6" />
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">Personal Profile</h2>
-          <a
-            href={INSTAGRAM_PERSONAL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between bg-card/80 backdrop-blur-xl rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#833AB4]/30 via-[#C13584]/30 to-[#E1306C]/30 flex items-center justify-center">
-                <InstagramIcon size={20} className="text-[#E1306C]" />
+          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">Profiles</h2>
+          <div className="space-y-3">
+            <a
+              href={INSTAGRAM_SIIR}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between bg-card/80 backdrop-blur-xl rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#833AB4]/30 via-[#C13584]/30 to-[#E1306C]/30 flex items-center justify-center">
+                  <InstagramIcon size={20} className="text-[#E1306C]" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                    @siir2.0
+                  </h3>
+                  <p className="text-xs text-muted-foreground">Poetry Instagram</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                  @rahmi.oguzhan2
-                </h3>
-                <p className="text-xs text-muted-foreground">Personal Instagram account</p>
+              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+            </a>
+            <a
+              href={INSTAGRAM_PERSONAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between bg-card/80 backdrop-blur-xl rounded-xl p-4 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#833AB4]/30 via-[#C13584]/30 to-[#E1306C]/30 flex items-center justify-center">
+                  <InstagramIcon size={20} className="text-[#E1306C]" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                    @rahmi.oguzhan2
+                  </h3>
+                  <p className="text-xs text-muted-foreground">Personal Instagram</p>
+                </div>
               </div>
-            </div>
-            <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
+              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </div>
