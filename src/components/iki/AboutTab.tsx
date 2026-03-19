@@ -5,7 +5,7 @@ const MAILTO = 'mailto:roh@rahmioguzhan.com?subject=Contact — ROH2&body=Hello 
 
 const AboutTab = () => {
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative h-full flex flex-col overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
