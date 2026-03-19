@@ -15,7 +15,7 @@ const InstagramIcon = ({ size = 18, className = '' }: { size?: number; className
 
 const PoemsTab = () => {
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative pb-20">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
