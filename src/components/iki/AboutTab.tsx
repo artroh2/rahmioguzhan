@@ -5,13 +5,13 @@ const MAILTO = 'mailto:roh@rahmioguzhan.com?subject=Contact — ROH2&body=Hello 
 
 const AboutTab = () => {
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative h-full flex flex-col overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
       </div>
 
-      <div className="relative z-10 px-6 pt-12">
+      <div className="relative z-10 flex-1 flex flex-col px-6 pt-12 pb-4">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,11 +43,13 @@ const AboutTab = () => {
           </a>
         </motion.div>
 
+        <div className="flex-1" />
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 text-center text-xs text-muted-foreground"
+          className="text-center text-xs text-muted-foreground"
         >
           ROH2 © 2026 — All rights reserved
         </motion.p>
