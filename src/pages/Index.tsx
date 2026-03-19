@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import BottomNav, { type TabId } from '@/components/iki/BottomNav';
 import HomeHero from '@/components/iki/HomeHero';
@@ -10,6 +10,7 @@ const TAB_ORDER: TabId[] = ['home', 'muzik', 'siirler', 'ben'];
 
 const Index = () => {
   const [tab, setTab] = useState<TabId>('home');
+  const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     skipSnaps: false,
@@ -32,6 +33,11 @@ const Index = () => {
     const onSelect = () => {
       const index = emblaApi.selectedScrollSnap();
       setTab(TAB_ORDER[index]);
+      // Reset scroll position to top for the newly selected slide
+      const slide = slidesRef.current[index];
+      if (slide) {
+        slide.scrollTop = 0;
+      }
     };
     emblaApi.on('select', onSelect);
     return () => {
@@ -40,21 +46,23 @@ const Index = () => {
   }, [emblaApi]);
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          <div className="min-w-0 shrink-0 grow-0 basis-full">
-            <HomeHero onNavigate={handleNav} />
-          </div>
-          <div className="min-w-0 shrink-0 grow-0 basis-full">
-            <MusicTab />
-          </div>
-          <div className="min-w-0 shrink-0 grow-0 basis-full">
-            <PoemsTab />
-          </div>
-          <div className="min-w-0 shrink-0 grow-0 basis-full">
-            <AboutTab />
-          </div>
+    <main className="h-screen bg-background text-foreground overflow-hidden">
+      <div className="h-[calc(100vh-4rem)] overflow-hidden" ref={emblaRef}>
+        <div className="flex h-full">
+          {[
+            <HomeHero onNavigate={handleNav} />,
+            <MusicTab />,
+            <PoemsTab />,
+            <AboutTab />,
+          ].map((child, i) => (
+            <div
+              key={i}
+              ref={(el) => { slidesRef.current[i] = el; }}
+              className="min-w-0 shrink-0 grow-0 basis-full h-full overflow-y-auto"
+            >
+              {child}
+            </div>
+          ))}
         </div>
       </div>
       <BottomNav active={tab} onChange={handleNav} />

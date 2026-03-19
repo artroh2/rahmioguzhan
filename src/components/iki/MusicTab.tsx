@@ -1,4 +1,4 @@
-import { ExternalLink, Music, Headphones } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 
@@ -27,9 +27,9 @@ const MusicTab = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-8 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
+          className="bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-4 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
         >
-          <div className="aspect-square">
+          <div style={{ height: '352px' }}>
             <iframe
               src="https://open.spotify.com/embed/album/0qsai0PajSX9TgzyyzlzR2?utm_source=generator&theme=0"
               width="100%"
@@ -37,7 +37,7 @@ const MusicTab = () => {
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              className="rounded-t-2xl"
+              className="rounded-2xl"
               title="Spotify Album Embed"
             />
           </div>
