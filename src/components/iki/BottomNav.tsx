@@ -7,10 +7,10 @@ interface BottomNavProps {
 }
 
 const tabs: { id: TabId; label: string; icon: typeof Music }[] = [
-  { id: 'home', label: 'ANA SAYFA', icon: Home },
-  { id: 'muzik', label: 'MÜZİK', icon: Music },
-  { id: 'siirler', label: 'ŞİİRLER', icon: PenLine },
-  { id: 'ben', label: 'İLETİŞİM', icon: Mail },
+  { id: 'home', label: 'HOME', icon: Home },
+  { id: 'muzik', label: 'MUSIC', icon: Music },
+  { id: 'siirler', label: 'POETRY', icon: PenLine },
+  { id: 'ben', label: 'CONTACT', icon: Mail },
 ];
 
 const BottomNav = ({ active, onChange }: BottomNavProps) => {

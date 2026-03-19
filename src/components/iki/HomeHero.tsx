@@ -41,10 +41,10 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
               Rahmi Oğuzhan Hacıeyüpoğlu
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Şair. Müzisyen. Yapay Zeka ile İnşa Edip Üreten.
+              Poet. Musician. Building & Creating with AI.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Sessizlik Mimarı, Kelimelerle Mühendis.
+              Architect of Silence, Engineer of Words.
             </p>
           </div>
         </motion.div>
@@ -61,14 +61,14 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
             className="flex items-center justify-center gap-2.5 bg-primary hover:bg-primary/80 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.4)] hover:scale-[1.03] text-primary-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm active:scale-95"
           >
             <Music size={18} />
-            Müzik
+            Music
           </button>
           <button
             onClick={() => onNavigate('siirler')}
             className="flex items-center justify-center gap-2.5 bg-card hover:bg-secondary hover:border-primary/50 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.2)] hover:scale-[1.03] text-foreground font-semibold py-4 rounded-xl border border-border transition-all duration-300 text-sm active:scale-95"
           >
             <PenLine size={18} />
-            Şiirler
+            Poetry
           </button>
         </motion.div>
 
@@ -79,7 +79,7 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
           transition={{ duration: 1, delay: 1 }}
           className="text-center text-xs text-muted-foreground tracking-[0.4em]"
         >
-          şiir · müzik · yapay zeka · 2
+          poetry · music · ai · 2
         </motion.p>
       </div>
     </div>
