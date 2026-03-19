@@ -27,7 +27,7 @@ const projects = [
   },
   {
     title: 'MülkEx',
-    description: 'AI Gayrimenkul Teknolojisi',
+    description: 'AI Real Estate Technology',
     link: 'https://mulkex.com',
     logo: mulkexLogo,
   },
