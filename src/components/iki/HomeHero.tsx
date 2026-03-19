@@ -9,7 +9,7 @@ interface HomeHeroProps {
 
 const HomeHero = ({ onNavigate }: HomeHeroProps) => {
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative h-full flex flex-col overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
