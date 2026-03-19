@@ -4,7 +4,6 @@ import BottomNav, { type TabId } from '@/components/iki/BottomNav';
 import HomeHero from '@/components/iki/HomeHero';
 import MusicTab from '@/components/iki/MusicTab';
 import PoemsTab from '@/components/iki/PoemsTab';
-import ProjectsTab from '@/components/iki/ProjectsTab';
 import AboutTab from '@/components/iki/AboutTab';
 
 const Index = () => {
@@ -21,15 +20,12 @@ const Index = () => {
         return <MusicTab />;
       case 'siirler':
         return <PoemsTab />;
-      case 'projeler':
-        return <ProjectsTab />;
       case 'ben':
         return <AboutTab />;
       default:
         return <HomeHero onNavigate={handleNav} />;
     }
   };
-
   return (
     <main className="min-h-screen bg-background text-foreground">
       <AnimatePresence mode="wait">
