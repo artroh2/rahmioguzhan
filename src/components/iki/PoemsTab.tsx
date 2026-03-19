@@ -15,7 +15,7 @@ const InstagramIcon = ({ size = 18, className = '' }: { size?: number; className
 
 const PoemsTab = () => {
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative pb-20">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
@@ -38,7 +38,7 @@ const PoemsTab = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-6 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
         >
-          <div style={{ height: '1400px' }}>
+          <div style={{ height: '2000px' }}>
             <iframe
               src="https://www.instagram.com/siir2.0/embed"
               width="100%"
