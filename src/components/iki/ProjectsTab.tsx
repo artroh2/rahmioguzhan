@@ -15,7 +15,7 @@ const projects = [
   },
   {
     title: 'Arayor',
-    description: 'AI Otomotiv İnceleme',
+    description: 'AI Automotive Review',
     link: 'https://arayor.com',
     logo: arayorLogo,
   },
