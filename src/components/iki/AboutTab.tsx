@@ -11,7 +11,7 @@ const AboutTab = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
       </div>
 
-      <div className="relative z-10 px-6 pt-12">
+      <div className="relative z-10 flex-1 flex flex-col px-6 pt-12 pb-4">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
