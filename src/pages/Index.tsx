@@ -6,7 +6,7 @@ import MusicTab from '@/components/iki/MusicTab';
 import PoemsTab from '@/components/iki/PoemsTab';
 import AboutTab from '@/components/iki/AboutTab';
 
-const TAB_ORDER: TabId[] = ['home', 'muzik', 'siirler', 'ben'];
+const TAB_ORDER: TabId[] = ['home', 'muzik', 'siirler', 'ben'] as const;
 
 const Index = () => {
   const [tab, setTab] = useState<TabId>('home');
