@@ -29,16 +29,25 @@ const formatTime = (s: number) => {
 const MusicTab = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audioError, setAudioError] = useState(false);
+
+  const track = TRACKS[trackIndex];
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     const onTime = () => setCurrentTime(audio.currentTime);
     const onMeta = () => setDuration(audio.duration);
-    const onEnd = () => setPlaying(false);
+    const onEnd = () => {
+      if (trackIndex < TRACKS.length - 1) {
+        setTrackIndex(i => i + 1);
+      } else {
+        setPlaying(false);
+      }
+    };
     const onErr = () => setAudioError(true);
     audio.addEventListener('timeupdate', onTime);
     audio.addEventListener('loadedmetadata', onMeta);
@@ -50,13 +59,29 @@ const MusicTab = () => {
       audio.removeEventListener('ended', onEnd);
       audio.removeEventListener('error', onErr);
     };
-  }, []);
+  }, [trackIndex]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setAudioError(false);
+    setCurrentTime(0);
+    setDuration(0);
+    audio.load();
+    if (playing) audio.play().catch(() => setAudioError(true));
+  }, [trackIndex]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
     if (playing) { audio.pause(); } else { audio.play().catch(() => setAudioError(true)); }
     setPlaying(!playing);
+  };
+
+  const selectTrack = (i: number) => {
+    if (i === trackIndex) { togglePlay(); return; }
+    setTrackIndex(i);
+    setPlaying(true);
   };
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +97,7 @@ const MusicTab = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
       </div>
 
-      <audio ref={audioRef} src="/audio/we-are-one.mp3" preload="metadata" />
+      <audio ref={audioRef} src={track.src} preload="metadata" />
 
       <div className="relative z-10 px-5 pt-10 pb-6">
         <motion.div
