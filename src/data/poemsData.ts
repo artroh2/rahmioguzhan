@@ -1759,5 +1759,8 @@ Sizin yüzünüzden
 Kanatları ne işe yarayacak bilmeyecekler
 Rüzgara değemeyecekler
 Bir gün artık istemeyecekler bile
-Bulutlar?`, category: "TR" }
+Bulutlar?`, category: "TR" },
+  { id: 191, title: "Let Me", body: `Let me`, category: "EN" },
+  { id: 192, title: "Let Me Know What You Were Thinking", body: `Let me know what you were thinking`, category: "EN" },
+  { id: 193, title: "See You Up There", body: `See you up there`, category: "EN" }
 ];
