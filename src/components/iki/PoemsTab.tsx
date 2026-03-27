@@ -1,12 +1,12 @@
-import { useState, forwardRef } from 'react';
-import { Search, X } from 'lucide-react';
+import { useState } from 'react';
+import { Search, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 import { POEMS, Poem } from '@/data/poemsData';
 
 const PoemsTab = () => {
   const [search, setSearch] = useState('');
-  const [selected, setSelected] = useState<Poem | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const filtered = search.trim().length > 0
     ? POEMS.filter(p =>
@@ -15,9 +15,8 @@ const PoemsTab = () => {
       )
     : [];
 
-  const getPreview = (body: string) => {
-    const lines = body.split('\n').filter(l => l.trim());
-    return lines.slice(0, 3).join(' / ') + (lines.length > 3 ? '…' : '');
+  const toggleExpand = (id: number) => {
+    setExpandedId(prev => (prev === id ? null : id));
   };
 
   return (
@@ -66,60 +65,63 @@ const PoemsTab = () => {
 
         {/* Results */}
         <div className="space-y-3">
-          {filtered.map((poem, i) => (
-            <motion.div
-              key={poem.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.03 }}
-              onClick={() => setSelected(poem)}
-              className="cursor-pointer w-full text-left bg-card/80 backdrop-blur-xl rounded-2xl p-4 border border-border hover:border-primary/30 transition-all duration-300 active:scale-[0.98]"
-            >
-              <div className="flex items-baseline justify-between mb-1.5">
-                <h2 className="text-sm font-bold text-primary leading-tight">{poem.title}</h2>
-                <span className="text-[10px] text-muted-foreground ml-2 shrink-0 uppercase tracking-wider">{poem.category}</span>
-              </div>
-              <p className="text-xs text-foreground/60 leading-relaxed line-clamp-2">
-                {getPreview(poem.body)}
-              </p>
-            </motion.div>
-          ))}
+          {filtered.map((poem, i) => {
+            const isExpanded = expandedId === poem.id;
+            return (
+              <motion.div
+                key={poem.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.03 }}
+                onClick={() => toggleExpand(poem.id)}
+                className={`cursor-pointer w-full text-left bg-card/80 backdrop-blur-xl rounded-2xl border transition-all duration-300 active:scale-[0.98] overflow-hidden ${
+                  isExpanded ? 'border-primary/60' : 'border-border hover:border-primary/30'
+                }`}
+              >
+                <div className="flex items-center justify-between p-4">
+                  <div className="flex items-baseline gap-2 min-w-0">
+                    <h2 className="text-sm font-bold text-primary leading-tight truncate">{poem.title}</h2>
+                    <span className="text-[10px] text-muted-foreground shrink-0 uppercase tracking-wider">{poem.category}</span>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="shrink-0 ml-2 text-muted-foreground"
+                  >
+                    <ChevronDown size={16} />
+                  </motion.div>
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-4 pt-0 border-t border-border/50">
+                        <div className="pt-3 space-y-1">
+                          {poem.body.split('\n').map((line, j) => (
+                            <p key={j} className="text-sm text-foreground/80 leading-relaxed min-h-[0.5em]">
+                              {line || '\u00A0'}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
 
         {search.trim() && filtered.length === 0 && (
           <p className="text-center text-muted-foreground text-sm py-12">No poems contain "{search}"</p>
         )}
       </div>
-
-      {/* Expanded poem modal */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={() => setSelected(null)}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            className="w-full max-w-lg max-h-[80vh] overflow-y-auto bg-card border border-border rounded-2xl p-6 animate-in slide-in-from-bottom-4 duration-300"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h2 className="text-lg font-bold text-primary">{selected.title}</h2>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{selected.category}</span>
-              </div>
-              <button onClick={() => setSelected(null)} className="text-muted-foreground hover:text-foreground p-1">
-                <X size={18} />
-              </button>
-            </div>
-            <div className="space-y-2">
-              {selected.body.split('\n').map((line, i) => (
-                <p key={i} className="text-sm text-foreground/80 leading-relaxed min-h-[0.5em]">
-                  {line || '\u00A0'}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
