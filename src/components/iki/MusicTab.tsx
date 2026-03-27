@@ -127,8 +127,8 @@ const MusicTab = () => {
               {playing ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
             </button>
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-bold text-foreground truncate">We Are One</h3>
-              <p className="text-xs text-muted-foreground truncate">Rahmi Oğuzhan</p>
+              <h3 className="text-sm font-bold text-foreground truncate">{track.title}</h3>
+              <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
             </div>
           </div>
 
@@ -150,6 +150,27 @@ const MusicTab = () => {
               </div>
             </div>
           )}
+
+          {/* Track list */}
+          <div className="mt-4 space-y-1.5 border-t border-border/50 pt-3">
+            {TRACKS.map((t, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); selectTrack(i); }}
+                className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200 ${
+                  i === trackIndex ? 'bg-primary/10 border border-primary/30' : 'hover:bg-card/60'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  {i === trackIndex && playing ? <Pause size={12} className="text-primary" /> : <Play size={12} className="text-primary ml-0.5" />}
+                </div>
+                <div className="min-w-0">
+                  <p className={`text-xs font-semibold truncate ${i === trackIndex ? 'text-primary' : 'text-foreground'}`}>{t.title}</p>
+                  <p className="text-[10px] text-muted-foreground">{t.artist}</p>
+                </div>
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Discography */}
