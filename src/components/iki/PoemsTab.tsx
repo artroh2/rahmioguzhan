@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback, ReactNode } from 'react';
 import { Search, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 import { POEMS, Poem } from '@/data/poemsData';
 
+const highlightText = (text: string, query: string): ReactNode => {
+  if (!query.trim()) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const parts = text.split(new RegExp(`(${escaped})`, 'gi'));
+  return parts.map((part, i) =>
+    part.toLowerCase() === query.toLowerCase() ? (
+      <span key={i} className="bg-primary/80 text-primary-foreground rounded px-0.5 py-px">{part}</span>
+    ) : part
+  );
+};
+
 const PoemsTab = () => {
   const [search, setSearch] = useState('');
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const filtered = search.trim().length > 0
     ? POEMS.filter(p =>
@@ -15,9 +27,17 @@ const PoemsTab = () => {
       )
     : [];
 
-  const toggleExpand = (id: number) => {
-    setExpandedId(prev => (prev === id ? null : id));
-  };
+  const toggleExpand = useCallback((id: number) => {
+    setExpandedId(prev => {
+      const next = prev === id ? null : id;
+      if (next !== null) {
+        setTimeout(() => {
+          cardRefs.current[id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 350);
+      }
+      return next;
+    });
+  }, []);
 
   return (
     <div className="relative min-h-full">
@@ -39,7 +59,6 @@ const PoemsTab = () => {
           </p>
         </motion.div>
 
-        {/* Search */}
         <div className="relative mb-6">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -56,20 +75,19 @@ const PoemsTab = () => {
           )}
         </div>
 
-        {/* Hint */}
         {!search.trim() && (
           <p className="text-center text-muted-foreground text-sm py-12">
             Type a word to discover poems containing it
           </p>
         )}
 
-        {/* Results */}
         <div className="space-y-3">
           {filtered.map((poem, i) => {
             const isExpanded = expandedId === poem.id;
             return (
               <motion.div
                 key={poem.id}
+                ref={el => { cardRefs.current[poem.id] = el; }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.03 }}
@@ -105,7 +123,7 @@ const PoemsTab = () => {
                         <div className="pt-3 space-y-1">
                           {poem.body.split('\n').map((line, j) => (
                             <p key={j} className="text-sm text-foreground/80 leading-relaxed min-h-[0.5em]">
-                              {line || '\u00A0'}
+                              {line ? highlightText(line, search.trim()) : '\u00A0'}
                             </p>
                           ))}
                         </div>
