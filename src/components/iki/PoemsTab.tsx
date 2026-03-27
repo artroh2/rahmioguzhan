@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
@@ -41,12 +41,7 @@ const PoemsTab = () => {
         </motion.div>
 
         {/* Search */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="relative mb-6"
-        >
+        <div className="relative mb-6">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
@@ -60,43 +55,35 @@ const PoemsTab = () => {
               <X size={14} />
             </button>
           )}
-        </motion.div>
+        </div>
 
         {/* Hint */}
         {!search.trim() && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-muted-foreground text-sm py-12"
-          >
+          <p className="text-center text-muted-foreground text-sm py-12">
             Type a word to discover poems containing it
-          </motion.p>
+          </p>
         )}
 
         {/* Results */}
         <div className="space-y-3">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((poem) => (
-              <motion.button
-                key={poem.id}
-                layout
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setSelected(poem)}
-                className="w-full text-left bg-card/80 backdrop-blur-xl rounded-2xl p-4 border border-border hover:border-primary/30 transition-all duration-300"
-              >
-                <div className="flex items-baseline justify-between mb-1.5">
-                  <h2 className="text-sm font-bold text-primary leading-tight">{poem.title}</h2>
-                  <span className="text-[10px] text-muted-foreground ml-2 shrink-0 uppercase tracking-wider">{poem.category}</span>
-                </div>
-                <p className="text-xs text-foreground/60 leading-relaxed line-clamp-2">
-                  {getPreview(poem.body)}
-                </p>
-              </motion.button>
-            ))}
-          </AnimatePresence>
+          {filtered.map((poem, i) => (
+            <motion.div
+              key={poem.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: i * 0.03 }}
+              onClick={() => setSelected(poem)}
+              className="cursor-pointer w-full text-left bg-card/80 backdrop-blur-xl rounded-2xl p-4 border border-border hover:border-primary/30 transition-all duration-300 active:scale-[0.98]"
+            >
+              <div className="flex items-baseline justify-between mb-1.5">
+                <h2 className="text-sm font-bold text-primary leading-tight">{poem.title}</h2>
+                <span className="text-[10px] text-muted-foreground ml-2 shrink-0 uppercase tracking-wider">{poem.category}</span>
+              </div>
+              <p className="text-xs text-foreground/60 leading-relaxed line-clamp-2">
+                {getPreview(poem.body)}
+              </p>
+            </motion.div>
+          ))}
         </div>
 
         {search.trim() && filtered.length === 0 && (
@@ -105,39 +92,30 @@ const PoemsTab = () => {
       </div>
 
       {/* Expanded poem modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-            onClick={() => setSelected(null)}
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            className="w-full max-w-lg max-h-[80vh] overflow-y-auto bg-card border border-border rounded-2xl p-6 animate-in slide-in-from-bottom-4 duration-300"
           >
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              onClick={e => e.stopPropagation()}
-              className="w-full max-w-lg max-h-[80vh] overflow-y-auto bg-card border border-border rounded-2xl p-6"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h2 className="text-lg font-bold text-primary">{selected.title}</h2>
-                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{selected.category}</span>
-                </div>
-                <button onClick={() => setSelected(null)} className="text-muted-foreground hover:text-foreground p-1">
-                  <X size={18} />
-                </button>
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h2 className="text-lg font-bold text-primary">{selected.title}</h2>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">{selected.category}</span>
               </div>
-              <p className="text-sm text-foreground/80 whitespace-pre-line leading-relaxed">
-                {selected.body}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <button onClick={() => setSelected(null)} className="text-muted-foreground hover:text-foreground p-1">
+                <X size={18} />
+              </button>
+            </div>
+            <p className="text-sm text-foreground/80 whitespace-pre-line leading-relaxed">
+              {selected.body}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
