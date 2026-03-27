@@ -1,60 +1,168 @@
-import { ExternalLink } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Play, Pause, ExternalLink, Music, Disc } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 
 const SPOTIFY_ARTIST = 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk?si=a2OzNdQ7RQavn3XLUxTZuA';
 const APPLE_ARTIST = 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707?l=tr';
 
+const DISCOGRAPHY = [
+  { title: 'We Are One', year: '2024', type: 'Single' },
+  { title: 'Sessizliğin Mimarı', year: '2023', type: 'Album' },
+  { title: 'İki', year: '2023', type: 'Single' },
+  { title: 'Kök', year: '2022', type: 'Single' },
+];
+
+const formatTime = (s: number) => {
+  if (!isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+};
+
 const MusicTab = () => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [audioError, setAudioError] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const onTime = () => setCurrentTime(audio.currentTime);
+    const onMeta = () => setDuration(audio.duration);
+    const onEnd = () => setPlaying(false);
+    const onErr = () => setAudioError(true);
+    audio.addEventListener('timeupdate', onTime);
+    audio.addEventListener('loadedmetadata', onMeta);
+    audio.addEventListener('ended', onEnd);
+    audio.addEventListener('error', onErr);
+    return () => {
+      audio.removeEventListener('timeupdate', onTime);
+      audio.removeEventListener('loadedmetadata', onMeta);
+      audio.removeEventListener('ended', onEnd);
+      audio.removeEventListener('error', onErr);
+    };
+  }, []);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) { audio.pause(); } else { audio.play().catch(() => setAudioError(true)); }
+    setPlaying(!playing);
+  };
+
+  const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Number(e.target.value);
+  };
+
   return (
-    <div className="relative h-full flex flex-col overflow-hidden">
+    <div className="relative min-h-full">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background/98" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
       </div>
 
-      <div className="relative z-10 flex-1 flex flex-col px-6 pt-10 pb-4">
+      <audio ref={audioRef} src="/audio/we-are-one.mp3" preload="metadata" />
+
+      <div className="relative z-10 px-5 pt-10 pb-6">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="shrink-0"
+          className="mb-5"
         >
-          <h1 className="font-display text-6xl font-bold text-primary mb-0.5">Music</h1>
-          <p className="text-base tracking-[0.4em] uppercase text-muted-foreground mb-4">Songs & Albums</p>
+          <h1 className="font-display text-5xl font-bold text-primary mb-1">Music</h1>
+          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground">Songs & Albums</p>
         </motion.div>
 
+        {/* Now Playing */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex-1 min-h-0 bg-card/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-border mb-3 hover:border-primary/30 hover:shadow-[0_0_25px_hsl(34_66%_47%/0.12)] transition-all duration-300"
+          className="bg-card/80 backdrop-blur-xl rounded-2xl p-5 border border-border mb-5"
         >
-          <iframe
-            src="https://open.spotify.com/embed/album/0qsai0PajSX9TgzyyzlzR2?utm_source=generator&theme=0"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            className="rounded-2xl"
-            title="Spotify Album Embed"
-          />
+          <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-3">Now Playing</p>
+          <div className="flex items-center gap-4 mb-4">
+            <button
+              onClick={togglePlay}
+              disabled={audioError}
+              className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground shrink-0 hover:bg-primary/80 active:scale-95 transition-all disabled:opacity-50"
+            >
+              {playing ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
+            </button>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-sm font-bold text-foreground truncate">We Are One</h3>
+              <p className="text-xs text-muted-foreground truncate">Rahmi Oğuzhan</p>
+            </div>
+          </div>
+
+          {audioError ? (
+            <p className="text-xs text-muted-foreground text-center">Audio file not available — listen on Spotify below</p>
+          ) : (
+            <div className="space-y-1.5">
+              <input
+                type="range"
+                min={0}
+                max={duration || 0}
+                value={currentTime}
+                onChange={seek}
+                className="w-full h-1 accent-primary bg-border rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none"
+              />
+              <div className="flex justify-between text-[10px] text-muted-foreground">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
+            </div>
+          )}
         </motion.div>
 
+        {/* Discography */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-5"
+        >
+          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Discography</h2>
+          <div className="space-y-2.5">
+            {DISCOGRAPHY.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 bg-card/80 backdrop-blur-xl rounded-xl p-3.5 border border-border hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  {item.type === 'Album' ? <Disc size={18} className="text-primary" /> : <Music size={18} className="text-primary" />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-sm font-semibold text-foreground truncate">{item.title}</h3>
+                  <p className="text-[10px] text-muted-foreground">{item.year}</p>
+                </div>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground bg-secondary/50 px-2 py-0.5 rounded-full shrink-0">
+                  {item.type}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Platform links */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="shrink-0"
         >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-2">All Albums & Songs</h2>
+          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Listen On</h2>
           <div className="flex gap-3">
             <a
               href={SPOTIFY_ARTIST}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center gap-2.5 bg-card/80 backdrop-blur-xl rounded-xl p-3 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
+              className="flex-1 flex items-center gap-2.5 bg-card/80 backdrop-blur-xl rounded-xl p-3 border border-border hover:border-primary/30 transition-all duration-300 group"
             >
               <div className="w-9 h-9 rounded-full bg-[#1DB954]/20 flex items-center justify-center shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#1DB954">
@@ -72,7 +180,7 @@ const MusicTab = () => {
               href={APPLE_ARTIST}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center gap-2.5 bg-card/80 backdrop-blur-xl rounded-xl p-3 border-l-2 border-transparent hover:border-primary hover:shadow-[0_0_15px_hsl(34_66%_47%/0.1)] transition-all duration-300 group"
+              className="flex-1 flex items-center gap-2.5 bg-card/80 backdrop-blur-xl rounded-xl p-3 border border-border hover:border-primary/30 transition-all duration-300 group"
             >
               <div className="w-9 h-9 rounded-full bg-[#FC3C44]/20 flex items-center justify-center shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#FC3C44">
