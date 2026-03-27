@@ -1356,5 +1356,408 @@ Her sabah bir çay bardağı su ile günaydın derim. Yaprakların çok sevinir.
 Ama küsmüştüm de buna,
 Aşk artık uzaklarda bir dahil kasabasında yazılması gereken bir şiirdi aslına bakarsan.
 Ben, sahip olduğum hayat sevgisini seninle paylaşabilirim;
-Kalbim kalbine denkse, ve bu sırrı bir ömür boyu saklarsan.`, category: "TR" }
+Kalbim kalbine denkse, ve bu sırrı bir ömür boyu saklarsan.`, category: "TR" },
+  { id: 149, title: "Aklımı Anlatıyorum", body: `Aklımı anlatıyorum satır satır satır satır her gece
+Bence eski cümlelerin yenilerden tecrübeli olması
+İncinmek için yanlış zamanlara rastladım bence
+Ve malesef Güneş'in gecelere doğmaması
+Ne kadar çok isterdim anlamasını
+Çatımın altmın ortasına damlamamasını
+Annemin öperek uyandırmasını`, category: "TR" },
+  { id: 150, title: "Aklımın Almadığını Sakladığım", body: `Aklımın almadığını sakladığım yarınlarıma da önce bir bak istersen
+İçeride en sevdiğim şarkılar ve yüzlerce şiir var
+Yanında gelirken hiçbir şey getirmesen iyi edersin hem
+Misafiri olacağın yer neredeyse yok denecek kadar dar
+Zor ve karanlık gelebilir önce anlam veremediğim her.`, category: "TR" },
+  { id: 151, title: "Aklında Tutamadığın Anılardan", body: `Aklında tutamadığın anılardan her daim hayatında olanları çıkarıp koyma bir kenara yeter,
+Derhal göğe at!
+Topla orda biriktirdiklerini
+Yeni bir çağ yarat, dahasından da beter
+Biraz sabır, biraz sebat.
+Hakkında atıp tutan nefsin ıslığına şapka çıkarırken vicdan
+Yokla yitirdiklerini
+Hiç mi yok lan bitirdik mi hepsini?
+Elimdekiler? Vay anasını..
+Özellikle sanat.`, category: "TR" },
+  { id: 152, title: "Aklından Geçenleri Düşün", body: `Aklından geçenleri düşün 1, sana söylediği kelimeler bir dile ait değil.
+Zamanda ne kadar da hızlılar, ki bir de söyleyemedikleri var, ama bu değil.
+İçinde tutup, peşinde koşup, bir varolup bir yokolup.
+Çok üzgünken özür dilerim ve sürem bundan emin.
+Anlamı çok derin içime hapsedilen misafirimin.
+Kapalı bir kutuda gelen esameleri.
+Ne değişik bir hal ki bu gönlüme esen bir korku gibi serin bütün hezeyanlar.
+Tesadüf ki harikulade yaşamıştım ben bunu 2 kez.
+Ve bu, senin eserin.
+Üzgünüm, özür dilediğim için.
+İçinden gelen sesleri dinledin.`, category: "TR" },
+  { id: 153, title: "Akıyla Dinleyen Yoksa", body: `Akıyla dinleyen yoksa
+Söyleyecek birşeyin kalmadıysa
+Özlenecek kimseler bir yada iki
+Özleyecek kimseler pişmanlıklardan birer duvarsa eğer
+Senin için hiç kimsenin anlamı kalmadıysa
+Bunu yapmaya değer...
+Pişman olacağım şeyler de hayalini kurup gerçekleştiremediğim şeyler olur, öyle annem babam üzülür diye değil`, category: "TR" },
+  { id: 154, title: "Alacağım Çok Şey Var Senden Dünya", body: `Alacağım çok şey var senden Dünya
+Ya seve seve ver birer birer
+Ya nefret ede ede beni geri çevir buna değerse
+Ben üzerine düşeni yapıp her geçen gün biraz daha deliriyorum tamam
+ama
+Sen de tersine dönmeyi söyle ister misin kelimerden ibaretsen`, category: "TR" },
+  { id: 155, title: "Alışınca Yalnızlığa", body: `Alışınca yalnızlığa yıkıldı ya tüm kaleler
+Yakıldı ya gemiler
+Bu güzel bahar zulmünden kurtulamadın sanma
+Daha özel zamanlar olacak
+İnanamayacaksın gücüne.`, category: "TR" },
+  { id: 156, title: "Anlamaya Başlıyorum Seni", body: `Anlamaya başlıyorum seni
+Ağlamaya davet edeceğim bu sefer kendimi kavuşmaya hasret ecelime
+Konuşmaya hacet hıckırıklar eşliğinde bir kuyunun dibi
+Kapkaranlık zifiri
+Tamamlamaya çalışıyorum bizi
+Tam anlamaya başlayacakken sessizliğin dibindeki su damlası sesini
+Dibe düşüyorum sayesinde
+Çarpıyorum bize kendimi
+Sen oluyorum
+Sel gibi
+Sakin.
+"Sakın!" der gibi.`, category: "TR" },
+  { id: 157, title: "Anlamlıca Bir İnsan Kalabalığının", body: `Anlamlıca bir insan kalabalığının gürültüsüne tıkamışım kulaklarımı düşüncelerimle
+Bir bakmışım hapsolmuş an
+Farkını atlamışım canlılığın üzüntüsünün
+Nakaratı takılı kalmış bir urfa türküsünün
+Hayatın her türlüsünde
+Bir şeylerim mahvolmuş
+Sıralarca sıralanmış bir insan kalabalığının en arkasındayım, ölümce.
+Bir sır varmış gibi en önde
+Bir bakışın ardına saklı
+Bir ağıtın derdiyle haklı
+Farkına vardığım o çoktan geçmiş geçecek ve o düşüncelerimdeki uzun yankı
+Elbet geçecek bu gürültü
+Elbet dinecek dalgalarım
+Ya Selâm verilince
+Yada sola selam verince
+İkisinden biri benim adıma seçilince.`, category: "TR" },
+  { id: 158, title: "Anlamsız Gelmiyor Mu Sana Da", body: `Anlamsız gelmiyor mu sana da olanlar?
+Acısı yavaş yavaş çıkan bir günah gibi yaşanan
+Evren dönüyor bir şeylerin etrafında
+365 gün 6 saat sürüyor abi süreye bak
+Milyarlarca yıldır yeryüzüne bakıyoruz
+Nerde kaldı sorulması gereken sorular?
+Kim kaybediyor, kim kazanan?
+Neler oluyor, okumayanlar?
+Oysa ne hayaller kurdurmuştu sana
+En güzelin vaadini okuman için bir cilt göndermişti
+Sana bak demişti arşa
+Bas demişti marşa
+Seni senin için istemişti de bu cennet rahme indirmişti
+9 ay 10 gün sürüyor abi süreye bak
+Onlarca yıldır aynaya bakıyoruz
+Nerde kaldı verilmesi gereken cevaplar?
+Kim kazanıyor kaybederken azalanlar?
+Neler oluyor?
+Anlatsa ya okuyanlar
+Sevabına`, category: "TR" },
+  { id: 159, title: "Arada Geliyorsun", body: `Arada geliyorsun arada gidiyorsun aklımdan aklım
+Böylelikle içimde bir fırtına kopartıyor Tanrı
+Öncesinde bir sensizlik
+Sonrasında bir sessizlik
+Yardım sandığım içimdeki yangın
+Sağ yanımda doslarım ve düşmanlar sol yanımda düşmanlarımla dostlar
+Akıllar baygın.`, category: "TR" },
+  { id: 160, title: "Arkasından Bakakaldığın", body: `Arkasından bakakaldığın sevinçlerin nasıl hüzne dönüştü birer birer?
+Halbuki ne güzellerdi değil mi hayallerin?
+Giden dönmeyecek bu göğsünü bin hançerle deler
+Falan filan.`, category: "TR" },
+  { id: 161, title: "Artık Günü Geldi", body: `Artık günü geldi bu son gibi dakikalar
+Sana bana bir süpriz yok artık
+Sadece harikalar
+İyi bir hiç
+Sana yazılan hayatta yürümen ne kadar da özel
+Şu yaptığın herşeye bak
+O kadar çirkin ki o kadar güzel`, category: "TR" },
+  { id: 162, title: "Artık Yalnızlığa Atılacak", body: `Artık yalnızlığa atılacak bir adım daha kalmadı
+Simsiyahın gölgesindeyim
+Etrafta kimseler yok
+Sanki kıyametin öncesindeyim
+Gözyaşı dediğin de aka aka biter
+Nasıl olsa her gelen bir yerden gider
+Belki biri gelip beni bir uçurumdan iter
+Ben hala aman sigaram sönmesindeyim
+Herkese anlattım sanırım ne kadar üzüldüğümü
+Biri anladı mı küskünlüğümü
+İfade etmeye çalıştığım düzgünlüğümün
+Temellisindeyim`, category: "TR" },
+  { id: 163, title: "Arzularımı İsteklerimin Şelalesinde", body: `Arzularımı isteklerimin şelalesinde boğdum ben
+Heveslerim bir an için asılı kaldı kursağımda
+Yardım için geldim çeyrek asır ömrüm ben
+Çok istiyorum diye döndüm her yerimde kaldığımda
+Çok seviyorum diye öldüm ben yeniden yarım kaldım
+Sevinçlerimin karşılığını aldığımda
+Hüzünlerin merkezine daldığımda göçtüm ben
+Arzularımı isteklerimle yoğurdum hep
+Vazgeçtim sonra ittim uzaklaştırdım kendimden
+Kendimi kendime sordum
+Kendime kendim zordum
+Yapayalnız kaldığımda
+Orda yoktum.
+Ben.`, category: "TR" },
+  { id: 164, title: "Asıl Ağlarken Gülerim", body: `Asıl ağlarken gülerim halime
+Durur zaman o an
+Kurur tamam olan gözyaşlarım
+Bir sırta sarılmıştım en son gelir diye bir mucize
+Akıl verir ya dostlarım ve düşmanlarım
+Yanlışlıkla kayıverir kalbime`, category: "TR" },
+  { id: 165, title: "Asıl Kendi Günahının Bedelini", body: `Asıl kendi günahının bedelini başkasının ödemesinden kork
+Çünkü öteki Dünya'dan başka bir yer daha yok..`, category: "TR" },
+  { id: 166, title: "Avuçlarımla Kainat Arasındaki", body: `Avuçlarımla kainat arasındaki sonsuz boşluk...
+Ağlasam gün doğumu umursar mı bu durumu?
+Nerden geldik nereye gidiyoruz neden bu çoşku?
+Bırak artık dolsun içime o sarı kırmızı loşluk
+Sonum
+İçimdeki boşluk.
+Ve o fısıltı kuşku.`, category: "TR" },
+  { id: 167, title: "Ayaklarımı Uzatıyorum", body: `Ayaklarımı uzatıyorum sonsuz bir boşlukta
+Cennet ve cehennem eşit uzaklıkta
+Sıcak serin oldukça
+Varlıkta ve yoklukta sordukça kendimi kendime daralıyor çember
+Her şey dört nala koştukça
+O şeyi sana sordukça
+Kelimelerle ifade edemeyesin diye varlar
+Irmaklar nehirler ateşler ve lavlar
+Düşündükçe bozuluyor ezber`, category: "TR" },
+  { id: 168, title: "Aynada Aynı Anda", body: `Aynada aynı anda birbirimize bakıyoruz seninle
+Gözlerinden okuyabiliyorum gerçekliğini
+Yeter artık duysun beni biri
+Başlayalım mı yeni baştan
+Silelim mi geçmişteki kaygan izleri
+Gelir misin benimle?
+Sözlerimden anlayabiliyor musun acı çektiğimi
+Bıktım artık duy sesimi
+Ekmeğimizi çıkaralım mı taştan?
+Gidelim mi uzakların çektiği yerlere bizi
+Ölene dek yeminle.`, category: "TR" },
+  { id: 169, title: "Az Bile Oldu", body: `Az bile oldu
+Müstahak olsun sana
+Mutlu olmayı hak etmiyorsun
+Yazıklar olsun
+Elinden bir şey gelmiyor değil mi
+Daha yeni mi anlıyorsun?`, category: "TR" },
+  { id: 170, title: "Azalır Mı Geçmişin Yüzünde", body: `Azalır mı geçmişin yüzünde bıraktığı izler?
+Biter mi siyah ve beyazın gri savaşı?
+Ayağa kalkıp koşar mı kan revan dizler?
+İzler mi gözler bunu karanlık yavaş yavaş aydınlığa alışırken?
+Bu hikayenin kahramanları!
+Bu yaşananlar bir korku filmi değil mi gözler önünde?
+Söyleyin!
+İster misiniz zaferi bir anda göğsünüz özgürlüğe sözler verirken?
+Bir bilenle tartışırken hayat ne kadar da zor ve güzel!`, category: "TR" },
+  { id: 171, title: "Bana Benden Mi Bahsedeceksin?", body: `Bana benden mi bahsedeceksin?
+Dost musun göz bebeklerime?
+Yalanla dolu bir fanusta nefessizim
+İnanacak mısın diyeceklerime?
+Sen grisin ben beyaz
+İçimde bu yüzden bir korku var biraz
+Şarkılarla kendimi buluyorum
+Merak ediyorum
+Kar yağacak mı bu yaz?
+Merhaba ben iki
+Sen çaremsindir belki
+Sonu ne olursa olsun ben bu kumar masasına oturmam
+Niye mi?
+Ya kazanırsam ve puff diye ortadan kaybolursan?`, category: "TR" },
+  { id: 172, title: "Bana Bizim Ne Kadar İleri", body: `Bana bizim ne kadar ileri gidebileceğimizi sorsalar
+Beni buna cevap vermeye zorlasalar
+Hatta bana bir kelime için yalvarsalar
+Onlara cevap vermek yerine
+Değer biçmek için değerine
+Hesaba katmadan bir diğerini
+Söylemeden sebebini
+Kalbimdeki seni
+Gökyüzündeki yıldızlarla karşılaştırırdım.
+Öyle ki;
+Onlar saymaya başlayıp bilmem kaç trilyonda yorulup bırakırlarsa
+Ben sana o esnada hala sarılıp dünyamızdaki kum tanelerinin ne kadar az olduğunu anlatırdım.`, category: "TR" },
+  { id: 173, title: "Bana Biçilen Değer", body: `Bana biçilen değer
+Yapmamı beklediğiniz her şey
+İnançlarım ve kabuslarınız
+Ne kadar da birbirlerine benziyorlarmış meğer
+Halim kalırsa yazarım
+Mutluluk duyarsanız eğer`, category: "TR" },
+  { id: 174, title: "Bana Bütün Kötülükleri Yapabilirsiniz", body: `Bana bütün kötülükleri yapabilirsiniz
+Nasılsa 2 dakikada unuturum
+Elimden her şeyimi alabilirsiniz
+Ben bir toz bulutuyum
+Benimle istediğiniz yere varabilirsiniz
+Kendi kendime kendi kendimden korunurum
+Nasıl olsa en doğrusunu siz bilirsiniz
+Ben bir hanımefendinin çocuğuyum`, category: "TR" },
+  { id: 175, title: "Bana Yasaksa Sana Da Yasak", body: `Bana yasaksa sana da yasak düşünmek
+Ulu orta beynim çıplak dolaşmak
+Hakkımı hakkım olanla savunmak
+Seninle senin kurallarına göre dövüşmek!
+Gece gündüz demeden hakkımı savunmak
+Kapalı kapılar ardında ne olduğuna ulaşmak
+Kirleneceğimi bile bile pis işlerine bulaşmak
+Korkmuyorum senden otorite
+Amacım amacıma ulaşmak.`, category: "TR" },
+  { id: 176, title: "Bari Bir Gece Ansızın", body: `Bari bir gece ansızın çık aklımdan
+Gecelere bırak gitsin güneşi
+Gözlerini kırpma bana yıldızların ötesinden
+Bu gidiş hayra alamet değil
+Boğuluyorum bu kuraklıktan
+Yaşamak istemiyorum çocuklar ölürken`, category: "TR" },
+  { id: 177, title: "Bazen Karanlıkları Bulur Da", body: `Bazen karanlıkları bulur da içinde de yürek, saklanır duvarının bir köşesine.
+Kendine kalır, sessizce söyler yalnızlığın şarkısını.
+Korkmuyorum!
+Renkler sizden korkmuyorum sadece..
+Yokluğunuza nispet.
+Ve ben ona buna şuna ait değilim.
+Bu çirkin huysuzluğunuzdan da hoşnut değilim.
+Ben o sandığınız kişi değilim.
+Ben benim.
+Karanlıktaki ordaki.
+Değilim, değil mi?
+Derin bir nefes rutubetten, gözyaşlarımdan bir kafes.
+Hakedilmemiş saygısızlıklardan mı ibaret,
+Keşke..
+Keşke kendimden önce kendimi dinleseydim zifirimde.
+Her seferinde lanetindi bu, kabul et.
+Hep başkasını mutlu etmek için çaba sarfettin.
+Üfleye üfleye ne kadar yangını söndürebilirsem o.
+Bu da mı ben değilim?
+Kimim ben?
+Ordaki karanlık mı?
+Değilim, değil mi?`, category: "TR" },
+  { id: 178, title: "Bağıra Çağıra Alevlerin Arasından", body: `Bağıra çağıra alevlerin arasından
+Küllerin yanıyor bak yeniden doğuyorsun sen
+Ciğerinin en derinlerinden avazının çıktığı yere kadara
+Çelik gibi sağlam ve tamamsın
+Bilmiyorum bildiklerini
+Çok farkeder farketmezsen terket cehennemini
+Sıfırdan başlıyoruz hayata ruhum
+Düşme aynı hatalara
+Küsme asla aşka
+Hikayenin sonu mutlumuydu hatırla bambaşkayı
+Saf ve temizsin saklanma
+Sönük bırakıyorsun ışıkları
+Belki yeniden doğamayacaksın bir daha
+Belki bir ikincisi daha yok
+Yorgunuz ikimizde sen başla
+Ben yetişirsem tamamlarım aşkı`, category: "TR" },
+  { id: 179, title: "Başucum Boş", body: `Başucum boş.
+Perdeleri çekik benim hayat pencerelerimin
+Öyle istediği gibi girip çıkamaz düşünceler aklıma
+Dünya hoş ama ışığı loş.
+Ben sen olsam önce bir bakardım kendime
+Anlamak için kim olduğunu bi sorardım derdime
+Neden bu acı
+Neden bu ızdırap
+Neden bu sancı
+Neden neden neden?
+Neden hala yerinde başının tacı?`, category: "TR" },
+  { id: 180, title: "Bekliyorum Elim Yüreğimde", body: `Bekliyorum elim yüreğimde
+Gelecek, geçmişten çok mu farklı sence?
+Düşüp gökyüzünden yeryüzünde gizli bir farkındalık
+Yaratabilir mi bu şiirlerden düşünce?
+Kelimeler diyorum kelimeler
+Zihnime bi'yerlerden düşünce`, category: "TR" },
+  { id: 181, title: "Bekliyorum Gelecekler", body: `Bekliyorum gelecekler
+Onca kalabalığın arasında yalnız bırakıp
+İçimin sesini açıp;
+İşte sana gerçekler diye bakıp
+Bana Dünya'yı verecekler
+Al işte kalan zaman sana
+Biraz inansana
+Acele etsene diyecekler
+Gel işte bırak
+Burası bir tuzak
+Uzak dediğin yakın
+Yakın dediğin uzak diyecekler
+Bu kadar bak
+Bu kadar bu hayat
+Bir meşale yakıp
+Bana karanlığa yürü diyecekler
+Kötüler iyiler
+Kötüler, iyiler.`, category: "TR" },
+  { id: 182, title: "Belki Bir Gün Biri Kulağına", body: `Belki bir gün biri kulağına fısıldarsa aşk diye
+Nefesini tut ölene kadar
+Dönme sakın geriye
+Sanki birden bire inanır gibi olursan şeye
+Sebebini sor bulana kadar
+Yap bunu kendine
+Yorma kendini`, category: "TR" },
+  { id: 183, title: "Belki Yarın Yarım Kalır Diye", body: `Belki yarın yarım kalır diye bir kez daha Güneş'i seyre durdum dalıp, bir bankın üzerinde yalnız.
+Batıyorsun arkana baka baka ama söz verir gibi bir veda. Gidiyorsun yarın olmaya sanki tutmak için sözünü son bir nefes alıp.
+Anlıyorsun beni. Yüreğimden şarkıları ısmarlaya ısmarlaya.
+Aşk mısın Güneş? Meşk misin Ay? Ufukta batıyorken bu sefer beni de sana vurgunlardan say.
+Ahh ah. Bir yerde yeniden doğ, bu gece yeniden başlayacakken kendini sonsuza yay.`, category: "TR" },
+  { id: 184, title: "Belli Ki Müsadenle", body: `Belli ki müsadenle bu kaostan çekiliyorum ben
+Belli bu savaş bitiyor
+Ve biz tükeniyoruz.
+Bu hantallık ve bu cefa
+Bu aptallık
+Bu macera?
+Perişan kalmış bir hikayenin son hamlesi
+Özellikle bir tanesi var ki dillere destan
+Akın akın ölüyoruz sessizlikten.
+Nereye gittiğini görmüyor insan...`, category: "TR" },
+  { id: 185, title: "Ben Ortalama Bir Beynin", body: `Ben, ortalama bir beynin en beyefendisiyim.
+Sözlerim var temelli.
+Yardım edenim de var efendim.
+Gözlerim var iki ayrı renkli, rengarenk.
+Ölen zavallı bir yazarım belki.
+Öylesine inanmışım ki şarkılara.
+Öylesine sonu gelmiş ki naraların.
+Korku nefesi.`, category: "TR" },
+  { id: 186, title: "Ben Belli Ki En Akıllı Deliyim", body: `Ben belli ki en akıllı deliyim
+Aklımdan geçenşerle dışarıdan gördüğünüz bir değil
+Susuyorsam sesimi dinlemek için
+Yazıyorsam sesimi duyman için gafil
+Aferin, demin emin.
+Biraz engin ve biraz derin
+Bilin ki çirkin değil gökyüzünde karanlıklar
+Kahkahalar da bu yüzden var
+Ağlamıyorum ben gülümserken
+Belli ki acıklı bir son olacak benimkisi
+Belki bir hastane belki bir sahil
+Emin değilim
+Hayatımdaki hiç bir şeyden
+Hem de 2`, category: "TR" },
+  { id: 187, title: "Ben Bu Hayata Gözlerimi Kırpışımdan", body: `Ben bu hayata gözlerimi kırpışımdan haz duymaya
+Azar azar özlediğim hayatıma bir zarf içinde sunmaya geldim
+Umudumu hiçe sayıp vazgeçmenin ta kendisiyken
+Görsen halimi yanarsın, alev almam an meselesi
+Bu kadar yakınken diğer bir harbe, bu nasıl bir darbe?
+Kalbe değinen her bir cümleyle tartışıyorum yüzümde sabır, vay be!
+Çok ağır çok, işte bu yüzden sende can havliyle bağır.
+Dinle gözyaşlarını
+Ağla kendine
+Hayde`, category: "TR" },
+  { id: 188, title: "Ben Fenerim", body: `Ben fenerim son görevimdi uzaklardan ışımak
+Can havliyle son nefeste bir an daha yaşamak
+Dilim varmaz söylemeye, zor bu yükü taşımak
+Garip bir his ağlamak, mutluluklar ey insan
+Anmak istersen beni, güneşe bak, yanarak
+Mum.`, category: "TR" },
+  { id: 189, title: "Ben Gerçeği Bilmek İstemiyorum Mu", body: `Ben gerçeği bilmek istemiyorum mu sanıyorsunuz?
+Gözlerime bakan bunca yalan
+Öyle bir şey yok falan
+Soluyorum ulan
+Işıklar karanlık!
+Belki de yanılıyorsunuz?
+Belki bir belki 2 belki onuz..
+Belki size göre bunlar hep ondan
+Belki seçilmiş belki kurban
+Belki bela belki derman
+Belki aşk bu simsiyah dumanlardan.
+Bak nelerle vedalaştık
+Bir haber olanlardan.`, category: "TR" },
+  { id: 190, title: "Ben İstiyorum Diye İstemiyorlar", body: `Ben istiyorum diye istemiyorlar
+Yapamazsıncılıklar
+Gökyüzü yukarda işte herkes biliyor
+Gönlümdeki kuşlar uçamayacaklar
+Sizin yüzünüzden
+Kanatları ne işe yarayacak bilmeyecekler
+Rüzgara değemeyecekler
+Bir gün artık istemeyecekler bile
+Bulutlar?`, category: "TR" }
 ];
