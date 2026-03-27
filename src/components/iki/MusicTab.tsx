@@ -177,34 +177,8 @@ const MusicTab = () => {
           </div>
         </motion.div>
 
-        {/* Discography */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-5"
-        >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Discography</h2>
-          <div className="space-y-2.5">
-            {DISCOGRAPHY.map((item, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 bg-card/80 backdrop-blur-xl rounded-xl p-3.5 border border-border hover:border-primary/30 transition-all duration-300"
-              >
-                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  {item.type === 'Album' ? <Disc size={18} className="text-primary" /> : <Music size={18} className="text-primary" />}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-sm font-semibold text-foreground truncate">{item.title}</h3>
-                  <p className="text-[10px] text-muted-foreground">{item.year}</p>
-                </div>
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground bg-secondary/50 px-2 py-0.5 rounded-full shrink-0">
-                  {item.type}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+
+
 
         {/* Platform links */}
         <motion.div
