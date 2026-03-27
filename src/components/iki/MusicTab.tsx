@@ -13,15 +13,7 @@ const TRACKS = [
   { title: 'Kendimle Savaş Halindeyim', artist: 'Rahmi Oğuzhan', src: '/audio/kendimle-savas-halindeyim.mp3' },
 ];
 
-const DISCOGRAPHY = [
-  { title: 'We Are One', year: '2024', type: 'Single' },
-  { title: 'Sakın ve Sakin', year: '2024', type: 'Single' },
-  { title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum', year: '2024', type: 'Single' },
-  { title: 'Kendimle Savaş Halindeyim', year: '2024', type: 'Single' },
-  { title: 'Sessizliğin Mimarı', year: '2023', type: 'Album' },
-  { title: 'İki', year: '2023', type: 'Single' },
-  { title: 'Kök', year: '2022', type: 'Single' },
-];
+
 
 const formatTime = (s: number) => {
   if (!isFinite(s)) return '0:00';
