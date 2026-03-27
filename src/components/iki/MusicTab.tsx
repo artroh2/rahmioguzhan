@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, ExternalLink, Music, Disc } from 'lucide-react';
+import { Play, Pause, ExternalLink, Music } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 
