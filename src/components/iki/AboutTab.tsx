@@ -151,7 +151,7 @@ const AboutTab = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center text-xs text-muted-foreground mt-8 pb-2 shrink-0"
+          className="text-center text-xs text-foreground mt-8 pb-2 shrink-0"
         >
           ROH2 © 2026 — All rights reserved
         </motion.p>
