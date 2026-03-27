@@ -110,9 +110,13 @@ const PoemsTab = () => {
                 <X size={18} />
               </button>
             </div>
-            <p className="text-sm text-foreground/80 whitespace-pre-line leading-relaxed">
-              {selected.body}
-            </p>
+            <div className="space-y-2">
+              {selected.body.split('\n').map((line, i) => (
+                <p key={i} className="text-sm text-foreground/80 leading-relaxed min-h-[0.5em]">
+                  {line || '\u00A0'}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       )}
