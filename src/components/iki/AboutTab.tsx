@@ -146,11 +146,12 @@ const AboutTab = () => {
           </button>
         </motion.form>
 
+        <div className="flex-1" />
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center text-xs text-muted-foreground mt-4 shrink-0"
+          className="text-center text-xs text-muted-foreground mt-8 pb-2 shrink-0"
         >
           ROH2 © 2026 — All rights reserved
         </motion.p>
