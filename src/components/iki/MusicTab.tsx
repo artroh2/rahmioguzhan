@@ -6,8 +6,14 @@ import heroBg from '@/assets/hero-bg.jpg';
 const SPOTIFY_ARTIST = 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk?si=a2OzNdQ7RQavn3XLUxTZuA';
 const APPLE_ARTIST = 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707?l=tr';
 
+const TRACKS = [
+  { title: 'We Are One', artist: 'Rahmi Oğuzhan', src: '/audio/we-are-one.mp3' },
+  { title: 'Sakın ve Sakin', artist: 'Rahmi Oğuzhan', src: '/audio/sakin-ve-sakin.mp3' },
+];
+
 const DISCOGRAPHY = [
   { title: 'We Are One', year: '2024', type: 'Single' },
+  { title: 'Sakın ve Sakin', year: '2024', type: 'Single' },
   { title: 'Sessizliğin Mimarı', year: '2023', type: 'Album' },
   { title: 'İki', year: '2023', type: 'Single' },
   { title: 'Kök', year: '2022', type: 'Single' },
@@ -23,16 +29,25 @@ const formatTime = (s: number) => {
 const MusicTab = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audioError, setAudioError] = useState(false);
+
+  const track = TRACKS[trackIndex];
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     const onTime = () => setCurrentTime(audio.currentTime);
     const onMeta = () => setDuration(audio.duration);
-    const onEnd = () => setPlaying(false);
+    const onEnd = () => {
+      if (trackIndex < TRACKS.length - 1) {
+        setTrackIndex(i => i + 1);
+      } else {
+        setPlaying(false);
+      }
+    };
     const onErr = () => setAudioError(true);
     audio.addEventListener('timeupdate', onTime);
     audio.addEventListener('loadedmetadata', onMeta);
@@ -44,13 +59,29 @@ const MusicTab = () => {
       audio.removeEventListener('ended', onEnd);
       audio.removeEventListener('error', onErr);
     };
-  }, []);
+  }, [trackIndex]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setAudioError(false);
+    setCurrentTime(0);
+    setDuration(0);
+    audio.load();
+    if (playing) audio.play().catch(() => setAudioError(true));
+  }, [trackIndex]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
     if (playing) { audio.pause(); } else { audio.play().catch(() => setAudioError(true)); }
     setPlaying(!playing);
+  };
+
+  const selectTrack = (i: number) => {
+    if (i === trackIndex) { togglePlay(); return; }
+    setTrackIndex(i);
+    setPlaying(true);
   };
 
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +97,7 @@ const MusicTab = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
       </div>
 
-      <audio ref={audioRef} src="/audio/we-are-one.mp3" preload="metadata" />
+      <audio ref={audioRef} src={track.src} preload="metadata" />
 
       <div className="relative z-10 px-5 pt-10 pb-6">
         <motion.div
@@ -96,8 +127,8 @@ const MusicTab = () => {
               {playing ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
             </button>
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-bold text-foreground truncate">We Are One</h3>
-              <p className="text-xs text-muted-foreground truncate">Rahmi Oğuzhan</p>
+              <h3 className="text-sm font-bold text-foreground truncate">{track.title}</h3>
+              <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
             </div>
           </div>
 
@@ -119,6 +150,27 @@ const MusicTab = () => {
               </div>
             </div>
           )}
+
+          {/* Track list */}
+          <div className="mt-4 space-y-1.5 border-t border-border/50 pt-3">
+            {TRACKS.map((t, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); selectTrack(i); }}
+                className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200 ${
+                  i === trackIndex ? 'bg-primary/10 border border-primary/30' : 'hover:bg-card/60'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  {i === trackIndex && playing ? <Pause size={12} className="text-primary" /> : <Play size={12} className="text-primary ml-0.5" />}
+                </div>
+                <div className="min-w-0">
+                  <p className={`text-xs font-semibold truncate ${i === trackIndex ? 'text-primary' : 'text-foreground'}`}>{t.title}</p>
+                  <p className="text-[10px] text-muted-foreground">{t.artist}</p>
+                </div>
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Discography */}
