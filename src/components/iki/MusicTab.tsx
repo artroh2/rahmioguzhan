@@ -10,12 +10,14 @@ const TRACKS = [
   { title: 'We Are One', artist: 'Rahmi Oğuzhan', src: '/audio/we-are-one.mp3' },
   { title: 'Sakın ve Sakin', artist: 'Rahmi Oğuzhan', src: '/audio/sakin-ve-sakin.mp3' },
   { title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum', artist: 'Rahmi Oğuzhan', src: '/audio/yasanabilecek-tum-ihtimalleri-biliyorum.mp3' },
+  { title: 'Kendimle Savaş Halindeyim', artist: 'Rahmi Oğuzhan', src: '/audio/kendimle-savas-halindeyim.mp3' },
 ];
 
 const DISCOGRAPHY = [
   { title: 'We Are One', year: '2024', type: 'Single' },
   { title: 'Sakın ve Sakin', year: '2024', type: 'Single' },
   { title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum', year: '2024', type: 'Single' },
+  { title: 'Kendimle Savaş Halindeyim', year: '2024', type: 'Single' },
   { title: 'Sessizliğin Mimarı', year: '2023', type: 'Album' },
   { title: 'İki', year: '2023', type: 'Single' },
   { title: 'Kök', year: '2022', type: 'Single' },
