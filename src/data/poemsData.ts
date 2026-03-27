@@ -1097,5 +1097,264 @@ Bilemezdim`, category: "TR" },
   { id: 111, title: "Çok Yakından Gelen Bir Yardım Çığlığı", body: `Çok yakından gelen bir yardım çığlığı
 Bir yangın! Bir deprem! Bir üzüntü!
 Kırmızı renkte bir gökyüzünde can sağlığı
-Sesini kısın tüm seslerin, bu seferki sulu gürültü.`, category: "TR" }
+Sesini kısın tüm seslerin, bu seferki sulu gürültü.`, category: "TR" },
+  { id: 112, title: "Ben Bugün Bir Günah İşledim", body: `Ben bugün bir günah işledim gözlerine bakarken
+Gözlerinden gönlüne akarken bir suça karıştım
+Her bir göz kırpışımda kirpiklerini yakarken
+Bir an öncesiyle tanışmak için kendimle yarıştım
+Ve buna alıştım.`, category: "TR" },
+  { id: 113, title: "Bir Gün Sen ve Ben Cennette", body: `Bir gün sen ve ben cennette karşılaşırsak eğer
+Bana hakkını helal etmiş olduğun gerçeğiyle
+Sana hatırlayabildiğimiz en eski anımız ile
+Sımsıkı sarılacağım
+Öyle ki sonsuza kadar vaktimiz var
+Ve bu yer düşündüğünden de geniş`, category: "TR" },
+  { id: 114, title: "Bir Uzun Zaman Zaman", body: `Bir uzun zaman zaman
+Milyarlarca kelimeyi nasıl güzel sığdırabilirdik?
+Gözlerime baktığın yetmezmiş gibi
+Birlikte de ağlayabilirdik.`, category: "TR" },
+  { id: 115, title: "Birbirimizi Düşünüyoruz", body: `Birbirimizi düşünüyoruz aynı zamanda farklı zamanlarda
+Ben pişmanım sen kızgın
+Ben varım sen yoksun
+Gönlün bana gerçekten bu kadar mı argın?
+Birbirimizi özlüyoruz bazen, her zaman
+Ben ölmüşüm sen ağır yaralı
+Ben yokum sen varsın
+Yokluğuma da alışmışsın, gönlün gerçekten bu kadar mı dargın?
+Birbirimize dönmeyeceğiz belki hiçbir zaman
+Sen orda ben burda
+Yakın ve uzak ve uzak ve yakının farkında
+Yanında sensizim
+Sensizliğine de mecbur kaldım, gönlün gerçekten bu kadar mı yorgun?
+Alamaz mı beni yeniden içeri?`, category: "TR" },
+  { id: 116, title: "Birden Gelir Dokunur", body: `Birden gelir dokunur çenene eli hafifmi hafif bir sevgili
+Bir sen susarsın o el konuşur seni seninle yaşar gibi
+Gözlerin kapanır nefesin durur aklın başlar şarkı söylemeye
+İçinden gelen bi ses sana dokunur der o hiç bırakmasın seni
+Yaşamak ne güzel yaşamak seninle kalan ömür bile artık bizim
+Yaşasın hayat yaşasın neşe yaşasın herşey bunlar ikimizin
+Çok alışacağım sana söz kendime söz herşeyinde üzerine
+Kalan her şey bizim için eli hafif mi hafif canım sevgilim`, category: "TR" },
+  { id: 117, title: "Birden Sarılıversen", body: `Birden sarılıversen karşıma çıkıp
+Nedeni olmadan seviversen yine beni
+En sevimli tavrını takınıp gösteriversen bana eskinin üstesinden gelmediğini yeninin
+Birden bağırıversen ağlayıp
+Son bir kez geçmişi hatırlasak ve bıraksak deminde
+Aynı yolcusuyuz biz bu geminin seyrinin
+Yeminle`, category: "TR" },
+  { id: 118, title: "Bomboş Bir Odada Hayalimdesin", body: `Bomboş bir odada hayalimdesin ne hoş
+Loş bir ışık vuruyor avuçlarıma, aklımdayken ne güzelsin
+Kanatların var, umutlarım var, ne güzel bir ziyaretsin
+Uç gel yine gönlüme, kon gel
+Sen gelebilecek en özel misafirimsin
+Yıldızlar dökülüyor kanatlarını çırptığında gökyüzü öksüz
+Bu dünyadan uzaklaşıyorum rüzgarını es
+Seni diliyorum, dualarım yönsüz
+Özlüyorum, anlamıyorsun, son ses, sonsuz`, category: "TR" },
+  { id: 119, title: "Bu Bir Ayrılık Şiiri Sevgilim", body: `Bu bir ayrılık şiiri sevgilim
+Dün gibi geçen günler
+Canına can kat derdimin
+Hatalardan uzun bir yol`, category: "TR" },
+  { id: 120, title: "Cuma Sabahı", body: `Cuma sabahı uyanıp dinlediğim ilk şarkı gibiydin sen
+O kadar hoşgelmiştin günaydınıma
+Yüzümde esen
+Yalnızlığıma
+Büyük bir haberin habercisiymiş pazartesi
+Öylesine boşvermişim hayatıma
+Öylesine boş geçmişin
+Ensesinde gezen
+Yapayalnızlığına`, category: "TR" },
+  { id: 121, title: "Diğer Bir Değişle", body: `Diğer bir değişle nefret ediyorum yokluğundan
+Doğduğumdan beri sana ait mişim de ondan
+Beni al götür sana sapalım başka bir yoldan
+Ellerimi tutmamana alışığım
+Gözlerime bakmamana alışığım
+Ama yokluğun
+Söyleyemiyorum ardan
+Bir başka deyişle seni çok seviyorum
+Ölüm bir kurtuluş bundan hatta
+Bir şiire sığmayacak kadar taşıyor gönlüm
+Nefes almana barışığım
+Nefesimi kesmene tanışığım
+Ve orada olman bile bir hediyeyken bana
+Daha nasıl bahsedeyim yardan`, category: "TR" },
+  { id: 122, title: "Evet Evet Bu Şiir Sana", body: `Evet evet
+Bu şiir sana.
+Başka da bir işe yaramazdı zaten`, category: "TR" },
+  { id: 123, title: "Eylül Kadar Çiçek Bekleten", body: `Eylül kadar çiçek bekleten bir ay daha yoktur ki ağlatmasın gözlerini
+Yeni bir mevsim kucaklarken seni
+Bir bakmışsın, aşık olmuşsun.
+Yeniden bakmışsın geri`, category: "TR" },
+  { id: 124, title: "Gökyüzümde Bir Yerlerdesin", body: `Gökyüzümde bir yerlerdesin şimdi
+Belki gönlümden geçenler de okuyordur yüreğin
+Belki hala seviyorsundur sonu olmayan bu filmi
+Sessiz sedasız nasılda bitmişti değil mi`, category: "TR" },
+  { id: 125, title: "Gözlerimi Görüyor Mu Gözlerin", body: `Gözlerimi görüyor mu gözlerin
+Cesaretin var mı aşka
+Seni her kırpışında özlerim`, category: "TR" },
+  { id: 126, title: "Gözlerimi Kaçırıyorum Senden", body: `Gözlerimi kaçırıyorum senden
+Her bakışı anlardım da senin ki çok zor be kardeşim
+Öfken mi derin
+Neresin benim yerin?
+Yanağın mı dizlerin mi?`, category: "TR" },
+  { id: 127, title: "Gözlerinin Gözlerime Değdiği", body: `Gözlerinin gözlerime değdiği bir an vardı hatırlar mısın bilmem
+Bir kaç saniye dayanabilmişti şiddetine aşkının bakabilmem
+Elim ayağım dolaşmıştı, biliyordum, geliyordu
+Kalbim o heyecanın ritmine ancak dayanabiliyordu
+Sonra yüzyıllar sürecek bir film başladı başrollerinde başka adamlar ve kadınlar olan
+Sana dokunamadan bir ömür mü geçecek öylesine solan?
+Sanki bir rüyadan uyanıyoruz benim seni daha çok sevdiğim
+Acilen acele etmeden bir yemek yememiz gerekiyor benim sana ruh eşim olmanı teklif etmem gerektiğim`, category: "TR" },
+  { id: 128, title: "Gözlerinin İçine Bakıp", body: `Gözlerinin içine bakıp arıyordum kendimi
+Gülüyordum ordan bana, ama yoksa, sende mi?
+İlk defa oluyor böyle bir şey`, category: "TR" },
+  { id: 129, title: "Gözünün Gördüğünü Bilirsin", body: `Gözünün gördüğünü bilirsin
+Kulağın duyar
+Parmak uçlarında benimsin`, category: "TR" },
+  { id: 130, title: "Güneş Batıyor Bak", body: `Güneş batıyor bak
+Yine aklımın ücra köşelerinden kovmaya çalışıyorum seni
+Kızıl bulutlar, ufuk sıcak, gözlerimle bu ana şahit olmak
+Bir kaç dakika sonra başka bir diyarda var olacakmışsın gibi özlüyorum seni
+Ama sıcağını kaybediyorum varlığının
+Bu yeni
+Sebebi bu gönül darlığımın
+Dargınlığımın değil`, category: "TR" },
+  { id: 131, title: "Heyecanlanmıştım Gerçekten", body: `Heyecanlanmıştım gerçekten
+Ya bu seferki sonsuza kadar sürerse?
+Belki katlanırsın üzerse..`, category: "TR" },
+  { id: 132, title: "İçinde İstanbul Geçen Şarkılar", body: `İçinde İstanbul geçen şarkılar nasıl hissettiriyorsa öylesin`, category: "TR" },
+  { id: 133, title: "Karanlıkta Yürüyebilmek", body: `Karanlıkta yürüyebilmek köşelere çarpmadan
+Ve parmak uçlarında ilerleyebilmek sessizce
+Birini sevebilmek gibi bunu ona sormadan
+Bunu yapabilmek delice yormadan
+Ne kadar özlemişim bunu bilsen
+Nasıl yaşamışım bu titrek heyecan olmadan`, category: "TR" },
+  { id: 134, title: "Kısa Cümleler Kurmak Kolay", body: `Kısa cümleler kurmak kolay
+Mevzu bir şiir olup anlatabilmek seni ne kadar çok özlediğimi
+Kahveler birikti fincanlarca yanyana
+Bilmiyorsun adalara bakıp yolunu nasıl gözlediğimi
+Hatırlıyor musun?
+Seni çok sevdiğimi söylediğimi?
+Bu olay böylesine kolay
+Ve öyle sıradan bir mesele değildi.`, category: "TR" },
+  { id: 135, title: "Nasıl Oluyor Da", body: `Nasıl oluyor da böylesine aydınlık olabiliyor bu zifiri karanlık
+Nasıl her düşümün sonu aynı yere varıyor
+Bütün yollar sona çıkıyor
+Kalbim üşüyor`, category: "TR" },
+  { id: 136, title: "Ne Kadar Kolay Değil Mi", body: `Ne kadar kolay değil mi ayrılığı seçmek`, category: "TR" },
+  { id: 137, title: "Neden Mi Olmasın?", body: `Neden mi olmasın?
+Çünkü ben nerde değilsem sen ordasın.
+Neden mi olmasın?
+Çünkü doğru soruları sormalısın.
+Neden mi olmasın?
+Çünkü aşk dediğin şey için bazen bir adım geri atmalısın.
+Neden mi olmasın?
+Çünkü gerektiği zaman yok olmalısın.`, category: "TR" },
+  { id: 138, title: "O Her Mevsim Çiçek Açan", body: `O her mevsim çiçek açan narin bir kardelen
+O gözlerinden cenneti okuyabileceğin bir melek
+O dokunmaya kıyamadığımız en kıymetlimiz
+O artık sana emanet`, category: "TR" },
+  { id: 139, title: "O Mavi Gölün Kıyısındaki", body: `O mavi gölün kıyısındaki kırmızı boyalı ahşap eve imrenmiştik aynı anda.
+Az sonra bembeyaz bulutlarda şekiller belirmişti gökyüzüne de dikkatli baktığımızda.
+O gün çocuğumuza yazdığım şarkıyı ezberletmiştim sana.
+Hayat ne kadar da renklenmişti.
+Baksana nelere göz kırpmışız o an.
+Gelde bir bak şimdi bana.
+O ev yanmış.
+Yağmur yağmış.
+Şarkı bitmiş simsiyah.`, category: "TR" },
+  { id: 140, title: "Olur Olur", body: `Olur olur
+Sen dokunursan goncama açar gülüm
+Sen okursan hayatımı
+Sen istersen hayatımı
+Senin olur
+Sensiz olmaz
+Yollar gidelim seninle
+Müzikleri sen seç
+Bulutları sen benzet kaplumbağalara
+Dikenlerim dökülür mutluluktan
+Sen örersen ağlarımı
+Sen istersen hayatımı
+Senin olurum
+Sensiz olmam`, category: "TR" },
+  { id: 141, title: "Onun Kısık Gözlerinde", body: `Onun kısık gözlerinde sonsuzluğu görmek mümkündü
+Belki de gördüğüm geri kalan ömrümdü
+Bu iki kişilik bir düğündü ve
+Kalbimin beynimle el sıkıştığı bir gündü bugün
+Garip, kendimle barıştırdı kelimeler saatlerce
+Koş dedi, uzaklaş artık arkanı yasladığın ağaçlardan harfler
+Uç dedi bir kuş, bir daha, tıpatıp benim gibi
+Buldun onu işte bulutlarda
+O da senin gibi
+Saklanıyormuş umutlarda`, category: "TR" },
+  { id: 142, title: "Oysa Ki Tam Reddetmiştim", body: `Oysa ki tam reddetmiştim bu şehrin ışıklarını
+Var ya ne kadar yaklaşmıştım sona
+Sen geldin
+Verdiği sözleri tutabilecek gibi
+Şarkılar söyleyecektim düşerken sana
+Sığdırır gibi bir ömrü bir ana
+Bakıp gözlerine isteyecektim senden seni
+Herkes gibi benimde var bir rengim
+Hikayemsi, yarımyamalak
+Katılaşmış yanak ağrıtan sahte bir gülümsemenin gönülden gülümseyesi var ağlayarak
+Hüzünleri biten sevinçlerin üzülleri sebepsiz
+Şiirler okuyacağım hayatım boyunca üşüyen aklımdan sana anlatan beni
+Geleceksen sessizce söndüğünde civar şehirlerin de ışıkları,
+Bakıp gözlerime son güneş gibi bana batıdan doğ.
+Tamamla yarımı`, category: "TR" },
+  { id: 143, title: "Özlüyorum Doğru", body: `Özlüyorum doğru
+Sen de merak ediyorsundur görüşmeyeli hayatımda neler neler olduğunu
+Hala seviyorum belki bazen seni
+Ama çoktan unuttum bile beni unuttuğunu
+Koymuyor artık yalnızlık
+Güldün sen
+Gül'dün sen
+Güldün dün sen
+Bugün ağla`, category: "TR" },
+  { id: 144, title: "Sana Ait Olmayan", body: `Sana ait olmayan bir şey söyleyeyim ruhum
+Gemisindesin Nuhun
+Her yağmur tanesinde ürküyor
+Her dalgada sendeliyor
+Her gözlerine baktığında aynalarda
+Her seferinde aynı takla
+Bi kendine sor.
+Geliyorsun
+Gidiyorsun
+Ölüyorsun.`, category: "TR" },
+  { id: 145, title: "Sana Anlatabilmek İçin", body: `Sana anlatabilmek için dışımdan geçenleri
+Gözlerine bakıp ruhunun içinde uzun bir yolculuğa çıkmam lazım
+Gönlünün tuvaline vurabilmek için fırçamı
+Bembeyazına hazım
+Sana gelebilmek için yolumdan çılgınlar gibi çıkıp
+Bir oraya bir buraya sağ ve sol da dahil her yere sapıp
+Görebilmen için kalbimi ellerine alıp
+Gökyüzünde aynı bulutun içinde uçmamız lazım
+Kanatsız.`, category: "TR" },
+  { id: 146, title: "Sana Beni Hatırlatsın Diye", body: `Sana beni sana hatırlatsın diye bir hediye vereceğim olsa
+Bana nedir diye sorsan
+Hakkımdaki her şey, geleceğim
+Bir gün sana geri döneceğim
+Yarım kalmış umutlarla
+Hala seni seveceğim.
+Aç paketi.`, category: "TR" },
+  { id: 147, title: "Sana Benziyor Hayalimdeki Kadın", body: `Sana benziyor hayalimdeki kadın
+Apaçık ortada nefreti ve sevgisi
+Rızam olmadan delirtecek gibi herkesi
+Ellerini birleştirmiş ortasında merkezin
+Nasıl bilmem, nerede bilmem, ne için bilmem
+Uğur getir bana emin olduğun bir yerden
+Rica etmeden önce ben, hemen!
+Çabul ol, yanıyorum doğmayacağım küllerimden
+Ormanlar kadar büyüdüm ve bu sefer sönmeyeceğim ben
+Barıştır beni rüzgar hatrına gökyüzüyle
+Alışamıyorum sen oradayken kimsesizliğine
+Nasıl bilmem, nerede bilmem, niçin bilmem
+Ne yap ne et al beni gönlüne, yanı derin sessizliğinsen`, category: "TR" },
+  { id: 148, title: "Sana Her Akşam", body: `Sana her akşam güzel konuşabilirim güzel çiçek
+Ben bana emanet her çiçeğe çok güzel davrandığım gibi sana da her gün batımında en güzel şarkılardan çalıp söylerim.
+Her sabah bir çay bardağı su ile günaydın derim. Yaprakların çok sevinir.
+Ama küsmüştüm de buna,
+Aşk artık uzaklarda bir dahil kasabasında yazılması gereken bir şiirdi aslına bakarsan.
+Ben, sahip olduğum hayat sevgisini seninle paylaşabilirim;
+Kalbim kalbine denkse, ve bu sırrı bir ömür boyu saklarsan.`, category: "TR" }
 ];
