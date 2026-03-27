@@ -91,14 +91,14 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
         >
           <button
             onClick={() => onNavigate('muzik')}
-            className="flex items-center justify-center gap-2.5 bg-card hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(34_66%_47%/0.4)] hover:scale-[1.03] text-foreground font-semibold py-4 rounded-xl border border-border hover:border-primary transition-all duration-300 text-sm active:scale-95"
+            className="flex items-center justify-center gap-2.5 bg-transparent hover:bg-primary/10 text-foreground hover:text-primary font-semibold py-4 rounded-xl border-2 border-primary/60 shadow-[0_0_12px_rgba(198,130,40,0.4)] hover:shadow-[0_0_24px_rgba(198,130,40,0.7)] hover:border-primary hover:scale-[1.03] transition-all duration-300 text-sm active:scale-95"
           >
             <Music size={18} />
             Music
           </button>
           <button
             onClick={() => onNavigate('siirler')}
-            className="flex items-center justify-center gap-2.5 bg-card hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(34_66%_47%/0.4)] hover:scale-[1.03] text-foreground font-semibold py-4 rounded-xl border border-border hover:border-primary transition-all duration-300 text-sm active:scale-95"
+            className="flex items-center justify-center gap-2.5 bg-transparent hover:bg-primary/10 text-foreground hover:text-primary font-semibold py-4 rounded-xl border-2 border-primary/60 shadow-[0_0_12px_rgba(198,130,40,0.4)] hover:shadow-[0_0_24px_rgba(198,130,40,0.7)] hover:border-primary hover:scale-[1.03] transition-all duration-300 text-sm active:scale-95"
           >
             <PenLine size={18} />
             Poetry
