@@ -178,7 +178,7 @@ const MusicTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Listen On</h2>
+          <h2 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Discography</h2>
           <div className="flex gap-3">
             <a
               href={SPOTIFY_ARTIST}
