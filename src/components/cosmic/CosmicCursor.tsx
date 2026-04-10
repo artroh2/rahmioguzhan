@@ -24,6 +24,20 @@ interface CelestialBody {
   spiralArms: number;
   glowSize: number;
   moons: Moon[];
+  opacity: number;    // for glow-up fade-in
+  vx: number;         // drift velocity
+  vy: number;
+}
+
+interface BackgroundStar {
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  opacity: number;       // current opacity (glow up)
+  targetOpacity: number; // target
+  vx: number;
+  vy: number;
 }
 
 interface SupernovaParticle {
@@ -60,9 +74,9 @@ const PALETTES = [
   { c1: '255, 120, 50', c2: '180, 60, 20', c3: '255, 180, 120' },
 ];
 
-function spawnCelestial(x: number, y: number, sizeScale = 1): CelestialBody {
+function spawnCelestial(x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy'): CelestialBody {
   const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
-  const isGalaxy = Math.random() > 0.5;
+  const isGalaxy = forceType === 'galaxy' ? true : forceType === 'planet' ? false : Math.random() > 0.5;
   const radius = isGalaxy
     ? (25 + Math.random() * 35) * sizeScale
     : (8 + Math.random() * 22) * sizeScale;
@@ -92,6 +106,9 @@ function spawnCelestial(x: number, y: number, sizeScale = 1): CelestialBody {
     spiralArms: 2 + Math.floor(Math.random() * 3),
     glowSize: 2.5 + Math.random() * 1.5,
     moons,
+    opacity: 0,
+    vx: (Math.random() - 0.5) * 0.15,
+    vy: (Math.random() - 0.5) * 0.15,
   };
 }
 
@@ -308,9 +325,13 @@ const CosmicCursor = () => {
   const [hasContent, setHasContent] = useState(false);
   const isTouchDevice = useRef(false);
 
+  const clickCountRef = useRef(0);
+  const bgStarsRef = useRef<BackgroundStar[]>([]);
+
   const clearAll = useCallback(() => {
     celestialsRef.current = [];
     supernovasRef.current = [];
+    bgStarsRef.current = [];
     if (paintRef.current) {
       const pctx = paintRef.current.getContext('2d');
       if (pctx) pctx.clearRect(0, 0, paintRef.current.width, paintRef.current.height);
@@ -371,9 +392,8 @@ const CosmicCursor = () => {
       if (!hasContent) setHasContent(true);
     };
 
-    const addCelestial = (x: number, y: number, sizeScale = 1) => {
-      celestialsRef.current.push(spawnCelestial(x, y, sizeScale));
-      // Limit total to prevent perf issues
+    const addCelestial = (x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy') => {
+      celestialsRef.current.push(spawnCelestial(x, y, sizeScale, forceType));
       if (celestialsRef.current.length > 30) {
         celestialsRef.current.shift();
       }
@@ -400,7 +420,13 @@ const CosmicCursor = () => {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
-      addCelestial(e.clientX, e.clientY);
+      clickCountRef.current++;
+      if (clickCountRef.current % 5 === 0) {
+        // Every 5 clicks → huge galaxy
+        addCelestial(e.clientX, e.clientY, 3, 'galaxy');
+      } else {
+        addCelestial(e.clientX, e.clientY);
+      }
     };
 
     const onDblClick = (e: MouseEvent) => {
@@ -416,27 +442,55 @@ const CosmicCursor = () => {
       if (!touch) return;
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
-
-      // Spawn a celestial on touch
-      addCelestial(touch.clientX, touch.clientY, 0.7);
+      clickCountRef.current++;
+      if (clickCountRef.current % 5 === 0) {
+        addCelestial(touch.clientX, touch.clientY, 2.5, 'galaxy');
+      } else {
+        addCelestial(touch.clientX, touch.clientY, 0.7);
+      }
     };
 
     const onTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       if (!touch) return;
       mouseRef.current = { x: touch.clientX, y: touch.clientY };
-      // Paint trail dots like cursor
       paintDots(touch.clientX, touch.clientY, 2);
     };
 
-    // ─── Auto-spawn every 3 seconds ───
+    // ─── Auto-spawn: medium planet every 5 seconds ───
     const autoSpawnInterval = setInterval(() => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       const x = 40 + Math.random() * (w - 80);
       const y = 40 + Math.random() * (h - 80);
-      addCelestial(x, y, isTouch ? 0.6 : 0.8);
-    }, 3000);
+      addCelestial(x, y, isTouch ? 0.8 : 1.2, 'planet');
+    }, 5000);
+
+    // ─── Background stars: spawn many with glow-up ───
+    const spawnBgStars = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const count = isTouch ? 40 : 80;
+      for (let i = 0; i < count; i++) {
+        bgStarsRef.current.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: 0.5 + Math.random() * 2,
+          color: trailColors[Math.floor(Math.random() * trailColors.length)],
+          opacity: 0,
+          targetOpacity: 0.3 + Math.random() * 0.5,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+        });
+      }
+      // Limit
+      if (bgStarsRef.current.length > (isTouch ? 120 : 250)) {
+        bgStarsRef.current.splice(0, bgStarsRef.current.length - (isTouch ? 120 : 250));
+      }
+      if (!hasContent) setHasContent(true);
+    };
+    spawnBgStars();
+    const bgStarInterval = setInterval(spawnBgStars, 8000);
 
     // Register events
     if (!isTouch) {
@@ -466,13 +520,46 @@ const CosmicCursor = () => {
       // Persistent paint layer
       ctx.drawImage(paint, 0, 0);
 
-      // Celestial bodies
+      // Background stars with glow-up and movement
+      for (const star of bgStarsRef.current) {
+        // Glow up
+        if (star.opacity < star.targetOpacity) {
+          star.opacity = Math.min(star.opacity + 0.005, star.targetOpacity);
+        }
+        // Move
+        star.x += star.vx;
+        star.y += star.vy;
+        // Wrap around
+        if (star.x < -5) star.x = canvas.width + 5;
+        if (star.x > canvas.width + 5) star.x = -5;
+        if (star.y < -5) star.y = canvas.height + 5;
+        if (star.y > canvas.height + 5) star.y = -5;
+        // Draw with glow
+        const sg = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3);
+        sg.addColorStop(0, `rgba(${star.color}, ${star.opacity})`);
+        sg.addColorStop(1, `rgba(${star.color}, 0)`);
+        ctx.fillStyle = sg;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${star.color}, ${star.opacity})`;
+        ctx.fill();
+      }
+
+      // Celestial bodies with fade-in and drift
       for (const body of celestialsRef.current) {
+        if (body.opacity < 1) body.opacity = Math.min(body.opacity + 0.02, 1);
+        body.x += body.vx;
+        body.y += body.vy;
+        ctx.globalAlpha = body.opacity;
         if (body.type === 'planet') {
           drawPlanet(ctx, body, time);
         } else {
           drawGalaxy(ctx, body, time);
         }
+        ctx.globalAlpha = 1;
       }
 
       // Supernovas
@@ -516,6 +603,7 @@ const CosmicCursor = () => {
     return () => {
       cancelAnimationFrame(frameRef.current);
       clearInterval(autoSpawnInterval);
+      clearInterval(bgStarInterval);
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseover', onOver);
