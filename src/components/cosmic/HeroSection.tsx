@@ -56,29 +56,29 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           transition={{ duration: 1.2, delay: 0.5 }}
           className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[0.95]"
         >
-          <span className="inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%] drop-shadow-[0_0_20px_rgba(74,158,255,0.5)]"
+          <span className="inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(168,216,255,0.6), #4A9EFF, #E0F0FF, rgba(255,255,255,0.9), #4A9EFF, rgba(168,216,255,0.6))',
-              filter: 'drop-shadow(0 0 8px rgba(74,158,255,0.3))',
-              WebkitTextStroke: '1px rgba(74,158,255,0.2)',
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(200,220,255,0.5), rgba(255,255,255,0.95), rgba(180,210,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(200,220,255,0.25)) drop-shadow(0 0 30px rgba(180,200,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}>
             Rahmi
           </span>
           <br />
-          <span className="inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%] drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+          <span className="inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(216,180,254,0.6), #8B5CF6, #F0E0FF, rgba(255,255,255,0.9), #8B5CF6, rgba(216,180,254,0.6))',
-              filter: 'drop-shadow(0 0 8px rgba(139,92,246,0.3))',
-              WebkitTextStroke: '1px rgba(139,92,246,0.2)',
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}>
             Oğuzhan
           </span>
           <br />
-          <span className="inline-block animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%] drop-shadow-[0_0_20px_rgba(245,158,11,0.5)]"
+          <span className="inline-block animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(253,230,138,0.6), #F59E0B, #FFFBEB, rgba(255,255,255,0.9), #F59E0B, rgba(253,230,138,0.6))',
-              filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.3))',
-              WebkitTextStroke: '1px rgba(245,158,11,0.2)',
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25)) drop-shadow(0 0 30px rgba(230,225,210,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}>
             Hacıeyüpoğlu
           </span>
