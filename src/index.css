@@ -167,3 +167,50 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Rotating glow border for platform cards */
+@keyframes glow-spin-cw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes glow-spin-ccw {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.platform-glow-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  z-index: 0;
+}
+.platform-glow-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--platform-color) 20%,
+    transparent 40%,
+    transparent 60%,
+    var(--platform-color-dim) 80%,
+    transparent 100%
+  );
+  animation: var(--glow-animation) 4s linear infinite;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.platform-glow-card:hover::before {
+  opacity: 1;
+}
+.platform-glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: hsl(var(--background));
+  z-index: -1;
+}
