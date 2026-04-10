@@ -289,6 +289,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
                 style={{
                   background: `conic-gradient(from ${Math.random() * 360}deg, transparent, ${btn.color} / 0.5, transparent, transparent, ${btn.color} / 0.25, transparent)`,
                   animation: `spin ${ctaGlowParams[i].speed}s linear infinite ${ctaGlowParams[i].dir === -1 ? 'reverse' : ''}`,
+                  willChange: 'transform',
                 }}
               />
               <span className="relative z-10 block rounded-full px-6 py-3 text-sm text-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
