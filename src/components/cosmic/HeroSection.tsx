@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ lang }: HeroSectionProps) => {
   const tagline = lang === 'tr'
-    ? 'Sessizliğin mimarı, kelimelerin mühendisi.'
+    ? 'Sessizlikte mimar, kelimelerle mühendis.'
     : 'Architect of Silence, Engineer of Words.';
 
   const [displayed, setDisplayed] = useState('');
