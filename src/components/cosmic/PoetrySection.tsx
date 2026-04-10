@@ -2,7 +2,7 @@ import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS, POEM_CATEGORIES } from '@/data/poemsData';
 import { InstagramIcon } from '@/components/icons/BrandIcons';
-import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, ChevronDown } from 'lucide-react';
+import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, ChevronDown, BookOpen } from 'lucide-react';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
@@ -15,6 +15,7 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   sparkles: Sparkles,
   zap: Zap,
   music: Music,
+  book: BookOpen,
 };
 
 const PAGE_SIZE = 12;
