@@ -154,22 +154,30 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
             {lang === 'tr' ? 'Tüm Platformlar' : 'All Platforms'}
           </p>
-          <div className="flex flex-wrap gap-3">
-            {PLATFORMS.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass rounded-full px-5 py-2.5 text-xs text-muted-foreground hover:text-foreground transition-all duration-300 hover:shadow-lg"
-                style={{ '--hover-color': p.color } as React.CSSProperties}
-              >
-                {p.name}
-              </a>
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {PLATFORMS.map((p) => {
+              const Icon = p.icon;
+              return (
+                <a
+                  key={p.name}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:shadow-lg hover:border-white/20"
+                >
+                  <Icon
+                    className="w-5 h-5 shrink-0 transition-colors duration-300"
+                    style={{ color: p.color }}
+                  />
+                  <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors">
+                    {p.name}
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>
