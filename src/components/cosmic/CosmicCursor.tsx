@@ -24,6 +24,20 @@ interface CelestialBody {
   spiralArms: number;
   glowSize: number;
   moons: Moon[];
+  opacity: number;    // for glow-up fade-in
+  vx: number;         // drift velocity
+  vy: number;
+}
+
+interface BackgroundStar {
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  opacity: number;       // current opacity (glow up)
+  targetOpacity: number; // target
+  vx: number;
+  vy: number;
 }
 
 interface SupernovaParticle {
