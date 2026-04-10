@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Play, Pause } from 'lucide-react';
 import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
 
@@ -18,7 +18,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   // Audio player state
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -51,6 +51,15 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     });
     audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
 
+    // Auto-play on load
+    const playPromise = audio.play();
+    if (playPromise) {
+      playPromise.catch(() => {
+        // Browser blocked autoplay, set to not playing
+        setIsPlaying(false);
+      });
+    }
+
     return () => { audio.pause(); audio.src = ''; };
   }, []);
 
@@ -76,6 +85,12 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
+  // Random glow params for CTA buttons
+  const ctaGlowParams = useMemo(() => [
+    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1 },
+    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1 },
+  ], []);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background video */}
@@ -98,7 +113,8 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <p className="font-mono text-xs tracking-[0.5em] uppercase text-muted-foreground mb-6">
+          <p className="font-mono text-xs tracking-[0.5em] uppercase text-muted-foreground mb-6"
+            style={{ textShadow: '0 0 10px rgba(200,220,255,0.3)' }}>
             {lang === 'tr' ? 'şair · besteci · AI' : 'poet · composer · AI'}
           </p>
         </motion.div>
@@ -169,12 +185,13 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
           className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8 font-mono min-h-[1.8em]"
+          style={{ textShadow: '0 0 12px rgba(200,220,255,0.2)' }}
         >
           {displayed}
           {!typeDone && <span className="animate-pulse text-primary ml-0.5">|</span>}
         </motion.p>
 
-        {/* Audio Player - no border */}
+        {/* Audio Player */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -182,7 +199,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           className="mb-8 max-w-md mx-auto"
         >
           <div className="flex items-center gap-4">
-            {/* Album art */}
             <div className="relative shrink-0" style={{ perspective: '600px' }}>
               <div
                 className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-white/10 shadow-lg"
@@ -192,12 +208,12 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
               </div>
             </div>
 
-            {/* Info + controls */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between mb-1">
                 <div>
-                  <h3 className="font-display text-sm sm:text-base font-bold text-foreground truncate">2'ye Saymak</h3>
-                  <p className="text-[10px] text-muted-foreground">Rahmi Oğuzhan</p>
+                  <h3 className="font-display text-sm sm:text-base font-bold text-foreground truncate"
+                    style={{ textShadow: '0 0 10px rgba(200,220,255,0.2)' }}>2'ye Saymak</h3>
+                  <p className="text-[10px] text-muted-foreground" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>Rahmi Oğuzhan</p>
                 </div>
                 <button
                   onClick={togglePlay}
@@ -211,7 +227,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
                   )}
                 </button>
               </div>
-              {/* Progress bar */}
               <div
                 ref={progressRef}
                 onClick={handleSeek}
@@ -260,28 +275,28 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           transition={{ duration: 0.8, delay: 2.1 }}
           className="flex justify-center gap-4"
         >
-          <a
-            href="#muzik"
-            className="relative group glass px-6 py-3 rounded-full text-sm text-foreground transition-all duration-300 overflow-hidden"
-          >
-            <span className="absolute inset-0 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors duration-300" />
-            <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-gradient-to-r from-primary/10 to-primary/5 transition-opacity duration-300" />
-            <span className="absolute inset-0 rounded-full animate-pulse opacity-0 group-hover:opacity-50 shadow-[0_0_15px_hsl(213_100%_65%/0.3)]" style={{ animationDuration: '2s' }} />
-            <span className="relative z-10 group-hover:text-primary transition-colors">
-              {lang === 'tr' ? 'Müziği Keşfet' : 'Explore Music'}
-            </span>
-          </a>
-          <a
-            href="#siir"
-            className="relative group glass px-6 py-3 rounded-full text-sm text-foreground transition-all duration-300 overflow-hidden"
-          >
-            <span className="absolute inset-0 rounded-full border border-secondary/30 group-hover:border-secondary/60 transition-colors duration-300" />
-            <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-gradient-to-r from-secondary/10 to-secondary/5 transition-opacity duration-300" />
-            <span className="absolute inset-0 rounded-full animate-pulse opacity-0 group-hover:opacity-50 shadow-[0_0_15px_hsl(263_70%_58%/0.3)]" style={{ animationDuration: '2s' }} />
-            <span className="relative z-10 group-hover:text-secondary transition-colors">
-              {lang === 'tr' ? 'Şiirleri Oku' : 'Read Poetry'}
-            </span>
-          </a>
+          {[
+            { href: '#muzik', label: lang === 'tr' ? 'Müziği Keşfet' : 'Explore Music', color: 'hsl(213 100% 65%)' },
+            { href: '#siir', label: lang === 'tr' ? 'Şiirleri Oku' : 'Read Poetry', color: 'hsl(263 70% 58%)' },
+          ].map((btn, i) => (
+            <a
+              key={btn.href}
+              href={btn.href}
+              className="relative group rounded-full p-[1px] overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: `conic-gradient(from ${Math.random() * 360}deg, transparent, ${btn.color} / 0.5, transparent, transparent, ${btn.color} / 0.25, transparent)`,
+                  animation: `spin ${ctaGlowParams[i].speed}s linear infinite ${ctaGlowParams[i].dir === -1 ? 'reverse' : ''}`,
+                }}
+              />
+              <span className="relative z-10 block rounded-full px-6 py-3 text-sm text-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
+                style={{ boxShadow: `0 0 15px ${btn.color.replace(')', ' / 0.1)')}` }}>
+                {btn.label}
+              </span>
+            </a>
+          ))}
         </motion.div>
       </div>
 

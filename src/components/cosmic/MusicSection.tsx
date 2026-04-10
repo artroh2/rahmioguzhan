@@ -43,7 +43,6 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
       <div className="absolute inset-0 bg-[#050F14]/60" />
@@ -57,19 +56,19 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3">
+          <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3"
+            style={{ textShadow: '0 0 12px rgba(74,158,255,0.4)' }}>
             {lang === 'tr' ? 'müzik' : 'music'}
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
               backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(200,220,255,0.5), rgba(255,255,255,0.95), rgba(180,210,255,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(200,220,255,0.25)) drop-shadow(0 0 30px rgba(180,200,255,0.1))',
+              filter: 'drop-shadow(0 0 18px rgba(200,220,255,0.35)) drop-shadow(0 0 40px rgba(180,200,255,0.15))',
               WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}>
             {lang === 'tr' ? 'Şarkılar & Albümler' : 'Songs & Albums'}
           </h2>
         </motion.div>
-
 
         {/* Platform links */}
         <motion.div
@@ -77,7 +76,8 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6 text-center">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6 text-center"
+            style={{ textShadow: '0 0 10px rgba(200,220,255,0.25)' }}>
             {lang === 'tr' ? 'Tüm Şarkılar, Tüm Platformlar' : 'All Songs, All Platforms'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -106,7 +106,8 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                   } as React.CSSProperties}
                 >
                   <Icon className="w-5 h-5 shrink-0 transition-colors duration-300" style={{ color: p.color }} />
-                  <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors">
+                  <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors"
+                    style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
                     {p.name}
                   </span>
                 </motion.a>
