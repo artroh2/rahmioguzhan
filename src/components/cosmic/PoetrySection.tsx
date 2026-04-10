@@ -77,6 +77,30 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
     setExpandedId(prev => prev === id ? null : id);
   }, []);
 
+  const handleTranslate = useCallback(async (poem: typeof POEMS[0], e: React.MouseEvent) => {
+    e.stopPropagation();
+    const id = poem.id;
+    if (translations[id]) {
+      setShowTranslation(prev => ({ ...prev, [id]: !prev[id] }));
+      return;
+    }
+    setTranslatingId(id);
+    try {
+      const { data, error } = await supabase.functions.invoke('translate-poem', {
+        body: { title: poem.title, body: poem.body },
+      });
+      if (error) throw error;
+      if (data?.translation) {
+        setTranslations(prev => ({ ...prev, [id]: data.translation }));
+        setShowTranslation(prev => ({ ...prev, [id]: true }));
+      }
+    } catch (err) {
+      console.error('Translation error:', err);
+    } finally {
+      setTranslatingId(null);
+    }
+  }, [translations]);
+
   const handleShuffle = useCallback(() => {
     setShuffleKey(k => k + 1);
   }, []);
