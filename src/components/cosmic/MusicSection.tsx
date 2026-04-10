@@ -34,11 +34,24 @@ const TRACKS = [
 ];
 
 const PLATFORMS = [
-  { name: 'Spotify', color: '#1DB954', href: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk' },
-  { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707' },
-  { name: 'YouTube Music', color: '#FF0000', href: '#' },
-  { name: 'Deezer', color: '#A238FF', href: '#' },
-  { name: 'Tidal', color: '#00FFFF', href: '#' },
+  { name: 'Spotify', color: '#1DB954', href: 'https://open.spotify.com/search/Rahmi%20Oguzhan' },
+  { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/search?term=Rahmi+Oguzhan' },
+  { name: 'iTunes', color: '#EA4CC0', href: 'https://itunes.apple.com/search?term=Rahmi+Oguzhan&media=music' },
+  { name: 'Amazon Music', color: '#25D1DA', href: 'https://music.amazon.com/search/Rahmi+Oguzhan' },
+  { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/search?q=Rahmi+Oguzhan' },
+  { name: 'Deezer', color: '#A238FF', href: 'https://www.deezer.com/search/Rahmi%20Oguzhan' },
+  { name: 'Tidal', color: '#00FFFF', href: 'https://tidal.com/search?q=Rahmi+Oguzhan' },
+  { name: 'iHeartRadio', color: '#C6002B', href: 'https://www.iheart.com/search/?keywords=Rahmi+Oguzhan' },
+  { name: 'Pandora', color: '#3668FF', href: 'https://www.pandora.com/search/Rahmi+Oguzhan/all' },
+  { name: 'Anghami', color: '#6C23A0', href: 'https://play.anghami.com/search/Rahmi+Oguzhan' },
+  { name: 'Boomplay', color: '#29B6F6', href: 'https://www.boomplaymusic.com/search#Rahmi+Oguzhan' },
+  { name: 'FLO', color: '#FF6B00', href: 'https://www.flo.com.tr/search?q=Rahmi+Oguzhan' },
+  { name: 'Audiomack', color: '#FFA500', href: 'https://audiomack.com/search?q=Rahmi+Oguzhan' },
+  { name: 'LiveOne', color: '#E91E63', href: 'https://www.liveone.com/search/?q=Rahmi+Oguzhan' },
+  { name: 'Shazam', color: '#0088FF', href: 'https://www.shazam.com/search?q=Rahmi+Oguzhan' },
+  { name: 'KKBOX', color: '#09C4E8', href: 'https://www.kkbox.com/search?q=Rahmi+Oguzhan' },
+  { name: 'JOOX', color: '#00C853', href: 'https://www.joox.com/search?q=Rahmi+Oguzhan' },
+  { name: 'NetEase', color: '#C62828', href: 'https://music.163.com/#/search/m/?s=Rahmi+Oguzhan' },
 ];
 
 const MusicSection = ({ lang }: MusicSectionProps) => {
