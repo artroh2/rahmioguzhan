@@ -1,6 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
+import albumWeAreOne from '@/assets/album-we-are-one.jpg';
+import albumSakinVeSakin from '@/assets/album-sakin-ve-sakin.jpg';
+import albumYasanabilecek from '@/assets/album-yasanabilecek.jpg';
+import albumKendimleSavas from '@/assets/album-kendimle-savas.jpg';
 
 interface MusicSectionProps {
   lang: 'tr' | 'en';
