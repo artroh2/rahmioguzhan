@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Play, Pause } from 'lucide-react';
+import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
 
 interface HeroSectionProps {
   lang: 'tr' | 'en';
@@ -13,6 +14,14 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   const [displayed, setDisplayed] = useState('');
   const [typeDone, setTypeDone] = useState(false);
+
+  // Audio player state
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     setDisplayed('');
@@ -30,9 +39,46 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     return () => clearInterval(interval);
   }, [tagline]);
 
+  useEffect(() => {
+    const audio = new Audio('/audio/ikiye-saymak.mp3');
+    audio.preload = 'metadata';
+    audioRef.current = audio;
+
+    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
+    audio.addEventListener('timeupdate', () => {
+      setCurrentTime(audio.currentTime);
+      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
+    });
+    audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
+
+    return () => { audio.pause(); audio.src = ''; };
+  }, []);
+
+  const togglePlay = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) { audio.pause(); } else { audio.play(); }
+    setIsPlaying(!isPlaying);
+  }, [isPlaying]);
+
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    const bar = progressRef.current;
+    if (!audio || !bar || !audio.duration) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  }, []);
+
+  const fmt = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Background video */}
       <div className="absolute inset-0">
         <video
           src="/videos/hero-video.mp4"
@@ -107,7 +153,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           </span>
         </motion.h1>
 
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -128,6 +173,64 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           {displayed}
           {!typeDone && <span className="animate-pulse text-primary ml-0.5">|</span>}
         </motion.p>
+
+        {/* Audio Player - no border */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+          className="mb-8 max-w-md mx-auto"
+        >
+          <div className="flex items-center gap-4">
+            {/* Album art */}
+            <div className="relative shrink-0" style={{ perspective: '600px' }}>
+              <div
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-white/10 shadow-lg"
+                style={isPlaying ? { animation: 'flipY 4s linear infinite' } : {}}
+              >
+                <img src={albumIkiyeSaymak} alt="2'ye Saymak" className="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            {/* Info + controls */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1">
+                <div>
+                  <h3 className="font-display text-sm sm:text-base font-bold text-foreground truncate">2'ye Saymak</h3>
+                  <p className="text-[10px] text-muted-foreground">Rahmi Oğuzhan</p>
+                </div>
+                <button
+                  onClick={togglePlay}
+                  className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 transition-all duration-300 shrink-0"
+                  aria-label={isPlaying ? 'Pause' : 'Play'}
+                >
+                  {isPlaying ? (
+                    <Pause className="w-3.5 h-3.5 text-primary" fill="currentColor" />
+                  ) : (
+                    <Play className="w-3.5 h-3.5 text-primary ml-0.5" fill="currentColor" />
+                  )}
+                </button>
+              </div>
+              {/* Progress bar */}
+              <div
+                ref={progressRef}
+                onClick={handleSeek}
+                className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative"
+              >
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
+                  style={{ width: `${progress}%` }}
+                >
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
+                </div>
+              </div>
+              <div className="flex justify-between mt-1">
+                <span className="text-[9px] text-muted-foreground font-mono">{fmt(currentTime)}</span>
+                <span className="text-[9px] text-muted-foreground font-mono">{fmt(duration)}</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Embedded video */}
         <motion.div
