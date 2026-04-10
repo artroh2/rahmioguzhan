@@ -394,11 +394,22 @@ const CosmicCursor = () => {
 
     const addCelestial = (x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy') => {
       celestialsRef.current.push(spawnCelestial(x, y, sizeScale, forceType));
-      if (celestialsRef.current.length > 30) {
-        celestialsRef.current.shift();
-      }
       if (!hasContent) setHasContent(true);
     };
+
+    // ─── Random explosions: every 4-8s a random planet explodes ───
+    const randomExplosionInterval = setInterval(() => {
+      const bodies = celestialsRef.current;
+      if (bodies.length < 3) return;
+      // Pick a random planet (not galaxy) to explode
+      const candidates = bodies.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'planet' && b.opacity >= 0.8);
+      if (candidates.length === 0) return;
+      const pick = candidates[Math.floor(Math.random() * candidates.length)];
+      // Spawn supernova at its position
+      supernovasRef.current.push(spawnSupernova(pick.b.x, pick.b.y));
+      // Remove the planet
+      celestialsRef.current.splice(pick.i, 1);
+    }, 4000 + Math.random() * 4000);
 
     // ─── Desktop mouse events ───
     const onMove = (e: MouseEvent) => {
@@ -641,6 +652,7 @@ const CosmicCursor = () => {
       cancelAnimationFrame(frameRef.current);
       clearInterval(autoSpawnInterval);
       clearInterval(bgStarInterval);
+      clearInterval(randomExplosionInterval);
       cancelLongPress();
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
