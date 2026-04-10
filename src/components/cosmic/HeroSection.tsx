@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import heroImg from '@/assets/cosmic-hero.jpg';
 
 interface HeroSectionProps {
   lang: 'tr' | 'en';
@@ -7,16 +8,15 @@ interface HeroSectionProps {
 const HeroSection = ({ lang }: HeroSectionProps) => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-background" />
-      <div className="absolute inset-0 stars-bg opacity-60" />
-      <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" style={{
-        background: 'radial-gradient(ellipse at 50% 40%, hsl(213 100% 65% / 0.08) 0%, transparent 60%), radial-gradient(ellipse at 30% 70%, hsl(263 70% 58% / 0.06) 0%, transparent 50%)'
-      }} />
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img src={heroImg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      </div>
 
-      {/* Crystal/geometric accent */}
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 border border-primary/10 rotate-45 rounded-3xl opacity-30 animate-float" />
-      <div className="absolute bottom-1/3 left-1/4 w-48 h-48 border border-cosmic/10 rotate-12 rounded-2xl opacity-20" style={{ animationDelay: '1.5s', animation: 'float 4s ease-in-out infinite' }} />
+      {/* Subtle star overlay */}
+      <div className="absolute inset-0 stars-bg opacity-30" />
 
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div
