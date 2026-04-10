@@ -61,11 +61,15 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3">
-            {lang === 'tr' ? 'iletişim' : 'contact'}
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
-            {lang === 'tr' ? 'Bağlantı Kur' : 'Get in Touch'}
+          <h2
+            className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
+            style={{
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+            }}
+          >
+            {lang === 'tr' ? 'BAĞLANTI KUR' : 'GET IN TOUCH'}
           </h2>
         </motion.div>
 
