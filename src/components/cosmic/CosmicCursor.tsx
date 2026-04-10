@@ -43,17 +43,17 @@ const CosmicCursor = () => {
 
       mouseRef.current = { x: e.clientX, y: e.clientY };
 
-      if (speed > 3) {
-        const count = Math.min(Math.floor(speed / 8), 3);
+      if (speed > 2) {
+        const count = Math.min(Math.floor(speed / 4), 5);
         for (let i = 0; i < count; i++) {
           particlesRef.current.push({
-            x: e.clientX + (Math.random() - 0.5) * 8,
-            y: e.clientY + (Math.random() - 0.5) * 8,
+            x: e.clientX + (Math.random() - 0.5) * 6,
+            y: e.clientY + (Math.random() - 0.5) * 6,
             life: 1,
             maxLife: 1,
-            size: Math.random() * 2 + 0.5,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 2.5 + 1,
+            vx: 0,
+            vy: 0,
           });
         }
       }
