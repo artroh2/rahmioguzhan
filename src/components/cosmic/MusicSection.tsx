@@ -157,7 +157,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + idx * 0.05 }}
-                  className="glass rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
+                  className="bg-transparent border-none rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
                   style={{
                     // @ts-ignore
                     '--platform-color': p.color,
