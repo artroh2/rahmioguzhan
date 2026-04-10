@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback, ComponentType, SVGProps } from 'react';
 import { Play, Pause } from 'lucide-react';
-import albumKendimleSavas from '@/assets/album-kendimle-savas.jpg';
+import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
 import {
   SpotifyIcon, AppleMusicIcon, ITunesIcon, AmazonMusicIcon,
   YouTubeMusicIcon, DeezerIcon, TidalIcon, IHeartRadioIcon,
