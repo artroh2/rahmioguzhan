@@ -1,10 +1,16 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, ComponentType, SVGProps } from 'react';
 import { ExternalLink } from 'lucide-react';
 import albumWeAreOne from '@/assets/album-we-are-one.jpg';
 import albumSakinVeSakin from '@/assets/album-sakin-ve-sakin.jpg';
 import albumYasanabilecek from '@/assets/album-yasanabilecek.jpg';
 import albumKendimleSavas from '@/assets/album-kendimle-savas.jpg';
+import {
+  SpotifyIcon, AppleMusicIcon, ITunesIcon, AmazonMusicIcon,
+  YouTubeMusicIcon, DeezerIcon, TidalIcon, IHeartRadioIcon,
+  PandoraIcon, AnghamiIcon, BoomplayIcon, FloIcon,
+  AudiomackIcon, LiveOneIcon, ShazamIcon, KKBOXIcon, JOOXIcon, NetEaseIcon,
+} from '@/components/icons/PlatformIcons';
 
 interface MusicSectionProps {
   lang: 'tr' | 'en';
@@ -41,25 +47,32 @@ const TRACKS = [
   },
 ];
 
-const PLATFORMS = [
-  { name: 'Spotify', color: '#1DB954', href: 'https://open.spotify.com/search/Rahmi%20Oguzhan' },
-  { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/search?term=Rahmi+Oguzhan' },
-  { name: 'iTunes', color: '#EA4CC0', href: 'https://itunes.apple.com/search?term=Rahmi+Oguzhan&media=music' },
-  { name: 'Amazon Music', color: '#25D1DA', href: 'https://music.amazon.com/search/Rahmi+Oguzhan' },
-  { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/search?q=Rahmi+Oguzhan' },
-  { name: 'Deezer', color: '#A238FF', href: 'https://www.deezer.com/search/Rahmi%20Oguzhan' },
-  { name: 'Tidal', color: '#00FFFF', href: 'https://tidal.com/search?q=Rahmi+Oguzhan' },
-  { name: 'iHeartRadio', color: '#C6002B', href: 'https://www.iheart.com/search/?keywords=Rahmi+Oguzhan' },
-  { name: 'Pandora', color: '#3668FF', href: 'https://www.pandora.com/search/Rahmi+Oguzhan/all' },
-  { name: 'Anghami', color: '#6C23A0', href: 'https://play.anghami.com/search/Rahmi+Oguzhan' },
-  { name: 'Boomplay', color: '#29B6F6', href: 'https://www.boomplaymusic.com/search#Rahmi+Oguzhan' },
-  { name: 'FLO', color: '#FF6B00', href: 'https://www.flo.com.tr/search?q=Rahmi+Oguzhan' },
-  { name: 'Audiomack', color: '#FFA500', href: 'https://audiomack.com/search?q=Rahmi+Oguzhan' },
-  { name: 'LiveOne', color: '#E91E63', href: 'https://www.liveone.com/search/?q=Rahmi+Oguzhan' },
-  { name: 'Shazam', color: '#0088FF', href: 'https://www.shazam.com/search?q=Rahmi+Oguzhan' },
-  { name: 'KKBOX', color: '#09C4E8', href: 'https://www.kkbox.com/search?q=Rahmi+Oguzhan' },
-  { name: 'JOOX', color: '#00C853', href: 'https://www.joox.com/search?q=Rahmi+Oguzhan' },
-  { name: 'NetEase', color: '#C62828', href: 'https://music.163.com/#/search/m/?s=Rahmi+Oguzhan' },
+type PlatformEntry = {
+  name: string;
+  color: string;
+  href: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+const PLATFORMS: PlatformEntry[] = [
+  { name: 'Spotify', color: '#1DB954', href: 'https://open.spotify.com/search/Rahmi%20Oguzhan', icon: SpotifyIcon },
+  { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/search?term=Rahmi+Oguzhan', icon: AppleMusicIcon },
+  { name: 'iTunes', color: '#EA4CC0', href: 'https://itunes.apple.com/search?term=Rahmi+Oguzhan&media=music', icon: ITunesIcon },
+  { name: 'Amazon Music', color: '#25D1DA', href: 'https://music.amazon.com/search/Rahmi+Oguzhan', icon: AmazonMusicIcon },
+  { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/search?q=Rahmi+Oguzhan', icon: YouTubeMusicIcon },
+  { name: 'Deezer', color: '#A238FF', href: 'https://www.deezer.com/search/Rahmi%20Oguzhan', icon: DeezerIcon },
+  { name: 'Tidal', color: '#00FFFF', href: 'https://tidal.com/search?q=Rahmi+Oguzhan', icon: TidalIcon },
+  { name: 'iHeartRadio', color: '#C6002B', href: 'https://www.iheart.com/search/?keywords=Rahmi+Oguzhan', icon: IHeartRadioIcon },
+  { name: 'Pandora', color: '#3668FF', href: 'https://www.pandora.com/search/Rahmi+Oguzhan/all', icon: PandoraIcon },
+  { name: 'Anghami', color: '#6C23A0', href: 'https://play.anghami.com/search/Rahmi+Oguzhan', icon: AnghamiIcon },
+  { name: 'Boomplay', color: '#29B6F6', href: 'https://www.boomplaymusic.com/search#Rahmi+Oguzhan', icon: BoomplayIcon },
+  { name: 'FLO', color: '#FF6B00', href: 'https://www.flo.com.tr/search?q=Rahmi+Oguzhan', icon: FloIcon },
+  { name: 'Audiomack', color: '#FFA500', href: 'https://audiomack.com/search?q=Rahmi+Oguzhan', icon: AudiomackIcon },
+  { name: 'LiveOne', color: '#E91E63', href: 'https://www.liveone.com/search/?q=Rahmi+Oguzhan', icon: LiveOneIcon },
+  { name: 'Shazam', color: '#0088FF', href: 'https://www.shazam.com/search?q=Rahmi+Oguzhan', icon: ShazamIcon },
+  { name: 'KKBOX', color: '#09C4E8', href: 'https://www.kkbox.com/search?q=Rahmi+Oguzhan', icon: KKBOXIcon },
+  { name: 'JOOX', color: '#00C853', href: 'https://www.joox.com/search?q=Rahmi+Oguzhan', icon: JOOXIcon },
+  { name: 'NetEase', color: '#C62828', href: 'https://music.163.com/#/search/m/?s=Rahmi+Oguzhan', icon: NetEaseIcon },
 ];
 
 const MusicSection = ({ lang }: MusicSectionProps) => {
@@ -141,22 +154,30 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
             {lang === 'tr' ? 'Tüm Platformlar' : 'All Platforms'}
           </p>
-          <div className="flex flex-wrap gap-3">
-            {PLATFORMS.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass rounded-full px-5 py-2.5 text-xs text-muted-foreground hover:text-foreground transition-all duration-300 hover:shadow-lg"
-                style={{ '--hover-color': p.color } as React.CSSProperties}
-              >
-                {p.name}
-              </a>
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {PLATFORMS.map((p) => {
+              const Icon = p.icon;
+              return (
+                <a
+                  key={p.name}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:shadow-lg hover:border-white/20"
+                >
+                  <Icon
+                    className="w-5 h-5 shrink-0 transition-colors duration-300"
+                    style={{ color: p.color }}
+                  />
+                  <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors">
+                    {p.name}
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>
