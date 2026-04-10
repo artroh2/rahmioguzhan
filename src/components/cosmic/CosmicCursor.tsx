@@ -100,20 +100,13 @@ const CosmicCursor = () => {
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Particles
+      // Persistent paint particles — never removed
       const particles = particlesRef.current;
-      for (let i = particles.length - 1; i >= 0; i--) {
+      for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.life -= 0.025;
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.life <= 0) {
-          particles.splice(i, 1);
-          continue;
-        }
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(240, 244, 255, ${p.life * 0.6})`;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(74, 158, 255, 0.45)';
         ctx.fill();
       }
     };
