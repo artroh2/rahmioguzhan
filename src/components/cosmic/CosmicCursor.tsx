@@ -421,7 +421,13 @@ const CosmicCursor = () => {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
-      addCelestial(e.clientX, e.clientY);
+      clickCountRef.current++;
+      if (clickCountRef.current % 5 === 0) {
+        // Every 5 clicks → huge galaxy
+        addCelestial(e.clientX, e.clientY, 3, 'galaxy');
+      } else {
+        addCelestial(e.clientX, e.clientY);
+      }
     };
 
     const onDblClick = (e: MouseEvent) => {
@@ -437,27 +443,55 @@ const CosmicCursor = () => {
       if (!touch) return;
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
-
-      // Spawn a celestial on touch
-      addCelestial(touch.clientX, touch.clientY, 0.7);
+      clickCountRef.current++;
+      if (clickCountRef.current % 5 === 0) {
+        addCelestial(touch.clientX, touch.clientY, 2.5, 'galaxy');
+      } else {
+        addCelestial(touch.clientX, touch.clientY, 0.7);
+      }
     };
 
     const onTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       if (!touch) return;
       mouseRef.current = { x: touch.clientX, y: touch.clientY };
-      // Paint trail dots like cursor
       paintDots(touch.clientX, touch.clientY, 2);
     };
 
-    // ─── Auto-spawn every 3 seconds ───
+    // ─── Auto-spawn: medium planet every 5 seconds ───
     const autoSpawnInterval = setInterval(() => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       const x = 40 + Math.random() * (w - 80);
       const y = 40 + Math.random() * (h - 80);
-      addCelestial(x, y, isTouch ? 0.6 : 0.8);
-    }, 3000);
+      addCelestial(x, y, isTouch ? 0.8 : 1.2, 'planet');
+    }, 5000);
+
+    // ─── Background stars: spawn many with glow-up ───
+    const spawnBgStars = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const count = isTouch ? 40 : 80;
+      for (let i = 0; i < count; i++) {
+        bgStarsRef.current.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: 0.5 + Math.random() * 2,
+          color: trailColors[Math.floor(Math.random() * trailColors.length)],
+          opacity: 0,
+          targetOpacity: 0.3 + Math.random() * 0.5,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+        });
+      }
+      // Limit
+      if (bgStarsRef.current.length > (isTouch ? 120 : 250)) {
+        bgStarsRef.current.splice(0, bgStarsRef.current.length - (isTouch ? 120 : 250));
+      }
+      if (!hasContent) setHasContent(true);
+    };
+    spawnBgStars();
+    const bgStarInterval = setInterval(spawnBgStars, 8000);
 
     // Register events
     if (!isTouch) {
