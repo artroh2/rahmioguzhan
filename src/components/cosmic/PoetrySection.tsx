@@ -242,40 +242,22 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           </motion.div>
         )}
 
-        {/* Instagram */}
+        {/* Instagram Icon */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
+          className="mt-16 text-center"
         >
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 text-center">
-            {lang === 'tr' ? 'Instagram\'da Şiirler' : 'Poetry on Instagram'}
-          </p>
-          <div className="relative rounded-2xl overflow-hidden border border-secondary/20 shadow-[0_0_40px_hsl(263_70%_58%/0.08)]">
-            <iframe
-              src="https://www.instagram.com/siir2.0/embed"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              scrolling="yes"
-              allowTransparency
-              loading="lazy"
-              className="rounded-2xl bg-[#030508]"
-              style={{ filter: 'brightness(0.9) saturate(1.1)' }}
-            />
-          </div>
-          <div className="text-center mt-4">
-            <a
-              href="https://www.instagram.com/siir2.0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full glass text-muted-foreground hover:text-secondary hover:border-secondary/30 transition-all duration-300"
-              aria-label="@siir2.0 Instagram"
-            >
-              <InstagramIcon className="w-5 h-5" />
-            </a>
-          </div>
+          <a
+            href="https://www.instagram.com/siir2.0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center text-muted-foreground/30 hover:text-secondary transition-all duration-500 hover:drop-shadow-[0_0_40px_hsl(263_70%_58%/0.3)]"
+            aria-label="@siir2.0 Instagram"
+          >
+            <InstagramIcon className="w-36 h-36 sm:w-44 sm:h-44" />
+          </a>
         </motion.div>
       </div>
     </section>
