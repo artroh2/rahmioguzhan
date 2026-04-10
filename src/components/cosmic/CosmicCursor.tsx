@@ -603,6 +603,7 @@ const CosmicCursor = () => {
     return () => {
       cancelAnimationFrame(frameRef.current);
       clearInterval(autoSpawnInterval);
+      clearInterval(bgStarInterval);
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseover', onOver);
