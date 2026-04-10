@@ -74,7 +74,7 @@ const PALETTES = [
   { c1: '255, 120, 50', c2: '180, 60, 20', c3: '255, 180, 120' },
 ];
 
-function spawnCelestial(x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy'): CelestialBody {
+function spawnCelestial(x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy' | 'earth'): CelestialBody {
   const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
   const isGalaxy = forceType === 'galaxy' ? true : forceType === 'planet' || forceType === 'earth' ? false : Math.random() > 0.5;
   const radius = isGalaxy
