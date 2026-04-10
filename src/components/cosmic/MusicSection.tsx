@@ -17,34 +17,10 @@ interface MusicSectionProps {
 }
 
 const TRACKS = [
-  {
-    title: 'We Are One',
-    artist: 'Rahmi Oğuzhan',
-    cover: albumWeAreOne,
-    spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
-    apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
-  },
-  {
-    title: 'Sakın ve Sakin',
-    artist: 'Rahmi Oğuzhan',
-    cover: albumSakinVeSakin,
-    spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
-    apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
-  },
-  {
-    title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum',
-    artist: 'Rahmi Oğuzhan',
-    cover: albumYasanabilecek,
-    spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
-    apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
-  },
-  {
-    title: 'Kendimle Savaş Halindeyim',
-    artist: 'Rahmi Oğuzhan',
-    cover: albumKendimleSavas,
-    spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
-    apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
-  },
+  { title: 'We Are One', artist: 'Rahmi Oğuzhan', cover: albumWeAreOne, spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707' },
+  { title: 'Sakın ve Sakin', artist: 'Rahmi Oğuzhan', cover: albumSakinVeSakin, spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707' },
+  { title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum', artist: 'Rahmi Oğuzhan', cover: albumYasanabilecek, spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707' },
+  { title: 'Kendimle Savaş Halindeyim', artist: 'Rahmi Oğuzhan', cover: albumKendimleSavas, spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707' },
 ];
 
 type PlatformEntry = {
@@ -81,10 +57,12 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
 
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
-      <div className="absolute inset-0 stars-bg opacity-30" />
+      {/* Dark teal overlay */}
+      <div className="absolute inset-0 bg-[#050F14]/60" />
+
       <div className="relative z-10 max-w-6xl mx-auto px-6" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="mb-16"
@@ -97,25 +75,27 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Spotify Embed */}
+        {/* Spotify Embed with glow */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-12"
         >
-          <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-[0_0_40px_hsl(213_100%_65%/0.08)]">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-cosmic/5 pointer-events-none z-10 mix-blend-color rounded-2xl" />
-            <iframe
-              src="https://open.spotify.com/embed/artist/4fQ8VbreLSA4Eaiwm1Elfk?utm_source=generator&theme=0"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              className="rounded-2xl relative z-0"
-              style={{ filter: 'saturate(1.2) hue-rotate(-10deg) brightness(0.85)' }}
-            />
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-2xl bg-[#1DB954]/10 blur-xl" />
+            <div className="relative rounded-2xl overflow-hidden border border-[#1DB954]/20 shadow-[0_0_40px_rgba(29,185,84,0.1)]">
+              <iframe
+                src="https://open.spotify.com/embed/artist/4fQ8VbreLSA4Eaiwm1Elfk?utm_source=generator&theme=0"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="rounded-2xl relative z-0"
+                style={{ filter: 'saturate(1.2) hue-rotate(-10deg) brightness(0.85)' }}
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -124,10 +104,10 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           {TRACKS.map((track, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * i }}
-              className="glass rounded-2xl p-5 group hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.1)]"
+              transition={{ duration: 0.5, delay: 0.15 * i + 0.3 }}
+              className="glass rounded-2xl p-5 group hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.1)]"
             >
               <div className="flex items-start gap-4">
                 <img src={track.cover} alt={track.title} loading="lazy" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
@@ -150,9 +130,9 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           ))}
         </div>
 
-        {/* Platform links */}
+        {/* Platform links with staggered entrance + brand glow on hover */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
@@ -160,24 +140,36 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
             {lang === 'tr' ? 'Tüm Platformlar' : 'All Platforms'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {PLATFORMS.map((p) => {
+            {PLATFORMS.map((p, idx) => {
               const Icon = p.icon;
               return (
-                <a
+                <motion.a
                   key={p.name}
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:shadow-lg hover:border-white/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.6 + idx * 0.05 }}
+                  className="glass rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
+                  style={{
+                    // @ts-ignore
+                    '--platform-color': p.color,
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${p.color}22, 0 0 0 1px ${p.color}33`;
+                    (e.currentTarget as HTMLElement).style.borderBottomColor = p.color;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = '';
+                    (e.currentTarget as HTMLElement).style.borderBottomColor = '';
+                  }}
                 >
-                  <Icon
-                    className="w-5 h-5 shrink-0 transition-colors duration-300"
-                    style={{ color: p.color }}
-                  />
+                  <Icon className="w-5 h-5 shrink-0 transition-colors duration-300" style={{ color: p.color }} />
                   <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors">
                     {p.name}
                   </span>
-                </a>
+                </motion.a>
               );
             })}
           </div>
