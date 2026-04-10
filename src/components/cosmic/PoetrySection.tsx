@@ -283,12 +283,49 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                       transition={{ duration: 0.4 }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-3 pt-3 border-t border-secondary/10">
-                        {poem.body.split('\n').map((line, li) => (
-                          <p key={li} className="font-display text-sm text-muted-foreground leading-relaxed italic">
+                      <div className="mt-3 pt-3 border-t border-secondary/10 relative">
+                        {/* EN translate button */}
+                        <button
+                          onClick={(e) => handleTranslate(e, poem)}
+                          disabled={translatingId === poem.id}
+                          className={`absolute top-3 right-0 flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono tracking-wider transition-all duration-300 border ${
+                            showTranslation[poem.id]
+                              ? 'text-secondary border-secondary/40 bg-secondary/10'
+                              : 'text-muted-foreground/60 border-border/30 hover:text-secondary hover:border-secondary/30'
+                          }`}
+                        >
+                          {translatingId === poem.id ? (
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                          ) : (
+                            <Languages className="w-3 h-3" />
+                          )}
+                          EN
+                        </button>
+
+                        {/* Original poem */}
+                        {(!showTranslation[poem.id]) && poem.body.split('\n').map((line, li) => (
+                          <p key={li} className="font-display text-sm text-muted-foreground leading-relaxed italic pr-12">
                             {line ? highlight(line) : <br />}
                           </p>
                         ))}
+
+                        {/* Translated poem */}
+                        {showTranslation[poem.id] && translations[poem.id] && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <p className="font-display text-xs text-secondary/70 mb-2 tracking-wider uppercase">
+                              {translations[poem.id].title}
+                            </p>
+                            {translations[poem.id].body.split('\n').map((line, li) => (
+                              <p key={li} className="font-display text-sm text-muted-foreground/80 leading-relaxed italic pr-12">
+                                {line || <br />}
+                              </p>
+                            ))}
+                          </motion.div>
+                        )}
                       </div>
                     </motion.div>
                   )}
