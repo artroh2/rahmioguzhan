@@ -30,7 +30,7 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are a poetry translator. Translate the given Turkish poem into English. 
+            content: `You are a poetry translator. Translate the given Turkish poem into English.
 RULES:
 - Preserve the exact line structure (same number of lines, same line breaks)
 - Preserve the poetic meaning, emotion, and imagery
@@ -49,13 +49,8 @@ RULES:
 
     if (!response.ok) {
       if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "Rate limited, please try again later." }), {
+        return new Response(JSON.stringify({ error: "Rate limited" }), {
           status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "Credits exhausted. Please add funds." }), {
-          status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       const t = await response.text();
