@@ -197,6 +197,104 @@ function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody, time: numbe
   }
 }
 
+function drawEarth(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
+  const { x, y, radius } = b;
+
+  // Atmosphere glow
+  const atmoGlow = ctx.createRadialGradient(x, y, radius * 0.8, x, y, radius * 3.5);
+  atmoGlow.addColorStop(0, 'rgba(80, 160, 255, 0.2)');
+  atmoGlow.addColorStop(0.4, 'rgba(60, 140, 255, 0.08)');
+  atmoGlow.addColorStop(1, 'rgba(60, 140, 255, 0)');
+  ctx.fillStyle = atmoGlow;
+  ctx.beginPath();
+  ctx.arc(x, y, radius * 3.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ocean base
+  const oceanGrad = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.1, x, y, radius);
+  oceanGrad.addColorStop(0, 'rgba(60, 140, 220, 0.95)');
+  oceanGrad.addColorStop(0.5, 'rgba(30, 100, 200, 0.9)');
+  oceanGrad.addColorStop(1, 'rgba(20, 60, 140, 0.85)');
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = oceanGrad;
+  ctx.fill();
+
+  // Continents (organic shapes via arcs)
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.clip();
+
+  const rot = time * 0.0003;
+  ctx.fillStyle = 'rgba(40, 160, 80, 0.7)';
+  // Continent 1
+  ctx.beginPath();
+  ctx.ellipse(x + radius * 0.2 * Math.cos(rot), y - radius * 0.2, radius * 0.45, radius * 0.3, rot * 0.5, 0, Math.PI * 2);
+  ctx.fill();
+  // Continent 2
+  ctx.fillStyle = 'rgba(50, 140, 60, 0.6)';
+  ctx.beginPath();
+  ctx.ellipse(x - radius * 0.3, y + radius * 0.25, radius * 0.35, radius * 0.25, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+  // Continent 3
+  ctx.fillStyle = 'rgba(60, 150, 70, 0.5)';
+  ctx.beginPath();
+  ctx.ellipse(x + radius * 0.35, y + radius * 0.3, radius * 0.2, radius * 0.15, 0.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ice caps
+  ctx.fillStyle = 'rgba(220, 230, 250, 0.5)';
+  ctx.beginPath();
+  ctx.ellipse(x, y - radius * 0.85, radius * 0.35, radius * 0.12, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x, y + radius * 0.88, radius * 0.3, radius * 0.1, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Cloud wisps
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+  ctx.lineWidth = radius * 0.06;
+  for (let i = 0; i < 4; i++) {
+    const cy = y - radius * 0.6 + i * radius * 0.35;
+    const cx = x + Math.sin(time * 0.001 + i) * radius * 0.2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * (0.3 + i * 0.1), -0.5, 1.2);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Specular highlight
+  const spec = ctx.createRadialGradient(x - radius * 0.35, y - radius * 0.35, radius * 0.05, x - radius * 0.2, y - radius * 0.2, radius * 0.6);
+  spec.addColorStop(0, 'rgba(255, 255, 255, 0.35)');
+  spec.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  ctx.fillStyle = spec;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Moon
+  for (const moon of b.moons) {
+    moon.angle += moon.speed;
+    const mx = x + Math.cos(moon.angle) * moon.orbitRadius;
+    const my = y + Math.sin(moon.angle) * moon.orbitRadius * 0.4;
+    // Moon orbit ring
+    ctx.beginPath();
+    ctx.ellipse(x, y, moon.orbitRadius, moon.orbitRadius * 0.4, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(200, 200, 220, 0.1)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+    // Moon body
+    const moonGrad = ctx.createRadialGradient(mx - moon.size * 0.3, my - moon.size * 0.3, 0, mx, my, moon.size);
+    moonGrad.addColorStop(0, 'rgba(220, 220, 230, 0.9)');
+    moonGrad.addColorStop(1, 'rgba(160, 160, 180, 0.7)');
+    ctx.beginPath();
+    ctx.arc(mx, my, moon.size, 0, Math.PI * 2);
+    ctx.fillStyle = moonGrad;
+    ctx.fill();
+  }
+}
+
 function drawGalaxy(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
   const { x, y, radius, color1, color2, color3, spiralArms, rotation, rotationSpeed } = b;
   const angle = rotation + time * rotationSpeed;
