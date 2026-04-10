@@ -16,6 +16,31 @@ interface CelestialBody {
   glowSize: number;
 }
 
+interface SupernovaParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  life: number;
+  maxLife: number;
+  color: string;
+  type: 'spark' | 'ring' | 'debris';
+}
+
+interface Supernova {
+  x: number;
+  y: number;
+  particles: SupernovaParticle[];
+  shockwave: number;
+  shockwaveMax: number;
+  flash: number;
+  color1: string;
+  color2: string;
+  color3: string;
+  alive: boolean;
+}
+
 const PALETTES = [
   { c1: '74, 158, 255', c2: '30, 80, 180', c3: '140, 200, 255' },   // ice blue
   { c1: '160, 80, 220', c2: '100, 30, 160', c3: '200, 140, 255' },  // cosmic purple
