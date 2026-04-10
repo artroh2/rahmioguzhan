@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS } from '@/data/poemsData';
+import { InstagramIcon } from '@/components/icons/BrandIcons';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
