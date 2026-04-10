@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import heroImg from '@/assets/cosmic-hero.jpg';
+
 
 interface HeroSectionProps {
   lang: 'tr' | 'en';
