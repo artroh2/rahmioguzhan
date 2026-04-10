@@ -30,6 +30,39 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [search, setSearch] = useState('');
   const [shuffleKey, setShuffleKey] = useState(0);
   const expandedRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  // Translation state
+  const [translations, setTranslations] = useState<Record<number, { title: string; body: string }>>({});
+  const [translatingId, setTranslatingId] = useState<number | null>(null);
+  const [showTranslation, setShowTranslation] = useState<Record<number, boolean>>({});
+
+  const handleTranslate = useCallback(async (e: React.MouseEvent, poem: { id: number; title: string; body: string }) => {
+    e.stopPropagation();
+    
+    // Toggle if already translated
+    if (translations[poem.id]) {
+      setShowTranslation(prev => ({ ...prev, [poem.id]: !prev[poem.id] }));
+      return;
+    }
+
+    setTranslatingId(poem.id);
+    try {
+      const { data, error } = await supabase.functions.invoke('translate-poem', {
+        body: { title: poem.title, body: poem.body },
+      });
+      if (error) throw error;
+      if (data?.translation) {
+        setTranslations(prev => ({ ...prev, [poem.id]: data.translation }));
+        setShowTranslation(prev => ({ ...prev, [poem.id]: true }));
+      }
+    } catch (err) {
+      console.error('Translation error:', err);
+      toast({ title: 'Çeviri hatası', description: 'Şiir çevrilemedi, tekrar deneyin.', variant: 'destructive' });
+    } finally {
+      setTranslatingId(null);
+    }
+  }, [translations, toast]);
 
   // Debounce search
   useEffect(() => {
