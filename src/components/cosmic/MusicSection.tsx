@@ -1,6 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
+import albumWeAreOne from '@/assets/album-we-are-one.jpg';
+import albumSakinVeSakin from '@/assets/album-sakin-ve-sakin.jpg';
+import albumYasanabilecek from '@/assets/album-yasanabilecek.jpg';
+import albumKendimleSavas from '@/assets/album-kendimle-savas.jpg';
 
 interface MusicSectionProps {
   lang: 'tr' | 'en';
@@ -10,24 +14,28 @@ const TRACKS = [
   {
     title: 'We Are One',
     artist: 'Rahmi Oğuzhan',
+    cover: albumWeAreOne,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Sakın ve Sakin',
     artist: 'Rahmi Oğuzhan',
+    cover: albumSakinVeSakin,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum',
     artist: 'Rahmi Oğuzhan',
+    cover: albumYasanabilecek,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Kendimle Savaş Halindeyim',
     artist: 'Rahmi Oğuzhan',
+    cover: albumKendimleSavas,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
@@ -107,10 +115,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
               className="glass rounded-2xl p-5 group hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.1)]"
             >
               <div className="flex items-start gap-4">
-                {/* Album art placeholder */}
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-cosmic/20 flex items-center justify-center shrink-0 border border-border">
-                  <span className="text-2xl">♪</span>
-                </div>
+                <img src={track.cover} alt={track.title} loading="lazy" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors truncate">
                     {track.title}
