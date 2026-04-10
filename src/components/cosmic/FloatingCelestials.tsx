@@ -29,46 +29,61 @@ const FloatingCelestials = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth < 1024;
+    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
+    const targetFps = isMobile ? 20 : isTablet ? 30 : 60;
+    const frameInterval = 1000 / targetFps;
+
     let w = window.innerWidth;
-    let h = document.documentElement.scrollHeight;
-    const dpr = Math.min(window.devicePixelRatio, 2);
+    let h = window.innerHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
     ctx.scale(dpr, dpr);
 
-    // Generate random celestial objects
-    const count = Math.floor(w * h / 200000);
+    // Fewer objects on mobile
+    const maxCount = isMobile ? 6 : isTablet ? 12 : 20;
     const objects: CelestialObject[] = [];
-    for (let i = 0; i < Math.min(count, 25); i++) {
+    for (let i = 0; i < maxCount; i++) {
       const [c1, c2] = COLORS[Math.floor(Math.random() * COLORS.length)];
       const isGalaxy = Math.random() > 0.6;
       objects.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        size: isGalaxy ? 15 + Math.random() * 35 : 4 + Math.random() * 12,
+        size: isGalaxy
+          ? (isMobile ? 10 + Math.random() * 15 : 15 + Math.random() * 35)
+          : (isMobile ? 3 + Math.random() * 6 : 4 + Math.random() * 12),
         type: isGalaxy ? 'galaxy' : 'planet',
         color1: c1,
         color2: c2,
         rotSpeed: (Math.random() - 0.5) * 0.003,
-        driftX: (Math.random() - 0.5) * 0.15,
-        driftY: (Math.random() - 0.5) * 0.1,
-        opacity: 0.15 + Math.random() * 0.25,
+        driftX: (Math.random() - 0.5) * 0.1,
+        driftY: (Math.random() - 0.5) * 0.08,
+        opacity: 0.1 + Math.random() * 0.2,
         phase: Math.random() * Math.PI * 2,
       });
     }
 
     let frame: number;
-    const draw = () => {
+    let lastTime = 0;
+
+    const draw = (timestamp: number) => {
       frame = requestAnimationFrame(draw);
+      const delta = timestamp - lastTime;
+      if (delta < frameInterval) return;
+      lastTime = timestamp - (delta % frameInterval);
+
       ctx.clearRect(0, 0, w, h);
-      const t = Date.now() * 0.001;
+      const t = timestamp * 0.001;
 
       for (const obj of objects) {
         obj.x += obj.driftX;
@@ -86,7 +101,6 @@ const FloatingCelestials = () => {
         ctx.translate(obj.x, obj.y);
 
         if (obj.type === 'galaxy') {
-          // Draw spiral galaxy
           const rot = t * obj.rotSpeed * 10;
           ctx.rotate(rot);
           const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, obj.size * breathe);
@@ -99,44 +113,39 @@ const FloatingCelestials = () => {
           ctx.ellipse(0, 0, obj.size * breathe, obj.size * breathe * 0.5, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Spiral arms
-          for (let arm = 0; arm < 2; arm++) {
-            ctx.beginPath();
-            for (let a = 0; a < Math.PI * 4; a += 0.1) {
-              const r = (a / (Math.PI * 4)) * obj.size * breathe * 0.9;
-              const px = Math.cos(a + arm * Math.PI) * r;
-              const py = Math.sin(a + arm * Math.PI) * r * 0.5;
-              if (a === 0) ctx.moveTo(px, py);
-              else ctx.lineTo(px, py);
+          // Skip spiral arms on mobile for performance
+          if (!isMobile) {
+            for (let arm = 0; arm < 2; arm++) {
+              ctx.beginPath();
+              for (let a = 0; a < Math.PI * 4; a += 0.15) {
+                const r = (a / (Math.PI * 4)) * obj.size * breathe * 0.9;
+                const px = Math.cos(a + arm * Math.PI) * r;
+                const py = Math.sin(a + arm * Math.PI) * r * 0.5;
+                if (a === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+              }
+              ctx.strokeStyle = `${obj.color1}30`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
             }
-            ctx.strokeStyle = `${obj.color1}30`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
           }
         } else {
-          // Draw planet
           const r = obj.size * breathe;
-          const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 2.5);
-          glow.addColorStop(0, `${obj.color1}22`);
-          glow.addColorStop(1, 'transparent');
-          ctx.fillStyle = glow;
-          ctx.beginPath();
-          ctx.arc(0, 0, r * 2.5, 0, Math.PI * 2);
-          ctx.fill();
+          // Simpler glow on mobile
+          if (!isMobile) {
+            const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 2.5);
+            glow.addColorStop(0, `${obj.color1}22`);
+            glow.addColorStop(1, 'transparent');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(0, 0, r * 2.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
 
           const bodyGrad = ctx.createRadialGradient(-r * 0.3, -r * 0.3, 0, 0, 0, r);
           bodyGrad.addColorStop(0, obj.color1);
           bodyGrad.addColorStop(1, obj.color2);
           ctx.fillStyle = bodyGrad;
-          ctx.beginPath();
-          ctx.arc(0, 0, r, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Specular
-          const spec = ctx.createRadialGradient(-r * 0.3, -r * 0.3, 0, -r * 0.3, -r * 0.3, r * 0.5);
-          spec.addColorStop(0, 'rgba(255,255,255,0.25)');
-          spec.addColorStop(1, 'rgba(255,255,255,0)');
-          ctx.fillStyle = spec;
           ctx.beginPath();
           ctx.arc(0, 0, r, 0, Math.PI * 2);
           ctx.fill();
@@ -150,7 +159,7 @@ const FloatingCelestials = () => {
 
     const handleResize = () => {
       w = window.innerWidth;
-      h = document.documentElement.scrollHeight;
+      h = window.innerHeight;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       canvas.style.width = `${w}px`;
