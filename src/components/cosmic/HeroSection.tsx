@@ -273,7 +273,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.1 }}
-          className="flex justify-center gap-4"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4"
         >
           {[
             { href: '#muzik', label: lang === 'tr' ? 'Müziği Keşfet' : 'Explore Music', color: 'hsl(213 100% 65%)' },
