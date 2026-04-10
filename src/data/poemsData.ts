@@ -6,12 +6,14 @@ export interface Poem {
 }
 
 export const POEM_CATEGORIES = [
-  { key: "ask", label: "Aşk Şiirleri", icon: "heart", count: 87 },
   { key: "en_iyiler", label: "En İyiler", icon: "star", count: 508 },
-  { key: "english", label: "English Poems", icon: "globe", count: 0 },
+  { key: "ask", label: "Aşk Şiirleri", icon: "heart", count: 87 },
   { key: "iyiler", label: "Alternatifler", icon: "sparkles", count: 219 },
-  { key: "kisalar", label: "Kısalar", icon: "zap", count: 0 },
+  { key: "kisalar", label: "Kısalar", icon: "zap", count: 162 },
   { key: "sarki", label: "Şarkı Sözleri", icon: "music", count: 52 },
+  { key: "english", label: "English Poems", icon: "globe", count: 43 },
+  { key: "kitap", label: "Kitap", icon: "book", count: 3 },
+  { key: "dunya", label: "Dünya", icon: "globe", count: 1 },
 ] as const;
 
 export const POEMS: Poem[] = [
@@ -1333,7 +1335,7 @@ export const POEMS: Poem[] = [
     "id": 220,
     "title": "Until yet !",
     "body": "Until yet !\nHow dare you are fighting to us\nLets make a deal\nLets not see each other in rest of our lifes",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 221,
@@ -4909,1225 +4911,1225 @@ export const POEMS: Poem[] = [
     "id": 816,
     "title": "There are some feelings in me that I try to explain",
     "body": "There are some feelings in me that I try to explain\nIt gets intense while its growing\nIf I may find a way to get away from questions\nIt is crazy , It is mind blowing\n\nIts far when I close my eyes\nIts there when I open them wide\nPlease sir , lets go heights\nAt least we could try\n\nIts far when I close my eyes\nIts there when I open them wide\nPlease sir , lets go heights\nAt least we could try\n\nThere are some feelings in me that I try to explain\nIt gets intense while its growing\nIf I may find a way to get away from questions\nIt is crazy , It is mind blowing\n\nIts far when I close my eyes\nIts there when I open them wide\nPlease sir , lets go heights\nAt least we could try\n\nIts far when I close my eyes\nIts there when I open them wide\nPlease sir , lets go heights\nAt least we could try",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 817,
     "title": "The reason for everything appears through your eyes",
     "body": "The reason for everything appears through your eyes\nIts the season of fall \nThere is no minute left\nThat was it , the all.\n\nOne ant under the ground\nMan up on all around\nSilence versus crowd\nFair playground\n\nOne ant under the ground\nMan up on all around\nSilence versus crowd\nFair playground\n\nLove is in the air , in the respiration\nFeeling is the inspiration ist the answer\nThe beat of the song californication\nMake the life better , make this place resaonable\n\nThe reason for everything appears through your eyes\nIts the season of fall \nThere is no minute left\nThat was it , the all.\n\nOne ant under the ground\nMan up on all around\nSilence versus crowd\nFair playground\n\nOne ant under the ground\nMan up on all around\nSilence versus crowd\nFair playground\n\nLove is in the air , in the respiration\nFeeling is the inspiration ist the answer\nThe beat of the song californication\nMake the life better , make this place resaonable",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 818,
     "title": "I will go for it , fight for it , live for it",
     "body": "I will go for it , fight for it , live for it\nEven if somebody will try stop me while I am walking through\nYes , Its true\nI am the one who will do \nI maybe the one who can\n\nIts getting deeper while time is passing by nearby our side without knowing the end is coming to us to say goodbye.\nJust , why ?\nWhy dont you try ?\n\nIts getting deeper while time is passing by nearby our side without knowing the end is coming to us to say goodbye.\nJust , why ?\nWhy dont you try ?\n\nI will go for it , fight for it , live for it\nEven if somebody will try stop me while I am walking through\nYes , Its true\nI am the one who will do \nI maybe the one who can\n\nIts getting deeper while time is passing by nearby our side without knowing the end is coming to us to say goodbye.\nJust , why ?\nWhy dont you try ?\n\nIts getting deeper while time is passing by nearby our side without knowing the end is coming to us to say goodbye.\nJust , why ?\nWhy dont you try ?",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 819,
     "title": "Last fourty five minutes",
     "body": "Last fourty five minutes \nLife tortures us with this\nClocks arent real when the young turnin right\nBut\n\nRace of the minutes are the best of the limits\nAnd they suppose to be digits over us\n\nAy\n\nTell me the clue mr. Tell me where liars are\nThen we can jump in to the why\n\nAy\n\nTik tok hypnotising \nKnock knock who is coming\nMaybe we can fly to sky\n\nLiar liar liar liar\nLiar all the time\n\nLiar liar liar liar\nTime wont stop right now.\n\nAy",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 820,
     "title": "Wrong feelings in my brain cells",
     "body": "Wrong feelings in my brain cells\nWrong missed calls in growing hells\nReady to stand in front of the only\nPrepared question is why are you lonely ?\n\nAre you really gonna burn me ?\nAnd there is no u turning ?\nDont forget what you are not forgiving\nLet me be get known by everybody\n\nI will be the history\nYoungest and most mystic love story\nWhich of my eye you are looking at ?\nRight and light , Left and dark , both , non ?\n\nI would take you to my heaven\nIf you would explain me my right when I was seven.\nIts my turn to play fool\nYou are not real and you are not cool\n\n2 options , dividing , not comprehensive\n2 eyes you gave it to me , injusticely right , it was like a deal\nListen to me carefully\nI am the one and i am real.\n\nYou are a number and you are tales\nDont forget that you have gave us nightmares\nWe wrote songs to describe how it feels\nHeaven , Hell ?\nOh hell yes , heaven please..\n\n2",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 821,
     "title": "Be my unlimited query",
     "body": "Be my unlimited query\nYou such a queen\nYou are much of mystery",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 822,
     "title": "Secret to the silence is loud",
     "body": "Secret to the silence is loud\nYou will understand what are those about\nOnly time is going on on this road",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 823,
     "title": "Im a torch",
     "body": "Im a torch \nYou are the lighter\nWe gonna burn\nTo create the fire\n\nCan you be the doom of the darkness\nStaying near by , \nThis place is full of this madness\nDont know even how\n\nWe can be the boom on the shadows like the\nCommunities fines\nThen we resume with the silence over\nMotherfucking lies\n\n2",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 824,
     "title": "Like there is no other place",
     "body": "Like there is no other place\nYou showed up and made me smile from my hearth\nIf there wouldn't be just one another night\nI would promise you to stay by your side\nRest of my life.\n\nLike years didn't pass all this time\nRealize the memories can stay without saying Bye\nHello my dear friend !\nFrom the deepest place from my deeps\nWith all of my soul\nHi !\n\nLike years didn't pass all this time\nRealize the memories can stay without saying Bye\nHello my dear friend !\nFrom the deepest place from my deeps\nWith all of my soul\nHi !\n\nLike there is no other place\nYou showed up and made me smile from my hearth\nIf there wouldn't be just one another night\nI would promise you to stay by your side\nRest of my life.\n\nLike years didn't pass all this time\nRealize the memories can stay without saying Bye\nHello my dear friend !\nFrom the deepest place from my deeps\nWith all of my soul\nHi !\n\nLike years didn't pass all this time\nRealize the memories can stay without saying Bye\nHello my dear friend !\nFrom the deepest place from my deeps\nWith all of my soul\nHi !",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 825,
     "title": "You must be messed up honey with that weights on your shoulders",
     "body": "You must be messed up honey with that weights on your shoulders\nBring that familiar feeling with you , we will find the holders\nBe honest , trust me up\nYou cant be alone with truth borders\nUgly truth\nTortures\n\nFalling from one year to another is fine\nCount the stars touches you gently\nHow to remember something is a mystery for me honey\nI will tell you about what I have done before\nAnd when i was that lonely\n\nIm spelling the spells honey\nWear your most beautiful dress\nWe will take a journey without anything\nWait for the bless",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 826,
     "title": "Thus , this story has to tell",
     "body": "Thus , this story has to tell\nFocus goes to next line\nIts kinda parallel\nPerfect timing\n\nOnce upon a time\nThere were no minutes\nNo seconds\nNo moments\nNo borders\nNo limits\nNo numbers\n\nOnce upon that time\nThere were no humans\n\nExistence wanted to create \nSomething precious \nUs",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 827,
     "title": "I dont believe in here",
     "body": "I dont believe in here\nI believe in there,  where people smiles here with tears\nEven if i want to know somehow\nI cant believe in here with all of these fears\nCause this place is not that we belong\nJoin me , without allow , be narrow\nWith all your knowledge and sorrow\nLet us complete the mission impossible to be hero\n\nSee the sences , feel them again and again\nIn all these consequences , be the pain and gain\nBeing here is hard to be stand lets over with\nLike all of the other places always rain\n\nSee the sences , feel them again and again\nIn all these consequences , be the pain and gain\nBeing here is hard to be stand lets over with\nLike all of the other places always rain",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 828,
     "title": "I know that you follow me everywhere but you did not become my soul…",
     "body": "I know that you follow me everywhere but you did not become my soul yet.\nAnd read it again like there is no other chance.\n\nI know that you follow me everywhere but you did not become my soul yet.\nAnd listen again like there is no other chance.\n\nDo you know how lonely it feels ?\nWhy I have to have this ?\nI assume this is what my eternity needs\nDo not keep it up on it please\nHow are your fears of tears\nClose your eyes and open up your ears\n\nDo you know how lonely it feels ?\nWhy I have to have this ?\nI assume this is what my eternity needs\nDo not keep it up on it please\nHow are your fears of tears\nClose your eyes and open up your ears",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 829,
     "title": "You are teling me that she is not so good",
     "body": "You are teling me that she is not so good\nRight in front of this shadow\nLike a fool\nA disaster \nGet lost now\nI wont let you , no !\n\nYou are telling me that she is not your type\nRight under this filthy rain\nLike a rule",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 830,
     "title": "Korkmuyorum senden kötülük",
     "body": "Korkmuyorum senden kötülük\nBütün ordularını topla üstüme gel\nKim bilir kaç yaşındasın benimkisi bir ömürlük\nAma ikimiz içinde gerçek ecel\n\nKorkmuyorum senden kötülük\nÖdeyeceğim altı üstü bir bedel\nŞu dünya şunun şurasında kaç dönümlük\nBenimle buluşmamız gereken yere gel\n\nKorkmuyorum senden kötülük\nEninde sonunda karşılaşalım bir an evvel\nİştahın kabarmış nefretin açgözlülük\nSana yazdığım davetiye bile şiirsel\n\nKorkmuyorum senden kötülük\nBenim yüreğim seninkinden daha büyük.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 831,
     "title": "I wonder how you feel when you get sone closer",
     "body": "I wonder how you feel when you get sone closer\nI mean \nHow a moment can be this long\nAnd getting longer\n\nI get lost in this  , please dont mind\nThis is not a goodbye \nThis is the sun rising\nIn so in to this\nAnd will love you more every second i get older\nAnd even when Im ill..",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 832,
     "title": "You show me how to be exist",
     "body": "You show me how to be exist\nIf you could be silence how would I exit\nPlease my only , lets next it\nLets let it happen somehow without mixing\nLets find our reason",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 833,
     "title": "Familiar secrets all around",
     "body": "Familiar secrets all around\nNo reason for fall\nSeason of lying\nTrying harder to have them all\nBurry them underground",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 834,
     "title": "Ill be ill til i fulfill with the true feelings againts reality",
     "body": "Ill be ill til i fulfill with the true feelings againts reality\nMy brain wants cruelity \nMy core needs immortality\nLike all of my cells negotiated for standing still\nWaiting for a holly touch on my personality\nThen they will move with an itch\n\nMy Heart will pump like a \nMy Eyes will move like a\nMy soul will feel like a \nBitch.\nThen i will wake up from this nonsense pitch.\n\nMy Heart will pump like a \nMy Eyes will move like a\nMy soul will feel like a \nBitch.\nThen i will wake up from this nonsense pitch.\n\nIll be ill til i fulfill with the true feelings againts reality\nMy brain wants cruelity \nMy core needs immortality\nLike all of my cells negotiated for standing still\nWaiting for a holly touch on my personality\nThen they will move with an itch\n\nMy Heart will pump like a \nMy Eyes will move like a\nMy soul will feel like a \nBitch.\nThen i will wake up from this nonsense pitch.\n\nMy Heart will pump like a \nMy Eyes will move like a\nMy soul will feel like a \nBitch.\nThen i will wake up from this nonsense pitch.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 835,
     "title": "I can see it from your sight",
     "body": "I can see it from your sight\nI want to shine within your eyes light\nDays might get longer , there may doors\nI will talk about this when its good night , and more\n\nNo doubts darling\nDance like there is no tomorow\nI will surrender\nNo doubts darling anymore\n\nYou are not a step less not a step more\nYou are a bless and above\nDont give up singing while you dancing\nThere are beautiful places we need to go",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 836,
     "title": "Lets ride the night above the stars",
     "body": "Lets ride the night above the stars\nTime is a moment there , heals the hearts\nWe will come back soon to our welcome scars\n\nWho we are ?\nWhen we are ?\nThen we are\nGonna fly\n\nTry anyway\n\nroguzhan.com",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 837,
     "title": "All i want to sell is all free",
     "body": "All i want to sell is all free\nIf you really want this\nI will be the one who you want me to be\nI am not begging you , its just\nPlease\n\nLet me hear you scream like you want it\nLet me hear you yell like you mean it\nI dont want all of these feelings \nİts just because im loving it.\nSieze.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 838,
     "title": "Do you want to feel the same?",
     "body": "Do you want to feel the same?\nDo you want someone to blame?\nDo you sometimes imagine the game?\nDo you want to play?\n\nAs yesterday was tomorrow two days ago\nToday is the yesterday of tomorrow and the day before\nLife is not a story… It’s a history.\nComes from the first day till today, along.\nAll alone, twins with the mystery\n\nOpen your mind\nClose your eyes\nDon’t even think to open and blink through the sight\nBe dark.\n\nRhythm is your heartbeat\nRule will be said by blood.\nWhen you catch the best moment of your memory\nLock it, throw and let it fly\nLet somebody else catch and continue the game.\nNow you can blame\nBe the history.\nComplete your task as you came here to be.\nWanna play again?\nTry again…\nTo be.\n\nDo you want to feel the same?\nDo you want someone to blame?\nDo you sometimes imagine the game?\nDo you want to play?\n\nAs yesterday was tomorrow two days ago\nToday is the yesterday of tomorrow and the day before\nLife is not a story… It’s a history.\nComes from the first day till today, along.\nAll alone, twins with the mystery\n\nOpen your mind\nClose your eyes\nDon’t even think to open and blink through the sight\nBe dark.\n\nRhythm is your heartbeat\nRule will be said by blood.\nWhen you catch the best moment of your memory\nLock it, throw and let it fly\nLet somebody else catch and continue the game.\nNow you can blame\nBe the history.\nComplete your task as you came here to be.\nWanna play again?\n\nDo you want to feel the same?\nDo you want someone to blame?\nDo you sometimes imagine the game?\nDo you want to play?\n\nDo you want to feel the same?\nDo you want someone to blame?\nDo you sometimes imagine the game?\nDo you want to play?\n\nTry again…\nTo be.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 839,
     "title": "Let me know what you were thinking",
     "body": "Let me know what you were thinking",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 840,
     "title": "Let me",
     "body": "Let me",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 841,
     "title": "Across the ocean",
     "body": "Across the ocean\nWhats near the edge\nWhy all of this motion\nWhy i have this fear\nLets play fetch\n\nAll around this round world\nWhy surrounding emptiness\nAn interesting loneliness\nAn impressive huge\n\nAll around this round world\nWhy surrounding emptiness\nAn interesting loneliness\nAn impressive huge\n\nLets play hide and seek\nLets wait for for some one come to see us\nLets close our eyes\nUntil light gets in our sight in the dark\n\nAll around this round world\nWhy surrounding emptiness\nAn interesting loneliness\nAn impressive huge\n\nAll around this round world\nWhy surrounding emptiness\nAn interesting loneliness\nAn impressive huge",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 842,
     "title": "Secret to the silence is loud",
     "body": "Secret to the silence is loud\nYou will understand what are those about\nOnly time is going on on this road\n\nroguzhan.com",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 843,
     "title": "Sometimes its just a feeling",
     "body": "Sometimes its just a feeling\nSometime its kind of meaning of my sorrow\nSome times are being unreal\nSame lies becoming tomarrow\nUnbelievable horror.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 844,
     "title": "We are one,",
     "body": "We are one, \nWe are full of expectations.\nSee what is summarizing hopeful sounds below\nFind something never gonna fail those seasons \nFeel when Idea comes to love...\n\nKneel down in front of the beginning !\nPleased tears , near fears go away !\nInside insider Its happening.. ;)\nBe love when it shows you the way...",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 845,
     "title": "Its been a while since I wrote to myselfs best friend",
     "body": "Its been a while since I wrote to myselfs best friend\nNow its time to go get the news\nThe peace\nFrom a hell scene\n\nNow look better on this\nClear surface , shining thrifts\nBetter piss of , its nice to be mad",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 846,
     "title": "Why people wait while they walking through precious time",
     "body": "Why people wait while they walking through precious time \nAnother day might be promising\nA breath may take time\nThe life passing on your soul \nThis stranger is full of stories which are not fine\n\nYou have to play the game by its rules\nGame never ends , tension bends\nCreates new ones with its magical tools\nEnd never comes , maybe it tends\n\nYou have to play the game by its rules\nGame never ends , tension bends\nCreates new ones with its magical tools\nEnd never comes , maybe it tends\n\nWhy people wait while they walking through precious time \nAnother day might be promising\nA breath may take time\nThe life passing on your soul \nThis stranger is full of stories which are not fine\n\nYou have to play the game by its rules\nGame never ends , tension bends\nCreates new ones with its magical tools\nEnd never comes , maybe it tends\n\nYou have to play the game by its rules\nGame never ends , tension bends\nCreates new ones with its magical tools\nEnd never comes , maybe it tends",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 847,
     "title": "We are one we are full of expectations",
     "body": "We are one we are full of expectations\nSee what is summerizing hopeful sounds below\nFind something never gonna fail those seasons\nFeel when idea  comes to love\n\nKneel down in front of the beginning\nPleased tears , near fears go away\nInsides insider it is happening\nBe love when it shows you the way",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 848,
     "title": "Oh , sun.",
     "body": "Oh , sun.\nIf you could see yourself in the mirror\nThat shine\nThat power\nThat glory\nThe victory\nWill be the end of our history\nUnfortunately\n\nOh , sun.\nIf someone could show the picture of yourself\nThat beauty\nThat loneliness\nThat duty\nWill be the end of your story\nFinally\n\nOh , sun.\nIf you could talk to somebody\nIf they could listen to\nWould you say that keyword to save the mystery\nThe maze\nThe last piece of puzzle\nThat unrequited love story\nYou may complete ,\nIf somebody could dare like me.\nWill be the end of our journey ,\nBurn us.\nReturn us to yourself.\n\nBu şiir Türkçe albümde İngilizce bir sürpriz — güneşe yazılmış bir mektup. Hem kozmos hem yalnızlık hem de son bir cesaret.\n\n───\n\n**Yapı:**\n\n**[Intro]**\n\n*(Solo akustik gitar)*\n\n**[Verse 1]**\n\nOh, sun.\nIf you could see yourself in the mirror\nThat shine, that power, that glory\nThe victory\nWill be the end of our history\nUnfortunately\n\n**[Verse 2]**\n\nOh, sun.\nIf someone could show the picture of yourself\nThat beauty, that loneliness, that duty\nWill be the end of your story\nFinally\n\n**[Chorus]**\n\nOh, sun.\nIf you could talk to somebody\nIf they could listen to\nWould you say that keyword to save the mystery\n\n**[Chorus]**\n\nThe maze, the last piece of puzzle\nThat unrequited love story\nYou may complete\nIf somebody could dare like me\n\n**[Outro]**\n\nWill be the end of our journey\nBurn us\nReturn us to yourself",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 849,
     "title": "Its never acceptable for me to stay still",
     "body": "Its never acceptable for me to stay still\nI have to do it again and again some things\nI am the reason that I dont want to miss\nThe peace ?\n\nBetween us\nWe are zero , minues and plus\nPlease.",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 850,
     "title": "You dont know what you are missing",
     "body": "You dont know what you are missing\nBecause you dont know why you are misssing\nTry to listen",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 851,
     "title": "I have never ever felt this way before",
     "body": "I have never ever felt this way before\nMy heart was beatin nothing after all\nYour smile made me anxious\nYour eyes really precious for me\nI have never ever felt this way before\n\nLove seems so friendly\nDesires made me let be\nHappines feels only\nI have never ever felt this way before\n\nLong distances are numbers\nYour passion melts the sun\nCouse your loving hearh is so warm\nI have never ever felt this way before\n\nI have never ever felt this way before\nMy heart was beatin nothing after all\nYour smile made me anxious\nYour eyes really precious for me\nI have never ever felt this way before\n\nLove seems so friendly\nDesires made me let be\nHappines feels only\nI have never ever felt this way before\n\nLong distances are numbers\nYour passion melts the sun\nCouse your loving hearh is so warm\nI have never ever felt this way before",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 852,
     "title": "We've got some names on",
     "body": "We've got some names on \nIn the name of our life zone\nIts a bit dangerous\nCause we are last humans\nIn only world includes us",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 853,
     "title": "Kindly Reminder ;",
     "body": "Kindly Reminder ;\n\nTo fall asleep\nDiving in to deeps\nYou know how it feels\nRemind me the good days and memories\n\nWe need to go further\nWe need to be in peace\nHow ?\nDo you know how long I am dreaming for this\nI am begging you\nI am at the beginning of why it heals\n\nDear ,\n\nSincerely,",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 854,
     "title": "Come and get me if you can",
     "body": "Come and get me if you can\nThere are signs in my head\nI dont know how you can handle this but I dont want my mother to have bad times.\n\nI will ask each of you about life, danger and zone\nOur faith in our heart may can eliminate ozon\nWhat do you want me to do \nA call to who ?\n\nI will ask each of you about life, danger and zone\nOur faith in our heart may can eliminate ozon\nWhat do you want me to do \nA call to who ?\n\nCome and get me if you can\nThere are signs in my head\nI dont know how you can handle this but I dont want my mother to have bad times.\n\nI will ask each of you about life, danger and zone\nOur faith in our heart may can eliminate ozon\nWhat do you want me to do \nA call to who ?\n\nI will ask each of you about life, danger and zone\nOur faith in our heart may can eliminate ozon\nWhat do you want me to do \nA call to who ?",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 855,
     "title": "This time my fingers are not tipsy",
     "body": "This time my fingers are not tipsy\nMy excitement is happy\nThis time my language is not risky\nMy happiness is pure , not filthy\n\nLife excuses me , probably listened my prayers\nSurrounded around me , all around players\nTriers , tears\nThe taste of success is unexplainable\nMy hairs are windy",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 856,
     "title": "I wonder how you feel when you get closer",
     "body": "I wonder how you feel when you get closer\nI mean \nHow a moment can be this long\nAnd getting longer\nI dont know how to feel\n\nI get lost in this  , please dont mind\nThis is not a goodbye \nThis is the sun rising\nÖIm so in to this\nAnd will love you more every second i get older\nAnd even when Im ill..",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 857,
     "title": "Come and get me if yoı can",
     "body": "Come and get me if yoı can\nThere are signs in my head\nI dont know how you can handle this but I dont want mu mother to have band times.\n\nI will ask each of you about life, danger and zone\nOur faith in our heart may can eliminate ozon\nWhat do you want me to do \nA call to who ?",
-    "category": "diger"
+    "category": "english"
   },
   {
     "id": 858,
     "title": "Belki kuytu köşede kalmış bir sevabım vardır beni o azaptan kurtaracak",
     "body": "Belki kuytu köşede kalmış bir sevabım vardır beni o azaptan kurtaracak\nÖlüm , senden korkmuyorum\nBiliyorum ki düştüğüm deniz beni kucaklayacak",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 859,
     "title": "Dünya bir sahil",
     "body": "Dünya bir sahil\nBense kumdan yatakta\nHerkeste aynı merak\nÇatlamasını bekliyor yumurtalarının\nCaretta caretta",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 860,
     "title": "Seninle sonbaharda şarkılaşmak istiyorum",
     "body": "Seninle sonbaharda şarkılaşmak istiyorum\nGel kıyafetini değiştirelim yarım küremizin",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 861,
     "title": "Orda biri var mı bilmiyorsun.",
     "body": "Orda biri var mı bilmiyorsun.\nİnanmıyorsun gözlerinin görmediklerine.\nHalbuki bir fark etsen yalnızlığının asaletini\nDeğişmiyorsun ölmedikçe.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 862,
     "title": "Bir kötü söz gibi bekliyordum gecelerde",
     "body": "Bir kötü söz gibi bekliyordum gecelerde\nBir lafına binbir yumruk",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 863,
     "title": "Hayat eskisi gibi değil",
     "body": "Hayat eskisi gibi değil\nBu bildiğin dalgalı bir denizde seyir\nBiat et önümde eğil\nKarış kalabalığıma",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 864,
     "title": "Hepimiz farklıyız",
     "body": "Hepimiz farklıyız\nAma bir bütünün vazgeçilmez önemde parçasıyız",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 865,
     "title": "Karışıyor ortalık",
     "body": "Karışıyor ortalık\nYarışıyor kötülükler\nYapışıyor bataklık gibi sezinler\nAlışıyor insanlık",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 866,
     "title": "Zamanı düş hesaptan al sana sonsuz",
     "body": "Zamanı düş hesaptan al sana sonsuz\nHer şey senin\nAma nereye varabilirsin yolsuz ?\nTamamından bir eksik her geçen an biraz onsuz",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 867,
     "title": "Bilemiyorum belki de gerçektir bu masal",
     "body": "Bilemiyorum belki de gerçektir bu masal\nSonu da mutlu bitecektir",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 868,
     "title": "Koskoca evren",
     "body": "Koskoca evren\nMilyarlarca arasından neden ben ?\nDiye soralı yıllar oldu \nGeçmiş oldu önceden",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 869,
     "title": "Ateşe o kadar uzun baktım ki dün",
     "body": "Ateşe o kadar uzun baktım ki dün\nBugünüm öylesine karanlık\nGözlerim öylesine soğuk\nİlüzyon öylesine gerçek",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 870,
     "title": "Serin bir sessizlik , incecik bir uğultu",
     "body": "Serin bir sessizlik , incecik bir uğultu\nNe kadar dinlesende az gelirdi yoruldu",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 871,
     "title": "Kelimeler diyorum.. kelimeler yetiyor m",
     "body": "Kelimeler diyorum.. kelimeler yetiyor m",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 872,
     "title": "Geceler biliyor",
     "body": "Geceler biliyor\nGönlümden geçenleri aklınız almıyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 873,
     "title": "Bütün şarkılar",
     "body": "Bütün şarkılar\nOlması gerektikleri gibi varlar\nNe bir zaman ileri ne bir an geri",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 874,
     "title": "Yağmur yağmıyor bugün",
     "body": "Yağmur yağmıyor bugün\nRuhum kurak bir çölden farksız\nŞu Issız lambaların üstüne düşen damlalar nerde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 875,
     "title": "Benim için üzülme",
     "body": "Benim için üzülme\nBen zaten kendim için yeterince üzülüyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 876,
     "title": "Karşıma çıkan her şarkıya en az 2 şans veriyorum",
     "body": "Karşıma çıkan her şarkıya en az 2 şans veriyorum\nBelki çıkarır beni bu manasız diyarlardan\nKelimeleri özenle seçmişler mi bir bakıyorum\nMüsade alınmış mı rüyalardan\n\nSonra sessizliğe bakıyorum sensizlik gibi\nHaberdar galiba olacaklardan",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 877,
     "title": "Bir yalanım vardı hakikatliğine çok alıştığım",
     "body": "Bir yalanım vardı hakikatliğine çok alıştığım\nOnunla barışmıştım\nYokluğundan bin pişmanım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 878,
     "title": "Düşünmeye vakit bulabildiysem sustum",
     "body": "Düşünmeye vakit bulabildiysem sustum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 879,
     "title": "Gerçeğinden ayırt edilemeyen bir rüya",
     "body": "Gerçeğinden ayırt edilemeyen bir rüya\nVe seni ele geçirip zihnini zapt etmiş bir his\nKimse inanmasın bırak dönsün mü dünya\nYoksa savaşlarla mı bezenilmiş bura bilakis\nKoca evren minicik bir bilye\nVe beynimin ortasındaki iyi huylu kist",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 880,
     "title": "Son bahar bu",
     "body": "Son bahar bu\nNe hikmetse sonbahar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 881,
     "title": "Hayal gücünün gittiği yere kadar özgürsün.",
     "body": "Hayal gücünün gittiği yere kadar özgürsün.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 882,
     "title": "Yüz yılın refahati",
     "body": "Yüz yılın refahati\nBir o kadar felaeti\nİyi niyeti yok bu adının\nÖlüp ölüp duracağız adamım.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 883,
     "title": "Vazgeçmekle pes etmek aynı şey mi ?",
     "body": "Vazgeçmekle pes etmek aynı şey mi ?\nMesela yıldızlara dokunamadan ölmemek\nYa da gezegenler arasında seyahat etmek\nGüneşe dokunmayı ertelemek mi hayat\nKendi kendime kaldığımdaki raks",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 884,
     "title": "Ben uzun yollara alışığım",
     "body": "Ben uzun yollara alışığım\nOlacaklarla barışığım\nKendi içimde karışığım\nBir duvarda sarmaşığın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 885,
     "title": "Karşıma çık",
     "body": "Karşıma çık\nKonuşalım açık açık ve kapatalım bu mevzuyu\nSen sessizliğine dön\nBen gürültüme özen göstermeye devam edeyim",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 886,
     "title": "Karanlığım pek aydınlık benim",
     "body": "Karanlığım pek aydınlık benim\nGölgelerim güneşli\nLimanlarım sakin\nTaşı taş",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 887,
     "title": "Merhaba bardağın boş kısmı",
     "body": "Merhaba bardağın boş kısmı\nMüsadenle sana kendimden katabilir miyim ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 888,
     "title": "Bir rüyadan uyanmak gibi mi olacak uykuya dalmak",
     "body": "Bir rüyadan uyanmak gibi mi olacak uykuya dalmak",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 889,
     "title": "Bir yanda manasız savaşlar",
     "body": "Bir yanda manasız savaşlar\nDiğer yanda faydasız ilaçlar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 890,
     "title": "Taa şu kadarcık uzaktasın",
     "body": "Taa şu kadarcık uzaktasın\nSen benim koyduğum en son noktasın\nNe fazlasın ne noksansın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 891,
     "title": "Evet...",
     "body": "Evet...\nBenim de birikti sana söylemek istediklerim\nHayır...\nSenin de",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 892,
     "title": "Ben bu resmi daha önce çizmiştim",
     "body": "Ben bu resmi daha önce çizmiştim\nBen buraya daha önce gelmiştim\nBen defalarca bu şiiri yazmışım da\nNe sen dönüp bakmışsın\nNe ben sana bu hikayeden bahsetmişim",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 893,
     "title": "Bunca dert ve tasa varken alemde",
     "body": "Bunca dert ve tasa varken alemde\nGelip beni buldun mabedimin tam orta yerinde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 894,
     "title": "Aslında karanlıktı her yer",
     "body": "Aslında karanlıktı her yer\nBen Birdim siz bin bir oldunuz\nBana karanlıklar dap dar\nIşığı görünce hepiniz yok oldunuz",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 895,
     "title": "Nasıl farkına varamıyorsun olanların aklım almıyor",
     "body": "Nasıl farkına varamıyorsun olanların aklım almıyor\nKendini seyrediyorsun gibi bir mahşer",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 896,
     "title": "Sen imren ben hayatımın çaresine bakarım",
     "body": "Sen imren ben hayatımın çaresine bakarım\nSeninle ben saatlerin zaafından kaçarım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 897,
     "title": "Yıllar sonra , geç kalmış bir müjdenin verdiği Ahmak bir gülümseme…",
     "body": "Yıllar sonra , geç kalmış bir müjdenin verdiği Ahmak bir gülümseme bu yüzümdeki\nGelmese daha mı iyiydi\nYoksa bu bir işaret mi?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 898,
     "title": "Belli ki bu gerçekleşecek bir gün",
     "body": "Belli ki bu gerçekleşecek bir gün\nBelki de bugün",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 899,
     "title": "Güzel günler nerdeler",
     "body": "Güzel günler nerdeler \nNeden ardına kadar açıkken perdeler ve lambalar karanlık bu oda ?\nYoruldu mu eksik kalan şeyler\nSabrı taşmış , affetmiş sonra.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 900,
     "title": "Yol verir insanoğlu birbirine belki geç der",
     "body": "Yol verir insanoğlu birbirine belki geç der\nBelki git der\nBelki kal der",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 901,
     "title": "Milyarlarca yaşındasın",
     "body": "Milyarlarca yaşındasın\nBelki henüz en başındasın\nBelki kendi yasındasın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 902,
     "title": "Boşa kürek çekme boşa",
     "body": "Boşa kürek çekme boşa\nHoşa gitmez bu dünya\nAklını başına devşir\nHani yanına almıştınya",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 903,
     "title": "Ruhumun zihnimi takip etmesinden mi bilmem",
     "body": "Ruhumun zihnimi takip etmesinden mi bilmem\nHerşey bana fazlasıyla tanıdık geliyor\nAcaba bundan mı kaynaklanıyor bazı şeyleri önceden bilmem ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 904,
     "title": "Gözünün önündeki gerçekler seni aldatan.",
     "body": "Gözünün önündeki gerçekler seni aldatan.\nAnanı ağlatan...\nSözünün ardındaki gizler seni sana anlatırken yerin  dibine batıran.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 905,
     "title": "Görüyor musun sende görmüyorsun olan biteni",
     "body": "Görüyor musun sende görmüyorsun olan biteni\nBir daha , bir kaç kez daha",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 906,
     "title": "Ufka bak",
     "body": "Ufka bak\nŞiir yaz diyor bulutlar\nYolculuğa çık içine\nDuaların kabul olmamış\nBelki başka bir biçimde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 907,
     "title": "O zaman her alan için 100 karaktere sıkıştırıyorum:",
     "body": "O zaman her alan için 100 karaktere sıkıştırıyorum:\n\n───\n\n**Step 3 — Outfit and style:**\n\n`Dark hoodie, short beard, cinematic indie style, desaturated, natural subtle movements, realistic.`\n\n───\n\n**Step 4 — Locations and mood:**\n\n`Frozen city crowd, frozen cafe, frozen subway. Only main character moves. Eerie, surreal, melancholic, film grain.`\n\n───\n\n**Step 5 — Storyline:**\n\n`Man walks through a world frozen in time. Invisible to all. Alone in a crowd. At the end, he stops and stares into camera.`\n\n───\n\nGir bakalım! 🎬\n\n`One man moves through a frozen world. Invisible. Alone. Finally stops. Stares into camera. Then nothing.`\n\n97 karakter. 🎬",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 908,
     "title": "Gözlerini kapat seni özlüyorum orada",
     "body": "Gözlerini kapat seni özlüyorum orada\nYüreğimi yüreğinde hisset\nİşte tam orada pes de\nVe benimle gökyüzümüzde dans et",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 909,
     "title": "Herkes neden hüzünlü aşk şarkılarında dans ediyor ?",
     "body": "Herkes neden hüzünlü aşk şarkılarında dans ediyor ?\nDefalarca dinledim anlam veremiyor aklım ermiyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 910,
     "title": "Yarın oldu dünler",
     "body": "Yarın oldu dünler\nİftira yalan\nBaşa dönmesi nerden baksan iki gün sürer\nZamansızsa değer\nDengesizce olduğu yerde  döner",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 911,
     "title": "İnsanları utanmaya zorlamak",
     "body": "İnsanları utanmaya zorlamak",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 912,
     "title": "Gerçekten bilmek istiyor musun başına gelecekleri ?",
     "body": "Gerçekten bilmek istiyor musun başına gelecekleri ?\nGüneşe mi mercek yoksa gerçek rüyaların her gece\nBir yerlerde birileri ölüyorsa hiç uğruna\nDönüyorsa dursun Dünya",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 913,
     "title": "Süre doldu dedi bana vakit tamam",
     "body": "Süre doldu dedi bana vakit tamam",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 914,
     "title": "Var mı yok olan ?",
     "body": "Var mı yok olan ?\nYok mu var olan ?\nHala nasıl kimse çıkmadı ortaya\nBağırmak için uluya ortaya",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 915,
     "title": "Ne kadar çok benziyor seninle günahlarımız",
     "body": "Ne kadar çok benziyor seninle günahlarımız\nSen bana karşı koyuyorsun\nBen sana deliler gibi aşık oluyorum kaygısız",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 916,
     "title": "O salıncak",
     "body": "O salıncak\nO sanılcak",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 917,
     "title": "Gerçeği farkediyorum sanki",
     "body": "Gerçeği farkediyorum sanki\nFarkı farkediyorum\nDoğru zannediyorum\n\nHerşeye baş kaldırıyorum belki\nBaştan başlıyorum\nYanlış farzediyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 918,
     "title": "Sen herşeyin doğrusunu yaparken karşılaştığın muamele buysa yanlış…",
     "body": "Sen herşeyin doğrusunu yaparken karşılaştığın muamele buysa yanlış sende değil onda demektir. Yanlış yanlış olabilir ancak yanlışı düzeltmek erdemli olmayı gerektirir. Erdemi olmayan susar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 919,
     "title": "Düşüncelerimi dinledim önce",
     "body": "Düşüncelerimi dinledim önce\nHerşey heryerdeymiş öyle dediler",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 920,
     "title": "Sen bana yakıştırma",
     "body": "Sen bana yakıştırma\nBen alıştığın yerde dururum\nGel bunu karıştırma\nSandığından beter durum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 921,
     "title": "Senden gelecek bir habere sakladım bütün sevinçlerimi",
     "body": "Senden gelecek bir habere sakladım bütün sevinçlerimi\nOlasılıklar henüz değişmedi mi ?\nSorgulamadan konuşalım , karşılıklı karışalım\nBu bulut gökyüzüne hala alışmadı mı ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 922,
     "title": "Kolay kolay pes etmeyen bir sen gibi çetin",
     "body": "Kolay kolay pes etmeyen bir sen gibi çetin\nSana zor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 923,
     "title": "Şarkılar yeniden dinlenir , kulakların kanasın",
     "body": "Şarkılar yeniden dinlenir , kulakların kanasın\n\nYeniden şiirler yazarım sen onları sana sanarsın\n\nYüzümüm asıklığıyla doldurdum ceplerimi\n\nAl birazını aklını karıştırırsın akşam saatlerinde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 924,
     "title": "Nerden geldik nereye gidiyoruz bu nasıl bir tesadüf",
     "body": "Nerden geldik nereye gidiyoruz bu nasıl bir tesadüf",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 925,
     "title": "Sana müstahak olsun insan",
     "body": "Sana müstahak olsun insan\nNeleri kaçırdığını bir bilsen\nMilyarlarcasından tek bir lisan\nNe anlamlar içeriyor derinlerine insen",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 926,
     "title": "Bugün yazmıyorum",
     "body": "Bugün yazmıyorum\nKanıyorum kelimelerime\nYanıyor canım\nVarsaymıyorum ihtimalleri hevesle\nNet oluyorum olabildiğine\nKağıtlara susuyorum.\nÖzlesinler diye\nMürekkebi.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 927,
     "title": "Aklına geleni dökme hemen diline ,düşün ki yanılmayasın",
     "body": "Aklına geleni dökme hemen diline ,düşün ki yanılmayasın\nÜşü ki yanmayasın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 928,
     "title": "Gözlerimin içine bak",
     "body": "Gözlerimin içine bak\nNefret sana neler anlatıyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 929,
     "title": "Kabul etmek gidip dönmemeyi sessizce",
     "body": "Kabul etmek gidip dönmemeyi sessizce\nHer ile başlayan her şeyi geride bırakmak istiyorum geride\nGizlim saklım yok",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 930,
     "title": "Göz yaşlarını sil sonsuzluk",
     "body": "Göz yaşlarını sil sonsuzluk\nArtık canını acıtmıyor sonsuzluk\nDizlerini titretmiyor\nRuhunu acıtmıyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 931,
     "title": "Bana bir bak ben dahilim üç dört adım ötede",
     "body": "Bana bir bak ben dahilim üç dört adım ötede",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 932,
     "title": "Biliyorsun sende o boşluk hissi ne meret bişey",
     "body": "Biliyorsun sende o boşluk hissi ne meret bişey\nHer gece başını yastığa koyduğunda ne kadar da yalnızsın\nGece neden karanlık\nKapalı tüm kapılar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 933,
     "title": "Ömür dediğin bir kaç dünden ibaret",
     "body": "Ömür dediğin bir kaç dünden ibaret\nYarın bana çok zor bir bilmece\nGönlünün gönlüne bir küçük an sığar elbet\nYoksa neden dua eder insan uyumadan her gece",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 934,
     "title": "Diğerlerini bilmem",
     "body": "Diğerlerini bilmem\nBen bu yolda ölmeye varım\nYaram derin kimseye değmem",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 935,
     "title": "Uzakta",
     "body": "Uzakta\nÇok uzakta bir neyse",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 936,
     "title": "Ben en lazım kelimeleri seçtim lüzumun hazzı için",
     "body": "Ben en lazım kelimeleri seçtim lüzumun hazzı için\nSen anlamadın beni\nBen anlatamayan oldum kendini\nHalbuki ne kadar sadeydi cümlelerim\nYoktu benzeri\n\n2",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 937,
     "title": "Sana kalbimin en ücra köşesinden bir selam getirdim",
     "body": "Sana kalbimin en ücra köşesinden bir selam getirdim\nEğer kabul edeceğini bilsem\nEğer kabul edeceğini bilsen\nSeni o selamın geldiği yere görürür cennetin nasıl bir yer olduğunu görmeni isterdim.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 938,
     "title": "Gözümün önünde duruyor ama henüz dokunmam yasak bu yasak elmaya",
     "body": "Gözümün önünde duruyor ama henüz dokunmam yasak bu yasak elmaya",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 939,
     "title": "Gün doğmuş yine birkaç saat önce",
     "body": "Gün doğmuş yine birkaç saat önce\nYetişemedim sana Güneş hep ama aklımdasın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 940,
     "title": "Bir haberdi yüreğine düşen ateş",
     "body": "Bir haberdi yüreğine düşen ateş\nFayda etmeyen gözyaşları\nBir an önce başlasın telaş\nMüsade etmeyen o Tanrı affetsin\nBen meseleyi pek bilmem ama\nBu öyle bir intikam ki\nAllah kahretsin.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 941,
     "title": "Belki bu savaş çok uzaklarda",
     "body": "Belki bu savaş çok uzaklarda\nBelki içimizde en derinimizde\nBelki cevabı tuzaklarda\nBelki apaçık ellerimizde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 942,
     "title": "Gidiyorum uzaklara",
     "body": "Gidiyorum uzaklara\nAslında orası buradan daha yakın sana\nBeni dinlersin , kıymetimi özlersin\nBelki delirirsin de vazgeç gel deme\nGöğsüne bas boşlukta hisli\nDünyam devrilsin",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 943,
     "title": "Birkaç gün kalmış olsa mesela",
     "body": "Birkaç gün kalmış olsa mesela\nMesela gökyüzünde bir kapı aralansa\nGönlüm uğrunuzda paralansa\nUmursar mıydınız ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 944,
     "title": "Çok büyütüyorum",
     "body": "Çok büyütüyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 945,
     "title": "Güzel günler geride kaldı Tió",
     "body": "Güzel günler geride kaldı Tió\nİnsan artık tükettiğini saymıyor\nBir ben bir sen bir o\nDünya bizden fazlasını almıyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 946,
     "title": "Sana anlatmaya çalıştım , sen herkesten farklısın",
     "body": "Sana anlatmaya çalıştım , sen herkesten farklısın\nBir çok konuda olduğu gibi yine sen haklısın",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 947,
     "title": "Geliyorsun çok uzaklardan",
     "body": "Geliyorsun çok uzaklardan\nYüreğim elimde bekliyorum seni\nHayalinde boğulduğum olacaklardan\nBiz sorumluyuz",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 948,
     "title": "Bana bir ben gerekmiş yalnız başına , yalnız başıma",
     "body": "Bana bir ben gerekmiş yalnız başına , yalnız başıma\nSeni bulanadekmiş ayrılık\nAğır ağır gözyaşları kaç yaşında ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 949,
     "title": "Bir gece uyanırsan uykundan beni ansızın rüyanda tanıyıp",
     "body": "Bir gece uyanırsan uykundan beni ansızın rüyanda tanıyıp",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 950,
     "title": "Sesin kesildi , yüzün silindi , kokun gitti",
     "body": "Sesin kesildi , yüzün silindi , kokun gitti\nBelki bir ömür boyu aklıma geleceksin o hayat hevesinin sona ermesinin hatrıyla\nZoruma gidiyor",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 951,
     "title": "Eşit aralıklar",
     "body": "Eşit aralıklar\nSen bana bir telefon uzaklıktasın\nBen sana kainatın öbür ucunda.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 952,
     "title": "Kendimle savaştayım",
     "body": "Kendimle savaştayım\nKazanırsam kaybedeceğin",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 953,
     "title": "Sana birazdan gelip sarılsam ?",
     "body": "Sana birazdan gelip sarılsam ?\nGözyaşların omzuma dökülür mü bu gece ?\nYıllar seni de benim kadar yordu mu\nHangisi cümle hangisi hece",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 954,
     "title": "Varlığı ispatlanamayan bir olgunun yokluğu ispatlanabilinemez",
     "body": "Varlığı ispatlanamayan bir olgunun yokluğu ispatlanabilinemez",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 955,
     "title": "Kalemlerden ve dillerden dökülen en üzücü şey keşkedir.",
     "body": "Kalemlerden ve dillerden dökülen en üzücü şey keşkedir.\nEr yada geç söylenir",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 956,
     "title": "Dün gece bir küçük kuşla tanıştım kanadı kırık",
     "body": "Dün gece bir küçük kuşla tanıştım kanadı kırık\nHava ise soğuk ve karanlıktı\nSanki düşlerimi üşüten bir farkındalık\nÖylesine değildi tanışmamız o da farkında",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 957,
     "title": "Ben istediğim kadar şiir yazayım küfredeyim bu düzene",
     "body": "Ben istediğim kadar şiir yazayım küfredeyim bu düzene\nSen sana hak kılınmış sandığın canlara bomba at",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 958,
     "title": "Uğruna ölmek de var öldürmekte",
     "body": "Uğruna ölmek de var öldürmekte\nDünya dönerken dönekleri döndürmekte",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 959,
     "title": "Şekeri elinden alıp şu çocuğu üzdüler",
     "body": "Şekeri elinden alıp şu çocuğu üzdüler\nGöze bakmayan bi bakış\nSesi acı bir alkış",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 960,
     "title": "Neden bütün şarkılar aşklara ?",
     "body": "Neden bütün şarkılar aşklara ?\nNeden bütün kadınlar başkalar ?\nSanki başını vurur gibi taşlara",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 961,
     "title": "Dertlerinin sana ait olduğunu",
     "body": "Dertlerinin sana ait olduğunu\nOnlarla batan güneşin yine onlarla doğduğunu\nSeni özlediğimi sakın unutma\n\nAma bana da hatırlatma.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 962,
     "title": "Gecelerin koynuna sokul , uyutmaz düşünceler",
     "body": "Gecelerin koynuna sokul , uyutmaz düşünceler\nSiyahlar içinde hatıralar\nBelkiler , iyikiler",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 963,
     "title": "Ayaklarımın altında ne var bileklerimin üstündeki ?",
     "body": "Ayaklarımın altında ne var bileklerimin üstündeki ?\nKoşamam , kaçamam senden bilirim",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 964,
     "title": "Bir umudum var , elimde",
     "body": "Bir umudum var , elimde",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 965,
     "title": "Nedense kelimeleri seçesim var",
     "body": "Nedense kelimeleri seçesim var\nNeden bilmiyorum içime bir ateş düştü\nYalvarıyorum barışın ey insanoğlu\nBugün dündü.\n\nSana seni anlatan kim varsa güldü",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 966,
     "title": "Neden tanıdık diye merak ederdim şarkılar",
     "body": "Neden tanıdık diye merak ederdim şarkılar\nÇünkü bazıları diğerlerinden farklılar\nDaha fazla tatlılar yüreğime\nAma kafama takıldılar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 967,
     "title": "Sen sormadan nasıl olduğumu bilmeyen o siyah, derin , uçsuz bucaksız…",
     "body": "Sen sormadan nasıl olduğumu bilmeyen o siyah, derin , uçsuz bucaksız bir karanlık\n\nSen sormadan söyleyeyim nasıl olduğumu...\nBu izah artık apaçık bulanık ve dağınık",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 968,
     "title": "Ne de olsa yalnızım en nihayetinde",
     "body": "Ne de olsa yalnızım en nihayetinde\nAçık denizde yüzerken\nAçık denize düşerken\nAçıklarken denizi kendime\nYalnızım düşüncelerimle üşürken",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 969,
     "title": "Ben bu bedene sahibim",
     "body": "Ben bu bedene sahibim\nBedendeki aklım aklım\nBen herkesten haricim\nSahi olan baki hakkım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 970,
     "title": "Cumartesi...",
     "body": "Cumartesi...\n\nPazar .",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 971,
     "title": "Baksana kaç yıl olmuş ruhum yükselmeye başlayalı",
     "body": "Baksana kaç yıl olmuş ruhum yükselmeye başlayalı\nBaşımı göğsüne koyup ağlamayalı\nBuna nasıl dayanmalı\nNasıl uyanmalı",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 972,
     "title": "Alın götürün beni buradan",
     "body": "Alın götürün beni buradan\nKimsenin görmediği herkesin bildiği bir yere koyun\nO ki sana gelecek geçmişin vaad ettiği son baş komutan\nO ki akıllara ziyan tehlikeli bir oyun",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 973,
     "title": "Yarın diyebilir misin düne ?",
     "body": "Yarın diyebilir misin düne ?\nUyanabilir misin evelsi güne ?\nArayabilir misin döne döne ?\nBulabilir misin seni ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 974,
     "title": "Gel otur karşıma",
     "body": "Gel otur karşıma\nSana bir şeyler anlatacağım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 975,
     "title": "Yeniden başlamak mümkün mü başka ?",
     "body": "Yeniden başlamak mümkün mü başka ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 976,
     "title": "Nereden geldiğimiz uçsuz bucaksız bir belirsizlik",
     "body": "Nereden geldiğimiz uçsuz bucaksız bir belirsizlik\nDünya eşi benzeri olmayan bir rezillikmiş\nSığamıyorum kabıma\n\nNereye gidiyoruz bu anlamısız geçimsizlikle\nBu aralar sevimsizlik ve seçimsizlikten\nDoğamıyorum yarına",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 977,
     "title": "Korkma , sadece karanlıktasın.",
     "body": "Korkma , sadece karanlıktasın.\nGüven , gözlerini kapalı tutmak zorundasın.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 978,
     "title": "Hayatın tadını alabiliyor musun dilinin ucundaki kelimelerden ?",
     "body": "Hayatın tadını alabiliyor musun dilinin ucundaki kelimelerden ?\nYıldızlar güneşler gök kuşakları çiziyor musun gökyüzünde bulutlara arkadaş ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 979,
     "title": "Arkadaş kelimeler",
     "body": "Arkadaş kelimeler\nCehennem mazoşiste cennet",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 980,
     "title": "İçimde bir coşku büyüyor",
     "body": "İçimde bir coşku büyüyor\nTutamıyorum zamanı\nYüz çevirdim rüzgara\nGözyaşlarımı tutamıyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 981,
     "title": "Beynimdeki hücreler bana yalvarıyor önce beni söyle önce beni söyle…",
     "body": "Beynimdeki hücreler bana yalvarıyor önce beni söyle önce beni söyle diye\n\nBütün bu acele niye ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 982,
     "title": "Senin hayal ettiğinden de büyük burası",
     "body": "Senin hayal ettiğinden de büyük burası\nSonsuz geniş\nVar olduğun gibi yokluğun da olası",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 983,
     "title": "Düşlesene bir daha uyuyamadığını",
     "body": "Düşlesene bir daha uyuyamadığını\nZifiri bir aydınlık",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 984,
     "title": "Donuk bir yüz ifadesi",
     "body": "Donuk bir yüz ifadesi\nMilyarlarcası ve sadece bir tanesi \nSırtında pelerin ve başında haresi\nGeceleri gündüzün , çaresizlerin çaresi.\n\nYine gelse yine olur aynısı",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 985,
     "title": "Zaman mı geçiyor ?",
     "body": "Zaman mı geçiyor ?\nZaman mı geçiyor ???\nDün gece daha demindi\nYarın bugünün dün olacağından emindi hani ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 986,
     "title": "Ben varım",
     "body": "Ben varım\nO kadar yarım ki hikayem kendime darım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 987,
     "title": "Bak şu gökyüzü ne kadar büyük",
     "body": "Bak şu gökyüzü ne kadar büyük\nSular ne kadar şeffaf\nVe ne kadar gerçek ölüm\nTakma kafana bu hayat oldukça kısa\nİnsan insana sarraf\nVe bu son bölüm",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 988,
     "title": "Bu bir arş enginlerden yükselen",
     "body": "Bu bir arş enginlerden yükselen\nBu bir barış çubuğu elden ele verilen\nKarış karış her zerresi toprağım",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 989,
     "title": "Gözlerini açsan da karanlık",
     "body": "Gözlerini açsan da karanlık\nKin sarmış her bir yanı\nBu bir savaş olsa da seviş\nTamam mı ?",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 990,
     "title": "Eyvah !",
     "body": "Eyvah !\n\nGönlüm sönmüş.\nBu yeşil çayır çimen yanmış küle dönmüş.\nÖylesine derin küsmüş ki aşka\nYanıbaşında duran şevkate arkasını dönmüş",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 991,
     "title": "Gece çöksün mü senin de üzerine ?",
     "body": "Gece çöksün mü senin de üzerine ?\nSöyle , bu yükü kaldırabilir misin ?\nÖyle , bir de yağmur yağarsa sağanak\nYakınsa zifiri karanlık\nYada en korktuğun şimşeklere bağırıp",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 992,
     "title": "Eyvah !",
     "body": "Eyvah !\nYağıyor yine başı boş kelimeler \nHer biri ayrı ayrı panik",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 993,
     "title": "Bir kelime ile kainatı hayal ettiriyorsa hayat",
     "body": "Bir kelime ile kainatı hayal ettiriyorsa hayat\nSon bir cümle ile de hayatını bitirebilir zaman\nBelki yapayalnız bir noktalama işaretisin fakat\nBir sonrakine ön bir öncekine arka olmak olay",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 994,
     "title": "Gidiyorlar birer birer uzak diyarlara",
     "body": "Gidiyorlar birer birer uzak diyarlara\nBurdan uğurladım sizi , karşılayan var mı orda",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 995,
     "title": "Karşımda durmasını bilene",
     "body": "Karşımda durmasını bilene\nGökyüzünde Güneşim yeryüzünde Kan !\nYarınlar kaybettiğimiz yakınlarınız kadar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 996,
     "title": "Ben mi çok büyütüyorum yoksa her şey çok mu kolay ?",
     "body": "Ben mi çok büyütüyorum yoksa her şey çok mu kolay ?\nAnlaşılması güç bir olay",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 997,
     "title": "Ben mi çok kuruyorum",
     "body": "Ben mi çok kuruyorum\nYoksa siz hakikaten ölmemi mi bekliyorsunuz göz göre göre\nTakımı kuruyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 998,
     "title": "Hayal kurma",
     "body": "Hayal kurma\nKarşımda dimdik durma\nGünah işleme\nSoru sorma",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 999,
     "title": "Koşmak mı istiyorsun ?",
     "body": "Koşmak mı istiyorsun ?\nUçmak mı ?\nKaçmak mı istiyorsun kendinden ?\nÖnce dur",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1000,
     "title": "Hadi bir gayret tutalım düşenlerin onurundan",
     "body": "Hadi bir gayret tutalım düşenlerin onurundan\nDağlar kadar biriktim kurtulamıyorum olurundan\nBazen dikkat edemiyorum hayata\nBazen farketmiyor saatin kaç olduğu",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1001,
     "title": "Yakınlara koşmak",
     "body": "Yakınlara koşmak\nOlduğum yerden uzaklaşmak istiyorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1002,
     "title": "Gökyüzü karanlıktan ibaret",
     "body": "Gökyüzü karanlıktan ibaret\nNereye baksam...\nHiç.\n\nNefesine odaklanırsın\nGeçmişine baksam\nPiç.",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1003,
     "title": "Şimdi öğlen sıcağını ilk defa göğüsleyen bir bebeğim yeni",
     "body": "Şimdi öğlen sıcağını ilk defa göğüsleyen bir bebeğim yeni\nBana ihtiyacın olursa büyütmelisin beni",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1004,
     "title": "O kadar gerçeksin ki bugün",
     "body": "O kadar gerçeksin ki bugün\nSana dokunmak neredeyse mümkün\nNefessin , gökyüzümde benimsin\nHerkesin içinde önünde diz çöktüğüm hüznümsün ah.\n\nGeri kalan tüm ömrümü özlet bana Rab",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1005,
     "title": "Gerçeği gözlerden ayıracak bir yol arıyorum hayal meyal",
     "body": "Gerçeği gözlerden ayıracak bir yol arıyorum hayal meyal",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1006,
     "title": "Çok uzaklardayım sana bir nefes kadar yakın",
     "body": "Çok uzaklardayım sana bir nefes kadar yakın\nBeni görmek istiyorsan hatıralarımıza bakın\nBana en sert tavrını takınıp\nKendini en istemediğin şeylerden sakınıp",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1007,
     "title": "Herkes uyanmak üzereyken unutulmaz bir rüyadan",
     "body": "Herkes uyanmak üzereyken unutulmaz bir rüyadan\nBu Dünya'dan...\nDur ! Dur ! Sakın seni haklı çıktın sanmasınlar\nZatenlerin kazanmışken mağlup düşsün galibalar",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1008,
     "title": "Ben mi ?",
     "body": "Ben mi ?\nBana sorarsan inceden deli\nİki ileri iki geri",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1009,
     "title": "Sensiz bir dert hayal etti",
     "body": "Sensiz bir dert hayal etti\nO kadar sensizdi ki\nZiyan ettim",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1010,
     "title": "Gecelere sor bir de şafağın güzelliğini",
     "body": "Gecelere sor bir de şafağın güzelliğini\nAya bakarak çekilen aydınlık hasretini\nKendi kendine kalma özlemini\nSıfır huzur\n\n2",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1011,
     "title": "Adaletinde yargılar",
     "body": "Adaletinde yargılar \nDiğerlerinden farklı algılar\nYorum",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1012,
     "title": "Sırf uğraşmamak için seninle",
     "body": "Sırf uğraşmamak için seninle\nVazgeçiyorum anlatmaktan artık derdimi\nOysa ki arkasındaydım tezimin yeminle\nAnlamadınız derdimi",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1013,
     "title": "Seni.",
     "body": "Seni.\nBeni",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1014,
     "title": "Kendine sakladığın eski ne varsa aklında dök",
     "body": "Kendine sakladığın eski ne varsa aklında dök\nKalbini sök ve önüme koy\nYağmurlu bir günü seç bunu yapmak için",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1015,
     "title": "Benim gözleri görmez",
     "body": "Benim gözleri görmez\nKulaklarım duymaz\nBir dediğim bir dediğime uymaz",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1016,
     "title": "Diyorsun ki bana değer katamadın",
     "body": "Diyorsun ki bana değer katamadın\nFerah bir nefes almak istiyorum\nBeni dertlerimden ferahlatamadın\n\nDiyorsun ki git ama kal orda",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1017,
     "title": "Susuyorum.",
     "body": "Susuyorum.\nGözlerimden anla ne demek istediğimi sana\nNefretimi kusuyorum...",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1018,
     "title": "Kötülükte iyilikler gibi vicdan denizinde kıyıya vurur",
     "body": "Kötülükte iyilikler gibi vicdan denizinde kıyıya vurur\nVe ne hikmetse gelir seni bulur",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1019,
     "title": "Bir benmişim içinden susan",
     "body": "Bir benmişim içinden susan\nKendimmişim susunca kaçan\nSessizmişim usulca açan\nÇiçeklere özenip\n\nBir benmiyim",
-    "category": "diger"
+    "category": "kisalar"
   },
   {
     "id": 1020,
@@ -6445,24 +6447,24 @@ export const POEMS: Poem[] = [
     "id": 1072,
     "title": "Yine daha yakın kelimeler boğazıma dilimden daha çok",
     "body": "Yine daha yakın kelimeler boğazıma dilimden daha çok\nBöylesi ne görüldü ne duyuldu ve de eşi benzeri yok\nAllahım al canımı desem Dünya var mevzu bahis\nSenin için oluyor bunlar bunu da aklına sok\n\nBana ne vaad edildi biliyor musun ey insan\nÇile , dert , keder , acı , şok , fizan\nElimden gelse bir kaşık suda boğabilecekken şeytanı\nBoyun eymem buna , buda Allah'ın 2 planı\n\nBana bir ömür sessizlik hakkı doğduğunda\nVe beklenilen olup güneş farklı doğduğunda\nBir anneden son bir melek doğduğunda\nYetişin imdadıma\nRuhum yardım arıyor.",
-    "category": "diger"
+    "category": "kitap"
   },
   {
     "id": 1073,
     "title": "Yeniden başlamak için bu yarışa",
     "body": "Yeniden başlamak için bu yarışa\nBarışmak lazımdı aşkla alışa alışa\nKelimeler seçmek galibiyetin ilk adımına\nSana bir fincan çay\nBana bir fincan kahve\n\nOldu mu bu sefer diye sevindim vay be\nGönlümdeki pay ve başıma gelen bu olay heyt !\nPes ettim dediğim yerde tutup kaldırdığın yerden beni",
-    "category": "diger"
+    "category": "kitap"
   },
   {
     "id": 1074,
     "title": "Koşmak istiyorum sana bir denizin üstünden",
     "body": "Koşmak istiyorum sana bir denizin üstünden\nŞiirler ve şarkılar anlatırlar seni sana göğsümden\nBelki de binlerce kez yeniden doğarken\nNeden bu çiçek büyümeden solsun ?",
-    "category": "diger"
+    "category": "kitap"
   },
   {
     "id": 1075,
     "title": "Hiçbir şey görüldüğü gibi değil",
     "body": "Hiçbir şey görüldüğü gibi değil\nGözlerimizi kapatalım en iyisi",
-    "category": "diger"
+    "category": "dunya"
   }
 ];
