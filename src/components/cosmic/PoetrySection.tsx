@@ -36,11 +36,19 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-  // Pre-index: group poems by category once
+  // Pre-index: group poems by category once, with shuffled order
   const poemsByCategory = useMemo(() => {
     const map: Record<string, typeof POEMS> = {};
     for (const p of POEMS) {
       (map[p.category] ??= []).push(p);
+    }
+    // Shuffle each category using Fisher-Yates
+    for (const key in map) {
+      const arr = map[key];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
     }
     return map;
   }, []);
