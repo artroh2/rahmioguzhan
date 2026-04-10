@@ -392,9 +392,8 @@ const CosmicCursor = () => {
       if (!hasContent) setHasContent(true);
     };
 
-    const addCelestial = (x: number, y: number, sizeScale = 1) => {
-      celestialsRef.current.push(spawnCelestial(x, y, sizeScale));
-      // Limit total to prevent perf issues
+    const addCelestial = (x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy') => {
+      celestialsRef.current.push(spawnCelestial(x, y, sizeScale, forceType));
       if (celestialsRef.current.length > 30) {
         celestialsRef.current.shift();
       }
