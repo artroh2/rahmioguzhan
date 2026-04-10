@@ -241,24 +241,6 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
             </button>
           </motion.div>
         )}
-
-        {/* Instagram Icon */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <a
-            href="https://www.instagram.com/siir2.0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center text-muted-foreground/30 hover:text-secondary transition-all duration-500 hover:drop-shadow-[0_0_40px_hsl(263_70%_58%/0.3)]"
-            aria-label="@siir2.0 Instagram"
-          >
-            <InstagramIcon className="w-36 h-36 sm:w-44 sm:h-44" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );
