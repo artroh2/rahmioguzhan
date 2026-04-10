@@ -402,6 +402,7 @@ const CosmicCursor = () => {
           pctx.arc(px, py, size, 0, Math.PI * 2);
           pctx.fillStyle = `rgba(74, 158, 255, ${0.3 + Math.random() * 0.25})`;
           pctx.fill();
+          if (!hasContent) setHasContent(true);
         }
       }
     };
