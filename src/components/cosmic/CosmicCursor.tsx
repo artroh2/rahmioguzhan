@@ -345,6 +345,17 @@ const CosmicCursor = () => {
   const frameRef = useRef(0);
   const celestialsRef = useRef<CelestialBody[]>([]);
   const supernovasRef = useRef<Supernova[]>([]);
+  const [hasContent, setHasContent] = useState(false);
+
+  const clearAll = useCallback(() => {
+    celestialsRef.current = [];
+    supernovasRef.current = [];
+    if (paintRef.current) {
+      const pctx = paintRef.current.getContext('2d');
+      if (pctx) pctx.clearRect(0, 0, paintRef.current.width, paintRef.current.height);
+    }
+    setHasContent(false);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
