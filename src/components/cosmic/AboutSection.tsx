@@ -153,6 +153,7 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
       <div className="absolute inset-0" style={{
         background: 'radial-gradient(ellipse at 30% 50%, hsl(213 100% 65% / 0.04) 0%, transparent 60%)'
       }} />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6" ref={ref}>
         <motion.div
