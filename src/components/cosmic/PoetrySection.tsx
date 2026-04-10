@@ -2,7 +2,7 @@ import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS, POEM_CATEGORIES } from '@/data/poemsData';
 import { InstagramIcon } from '@/components/icons/BrandIcons';
-import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, ChevronDown } from 'lucide-react';
+import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, ChevronDown, BookOpen } from 'lucide-react';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
@@ -15,6 +15,7 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   sparkles: Sparkles,
   zap: Zap,
   music: Music,
+  book: BookOpen,
 };
 
 const PAGE_SIZE = 12;
@@ -24,9 +25,25 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState<string>('en_iyiler');
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const expandedRef = useRef<HTMLDivElement>(null);
+
+  // Debounce search for performance
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(searchInput), 200);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  // Pre-index: group poems by category once
+  const poemsByCategory = useMemo(() => {
+    const map: Record<string, typeof POEMS> = {};
+    for (const p of POEMS) {
+      (map[p.category] ??= []).push(p);
+    }
+    return map;
+  }, []);
 
   // Reset visible count on category/search change
   useEffect(() => {
@@ -35,15 +52,13 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   }, [activeCategory, search]);
 
   const filtered = useMemo(() => {
-    let list = POEMS.filter(p => p.category === activeCategory);
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(p =>
-        p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
-      );
-    }
-    return list;
-  }, [activeCategory, search]);
+    const list = poemsByCategory[activeCategory] || [];
+    if (!search.trim()) return list;
+    const q = search.toLowerCase();
+    return list.filter(p =>
+      p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
+    );
+  }, [activeCategory, search, poemsByCategory]);
 
   const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMore = visibleCount < filtered.length;
@@ -138,13 +153,13 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/50" />
           <input
             type="text"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
             placeholder={lang === 'tr' ? 'Şiirlerde ara...' : 'Search poems...'}
             className="w-full pl-9 pr-8 py-2 rounded-full bg-transparent border border-border/40 text-sm text-foreground placeholder:text-muted-foreground/40 font-mono tracking-wide focus:outline-none focus:border-secondary/40 transition-colors"
           />
-          {search && (
-            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-foreground transition-colors">
+          {searchInput && (
+            <button onClick={() => { setSearchInput(''); setSearch(''); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-foreground transition-colors">
               <X className="w-3.5 h-3.5" />
             </button>
           )}
