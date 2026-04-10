@@ -1,7 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback, ComponentType, SVGProps } from 'react';
-import { Play, Pause } from 'lucide-react';
-import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
+import { useRef, ComponentType, SVGProps } from 'react';
 import {
   SpotifyIcon, AppleMusicIcon, ITunesIcon, AmazonMusicIcon,
   YouTubeMusicIcon, DeezerIcon, TidalIcon, IHeartRadioIcon,
@@ -44,49 +42,7 @@ const PLATFORMS: PlatformEntry[] = [
 const MusicSection = ({ lang }: MusicSectionProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    const audio = new Audio('/audio/ikiye-saymak.mp3');
-    audio.preload = 'metadata';
-    audioRef.current = audio;
-
-    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
-    audio.addEventListener('timeupdate', () => {
-      setCurrentTime(audio.currentTime);
-      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
-    });
-    audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
-
-    return () => { audio.pause(); audio.src = ''; };
-  }, []);
-
-  const togglePlay = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (isPlaying) { audio.pause(); } else { audio.play(); }
-    setIsPlaying(!isPlaying);
-  }, [isPlaying]);
-
-  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    const bar = progressRef.current;
-    if (!audio || !bar || !audio.duration) return;
-    const rect = bar.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = ratio * audio.duration;
-  }, []);
-
-  const fmt = (s: number) => {
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return `${m}:${sec.toString().padStart(2, '0')}`;
-  };
 
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
@@ -113,71 +69,6 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Custom Audio Player */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16 max-w-2xl mx-auto"
-        >
-          <div className="relative rounded-2xl border border-white/10 p-6 sm:p-8">
-              <div className="flex items-center gap-5 sm:gap-6">
-                {/* Album art */}
-                <div className="relative shrink-0" style={{ perspective: '600px' }}>
-                  <div
-                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-white/10 shadow-lg`}
-                    style={isPlaying ? { animation: 'flipY 4s linear infinite' } : {}}
-                  >
-                    <img src={albumIkiyeSaymak} alt="2'ye Saymak" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-                {/* Info + controls */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground truncate">
-                    2'ye Saymak
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Rahmi Oğuzhan</p>
-
-                  {/* Play/Pause + progress */}
-                  <div className="flex items-center gap-3 mt-4">
-                    <button
-                      onClick={togglePlay}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 transition-all duration-300 shrink-0"
-                      aria-label={isPlaying ? 'Pause' : 'Play'}
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="currentColor" />
-                      ) : (
-                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary ml-0.5" fill="currentColor" />
-                      )}
-                    </button>
-
-                    <div className="flex-1 min-w-0">
-                      {/* Progress bar */}
-                      <div
-                        ref={progressRef}
-                        onClick={handleSeek}
-                        className="h-1.5 rounded-full bg-white/10 cursor-pointer group/bar relative"
-                      >
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
-                          style={{ width: `${progress}%` }}
-                        >
-                          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
-                        </div>
-                      </div>
-                      {/* Time */}
-                      <div className="flex justify-between mt-1.5">
-                        <span className="text-[10px] text-muted-foreground font-mono">{fmt(currentTime)}</span>
-                        <span className="text-[10px] text-muted-foreground font-mono">{fmt(duration)}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </motion.div>
 
         {/* Platform links */}
         <motion.div
