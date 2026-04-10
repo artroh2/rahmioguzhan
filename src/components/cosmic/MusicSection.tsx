@@ -104,7 +104,8 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-12"
         >
-          <div className="glass rounded-2xl overflow-hidden border border-border">
+          <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-[0_0_40px_hsl(213_100%_65%/0.08)]">
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-cosmic/5 pointer-events-none z-10 mix-blend-color rounded-2xl" />
             <iframe
               src="https://open.spotify.com/embed/artist/4fQ8VbreLSA4Eaiwm1Elfk?utm_source=generator&theme=0"
               width="100%"
@@ -112,7 +113,8 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              className="rounded-2xl"
+              className="rounded-2xl relative z-0"
+              style={{ filter: 'saturate(1.2) hue-rotate(-10deg) brightness(0.85)' }}
             />
           </div>
         </motion.div>
