@@ -148,8 +148,11 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {PLATFORMS.map((p, idx) => {
               const Icon = p.icon;
-              const direction = idx % 2 === 0 ? 'glow-spin-cw' : 'glow-spin-ccw';
-              // Create a dimmer version of the color for the secondary gradient stop
+              // Pseudo-random per card: direction, speed, delay
+              const seed = (idx * 7 + 3) % 18;
+              const direction = seed % 3 === 0 ? 'glow-spin-cw' : seed % 3 === 1 ? 'glow-spin-ccw' : (seed % 2 === 0 ? 'glow-spin-cw' : 'glow-spin-ccw');
+              const speed = 3 + (seed % 5) * 0.8; // 3s to 6.2s
+              const delay = -((seed * 0.7) % 4); // negative delay for offset start
               return (
                 <motion.a
                   key={p.name}
@@ -162,8 +165,10 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                   className="platform-glow-card px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
                   style={{
                     '--platform-color': p.color,
-                    '--platform-color-dim': `${p.color}66`,
+                    '--platform-color-dim': `${p.color}44`,
                     '--glow-animation': direction,
+                    '--glow-speed': `${speed}s`,
+                    '--glow-delay': `${delay}s`,
                   } as React.CSSProperties}
                 >
                   <Icon className="w-5 h-5 shrink-0 transition-colors duration-300" style={{ color: p.color }} />
