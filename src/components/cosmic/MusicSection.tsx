@@ -57,8 +57,9 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
 
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
-      {/* Dark teal overlay */}
+      {/* Dark-to-light gradient overlay */}
       <div className="absolute inset-0 bg-[#050F14]/60" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6" ref={ref}>
         <motion.div
