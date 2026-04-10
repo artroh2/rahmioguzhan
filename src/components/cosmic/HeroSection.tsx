@@ -54,7 +54,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
-          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[0.95]"
+          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[1.15]"
         >
           <span className="inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
