@@ -411,6 +411,15 @@ const CosmicCursor = () => {
       // Persistent paint layer
       ctx.drawImage(paint, 0, 0);
 
+      // Celestial bodies
+      for (const body of celestialsRef.current) {
+        if (body.type === 'planet') {
+          drawPlanet(ctx, body);
+        } else {
+          drawGalaxy(ctx, body, time);
+        }
+      }
+
       // Supernovas
       const snovae = supernovasRef.current;
       for (let i = snovae.length - 1; i >= 0; i--) {
