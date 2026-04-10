@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
+import { Trash2 } from 'lucide-react';
 
 interface Moon {
   orbitRadius: number;
