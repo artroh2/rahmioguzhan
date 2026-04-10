@@ -113,7 +113,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 * i + 0.3 }}
-              className="glass rounded-2xl p-5 group hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.1)]"
+              className="rounded-2xl p-5 group border border-border/50 bg-transparent transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.15),0_0_60px_hsl(213_100%_65%/0.05)]"
             >
               <div className="flex items-start gap-4">
                 <img src={track.cover} alt={track.title} loading="lazy" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
