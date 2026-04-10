@@ -325,9 +325,13 @@ const CosmicCursor = () => {
   const [hasContent, setHasContent] = useState(false);
   const isTouchDevice = useRef(false);
 
+  const clickCountRef = useRef(0);
+  const bgStarsRef = useRef<BackgroundStar[]>([]);
+
   const clearAll = useCallback(() => {
     celestialsRef.current = [];
     supernovasRef.current = [];
+    bgStarsRef.current = [];
     if (paintRef.current) {
       const pctx = paintRef.current.getContext('2d');
       if (pctx) pctx.clearRect(0, 0, paintRef.current.width, paintRef.current.height);
