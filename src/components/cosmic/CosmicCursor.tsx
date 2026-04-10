@@ -392,15 +392,26 @@ const CosmicCursor = () => {
       const speed = Math.sqrt(dx * dx + dy * dy);
       mouseRef.current = { x: e.clientX, y: e.clientY };
 
-      if (speed > 1.5) {
-        const count = Math.min(Math.floor(speed / 3), 6);
+      if (speed > 2.5) {
+        const count = Math.min(Math.floor(speed / 5), 4);
+        const trailColors = [
+          '74, 158, 255',   // blue
+          '255, 255, 255',  // white
+          '200, 220, 255',  // ice
+          '160, 80, 220',   // purple
+          '245, 158, 11',   // gold
+          '255, 80, 120',   // pink
+          '40, 200, 180',   // teal
+          '255, 120, 50',   // ember
+        ];
         for (let i = 0; i < count; i++) {
-          const px = e.clientX + (Math.random() - 0.5) * 6;
-          const py = e.clientY + (Math.random() - 0.5) * 6;
-          const size = Math.random() * 2.5 + 0.8;
+          const px = e.clientX + (Math.random() - 0.5) * 8;
+          const py = e.clientY + (Math.random() - 0.5) * 8;
+          const size = Math.random() * 2.2 + 0.6;
+          const color = trailColors[Math.floor(Math.random() * trailColors.length)];
           pctx.beginPath();
           pctx.arc(px, py, size, 0, Math.PI * 2);
-          pctx.fillStyle = `rgba(74, 158, 255, ${0.3 + Math.random() * 0.25})`;
+          pctx.fillStyle = `rgba(${color}, ${0.25 + Math.random() * 0.25})`;
           pctx.fill();
           if (!hasContent) setHasContent(true);
         }
