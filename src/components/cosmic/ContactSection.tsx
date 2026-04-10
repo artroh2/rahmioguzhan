@@ -11,9 +11,9 @@ interface ContactSectionProps {
 const SOCIALS = [
   { name: 'Spotify', href: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', color: '#1DB954' },
   { name: 'Apple Music', href: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707', color: '#FC3C44' },
-  { name: 'Instagram', href: 'https://instagram.com', color: '#E1306C' },
-  { name: 'X', href: 'https://x.com', color: '#F0F4FF' },
-  { name: 'YouTube', href: 'https://youtube.com', color: '#FF0000' },
+  { name: 'Instagram', href: 'https://instagram.com/siir2.0', color: '#E1306C' },
+  { name: 'X', href: 'https://x.com/roguzhanh', color: '#F0F4FF' },
+  { name: 'YouTube', href: 'https://www.youtube.com/@Siir2.0', color: '#FF0000' },
 ];
 
 const ContactSection = ({ lang }: ContactSectionProps) => {
@@ -90,19 +90,27 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
-              className="glass rounded-full px-5 py-2.5 text-xs text-muted-foreground transition-all duration-300"
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px ${s.color}33`;
-                (e.currentTarget as HTMLElement).style.borderColor = `${s.color}44`;
-                (e.currentTarget as HTMLElement).style.color = s.color;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = '';
-                (e.currentTarget as HTMLElement).style.borderColor = '';
-                (e.currentTarget as HTMLElement).style.color = '';
+              className="relative group rounded-full p-[1px] overflow-hidden"
+              style={{
+                boxShadow: `0 0 8px ${s.color}15, 0 0 20px ${s.color}08`,
               }}
             >
-              {s.name}
+              {/* Rotating border light */}
+              <div
+                className="absolute inset-0 rounded-full animate-[spin_4s_linear_infinite]"
+                style={{
+                  background: `conic-gradient(from 0deg, transparent, ${s.color}60, transparent, transparent, ${s.color}30, transparent)`,
+                }}
+              />
+              {/* Inner content */}
+              <span
+                className="relative z-10 block rounded-full px-5 py-2.5 text-xs text-muted-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
+                style={{
+                  boxShadow: `inset 0 0 12px ${s.color}08`,
+                }}
+              >
+                {s.name}
+              </span>
             </motion.a>
           ))}
         </motion.div>
