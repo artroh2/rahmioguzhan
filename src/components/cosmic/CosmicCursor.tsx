@@ -534,11 +534,21 @@ const CosmicCursor = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[9999]"
-      style={{ pointerEvents: 'none' }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-[9999]"
+      />
+      {hasContent && (
+        <button
+          onClick={clearAll}
+          className="fixed bottom-6 right-6 z-[10000] p-2.5 rounded-full glass border border-border/30 text-muted-foreground/40 hover:text-destructive hover:border-destructive/30 transition-all duration-300 hover:shadow-[0_0_20px_hsl(0_84%_60%/0.15)]"
+          aria-label="Clear cosmic canvas"
+        >
+          <Trash2 className="w-4 h-4" />
+        </button>
+      )}
+    </>
   );
 };
 
