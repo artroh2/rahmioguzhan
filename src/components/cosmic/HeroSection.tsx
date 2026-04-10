@@ -49,7 +49,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
       setCurrentTime(audio.currentTime);
       if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
     });
-    audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
+    audio.loop = true;
 
     // Auto-play on load
     const playPromise = audio.play();
