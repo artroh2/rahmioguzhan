@@ -66,7 +66,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3">
             {lang === 'tr' ? 'müzik' : 'music'}
@@ -137,7 +137,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6 text-center">
             {lang === 'tr' ? 'Tüm Platformlar' : 'All Platforms'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
