@@ -59,7 +59,7 @@ const PALETTES = [
   { c1: '255, 120, 50', c2: '180, 60, 20', c3: '255, 180, 120' },   // ember
 ];
 
-function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody) {
+function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
   const { x, y, radius, color1, color2, color3, hasRing, ringAngle } = b;
 
   // Outer glow
