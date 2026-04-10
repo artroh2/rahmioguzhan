@@ -148,6 +148,8 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {PLATFORMS.map((p, idx) => {
               const Icon = p.icon;
+              const direction = idx % 2 === 0 ? 'glow-spin-cw' : 'glow-spin-ccw';
+              // Create a dimmer version of the color for the secondary gradient stop
               return (
                 <motion.a
                   key={p.name}
@@ -157,19 +159,12 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + idx * 0.05 }}
-                  className="bg-transparent border-none rounded-xl px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
+                  className="platform-glow-card px-4 py-3 flex items-center gap-2.5 text-muted-foreground transition-all duration-300 group hover:-translate-y-1"
                   style={{
-                    // @ts-ignore
                     '--platform-color': p.color,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${p.color}22, 0 0 0 1px ${p.color}33`;
-                    (e.currentTarget as HTMLElement).style.borderBottomColor = p.color;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = '';
-                    (e.currentTarget as HTMLElement).style.borderBottomColor = '';
-                  }}
+                    '--platform-color-dim': `${p.color}66`,
+                    '--glow-animation': direction,
+                  } as React.CSSProperties}
                 >
                   <Icon className="w-5 h-5 shrink-0 transition-colors duration-300" style={{ color: p.color }} />
                   <span className="text-xs font-medium truncate group-hover:text-foreground transition-colors">
@@ -178,6 +173,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                 </motion.a>
               );
             })}
+          </div>
           </div>
         </motion.div>
       </div>
