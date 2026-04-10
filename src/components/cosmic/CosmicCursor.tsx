@@ -13,7 +13,7 @@ interface CelestialBody {
   x: number;
   y: number;
   radius: number;
-  type: 'planet' | 'galaxy';
+  type: 'planet' | 'galaxy' | 'earth';
   color1: string;
   color2: string;
   color3: string;
