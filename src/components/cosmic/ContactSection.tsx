@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Send, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -23,6 +23,15 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
+
+  // Random glow params per social button - each unique
+  const socialGlowParams = useMemo(() =>
+    SOCIALS.map(() => ({
+      speed: 3 + Math.random() * 5,
+      dir: Math.random() > 0.5 ? 'normal' : 'reverse',
+      offset: Math.floor(Math.random() * 360),
+    }))
+  , []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +75,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
             className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
               backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              filter: 'drop-shadow(0 0 18px rgba(210,200,255,0.35)) drop-shadow(0 0 40px rgba(200,190,255,0.15))',
               WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}
           >
@@ -74,45 +83,46 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Social links with platform glow */}
+        {/* Social links with random glow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {SOCIALS.map((s, idx) => (
-            <motion.a
-              key={s.name}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
-              className="relative group rounded-full p-[1px] overflow-hidden"
-              style={{
-                boxShadow: `0 0 8px ${s.color}15, 0 0 20px ${s.color}08`,
-              }}
-            >
-              {/* Rotating border light */}
-              <div
-                className="absolute inset-0 rounded-full animate-[spin_4s_linear_infinite]"
-                style={{
-                  background: `conic-gradient(from 0deg, transparent, ${s.color}60, transparent, transparent, ${s.color}30, transparent)`,
-                }}
-              />
-              {/* Inner content */}
-              <span
-                className="relative z-10 block rounded-full px-5 py-2.5 text-xs text-muted-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
-                style={{
-                  boxShadow: `inset 0 0 12px ${s.color}08`,
-                }}
+          {SOCIALS.map((s, idx) => {
+            const gp = socialGlowParams[idx];
+            return (
+              <motion.a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 15 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
+                className="relative group rounded-full p-[1px] overflow-hidden"
               >
-                {s.name}
-              </span>
-            </motion.a>
-          ))}
+                {/* Rotating border light - random speed & direction */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: `conic-gradient(from ${gp.offset}deg, transparent, ${s.color}60, transparent, transparent, ${s.color}30, transparent)`,
+                    animation: `spin ${gp.speed}s linear infinite ${gp.dir}`,
+                  }}
+                />
+                <span
+                  className="relative z-10 block rounded-full px-5 py-2.5 text-xs text-muted-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
+                  style={{
+                    boxShadow: `0 0 12px ${s.color}10`,
+                    textShadow: '0 0 8px rgba(200,220,255,0.15)',
+                  }}
+                >
+                  {s.name}
+                </span>
+              </motion.a>
+            );
+          })}
         </motion.div>
 
         {/* Contact form */}
@@ -164,6 +174,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
           className="text-center text-xs text-muted-foreground mt-16"
+          style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}
         >
           © {new Date().getFullYear()} Rahmi Oğuzhan Hacıeyüpoğlu
         </motion.p>

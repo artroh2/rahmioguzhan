@@ -1,8 +1,7 @@
 import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS, POEM_CATEGORIES } from '@/data/poemsData';
-import { InstagramIcon } from '@/components/icons/BrandIcons';
-import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, ChevronDown, BookOpen } from 'lucide-react';
+import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, Shuffle, BookOpen } from 'lucide-react';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
@@ -18,7 +17,7 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   book: BookOpen,
 };
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 5;
 
 const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const ref = useRef(null);
@@ -27,37 +26,37 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [shuffleKey, setShuffleKey] = useState(0);
   const expandedRef = useRef<HTMLDivElement>(null);
 
-  // Debounce search for performance
+  // Debounce search
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchInput), 200);
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-  // Pre-index: group poems by category once, with shuffled order
+  // Shuffle poems per category
   const poemsByCategory = useMemo(() => {
     const map: Record<string, typeof POEMS> = {};
     for (const p of POEMS) {
       (map[p.category] ??= []).push(p);
     }
-    // Shuffle each category using Fisher-Yates
     for (const key in map) {
-      const arr = map[key];
+      const arr = [...map[key]];
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
+      map[key] = arr;
     }
     return map;
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shuffleKey]);
 
-  // Reset visible count on category/search change
+  // Reset on category/search change
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
     setExpandedId(null);
-  }, [activeCategory, search]);
+  }, [activeCategory, search, shuffleKey]);
 
   const filtered = useMemo(() => {
     const list = poemsByCategory[activeCategory] || [];
@@ -68,16 +67,19 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
     );
   }, [activeCategory, search, poemsByCategory]);
 
-  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
-  const hasMore = visibleCount < filtered.length;
+  const visible = useMemo(() => filtered.slice(0, PAGE_SIZE), [filtered]);
 
   const toggleExpand = useCallback((id: number) => {
     setExpandedId(prev => prev === id ? null : id);
   }, []);
 
+  const handleShuffle = useCallback(() => {
+    setShuffleKey(k => k + 1);
+  }, []);
+
   const activeMeta = POEM_CATEGORIES.find(c => c.key === activeCategory)!;
 
-  // Highlight search matches in text
+  // Highlight search matches
   const highlight = useCallback((text: string) => {
     if (!search.trim()) return text;
     const q = search.trim();
@@ -89,6 +91,15 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
       ) : part
     );
   }, [search]);
+
+  // Random glow params for category buttons
+  const categoryGlowParams = useMemo(() => 
+    POEM_CATEGORIES.map(() => ({
+      speed: 3 + Math.random() * 4,
+      dir: Math.random() > 0.5 ? 'normal' : 'reverse',
+      offset: Math.floor(Math.random() * 360),
+    }))
+  , []);
 
   return (
     <section id="siir" className="relative py-24 sm:py-32">
@@ -105,14 +116,15 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-10 text-center"
         >
-          <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3">
+          <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3"
+            style={{ textShadow: '0 0 12px rgba(168,85,247,0.4)' }}>
             {lang === 'tr' ? `${POEMS.length} ŞİİR` : `${POEMS.length} POEMS`}
           </p>
           <h2
             className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
               backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              filter: 'drop-shadow(0 0 18px rgba(210,200,255,0.35)) drop-shadow(0 0 40px rgba(200,190,255,0.15))',
               WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}
           >
@@ -120,33 +132,49 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Category Tabs */}
+        {/* Category Tabs with glow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-2 mb-8"
         >
-          {POEM_CATEGORIES.map((cat) => {
+          {POEM_CATEGORIES.map((cat, catIdx) => {
             const Icon = CATEGORY_ICONS[cat.icon];
             const isActive = activeCategory === cat.key;
+            const gp = categoryGlowParams[catIdx];
             return (
               <button
                 key={cat.key}
                 onClick={() => setActiveCategory(cat.key)}
-                className={`
-                  flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-wider
-                  transition-all duration-300 border
-                  ${isActive
-                    ? 'border-secondary/50 bg-secondary/10 text-secondary shadow-[0_0_15px_hsl(263_70%_58%/0.15)]'
-                    : 'border-border/50 text-muted-foreground hover:border-secondary/30 hover:text-secondary/70'
-                  }
-                `}
+                className="relative rounded-full p-[1px] overflow-hidden group"
               >
-                <Icon className="w-3 h-3" />
-                <span>{cat.label}</span>
-                <span className={`text-[10px] ${isActive ? 'text-secondary/70' : 'text-muted-foreground/50'}`}>
-                  {cat.count}
+                {/* Rotating glow border */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: isActive
+                      ? `conic-gradient(from ${gp.offset}deg, transparent, hsl(263 70% 58% / 0.5), transparent, transparent, hsl(263 70% 58% / 0.25), transparent)`
+                      : `conic-gradient(from ${gp.offset}deg, transparent, rgba(255,255,255,0.1), transparent, transparent, rgba(255,255,255,0.05), transparent)`,
+                    animation: `spin ${gp.speed}s linear infinite ${gp.dir}`,
+                  }}
+                />
+                <span
+                  className={`
+                    relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-wider
+                    transition-all duration-300 block
+                    ${isActive
+                      ? 'text-secondary bg-[#030508]/90'
+                      : 'text-muted-foreground bg-[#030508]/90 hover:text-secondary/70'
+                    }
+                  `}
+                  style={isActive ? { boxShadow: '0 0 15px hsl(263 70% 58% / 0.15)' } : {}}
+                >
+                  <Icon className="w-3 h-3" />
+                  <span>{cat.label}</span>
+                  <span className={`text-[10px] ${isActive ? 'text-secondary/70' : 'text-muted-foreground/50'}`}>
+                    {cat.count}
+                  </span>
                 </span>
               </button>
             );
@@ -177,7 +205,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
 
         {/* Results count */}
         <div className="text-center mb-6">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase">
+          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase"
+            style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
             {filtered.length} {lang === 'tr' ? 'şiir' : 'poems'}
             {search && ` — "${search}"`}
           </p>
@@ -188,7 +217,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           <AnimatePresence mode="popLayout">
             {visible.map((poem, i) => (
               <motion.div
-                key={poem.id}
+                key={`${shuffleKey}-${poem.id}`}
                 ref={expandedId === poem.id ? expandedRef : undefined}
                 layout
                 initial={{ opacity: 0, y: 20 }}
@@ -205,7 +234,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   }
                 `}
               >
-                <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug">
+                <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
+                  style={{ textShadow: '0 0 10px rgba(210,200,255,0.2)' }}>
                   {highlight(poem.title)}
                 </h3>
                 <AnimatePresence>
@@ -232,25 +262,30 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           </AnimatePresence>
         </div>
 
-        {/* Load More */}
-        {hasMore && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center mt-8"
+        {/* Shuffle button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center mt-8"
+        >
+          <button
+            onClick={handleShuffle}
+            className="relative rounded-full p-[1px] overflow-hidden group inline-block"
           >
-            <button
-              onClick={() => setVisibleCount(v => v + PAGE_SIZE)}
-              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full border border-border/30 text-xs font-mono tracking-wider text-muted-foreground hover:text-secondary hover:border-secondary/30 transition-all duration-300"
-            >
-              <ChevronDown className="w-3 h-3" />
-              {lang === 'tr'
-                ? `${filtered.length - visibleCount} şiir daha`
-                : `${filtered.length - visibleCount} more poems`
-              }
-            </button>
-          </motion.div>
-        )}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: 'conic-gradient(from 0deg, transparent, hsl(263 70% 58% / 0.5), transparent, transparent, hsl(263 70% 58% / 0.25), transparent)',
+                animation: `spin ${3 + Math.random() * 3}s linear infinite ${Math.random() > 0.5 ? 'reverse' : ''}`,
+              }}
+            />
+            <span className="relative z-10 inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-mono tracking-wider text-muted-foreground bg-[#030508]/90 group-hover:text-secondary transition-all duration-300 block"
+              style={{ boxShadow: '0 0 10px hsl(263 70% 58% / 0.08)' }}>
+              <Shuffle className="w-3 h-3" />
+              {lang === 'tr' ? 'Karıştır' : 'Shuffle'}
+            </span>
+          </button>
+        </motion.div>
       </div>
     </section>
   );
