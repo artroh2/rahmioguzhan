@@ -120,16 +120,15 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16 max-w-2xl mx-auto"
         >
-          <div className="relative group">
-            {/* Glow */}
-            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-primary/15 via-secondary/10 to-accent/15 blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
-
-            <div className="relative glass rounded-2xl border border-white/10 p-6 sm:p-8">
+          <div className="relative rounded-2xl border border-white/10 p-6 sm:p-8">
               <div className="flex items-center gap-5 sm:gap-6">
                 {/* Album art */}
-                <div className="relative shrink-0">
-                  <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-white/10 shadow-lg ${isPlaying ? 'animate-[spin_8s_linear_infinite]' : ''}`}>
-                    <img src={albumKendimleSavas} alt="2'ye Saymak" className="w-full h-full object-cover" />
+                <div className="relative shrink-0" style={{ perspective: '600px' }}>
+                  <div
+                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-white/10 shadow-lg`}
+                    style={isPlaying ? { animation: 'flipY 4s linear infinite' } : {}}
+                  >
+                    <img src={albumIkiyeSaymak} alt="2'ye Saymak" className="w-full h-full object-cover" />
                   </div>
                 </div>
 
