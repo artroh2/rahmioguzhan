@@ -16,6 +16,31 @@ interface CelestialBody {
   glowSize: number;
 }
 
+interface SupernovaParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  life: number;
+  maxLife: number;
+  color: string;
+  type: 'spark' | 'ring' | 'debris';
+}
+
+interface Supernova {
+  x: number;
+  y: number;
+  particles: SupernovaParticle[];
+  shockwave: number;
+  shockwaveMax: number;
+  flash: number;
+  color1: string;
+  color2: string;
+  color3: string;
+  alive: boolean;
+}
+
 const PALETTES = [
   { c1: '74, 158, 255', c2: '30, 80, 180', c3: '140, 200, 255' },   // ice blue
   { c1: '160, 80, 220', c2: '100, 30, 160', c3: '200, 140, 255' },  // cosmic purple
@@ -143,6 +168,136 @@ function drawGalaxy(ctx: CanvasRenderingContext2D, b: CelestialBody, time: numbe
   ctx.fill();
 }
 
+function spawnSupernova(x: number, y: number): Supernova {
+  const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+  const particles: SupernovaParticle[] = [];
+
+  // Core sparks — fast outward burst
+  for (let i = 0; i < 80; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2 + Math.random() * 6;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: 1 + Math.random() * 3,
+      life: 1,
+      maxLife: 1,
+      color: [palette.c1, palette.c2, palette.c3][Math.floor(Math.random() * 3)],
+      type: 'spark',
+    });
+  }
+
+  // Debris — slower, larger chunks
+  for (let i = 0; i < 25; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 0.5 + Math.random() * 2;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: 2 + Math.random() * 4,
+      life: 1,
+      maxLife: 1,
+      color: palette.c3,
+      type: 'debris',
+    });
+  }
+
+  return {
+    x, y,
+    particles,
+    shockwave: 0,
+    shockwaveMax: 150 + Math.random() * 100,
+    flash: 1,
+    color1: palette.c1,
+    color2: palette.c2,
+    color3: palette.c3,
+    alive: true,
+  };
+}
+
+function drawSupernova(ctx: CanvasRenderingContext2D, sn: Supernova) {
+  // Flash
+  if (sn.flash > 0) {
+    const flashGrad = ctx.createRadialGradient(sn.x, sn.y, 0, sn.x, sn.y, 120 * sn.flash);
+    flashGrad.addColorStop(0, `rgba(255, 255, 255, ${sn.flash * 0.8})`);
+    flashGrad.addColorStop(0.3, `rgba(${sn.color3}, ${sn.flash * 0.5})`);
+    flashGrad.addColorStop(1, `rgba(${sn.color1}, 0)`);
+    ctx.fillStyle = flashGrad;
+    ctx.beginPath();
+    ctx.arc(sn.x, sn.y, 120 * sn.flash, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Shockwave ring
+  if (sn.shockwave < sn.shockwaveMax) {
+    const progress = sn.shockwave / sn.shockwaveMax;
+    const alpha = (1 - progress) * 0.6;
+    ctx.beginPath();
+    ctx.arc(sn.x, sn.y, sn.shockwave, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${sn.color1}, ${alpha})`;
+    ctx.lineWidth = 2 + (1 - progress) * 4;
+    ctx.stroke();
+
+    // Inner shockwave
+    ctx.beginPath();
+    ctx.arc(sn.x, sn.y, sn.shockwave * 0.7, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${sn.color3}, ${alpha * 0.5})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Particles
+  for (const p of sn.particles) {
+    if (p.life <= 0) continue;
+    ctx.beginPath();
+    if (p.type === 'spark') {
+      // Draw as small streak
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - p.vx * 0.5, p.y - p.vy * 0.5);
+      ctx.strokeStyle = `rgba(${p.color}, ${p.life * 0.8})`;
+      ctx.lineWidth = p.size * p.life;
+      ctx.stroke();
+    } else {
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color}, ${p.life * 0.6})`;
+      ctx.fill();
+    }
+  }
+
+  // Residual nebula glow
+  const nebulaAlpha = Math.max(0, sn.flash * 0.3);
+  if (nebulaAlpha > 0.01) {
+    const neb = ctx.createRadialGradient(sn.x, sn.y, 0, sn.x, sn.y, 60);
+    neb.addColorStop(0, `rgba(${sn.color2}, ${nebulaAlpha})`);
+    neb.addColorStop(1, `rgba(${sn.color1}, 0)`);
+    ctx.fillStyle = neb;
+    ctx.beginPath();
+    ctx.arc(sn.x, sn.y, 60, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function updateSupernova(sn: Supernova) {
+  sn.flash *= 0.94;
+  sn.shockwave += 3;
+
+  let allDead = sn.flash < 0.01 && sn.shockwave >= sn.shockwaveMax;
+
+  for (const p of sn.particles) {
+    if (p.life <= 0) continue;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vx *= 0.98;
+    p.vy *= 0.98;
+    p.life -= p.type === 'spark' ? 0.018 : 0.008;
+    if (p.life > 0) allDead = false;
+  }
+
+  if (allDead) sn.alive = false;
+}
+
 const CosmicCursor = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const paintRef = useRef<HTMLCanvasElement | null>(null);
@@ -150,6 +305,7 @@ const CosmicCursor = () => {
   const isHoveringRef = useRef(false);
   const frameRef = useRef(0);
   const celestialsRef = useRef<CelestialBody[]>([]);
+  const supernovasRef = useRef<Supernova[]>([]);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -235,9 +391,16 @@ const CosmicCursor = () => {
       });
     };
 
+    const onDblClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
+      supernovasRef.current.push(spawnSupernova(e.clientX, e.clientY));
+    };
+
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseover', onOver);
     window.addEventListener('click', onClick);
+    window.addEventListener('dblclick', onDblClick);
 
     let time = 0;
     const draw = () => {
@@ -255,6 +418,14 @@ const CosmicCursor = () => {
         } else {
           drawGalaxy(ctx, body, time);
         }
+      }
+
+      // Supernovas
+      const snovae = supernovasRef.current;
+      for (let i = snovae.length - 1; i >= 0; i--) {
+        updateSupernova(snovae[i]);
+        drawSupernova(ctx, snovae[i]);
+        if (!snovae[i].alive) snovae.splice(i, 1);
       }
 
       // Cursor orb
@@ -290,6 +461,7 @@ const CosmicCursor = () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseover', onOver);
       window.removeEventListener('click', onClick);
+      window.removeEventListener('dblclick', onDblClick);
       window.removeEventListener('resize', resize);
       document.body.style.cursor = '';
     };
