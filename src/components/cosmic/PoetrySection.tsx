@@ -107,9 +107,10 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
               href="https://www.instagram.com/siir2.0"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs text-muted-foreground hover:text-secondary hover:border-secondary/30 transition-all duration-300"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full glass text-muted-foreground hover:text-secondary hover:border-secondary/30 transition-all duration-300"
+              aria-label="@siir2.0 Instagram"
             >
-              @siir2.0 {lang === 'tr' ? 'profilini aç' : 'open profile'}
+              <InstagramIcon className="w-5 h-5" />
             </a>
           </div>
         </motion.div>
