@@ -453,12 +453,14 @@ const CosmicCursor = () => {
         glowSize: 2.5 + Math.random() * 1.5,
         moons,
       });
+      if (!hasContent) setHasContent(true);
     };
 
     const onDblClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       supernovasRef.current.push(spawnSupernova(e.clientX, e.clientY));
+      if (!hasContent) setHasContent(true);
     };
 
     window.addEventListener('mousemove', onMove);
