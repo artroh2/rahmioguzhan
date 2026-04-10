@@ -199,7 +199,8 @@
     var(--platform-color-dim) 80%,
     transparent 100%
   );
-  animation: var(--glow-animation) 4s linear infinite;
+  animation: var(--glow-animation) var(--glow-speed, 4s) linear infinite;
+  animation-delay: var(--glow-delay, 0s);
   opacity: 0.6;
   transition: opacity 0.3s;
 }
