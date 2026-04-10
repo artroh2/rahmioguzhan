@@ -1,5 +1,13 @@
 import { useEffect, useRef } from 'react';
 
+interface Moon {
+  orbitRadius: number;
+  size: number;
+  speed: number;
+  angle: number;
+  color: string;
+}
+
 interface CelestialBody {
   x: number;
   y: number;
@@ -14,6 +22,7 @@ interface CelestialBody {
   rotationSpeed: number;
   spiralArms: number;
   glowSize: number;
+  moons: Moon[];
 }
 
 interface SupernovaParticle {
@@ -50,7 +59,7 @@ const PALETTES = [
   { c1: '255, 120, 50', c2: '180, 60, 20', c3: '255, 180, 120' },   // ember
 ];
 
-function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody) {
+function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
   const { x, y, radius, color1, color2, color3, hasRing, ringAngle } = b;
 
   // Outer glow
@@ -118,6 +127,35 @@ function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody) {
   ctx.arc(x, y, radius, 0, Math.PI * 2);
   ctx.fillStyle = spec;
   ctx.fill();
+
+  // Moons
+  for (const moon of b.moons) {
+    moon.angle += moon.speed;
+    const mx = x + Math.cos(moon.angle) * moon.orbitRadius;
+    const my = y + Math.sin(moon.angle) * moon.orbitRadius * 0.4;
+
+    // Orbit trail
+    ctx.beginPath();
+    ctx.ellipse(x, y, moon.orbitRadius, moon.orbitRadius * 0.4, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${moon.color}, 0.08)`;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    // Moon glow
+    const mg = ctx.createRadialGradient(mx, my, 0, mx, my, moon.size * 3);
+    mg.addColorStop(0, `rgba(${moon.color}, 0.15)`);
+    mg.addColorStop(1, `rgba(${moon.color}, 0)`);
+    ctx.fillStyle = mg;
+    ctx.beginPath();
+    ctx.arc(mx, my, moon.size * 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Moon body
+    ctx.beginPath();
+    ctx.arc(mx, my, moon.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${moon.color}, 0.7)`;
+    ctx.fill();
+  }
 }
 
 function drawGalaxy(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
@@ -374,6 +412,18 @@ const CosmicCursor = () => {
         ? 25 + Math.random() * 35
         : 8 + Math.random() * 22;
 
+      const moonCount = isGalaxy ? 0 : 1 + Math.floor(Math.random() * 3);
+      const moons: Moon[] = [];
+      for (let m = 0; m < moonCount; m++) {
+        moons.push({
+          orbitRadius: radius * (1.8 + m * 0.7 + Math.random() * 0.5),
+          size: 1.5 + Math.random() * 2,
+          speed: (0.008 + Math.random() * 0.015) * (Math.random() > 0.5 ? 1 : -1),
+          angle: Math.random() * Math.PI * 2,
+          color: [palette.c1, palette.c3, '200, 200, 220'][Math.floor(Math.random() * 3)],
+        });
+      }
+
       celestialsRef.current.push({
         x: e.clientX,
         y: e.clientY,
@@ -388,6 +438,7 @@ const CosmicCursor = () => {
         rotationSpeed: (Math.random() - 0.5) * 0.003,
         spiralArms: 2 + Math.floor(Math.random() * 3),
         glowSize: 2.5 + Math.random() * 1.5,
+        moons,
       });
     };
 
@@ -414,7 +465,7 @@ const CosmicCursor = () => {
       // Celestial bodies
       for (const body of celestialsRef.current) {
         if (body.type === 'planet') {
-          drawPlanet(ctx, body);
+          drawPlanet(ctx, body, time);
         } else {
           drawGalaxy(ctx, body, time);
         }
