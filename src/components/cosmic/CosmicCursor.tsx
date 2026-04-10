@@ -461,6 +461,7 @@ const CosmicCursor = () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseover', onOver);
       window.removeEventListener('click', onClick);
+      window.removeEventListener('dblclick', onDblClick);
       window.removeEventListener('resize', resize);
       document.body.style.cursor = '';
     };
