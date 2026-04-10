@@ -183,7 +183,8 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
             className="rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden"
           >
             <SolarSystem />
-            <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mt-4">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mt-4"
+              style={{ textShadow: '0 0 10px rgba(200,220,255,0.25)' }}>
               {lang === 'tr' ? 'Gizemler İçinde' : 'Within Mysteries'}
             </p>
           </motion.div>
@@ -200,13 +201,13 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                 <p className="font-display text-lg text-foreground leading-relaxed italic" style={{ textShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
                   "Sessizliğin içinde bir evren var — her kelime bir yıldız, her nota bir galaksi."
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Rahmi Oğuzhan Hacıeyüpoğlu — şair, besteci ve dijital çağın sessiz filozofu. 
+                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
+                  Rahmi Oğuzhan Hacıeyüpoğlu — şair, besteci ve dijital çağın sessiz filozofu.
                   Kelimelerle evrenler inşa eder, notalarla duyguları şekillendirir. 
                   Yapay zeka ile sanatın kesişim noktasında, yeni ifade biçimleri arar.
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Her şiir bir kapıdır, her şarkı bir yolculuk. 
+                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
+                  Her şiir bir kapıdır, her şarkı bir yolculuk.
                   Karanlıkta yazılan satırlar, ışığa dönüşür.
                 </p>
               </div>
@@ -215,12 +216,12 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                 <p className="font-display text-lg text-foreground leading-relaxed italic" style={{ textShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
                   "Within silence lies a universe — each word a star, each note a galaxy."
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
                   Rahmi Oğuzhan Hacıeyüpoğlu — poet, composer, and quiet philosopher of the digital age.
                   He builds universes with words and shapes emotions through melodies.
                   At the intersection of AI and art, he seeks new forms of expression.
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
                   Every poem is a door, every song a journey.
                   Lines written in darkness transform into light.
                 </p>
