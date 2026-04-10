@@ -1,5 +1,13 @@
 import { useEffect, useRef } from 'react';
 
+interface Moon {
+  orbitRadius: number;
+  size: number;
+  speed: number;
+  angle: number;
+  color: string;
+}
+
 interface CelestialBody {
   x: number;
   y: number;
@@ -14,6 +22,7 @@ interface CelestialBody {
   rotationSpeed: number;
   spiralArms: number;
   glowSize: number;
+  moons: Moon[];
 }
 
 interface SupernovaParticle {
