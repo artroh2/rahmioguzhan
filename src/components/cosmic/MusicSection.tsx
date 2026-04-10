@@ -14,24 +14,28 @@ const TRACKS = [
   {
     title: 'We Are One',
     artist: 'Rahmi Oğuzhan',
+    cover: albumWeAreOne,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Sakın ve Sakin',
     artist: 'Rahmi Oğuzhan',
+    cover: albumSakinVeSakin,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Yaşanabilecek Tüm İhtimalleri Biliyorum',
     artist: 'Rahmi Oğuzhan',
+    cover: albumYasanabilecek,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
   {
     title: 'Kendimle Savaş Halindeyim',
     artist: 'Rahmi Oğuzhan',
+    cover: albumKendimleSavas,
     spotify: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk',
     apple: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707',
   },
