@@ -1,7 +1,8 @@
 import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS, POEM_CATEGORIES } from '@/data/poemsData';
-import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, Shuffle, BookOpen } from 'lucide-react';
+import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, Shuffle, BookOpen, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
