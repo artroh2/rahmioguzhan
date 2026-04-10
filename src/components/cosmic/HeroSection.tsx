@@ -98,7 +98,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.8 }}
-          className="mb-10 mx-auto max-w-md"
+          className="mb-10 mx-auto w-full max-w-3xl"
         >
           <div className="relative rounded-2xl overflow-hidden">
             <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm animate-pulse" style={{ animationDuration: '4s' }} />
@@ -109,7 +109,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
                 loop
                 muted
                 playsInline
-                className="w-full aspect-[9/16] object-cover"
+                className="w-full aspect-video object-cover"
               />
             </div>
           </div>
