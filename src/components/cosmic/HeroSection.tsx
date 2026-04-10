@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import heroImg from '@/assets/cosmic-hero.jpg';
+
 
 interface HeroSectionProps {
   lang: 'tr' | 'en';
@@ -34,7 +34,14 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        <img src={heroImg} alt="" className="w-full h-full object-cover" loading="eager" />
+        <video
+          src="/videos/hero-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/40 via-[#030508]/70 to-[#030508]" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-transparent" />
       </div>
@@ -50,55 +57,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           </p>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5 }}
-          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[1.15]"
-        >
-          <span className="inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
-            style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(200,220,255,0.5), rgba(255,255,255,0.95), rgba(180,210,255,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(200,220,255,0.25)) drop-shadow(0 0 30px rgba(180,200,255,0.1))',
-              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-            }}>
-            Rahmi
-          </span>
-          <br />
-          <span className="inline-block">
-            <span className="inline animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
-              style={{
-                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
-                filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25))',
-                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-              }}>
-              {''}
-            </span>
-            <span style={{ color: '#5C3A1E', filter: 'drop-shadow(0 0 10px rgba(92,58,30,0.4))' }}>O</span>
-            <span className="inline animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
-              style={{
-                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
-                filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25))',
-                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-              }}>ğuzhan</span>
-          </span>
-          <br />
-          <span className="inline-block">
-            <span className="inline animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
-              style={{
-                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
-                filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25))',
-                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-              }}>Hacıeyüp</span>
-            <span style={{ color: '#F59E0B', filter: 'drop-shadow(0 0 10px rgba(245,158,11,0.5))' }}>o</span>
-            <span className="inline animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
-              style={{
-                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
-                filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25))',
-                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-              }}>ğlu</span>
-          </span>
-        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0 }}
