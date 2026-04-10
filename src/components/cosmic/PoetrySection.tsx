@@ -262,11 +262,27 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                     : 'border-border/20 hover:border-secondary/20'
                   }
                 `}
-              >
-                <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
-                  style={{ textShadow: '0 0 10px rgba(210,200,255,0.2)' }}>
-                  {highlight(poem.title)}
-                </h3>
+               >
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
+                    style={{ textShadow: '0 0 10px rgba(210,200,255,0.2)' }}>
+                    {showTranslation[poem.id] && translations[poem.id]
+                      ? translations[poem.id].title
+                      : highlight(poem.title)}
+                  </h3>
+                  {expandedId === poem.id && (
+                    <button
+                      onClick={(e) => handleTranslate(poem, e)}
+                      disabled={translatingId === poem.id}
+                      className="shrink-0 px-2 py-0.5 rounded text-[10px] font-mono tracking-wider border border-secondary/30 text-secondary/80 hover:text-secondary hover:border-secondary/60 transition-all duration-300 disabled:opacity-50"
+                      style={{ textShadow: '0 0 8px rgba(168,85,247,0.3)' }}
+                    >
+                      {translatingId === poem.id
+                        ? <Loader2 className="w-3 h-3 animate-spin" />
+                        : showTranslation[poem.id] ? 'TR' : 'EN'}
+                    </button>
+                  )}
+                </div>
                 <AnimatePresence>
                   {expandedId === poem.id && (
                     <motion.div
@@ -277,9 +293,12 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                       className="overflow-hidden"
                     >
                       <div className="mt-3 pt-3 border-t border-secondary/10">
-                        {poem.body.split('\n').map((line, li) => (
+                        {(showTranslation[poem.id] && translations[poem.id]
+                          ? translations[poem.id].body
+                          : poem.body
+                        ).split('\n').map((line, li) => (
                           <p key={li} className="font-display text-sm text-muted-foreground leading-relaxed italic">
-                            {line ? highlight(line) : <br />}
+                            {line ? (showTranslation[poem.id] ? line : highlight(line)) : <br />}
                           </p>
                         ))}
                       </div>
