@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import diamondLogo from '@/assets/diamond-logo.png';
 
 interface NavbarProps {
   lang: 'tr' | 'en';
@@ -62,9 +63,8 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#hero" className="font-display text-2xl font-bold text-foreground hover:text-primary transition-colors relative group">
-          <span className="relative z-10">Rahmi Oğuzhan</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm animate-shimmer bg-[length:200%_100%]" />
+        <a href="#hero" className="flex items-center transition-transform duration-300 hover:scale-110">
+          <img src={diamondLogo} alt="ROH2" width={36} height={36} className="w-9 h-9 drop-shadow-[0_0_8px_rgba(200,220,255,0.4)]" />
         </a>
 
         {/* Desktop nav */}
