@@ -156,7 +156,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
             {lang === 'tr' ? 'Tüm Platformlar' : 'All Platforms'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
