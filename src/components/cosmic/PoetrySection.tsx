@@ -96,7 +96,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           className="mb-10 text-center"
         >
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3">
-            {lang === 'tr' ? `${POEMS.length} şiir` : `${POEMS.length} poems`}
+            {lang === 'tr' ? `${POEMS.length} ŞİİR` : `${POEMS.length} POEMS`}
           </p>
           <h2
             className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
@@ -106,7 +106,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
               WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
             }}
           >
-            {lang === 'tr' ? 'Şiirler' : 'Poetry'}
+            {lang === 'tr' ? 'ŞİİRLER' : 'POETRY'}
           </h2>
         </motion.div>
 
