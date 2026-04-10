@@ -21,7 +21,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-cosmic mb-3">
+          <p className="font-mono text-xs tracking-[0.4em] uppercase text-cosmic mb-3">
             {lang === 'tr' ? 'şiir' : 'poetry'}
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
@@ -35,7 +35,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 text-center">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4 text-center">
             {lang === 'tr' ? 'Instagram\'da Şiirler' : 'Poetry on Instagram'}
           </p>
           <div className="relative rounded-2xl overflow-hidden border border-cosmic/20 shadow-[0_0_40px_hsl(263_70%_58%/0.08)]">
