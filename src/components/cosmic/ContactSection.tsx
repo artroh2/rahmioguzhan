@@ -54,6 +54,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
   return (
     <section id="iletisim" className="relative py-24 sm:py-32">
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
       <div className="relative z-10 max-w-3xl mx-auto px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
