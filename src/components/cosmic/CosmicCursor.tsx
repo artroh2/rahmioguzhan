@@ -542,10 +542,10 @@ const CosmicCursor = () => {
       {hasContent && (
         <button
           onClick={clearAll}
-          className="fixed bottom-6 right-6 z-[10000] p-2.5 rounded-full glass border border-border/30 text-muted-foreground/40 hover:text-destructive hover:border-destructive/30 transition-all duration-300 hover:shadow-[0_0_20px_hsl(0_84%_60%/0.15)]"
+          className="fixed bottom-6 right-6 z-[10000] p-3 rounded-full glass border border-border/30 hover:border-ice/30 transition-all duration-300 hover:shadow-[0_0_25px_hsl(213_100%_65%/0.2)] hover:scale-110"
           aria-label="Clear cosmic canvas"
         >
-          <Trash2 className="w-4 h-4" />
+          <img src={diamondLogo} alt="Clear" className="w-8 h-8 drop-shadow-[0_0_10px_rgba(200,220,255,0.5)]" />
         </button>
       )}
     </>
