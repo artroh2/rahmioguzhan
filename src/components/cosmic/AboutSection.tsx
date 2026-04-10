@@ -141,7 +141,7 @@ const SolarSystem = () => {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  return <canvas ref={canvasRef} className="w-[280px] h-[280px] mx-auto" />;
+  return <canvas ref={canvasRef} className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] mx-auto" />;
 };
 
 const AboutSection = ({ lang }: AboutSectionProps) => {
