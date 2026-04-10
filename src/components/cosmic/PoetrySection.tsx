@@ -155,7 +155,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
             type="text"
             value={searchInput}
             onChange={e => setSearchInput(e.target.value)}
-            placeholder={lang === 'tr' ? 'Şiirlerde ara...' : 'Search poems...'}
+            placeholder={lang === 'tr' ? 'Şiirlerde kelime ara...' : 'Search poems...'}
             className="w-full pl-9 pr-8 py-2 rounded-full bg-transparent border border-border/40 text-sm text-foreground placeholder:text-muted-foreground/40 font-mono tracking-wide focus:outline-none focus:border-secondary/40 transition-colors"
           />
           {searchInput && (
