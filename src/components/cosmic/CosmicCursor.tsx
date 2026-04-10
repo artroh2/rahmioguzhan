@@ -550,6 +550,9 @@ const CosmicCursor = () => {
     window.addEventListener('touchend', cancelLongPress, { passive: true });
     window.addEventListener('touchmove', cancelLongPress, { passive: true });
 
+    const zoomSpeed = 0.0004; // how fast the universe zooms in
+    let zoomSpawnTimer = 0;
+
     let time = 0;
     const targetFps = isTouch ? 30 : 60;
     const frameInterval = 1000 / targetFps;
@@ -563,26 +566,32 @@ const CosmicCursor = () => {
       lastTime = timestamp - (delta % frameInterval);
 
       time++;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Persistent paint layer
       ctx.drawImage(paint, 0, 0);
 
-      // Background stars with glow-up and movement
-      for (const star of bgStarsRef.current) {
+      // ─── Zoom-in: expand stars outward from center ───
+      for (let i = bgStarsRef.current.length - 1; i >= 0; i--) {
+        const star = bgStarsRef.current[i];
         // Glow up
         if (star.opacity < star.targetOpacity) {
           star.opacity = Math.min(star.opacity + 0.005, star.targetOpacity);
         }
-        // Move
-        star.x += star.vx;
-        star.y += star.vy;
-        // Wrap around
-        if (star.x < -5) star.x = canvas.width + 5;
-        if (star.x > canvas.width + 5) star.x = -5;
-        if (star.y < -5) star.y = canvas.height + 5;
-        if (star.y > canvas.height + 5) star.y = -5;
-        // Draw with glow
+        // Zoom drift: move away from center + grow
+        const dx = star.x - cx;
+        const dy = star.y - cy;
+        star.x += dx * zoomSpeed + star.vx;
+        star.y += dy * zoomSpeed + star.vy;
+        star.size += star.size * zoomSpeed * 0.3;
+        // Remove if off-screen or too large
+        if (star.x < -50 || star.x > canvas.width + 50 || star.y < -50 || star.y > canvas.height + 50 || star.size > 8) {
+          bgStarsRef.current.splice(i, 1);
+          continue;
+        }
+        // Draw
         const sg = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3);
         sg.addColorStop(0, `rgba(${star.color}, ${star.opacity})`);
         sg.addColorStop(1, `rgba(${star.color}, 0)`);
@@ -596,11 +605,21 @@ const CosmicCursor = () => {
         ctx.fill();
       }
 
-      // Celestial bodies with fade-in and drift
-      for (const body of celestialsRef.current) {
+      // ─── Zoom-in: expand celestials outward from center ───
+      for (let i = celestialsRef.current.length - 1; i >= 0; i--) {
+        const body = celestialsRef.current[i];
         if (body.opacity < 1) body.opacity = Math.min(body.opacity + 0.02, 1);
-        body.x += body.vx;
-        body.y += body.vy;
+        // Zoom drift
+        const dx = body.x - cx;
+        const dy = body.y - cy;
+        body.x += dx * zoomSpeed + body.vx;
+        body.y += dy * zoomSpeed + body.vy;
+        body.radius += body.radius * zoomSpeed * 0.5;
+        // Remove if way off-screen or too huge
+        if (body.x < -200 || body.x > canvas.width + 200 || body.y < -200 || body.y > canvas.height + 200 || body.radius > 300) {
+          celestialsRef.current.splice(i, 1);
+          continue;
+        }
         ctx.globalAlpha = body.opacity;
         if (body.type === 'planet') {
           drawPlanet(ctx, body, time);
@@ -608,6 +627,18 @@ const CosmicCursor = () => {
           drawGalaxy(ctx, body, time);
         }
         ctx.globalAlpha = 1;
+      }
+
+      // ─── Spawn new celestials near center for infinite depth ───
+      zoomSpawnTimer++;
+      if (zoomSpawnTimer % (isTouch ? 90 : 60) === 0) {
+        // Spawn a small celestial near center with some randomness
+        const spawnX = cx + (Math.random() - 0.5) * canvas.width * 0.4;
+        const spawnY = cy + (Math.random() - 0.5) * canvas.height * 0.4;
+        const tiny = spawnCelestial(spawnX, spawnY, 0.3);
+        tiny.radius *= 0.4; // start very small (far away)
+        celestialsRef.current.push(tiny);
+      }
       }
 
       // Supernovas
