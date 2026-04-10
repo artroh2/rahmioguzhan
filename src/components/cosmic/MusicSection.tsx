@@ -76,6 +76,26 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           </h2>
         </motion.div>
 
+        {/* Spotify Embed */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
+        >
+          <div className="glass rounded-2xl overflow-hidden border border-border">
+            <iframe
+              src="https://open.spotify.com/embed/artist/4fQ8VbreLSA4Eaiwm1Elfk?utm_source=generator&theme=0"
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              className="rounded-2xl"
+            />
+          </div>
+        </motion.div>
+
         {/* Track cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
           {TRACKS.map((track, i) => (
