@@ -492,15 +492,52 @@ const CosmicCursor = () => {
     spawnBgStars();
     const bgStarInterval = setInterval(spawnBgStars, 8000);
 
+    // ─── Right-click (desktop): reset everything ───
+    const onContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
+      e.preventDefault();
+      clearAll();
+      // Re-spawn initial stars
+      setTimeout(spawnBgStars, 100);
+    };
+
+    // ─── Long-press (mobile/tablet): reset everything ───
+    let longPressTimer: ReturnType<typeof setTimeout> | null = null;
+    const longPressThreshold = 600; // ms
+
+    const onTouchStartForLongPress = (e: TouchEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
+      longPressTimer = setTimeout(() => {
+        longPressTimer = null;
+        clearAll();
+        setTimeout(spawnBgStars, 100);
+      }, longPressThreshold);
+    };
+
+    const cancelLongPress = () => {
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    };
+
     // Register events
     if (!isTouch) {
       window.addEventListener('mousemove', onMove);
       window.addEventListener('mouseover', onOver);
       window.addEventListener('click', onClick);
       window.addEventListener('dblclick', onDblClick);
+      window.addEventListener('contextmenu', onContextMenu);
+    } else {
+      window.addEventListener('contextmenu', (e) => e.preventDefault());
     }
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchstart', onTouchStartForLongPress, { passive: true });
+    window.addEventListener('touchend', cancelLongPress, { passive: true });
+    window.addEventListener('touchmove', cancelLongPress, { passive: true });
 
     let time = 0;
     const targetFps = isTouch ? 30 : 60;
