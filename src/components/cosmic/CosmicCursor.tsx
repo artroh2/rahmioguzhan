@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
+import { Trash2 } from 'lucide-react';
 
 interface Moon {
   orbitRadius: number;
@@ -344,6 +345,17 @@ const CosmicCursor = () => {
   const frameRef = useRef(0);
   const celestialsRef = useRef<CelestialBody[]>([]);
   const supernovasRef = useRef<Supernova[]>([]);
+  const [hasContent, setHasContent] = useState(false);
+
+  const clearAll = useCallback(() => {
+    celestialsRef.current = [];
+    supernovasRef.current = [];
+    if (paintRef.current) {
+      const pctx = paintRef.current.getContext('2d');
+      if (pctx) pctx.clearRect(0, 0, paintRef.current.width, paintRef.current.height);
+    }
+    setHasContent(false);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -390,6 +402,7 @@ const CosmicCursor = () => {
           pctx.arc(px, py, size, 0, Math.PI * 2);
           pctx.fillStyle = `rgba(74, 158, 255, ${0.3 + Math.random() * 0.25})`;
           pctx.fill();
+          if (!hasContent) setHasContent(true);
         }
       }
     };
@@ -440,12 +453,14 @@ const CosmicCursor = () => {
         glowSize: 2.5 + Math.random() * 1.5,
         moons,
       });
+      if (!hasContent) setHasContent(true);
     };
 
     const onDblClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       supernovasRef.current.push(spawnSupernova(e.clientX, e.clientY));
+      if (!hasContent) setHasContent(true);
     };
 
     window.addEventListener('mousemove', onMove);
@@ -519,11 +534,21 @@ const CosmicCursor = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[9999]"
-      style={{ pointerEvents: 'none' }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-[9999]"
+      />
+      {hasContent && (
+        <button
+          onClick={clearAll}
+          className="fixed bottom-6 right-6 z-[10000] p-2.5 rounded-full glass border border-border/30 text-muted-foreground/40 hover:text-destructive hover:border-destructive/30 transition-all duration-300 hover:shadow-[0_0_20px_hsl(0_84%_60%/0.15)]"
+          aria-label="Clear cosmic canvas"
+        >
+          <Trash2 className="w-4 h-4" />
+        </button>
+      )}
+    </>
   );
 };
 
