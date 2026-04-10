@@ -153,13 +153,13 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/50" />
           <input
             type="text"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
             placeholder={lang === 'tr' ? 'Şiirlerde ara...' : 'Search poems...'}
             className="w-full pl-9 pr-8 py-2 rounded-full bg-transparent border border-border/40 text-sm text-foreground placeholder:text-muted-foreground/40 font-mono tracking-wide focus:outline-none focus:border-secondary/40 transition-colors"
           />
-          {search && (
-            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-foreground transition-colors">
+          {searchInput && (
+            <button onClick={() => { setSearchInput(''); setSearch(''); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-foreground transition-colors">
               <X className="w-3.5 h-3.5" />
             </button>
           )}
