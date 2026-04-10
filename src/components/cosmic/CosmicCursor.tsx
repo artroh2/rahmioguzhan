@@ -661,7 +661,9 @@ const CosmicCursor = () => {
         body.x += body.vx;
         body.y += body.vy;
         ctx.globalAlpha = body.opacity;
-        if (body.type === 'planet') {
+        if (body.type === 'earth') {
+          drawEarth(ctx, body, time);
+        } else if (body.type === 'planet') {
           drawPlanet(ctx, body, time);
         } else {
           drawGalaxy(ctx, body, time);
