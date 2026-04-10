@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
-import { Trash2 } from 'lucide-react';
+import diamondLogo from '@/assets/diamond-logo.png';
 
 interface Moon {
   orbitRadius: number;
