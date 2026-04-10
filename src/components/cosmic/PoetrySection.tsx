@@ -172,7 +172,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   style={isActive ? { boxShadow: '0 0 15px hsl(263 70% 58% / 0.15)' } : {}}
                 >
                   <Icon className="w-3 h-3" />
-                  <span>{cat.label}</span>
+                  <span>{lang === 'en' ? cat.labelEn : cat.label}</span>
                   <span className={`text-[10px] ${isActive ? 'text-secondary/70' : 'text-muted-foreground/50'}`}>
                     {cat.count}
                   </span>

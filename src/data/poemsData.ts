@@ -6,14 +6,14 @@ export interface Poem {
 }
 
 export const POEM_CATEGORIES = [
-  { key: "en_iyiler", label: "En İyiler", icon: "star", count: 508 },
-  { key: "ask", label: "Aşk Şiirleri", icon: "heart", count: 87 },
-  { key: "iyiler", label: "Alternatifler", icon: "sparkles", count: 219 },
-  { key: "kisalar", label: "Kısalar", icon: "zap", count: 162 },
-  { key: "sarki", label: "Şarkı Sözleri", icon: "music", count: 52 },
-  { key: "english", label: "English Poems", icon: "globe", count: 43 },
-  { key: "kitap", label: "Kitap", icon: "book", count: 3 },
-  { key: "dunya", label: "Dünya", icon: "globe", count: 1 },
+  { key: "en_iyiler", label: "En İyiler", labelEn: "Best", icon: "star", count: 508 },
+  { key: "ask", label: "Aşk Şiirleri", labelEn: "Love Poems", icon: "heart", count: 87 },
+  { key: "iyiler", label: "Alternatifler", labelEn: "Alternatives", icon: "sparkles", count: 219 },
+  { key: "kisalar", label: "Kısalar", labelEn: "Short", icon: "zap", count: 162 },
+  { key: "sarki", label: "Şarkı Sözleri", labelEn: "Lyrics", icon: "music", count: 52 },
+  { key: "english", label: "English Poems", labelEn: "English Poems", icon: "globe", count: 43 },
+  { key: "kitap", label: "Kitap", labelEn: "Book", icon: "book", count: 3 },
+  { key: "dunya", label: "Dünya", labelEn: "World", icon: "globe", count: 1 },
 ] as const;
 
 export const POEMS: Poem[] = [
