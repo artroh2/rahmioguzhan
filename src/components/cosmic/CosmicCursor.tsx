@@ -93,19 +93,23 @@ function spawnCelestial(x: number, y: number, sizeScale = 1, forceType?: 'planet
     });
   }
 
+  const actualType = forceType === 'earth' ? 'earth' : (isGalaxy ? 'galaxy' : 'planet');
+  const earthColors = { c1: '30, 100, 200', c2: '40, 160, 80', c3: '220, 220, 240' };
+  const usePalette = forceType === 'earth' ? earthColors : { c1: palette.c1, c2: palette.c2, c3: palette.c3 };
+
   return {
     x, y, radius,
-    type: isGalaxy ? 'galaxy' : 'planet',
-    color1: palette.c1,
-    color2: palette.c2,
-    color3: palette.c3,
+    type: actualType,
+    color1: usePalette.c1,
+    color2: usePalette.c2,
+    color3: usePalette.c3,
     ringAngle: Math.random() * Math.PI * 0.4 - 0.2,
-    hasRing: !isGalaxy && Math.random() > 0.4,
+    hasRing: actualType === 'earth' ? false : (!isGalaxy && Math.random() > 0.4),
     rotation: Math.random() * Math.PI * 2,
     rotationSpeed: (Math.random() - 0.5) * 0.003,
     spiralArms: 2 + Math.floor(Math.random() * 3),
-    glowSize: 2.5 + Math.random() * 1.5,
-    moons,
+    glowSize: actualType === 'earth' ? 3 : 2.5 + Math.random() * 1.5,
+    moons: actualType === 'earth' ? [{ orbitRadius: radius * 2.2, size: radius * 0.18, speed: 0.012, angle: Math.random() * Math.PI * 2, color: '200, 200, 210' }] : moons,
     opacity: 0,
     vx: (Math.random() - 0.5) * 0.15,
     vy: (Math.random() - 0.5) * 0.15,
