@@ -181,7 +181,7 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden"
           >
-            <CosmicPortal />
+            <SolarSystem />
             <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mt-4">
               {lang === 'tr' ? 'Gizemler İçinde' : 'Within Mysteries'}
             </p>
