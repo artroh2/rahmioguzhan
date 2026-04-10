@@ -115,10 +115,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
               className="glass rounded-2xl p-5 group hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_30px_hsl(213_100%_65%/0.1)]"
             >
               <div className="flex items-start gap-4">
-                {/* Album art placeholder */}
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-cosmic/20 flex items-center justify-center shrink-0 border border-border">
-                  <span className="text-2xl">♪</span>
-                </div>
+                <img src={track.cover} alt={track.title} loading="lazy" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0 border border-border" />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors truncate">
                     {track.title}
