@@ -141,7 +141,7 @@ const SolarSystem = () => {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  return <canvas ref={canvasRef} className="w-[280px] h-[280px] mx-auto" />;
+  return <canvas ref={canvasRef} className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] mx-auto" />;
 };
 
 const AboutSection = ({ lang }: AboutSectionProps) => {
@@ -174,7 +174,7 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Cosmic portal */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

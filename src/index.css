@@ -208,6 +208,7 @@
   animation-delay: var(--glow-delay, 0s);
   opacity: 0.6;
   transition: opacity 0.3s;
+  will-change: transform;
 }
 .platform-glow-card:hover::before {
   opacity: 1;

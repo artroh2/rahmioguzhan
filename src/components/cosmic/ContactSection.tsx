@@ -109,6 +109,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                   style={{
                     background: `conic-gradient(from ${gp.offset}deg, transparent, ${s.color}60, transparent, transparent, ${s.color}30, transparent)`,
                     animation: `spin ${gp.speed}s linear infinite ${gp.dir}`,
+                    willChange: 'transform',
                   }}
                 />
                 <span

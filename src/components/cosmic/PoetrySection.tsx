@@ -157,6 +157,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                       ? `conic-gradient(from ${gp.offset}deg, transparent, hsl(263 70% 58% / 0.5), transparent, transparent, hsl(263 70% 58% / 0.25), transparent)`
                       : `conic-gradient(from ${gp.offset}deg, transparent, rgba(255,255,255,0.1), transparent, transparent, rgba(255,255,255,0.05), transparent)`,
                     animation: `spin ${gp.speed}s linear infinite ${gp.dir}`,
+                    willChange: 'transform',
                   }}
                 />
                 <span
@@ -277,6 +278,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
               style={{
                 background: 'conic-gradient(from 0deg, transparent, hsl(263 70% 58% / 0.5), transparent, transparent, hsl(263 70% 58% / 0.25), transparent)',
                 animation: `spin ${3 + Math.random() * 3}s linear infinite ${Math.random() > 0.5 ? 'reverse' : ''}`,
+                willChange: 'transform',
               }}
             />
             <span className="relative z-10 inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-mono tracking-wider text-muted-foreground bg-[#030508]/90 group-hover:text-secondary transition-all duration-300 block"
