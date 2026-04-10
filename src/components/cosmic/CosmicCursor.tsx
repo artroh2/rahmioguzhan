@@ -127,6 +127,35 @@ function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody, time: numbe
   ctx.arc(x, y, radius, 0, Math.PI * 2);
   ctx.fillStyle = spec;
   ctx.fill();
+
+  // Moons
+  for (const moon of b.moons) {
+    moon.angle += moon.speed;
+    const mx = x + Math.cos(moon.angle) * moon.orbitRadius;
+    const my = y + Math.sin(moon.angle) * moon.orbitRadius * 0.4;
+
+    // Orbit trail
+    ctx.beginPath();
+    ctx.ellipse(x, y, moon.orbitRadius, moon.orbitRadius * 0.4, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${moon.color}, 0.08)`;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    // Moon glow
+    const mg = ctx.createRadialGradient(mx, my, 0, mx, my, moon.size * 3);
+    mg.addColorStop(0, `rgba(${moon.color}, 0.15)`);
+    mg.addColorStop(1, `rgba(${moon.color}, 0)`);
+    ctx.fillStyle = mg;
+    ctx.beginPath();
+    ctx.arc(mx, my, moon.size * 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Moon body
+    ctx.beginPath();
+    ctx.arc(mx, my, moon.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${moon.color}, 0.7)`;
+    ctx.fill();
+  }
 }
 
 function drawGalaxy(ctx: CanvasRenderingContext2D, b: CelestialBody, time: number) {
