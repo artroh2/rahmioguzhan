@@ -1,34 +1,36 @@
 import { useEffect, useRef } from 'react';
 
-interface Particle {
-  x: number;
-  y: number;
-  life: number;
-  maxLife: number;
-  size: number;
-  vx: number;
-  vy: number;
-}
-
 const CosmicCursor = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const paintRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: -100, y: -100 });
-  const particlesRef = useRef<Particle[]>([]);
   const isHoveringRef = useRef(false);
   const frameRef = useRef(0);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if ('ontouchstart' in window) return; // Skip on touch devices
+    if ('ontouchstart' in window) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Offscreen canvas for persistent paint
+    const paint = document.createElement('canvas');
+    paintRef.current = paint;
+    const pctx = paint.getContext('2d')!;
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      // Save paint content before resize
+      const img = pctx.getImageData(0, 0, paint.width, paint.height);
+      canvas.width = w;
+      canvas.height = h;
+      paint.width = w;
+      paint.height = h;
+      pctx.putImageData(img, 0, 0);
     };
     resize();
     window.addEventListener('resize', resize);
@@ -43,18 +45,17 @@ const CosmicCursor = () => {
 
       mouseRef.current = { x: e.clientX, y: e.clientY };
 
-      if (speed > 2) {
-        const count = Math.min(Math.floor(speed / 4), 5);
+      // Paint directly onto the persistent canvas
+      if (speed > 1.5) {
+        const count = Math.min(Math.floor(speed / 3), 6);
         for (let i = 0; i < count; i++) {
-          particlesRef.current.push({
-            x: e.clientX + (Math.random() - 0.5) * 6,
-            y: e.clientY + (Math.random() - 0.5) * 6,
-            life: 1,
-            maxLife: 1,
-            size: Math.random() * 2.5 + 1,
-            vx: 0,
-            vy: 0,
-          });
+          const px = e.clientX + (Math.random() - 0.5) * 6;
+          const py = e.clientY + (Math.random() - 0.5) * 6;
+          const size = Math.random() * 2.5 + 0.8;
+          pctx.beginPath();
+          pctx.arc(px, py, size, 0, Math.PI * 2);
+          pctx.fillStyle = `rgba(74, 158, 255, ${0.3 + Math.random() * 0.25})`;
+          pctx.fill();
         }
       }
     };
@@ -72,6 +73,9 @@ const CosmicCursor = () => {
     const draw = () => {
       frameRef.current = requestAnimationFrame(draw);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw persistent paint layer
+      ctx.drawImage(paint, 0, 0);
 
       const { x, y } = mouseRef.current;
       const hovering = isHoveringRef.current;
@@ -99,16 +103,6 @@ const CosmicCursor = () => {
       ctx.strokeStyle = `rgba(74, 158, 255, ${hovering ? 0.5 : 0.2})`;
       ctx.lineWidth = 1;
       ctx.stroke();
-
-      // Persistent paint particles — never removed
-      const particles = particlesRef.current;
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(74, 158, 255, 0.45)';
-        ctx.fill();
-      }
     };
 
     frameRef.current = requestAnimationFrame(draw);
