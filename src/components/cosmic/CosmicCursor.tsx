@@ -523,7 +523,10 @@ const CosmicCursor = () => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       clickCountRef.current++;
-      if (clickCountRef.current % 5 === 0) {
+      if (clickCountRef.current % 10 === 0) {
+        // Every 10 clicks → Earth
+        addCelestial(e.clientX, e.clientY, 2.5, 'earth');
+      } else if (clickCountRef.current % 5 === 0) {
         // Every 5 clicks → huge galaxy
         addCelestial(e.clientX, e.clientY, 3, 'galaxy');
       } else {
