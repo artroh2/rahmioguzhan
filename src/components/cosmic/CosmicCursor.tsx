@@ -641,14 +641,19 @@ const CosmicCursor = () => {
       cancelAnimationFrame(frameRef.current);
       clearInterval(autoSpawnInterval);
       clearInterval(bgStarInterval);
+      cancelLongPress();
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseover', onOver);
         window.removeEventListener('click', onClick);
         window.removeEventListener('dblclick', onDblClick);
+        window.removeEventListener('contextmenu', onContextMenu);
       }
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchstart', onTouchStartForLongPress);
+      window.removeEventListener('touchend', cancelLongPress);
+      window.removeEventListener('touchmove', cancelLongPress);
       window.removeEventListener('resize', resize);
       if (!isTouch) document.body.style.cursor = '';
     };
