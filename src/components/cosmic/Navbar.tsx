@@ -62,10 +62,15 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between relative">
         <a href="#hero" className="flex items-center transition-transform duration-300 hover:scale-110">
           <img src={diamondLogo} alt="ROH2" width={36} height={36} className="w-9 h-9 drop-shadow-[0_0_8px_rgba(200,220,255,0.4)]" />
         </a>
+
+        {/* Centered "· 2 ·" */}
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-sm tracking-[0.3em] text-muted-foreground font-semibold select-none">
+          ·&nbsp;&nbsp;2&nbsp;&nbsp;·
+        </span>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
