@@ -30,7 +30,12 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3">
             {lang === 'tr' ? 'şiir' : 'poetry'}
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
+            style={{
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+            }}>
             {lang === 'tr' ? 'Şiirler' : 'Poetry'}
           </h2>
         </motion.div>
