@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,44 +6,48 @@
 
 @layer base {
   :root {
-    --background: 20 30% 3%;
-    --foreground: 30 30% 92%;
+    --background: 225 60% 3%;
+    --foreground: 220 20% 90%;
 
-    --card: 25 25% 10%;
-    --card-foreground: 30 30% 92%;
+    --card: 225 40% 8%;
+    --card-foreground: 220 20% 90%;
 
-    --popover: 25 25% 10%;
-    --popover-foreground: 30 30% 92%;
+    --popover: 225 40% 8%;
+    --popover-foreground: 220 20% 90%;
 
-    --primary: 34 66% 47%;
-    --primary-foreground: 20 30% 3%;
+    --primary: 213 100% 65%;
+    --primary-foreground: 225 60% 3%;
 
-    --secondary: 25 15% 15%;
-    --secondary-foreground: 30 15% 65%;
+    --secondary: 263 70% 58%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 25 15% 15%;
-    --muted-foreground: 30 10% 50%;
+    --muted: 225 30% 12%;
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 34 66% 47%;
-    --accent-foreground: 20 30% 3%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 225 60% 3%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 25 15% 18%;
-    --input: 25 15% 15%;
-    --ring: 34 66% 47%;
+    --border: 225 30% 15%;
+    --input: 225 30% 12%;
+    --ring: 213 100% 65%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 20 30% 3%;
-    --sidebar-foreground: 30 30% 92%;
-    --sidebar-primary: 34 66% 47%;
-    --sidebar-primary-foreground: 20 30% 3%;
-    --sidebar-accent: 25 15% 15%;
-    --sidebar-accent-foreground: 30 30% 92%;
-    --sidebar-border: 25 15% 18%;
-    --sidebar-ring: 34 66% 47%;
+    --sidebar-background: 225 60% 3%;
+    --sidebar-foreground: 220 20% 90%;
+    --sidebar-primary: 213 100% 65%;
+    --sidebar-primary-foreground: 225 60% 3%;
+    --sidebar-accent: 225 30% 12%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 225 30% 15%;
+    --sidebar-ring: 213 100% 65%;
+
+    --ice: 213 100% 65%;
+    --cosmic: 263 70% 58%;
+    --gold: 38 92% 50%;
   }
 }
 
@@ -72,10 +76,36 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(25 15% 25%);
+  background: hsl(225 30% 20%);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(34 66% 47% / 0.5);
+  background: hsl(213 100% 65% / 0.5);
+}
+
+/* Glass morphism utility */
+.glass {
+  background: hsl(225 40% 8% / 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(225 30% 15% / 0.5);
+}
+
+/* Cosmic gradient text */
+.text-gradient-cosmic {
+  background: linear-gradient(135deg, hsl(213 100% 65%), hsl(263 70% 58%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stars background */
+.stars-bg {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, hsl(213 100% 65% / 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, hsl(263 70% 58% / 0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, hsl(0 0% 100% / 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, hsl(213 100% 65% / 0.2), transparent),
+    radial-gradient(2px 2px at 160px 30px, hsl(0 0% 100% / 0.15), transparent);
+  background-size: 200px 100px;
 }

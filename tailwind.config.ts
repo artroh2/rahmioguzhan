@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Caveat", "cursive"],
+        display: ["Playfair Display", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,15 +51,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
-          dark: "hsl(var(--gold-dark))",
-        },
-        beige: "hsl(var(--beige))",
-        cream: "hsl(var(--cream))",
-        navy: "hsl(var(--navy))",
-        charcoal: "hsl(var(--charcoal))",
+        ice: "hsl(var(--ice))",
+        cosmic: "hsl(var(--cosmic))",
+        gold: "hsl(var(--gold))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -106,12 +100,12 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(28 85% 55% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(28 85% 55% / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(213 100% 65% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(213 100% 65% / 0.5)" },
         },
-        "warm-pulse": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.7" },
+        "star-twinkle": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "1" },
         },
       },
       animation: {
@@ -123,7 +117,7 @@ export default {
         shimmer: "shimmer 2s linear infinite",
         float: "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "warm-pulse": "warm-pulse 4s ease-in-out infinite",
+        "star-twinkle": "star-twinkle 3s ease-in-out infinite",
       },
     },
   },
