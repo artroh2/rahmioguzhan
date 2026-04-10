@@ -18,7 +18,7 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   book: BookOpen,
 };
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 2;
 
 const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const ref = useRef(null);
