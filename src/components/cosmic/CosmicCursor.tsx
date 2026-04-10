@@ -106,6 +106,9 @@ function spawnCelestial(x: number, y: number, sizeScale = 1, forceType?: 'planet
     spiralArms: 2 + Math.floor(Math.random() * 3),
     glowSize: 2.5 + Math.random() * 1.5,
     moons,
+    opacity: 0,
+    vx: (Math.random() - 0.5) * 0.15,
+    vy: (Math.random() - 0.5) * 0.15,
   };
 }
 
