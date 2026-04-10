@@ -129,7 +129,7 @@ function drawPlanet(ctx: CanvasRenderingContext2D, b: CelestialBody, time: numbe
   ctx.fill();
 
   // Moons
-  for (const moon of b.moons) {
+  for (const moon of (b.moons || [])) {
     moon.angle += moon.speed;
     const mx = x + Math.cos(moon.angle) * moon.orbitRadius;
     const my = y + Math.sin(moon.angle) * moon.orbitRadius * 0.4;
