@@ -1,7 +1,9 @@
 import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { POEMS, POEM_CATEGORIES } from '@/data/poemsData';
-import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, Shuffle, BookOpen } from 'lucide-react';
+import { Heart, Star, Globe, Sparkles, Zap, Music, Search, X, Shuffle, BookOpen, Languages, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface PoetrySectionProps {
   lang: 'tr' | 'en';
@@ -28,6 +30,39 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [search, setSearch] = useState('');
   const [shuffleKey, setShuffleKey] = useState(0);
   const expandedRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  // Translation state
+  const [translations, setTranslations] = useState<Record<number, { title: string; body: string }>>({});
+  const [translatingId, setTranslatingId] = useState<number | null>(null);
+  const [showTranslation, setShowTranslation] = useState<Record<number, boolean>>({});
+
+  const handleTranslate = useCallback(async (e: React.MouseEvent, poem: { id: number; title: string; body: string }) => {
+    e.stopPropagation();
+    
+    // Toggle if already translated
+    if (translations[poem.id]) {
+      setShowTranslation(prev => ({ ...prev, [poem.id]: !prev[poem.id] }));
+      return;
+    }
+
+    setTranslatingId(poem.id);
+    try {
+      const { data, error } = await supabase.functions.invoke('translate-poem', {
+        body: { title: poem.title, body: poem.body },
+      });
+      if (error) throw error;
+      if (data?.translation) {
+        setTranslations(prev => ({ ...prev, [poem.id]: data.translation }));
+        setShowTranslation(prev => ({ ...prev, [poem.id]: true }));
+      }
+    } catch (err) {
+      console.error('Translation error:', err);
+      toast({ title: 'Çeviri hatası', description: 'Şiir çevrilemedi, tekrar deneyin.', variant: 'destructive' });
+    } finally {
+      setTranslatingId(null);
+    }
+  }, [translations, toast]);
 
   // Debounce search
   useEffect(() => {
@@ -248,12 +283,49 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                       transition={{ duration: 0.4 }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-3 pt-3 border-t border-secondary/10">
-                        {poem.body.split('\n').map((line, li) => (
-                          <p key={li} className="font-display text-sm text-muted-foreground leading-relaxed italic">
+                      <div className="mt-3 pt-3 border-t border-secondary/10 relative">
+                        {/* EN translate button */}
+                        <button
+                          onClick={(e) => handleTranslate(e, poem)}
+                          disabled={translatingId === poem.id}
+                          className={`absolute top-3 right-0 flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono tracking-wider transition-all duration-300 border ${
+                            showTranslation[poem.id]
+                              ? 'text-secondary border-secondary/40 bg-secondary/10'
+                              : 'text-muted-foreground/60 border-border/30 hover:text-secondary hover:border-secondary/30'
+                          }`}
+                        >
+                          {translatingId === poem.id ? (
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                          ) : (
+                            <Languages className="w-3 h-3" />
+                          )}
+                          EN
+                        </button>
+
+                        {/* Original poem */}
+                        {(!showTranslation[poem.id]) && poem.body.split('\n').map((line, li) => (
+                          <p key={li} className="font-display text-sm text-muted-foreground leading-relaxed italic pr-12">
                             {line ? highlight(line) : <br />}
                           </p>
                         ))}
+
+                        {/* Translated poem */}
+                        {showTranslation[poem.id] && translations[poem.id] && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <p className="font-display text-xs text-secondary/70 mb-2 tracking-wider uppercase">
+                              {translations[poem.id].title}
+                            </p>
+                            {translations[poem.id].body.split('\n').map((line, li) => (
+                              <p key={li} className="font-display text-sm text-muted-foreground/80 leading-relaxed italic pr-12">
+                                {line || <br />}
+                              </p>
+                            ))}
+                          </motion.div>
+                        )}
                       </div>
                     </motion.div>
                   )}
