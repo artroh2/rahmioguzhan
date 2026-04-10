@@ -177,7 +177,6 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
                 </div>
               </div>
             </div>
-          </div>
         </motion.div>
 
         {/* Platform links */}
