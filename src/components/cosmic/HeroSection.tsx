@@ -25,7 +25,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <p className="text-xs tracking-[0.5em] uppercase text-muted-foreground mb-6">
-            {lang === 'tr' ? 'şair · besteci' : 'poet · composer'}
+            {lang === 'tr' ? 'şair · besteci · AI' : 'poet · composer · AI'}
           </p>
         </motion.div>
 
@@ -33,18 +33,20 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
-          className="font-display text-6xl sm:text-8xl lg:text-9xl font-bold mb-6 leading-[0.9]"
+          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[0.95]"
         >
-          <span className="text-gradient-cosmic">Rahmi</span>
+          <span className="text-cosmic">Rahmi</span>
           <br />
           <span className="text-foreground">Oğuzhan</span>
+          <br />
+          <span className="text-gold/80">Hacıeyüpoğlu</span>
         </motion.h1>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="flex items-center justify-center gap-4 mb-10"
+          className="flex items-center justify-center gap-4 mb-8"
         >
           <span className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
           <span className="text-gold text-xs tracking-[0.3em]">✦</span>
@@ -55,18 +57,37 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed"
+          className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8"
         >
           {lang === 'tr'
             ? 'Sessizliğin mimarı, kelimelerin mühendisi.'
             : 'Architect of Silence, Engineer of Words.'}
         </motion.p>
 
+        {/* Embedded video */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+          className="mb-10 mx-auto max-w-md"
+        >
+          <div className="glass rounded-2xl overflow-hidden border border-white/10">
+            <video
+              src="/videos/hero-reel.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full aspect-[9/16] object-cover"
+            />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.8 }}
-          className="mt-10 flex justify-center gap-4"
+          transition={{ duration: 0.8, delay: 2.1 }}
+          className="flex justify-center gap-4"
         >
           <a
             href="#muzik"
@@ -87,7 +108,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
+        transition={{ delay: 2.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <div className="w-5 h-8 rounded-full border border-muted-foreground/30 flex justify-center pt-1.5">
