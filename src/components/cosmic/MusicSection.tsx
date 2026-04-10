@@ -89,7 +89,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-3">
+          <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3">
             {lang === 'tr' ? 'müzik' : 'music'}
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">

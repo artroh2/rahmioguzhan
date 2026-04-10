@@ -21,7 +21,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-cosmic mb-3">
+          <p className="font-mono text-xs tracking-[0.4em] uppercase text-cosmic mb-3">
             {lang === 'tr' ? 'şiir' : 'poetry'}
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
