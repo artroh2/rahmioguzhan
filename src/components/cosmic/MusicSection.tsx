@@ -71,7 +71,12 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3">
             {lang === 'tr' ? 'müzik' : 'music'}
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
+            style={{
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(200,220,255,0.5), rgba(255,255,255,0.95), rgba(180,210,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(200,220,255,0.25)) drop-shadow(0 0 30px rgba(180,200,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+            }}>
             {lang === 'tr' ? 'Şarkılar & Albümler' : 'Songs & Albums'}
           </h2>
         </motion.div>
