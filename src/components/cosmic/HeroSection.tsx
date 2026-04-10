@@ -65,22 +65,38 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
             Rahmi
           </span>
           <br />
-          <span className="inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
-            style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
-              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-            }}>
-            Oğuzhan
+          <span className="inline-block">
+            <span className="inline animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
+              style={{
+                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+                filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25))',
+                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+              }}>
+              {''}
+            </span>
+            <span style={{ color: '#5C3A1E', filter: 'drop-shadow(0 0 10px rgba(92,58,30,0.4))' }}>O</span>
+            <span className="inline animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
+              style={{
+                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+                filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25))',
+                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+              }}>ğuzhan</span>
           </span>
           <br />
-          <span className="inline-block animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
-            style={{
-              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
-              filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25)) drop-shadow(0 0 30px rgba(230,225,210,0.1))',
-              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
-            }}>
-            Hacıeyüpoğlu
+          <span className="inline-block">
+            <span className="inline animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
+              style={{
+                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
+                filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25))',
+                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+              }}>Hacıeyüp</span>
+            <span style={{ color: '#F59E0B', filter: 'drop-shadow(0 0 10px rgba(245,158,11,0.5))' }}>o</span>
+            <span className="inline animate-gradient-sweep-gold bg-clip-text text-transparent bg-[length:300%_100%]"
+              style={{
+                backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(240,235,220,0.5), rgba(255,255,255,0.95), rgba(230,225,210,0.4), rgba(255,255,255,0.3))',
+                filter: 'drop-shadow(0 0 12px rgba(240,235,220,0.25))',
+                WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+              }}>ğlu</span>
           </span>
         </motion.h1>
 
