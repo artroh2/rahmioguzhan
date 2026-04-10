@@ -465,7 +465,7 @@ const CosmicCursor = () => {
       // Celestial bodies
       for (const body of celestialsRef.current) {
         if (body.type === 'planet') {
-          drawPlanet(ctx, body);
+          drawPlanet(ctx, body, time);
         } else {
           drawGalaxy(ctx, body, time);
         }
