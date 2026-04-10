@@ -133,14 +133,16 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
             onChange={e => setForm({ ...form, message: e.target.value })}
             className="w-full bg-muted/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_rgba(74,158,255,0.15)] transition-all duration-300 resize-none"
           />
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="relative group flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 disabled:opacity-50 hover:shadow-[0_0_25px_rgba(74,158,255,0.25)] overflow-hidden"
-          >
-            {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-            {lang === 'tr' ? 'Gönder' : 'Send'}
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="relative group flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 disabled:opacity-50 hover:shadow-[0_0_25px_rgba(74,158,255,0.25)] overflow-hidden"
+            >
+              {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+              {lang === 'tr' ? 'Gönder' : 'Send'}
+            </button>
+          </div>
         </motion.form>
 
         {/* Footer */}
