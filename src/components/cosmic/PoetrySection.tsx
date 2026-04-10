@@ -29,6 +29,9 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [search, setSearch] = useState('');
   const [shuffleKey, setShuffleKey] = useState(0);
   const expandedRef = useRef<HTMLDivElement>(null);
+  const [translations, setTranslations] = useState<Record<number, { title: string; body: string }>>({});
+  const [translatingId, setTranslatingId] = useState<number | null>(null);
+  const [showTranslation, setShowTranslation] = useState<Record<number, boolean>>({});
 
   // Debounce search
   useEffect(() => {
