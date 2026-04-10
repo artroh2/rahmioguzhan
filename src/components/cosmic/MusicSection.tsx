@@ -175,7 +175,6 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
             })}
           </div>
         </motion.div>
-        </motion.div>
       </div>
     </section>
   );
