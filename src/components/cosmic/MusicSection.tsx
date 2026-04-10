@@ -1,7 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback, ComponentType, SVGProps } from 'react';
-import { Play, Pause } from 'lucide-react';
-import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
+import { useRef, ComponentType, SVGProps } from 'react';
 import {
   SpotifyIcon, AppleMusicIcon, ITunesIcon, AmazonMusicIcon,
   YouTubeMusicIcon, DeezerIcon, TidalIcon, IHeartRadioIcon,
@@ -44,49 +42,7 @@ const PLATFORMS: PlatformEntry[] = [
 const MusicSection = ({ lang }: MusicSectionProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    const audio = new Audio('/audio/ikiye-saymak.mp3');
-    audio.preload = 'metadata';
-    audioRef.current = audio;
-
-    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
-    audio.addEventListener('timeupdate', () => {
-      setCurrentTime(audio.currentTime);
-      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
-    });
-    audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
-
-    return () => { audio.pause(); audio.src = ''; };
-  }, []);
-
-  const togglePlay = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (isPlaying) { audio.pause(); } else { audio.play(); }
-    setIsPlaying(!isPlaying);
-  }, [isPlaying]);
-
-  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    const bar = progressRef.current;
-    if (!audio || !bar || !audio.duration) return;
-    const rect = bar.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = ratio * audio.duration;
-  }, []);
-
-  const fmt = (s: number) => {
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return `${m}:${sec.toString().padStart(2, '0')}`;
-  };
 
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
