@@ -520,13 +520,46 @@ const CosmicCursor = () => {
       // Persistent paint layer
       ctx.drawImage(paint, 0, 0);
 
-      // Celestial bodies
+      // Background stars with glow-up and movement
+      for (const star of bgStarsRef.current) {
+        // Glow up
+        if (star.opacity < star.targetOpacity) {
+          star.opacity = Math.min(star.opacity + 0.005, star.targetOpacity);
+        }
+        // Move
+        star.x += star.vx;
+        star.y += star.vy;
+        // Wrap around
+        if (star.x < -5) star.x = canvas.width + 5;
+        if (star.x > canvas.width + 5) star.x = -5;
+        if (star.y < -5) star.y = canvas.height + 5;
+        if (star.y > canvas.height + 5) star.y = -5;
+        // Draw with glow
+        const sg = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3);
+        sg.addColorStop(0, `rgba(${star.color}, ${star.opacity})`);
+        sg.addColorStop(1, `rgba(${star.color}, 0)`);
+        ctx.fillStyle = sg;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${star.color}, ${star.opacity})`;
+        ctx.fill();
+      }
+
+      // Celestial bodies with fade-in and drift
       for (const body of celestialsRef.current) {
+        if (body.opacity < 1) body.opacity = Math.min(body.opacity + 0.02, 1);
+        body.x += body.vx;
+        body.y += body.vy;
+        ctx.globalAlpha = body.opacity;
         if (body.type === 'planet') {
           drawPlanet(ctx, body, time);
         } else {
           drawGalaxy(ctx, body, time);
         }
+        ctx.globalAlpha = 1;
       }
 
       // Supernovas
