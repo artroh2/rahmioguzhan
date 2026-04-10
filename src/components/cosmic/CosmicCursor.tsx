@@ -383,6 +383,18 @@ const CosmicCursor = () => {
         ? 25 + Math.random() * 35
         : 8 + Math.random() * 22;
 
+      const moonCount = isGalaxy ? 0 : 1 + Math.floor(Math.random() * 3);
+      const moons: Moon[] = [];
+      for (let m = 0; m < moonCount; m++) {
+        moons.push({
+          orbitRadius: radius * (1.8 + m * 0.7 + Math.random() * 0.5),
+          size: 1.5 + Math.random() * 2,
+          speed: (0.008 + Math.random() * 0.015) * (Math.random() > 0.5 ? 1 : -1),
+          angle: Math.random() * Math.PI * 2,
+          color: [palette.c1, palette.c3, '200, 200, 220'][Math.floor(Math.random() * 3)],
+        });
+      }
+
       celestialsRef.current.push({
         x: e.clientX,
         y: e.clientY,
@@ -397,6 +409,7 @@ const CosmicCursor = () => {
         rotationSpeed: (Math.random() - 0.5) * 0.003,
         spiralArms: 2 + Math.floor(Math.random() * 3),
         glowSize: 2.5 + Math.random() * 1.5,
+        moons,
       });
     };
 
