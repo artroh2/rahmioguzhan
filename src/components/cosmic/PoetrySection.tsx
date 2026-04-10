@@ -25,9 +25,25 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState<string>('en_iyiler');
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const expandedRef = useRef<HTMLDivElement>(null);
+
+  // Debounce search for performance
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(searchInput), 200);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  // Pre-index: group poems by category once
+  const poemsByCategory = useMemo(() => {
+    const map: Record<string, typeof POEMS> = {};
+    for (const p of POEMS) {
+      (map[p.category] ??= []).push(p);
+    }
+    return map;
+  }, []);
 
   // Reset visible count on category/search change
   useEffect(() => {
@@ -36,15 +52,13 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   }, [activeCategory, search]);
 
   const filtered = useMemo(() => {
-    let list = POEMS.filter(p => p.category === activeCategory);
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(p =>
-        p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
-      );
-    }
-    return list;
-  }, [activeCategory, search]);
+    const list = poemsByCategory[activeCategory] || [];
+    if (!search.trim()) return list;
+    const q = search.toLowerCase();
+    return list.filter(p =>
+      p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
+    );
+  }, [activeCategory, search, poemsByCategory]);
 
   const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMore = visibleCount < filtered.length;
