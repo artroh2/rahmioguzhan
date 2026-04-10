@@ -110,11 +110,15 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <p className="font-mono text-xs tracking-[0.4em] uppercase text-accent mb-3">
-            {lang === 'tr' ? 'hakkımda' : 'about'}
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
-            {lang === 'tr' ? 'Kim?' : 'Who?'}
+          <h2
+            className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
+            style={{
+              backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.3), rgba(220,210,255,0.5), rgba(255,255,255,0.95), rgba(200,190,255,0.4), rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 12px rgba(210,200,255,0.25)) drop-shadow(0 0 30px rgba(200,190,255,0.1))',
+              WebkitTextStroke: '0.5px rgba(255,255,255,0.08)',
+            }}
+          >
+            {lang === 'tr' ? 'HAKKIMDA' : 'ABOUT'}
           </h2>
         </motion.div>
 
@@ -124,12 +128,8 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden"
+            className="rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden"
           >
-            <div className="absolute inset-0 animate-pulse opacity-20" style={{
-              animationDuration: '8s',
-              background: 'conic-gradient(from 180deg at 50% 50%, hsl(213 100% 65% / 0.2), hsl(263 70% 58% / 0.2), hsl(38 92% 50% / 0.15), hsl(213 100% 65% / 0.2))'
-            }} />
             <CosmicPortal />
             <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mt-4">
               {lang === 'tr' ? 'Gizemler İçinde' : 'Within Mysteries'}
