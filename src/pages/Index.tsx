@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/cosmic/Navbar';
 import HeroSection from '@/components/cosmic/HeroSection';
 import MusicSection from '@/components/cosmic/MusicSection';
