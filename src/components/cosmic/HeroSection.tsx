@@ -56,11 +56,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
-        <video src="/videos/hero-video.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/40 via-[#030508]/70 to-[#030508]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-transparent" />
-      </div>
+      <div className="absolute inset-0 bg-[#030508]" />
 
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
