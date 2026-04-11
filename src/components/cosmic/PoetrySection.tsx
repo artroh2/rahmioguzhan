@@ -32,6 +32,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [translations, setTranslations] = useState<Record<number, { title: string; body: string }>>({});
   const [translatingId, setTranslatingId] = useState<number | null>(null);
   const [showTranslation, setShowTranslation] = useState<Record<number, boolean>>({});
+  const [visitedIds, setVisitedIds] = useState<Set<number>>(new Set());
 
   // Debounce search
   useEffect(() => {
