@@ -143,7 +143,8 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
               <div className="flex-1 min-w-0">
                 <div
                   onClick={handleSeek}
-                  className="h-1 rounded-full bg-white/10 cursor-pointer group/bar2 relative"
+                  onTouchStart={handleSeek}
+                  className="h-2 sm:h-1 rounded-full bg-white/10 cursor-pointer group/bar2 relative"
                 >
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
@@ -242,7 +243,8 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
               <div
                 ref={progressBarRef}
                 onClick={handleSeek}
-                className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative"
+                onTouchStart={handleSeek}
+                className="h-2 sm:h-1 rounded-full bg-white/10 cursor-pointer group/bar relative"
               >
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
