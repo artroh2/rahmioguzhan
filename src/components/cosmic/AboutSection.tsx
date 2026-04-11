@@ -146,9 +146,30 @@ const SolarSystem = () => {
   return <canvas ref={canvasRef} className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] mx-auto" />;
 };
 
+const POEM_TR = `Oturup yine o zihin uçurumunun kenarına\nYine birer birer kelimeler seçiyorum yokluğa fırlatmak için\nNe çok derdi varmış dünyanın, anca varıyorum farkına\nBütün bu yaşananlar ne için, ben kimim?\n\nNormalde yüksekten korkmam kolay kolay\nÖzgürce uçabilirim bulutların arasında, büyük olay\nAma bu sefer tanıyamıyorum seni gökyüzü\nDüşmek var sonrasında\nVe tuhaf, ilk defa üşüyorum.`;
+
 const AboutSection = ({ lang }: AboutSectionProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [showEN, setShowEN] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [translation, setTranslation] = useState('');
+
+  const handlePoemTranslate = useCallback(async () => {
+    if (showEN) { setShowEN(false); return; }
+    if (translation) { setShowEN(true); return; }
+    setTranslating(true);
+    try {
+      const { data } = await supabase.functions.invoke('translate-poem', {
+        body: { title: 'Hakkımda Şiiri', body: POEM_TR },
+      });
+      if (data?.translatedBody) {
+        setTranslation(data.translatedBody);
+        setShowEN(true);
+      }
+    } catch { /* ignore */ }
+    setTranslating(false);
+  }, [showEN, translation]);
 
   return (
     <section id="hakkimda" className="relative py-24 sm:py-32">
