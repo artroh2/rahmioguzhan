@@ -481,7 +481,7 @@ const CosmicCursor = () => {
     const spawnBgStars = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const count = isTouch ? 40 : 80;
+      const count = isTouch ? 150 : 400;
       for (let i = 0; i < count; i++) {
         bgStarsRef.current.push({
           x: Math.random() * w,
