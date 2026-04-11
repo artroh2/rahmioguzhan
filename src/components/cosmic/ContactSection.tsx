@@ -80,48 +80,6 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Social links with random glow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {SOCIALS.map((s, idx) => {
-            const gp = socialGlowParams[idx];
-            return (
-              <motion.a
-                key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 15 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
-                className="relative group rounded-full p-[1px] overflow-hidden"
-              >
-                {/* Rotating border light - random speed & direction */}
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: `conic-gradient(from ${gp.offset}deg, transparent, ${s.color}60, transparent, transparent, ${s.color}30, transparent)`,
-                    animation: `spin ${gp.speed}s linear infinite ${gp.dir}`,
-                    willChange: 'transform',
-                  }}
-                />
-                <span
-                  className="relative z-10 block rounded-full px-5 py-2.5 text-xs text-muted-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
-                  style={{
-                    boxShadow: `0 0 12px ${s.color}10`,
-                    textShadow: '0 0 8px rgba(200,220,255,0.15)',
-                  }}
-                >
-                  {s.name}
-                </span>
-              </motion.a>
-            );
-          })}
-        </motion.div>
 
         {/* Contact form */}
         <motion.form
