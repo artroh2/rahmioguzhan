@@ -746,6 +746,14 @@ const CosmicCursor = () => {
         if (!snovae[i].alive) snovae.splice(i, 1);
       }
 
+      // Idle cursor spawning — spawn celestials at cursor position even when stationary
+      if (!isTouch && time % 10 === 0) {
+        const { x: mx, y: my } = mouseRef.current;
+        if (mx > 0 && my > 0) {
+          spawnCursorTrail(mx, my, 2);
+        }
+      }
+
       // Cursor orb (desktop only)
       if (!isTouch) {
         const { x, y } = mouseRef.current;
