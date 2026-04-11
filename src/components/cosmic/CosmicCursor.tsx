@@ -481,7 +481,7 @@ const CosmicCursor = () => {
     const spawnBgStars = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const count = isTouch ? 40 : 80;
+      const count = isTouch ? 150 : 400;
       for (let i = 0; i < count; i++) {
         bgStarsRef.current.push({
           x: Math.random() * w,
@@ -550,7 +550,7 @@ const CosmicCursor = () => {
     window.addEventListener('touchend', cancelLongPress, { passive: true });
     window.addEventListener('touchmove', cancelLongPress, { passive: true });
 
-    const zoomSpeed = 0.2; // how fast the universe zooms in
+    const zoomSpeed = 0.1; // how fast the universe zooms in
     let zoomSpawnTimer = 0;
 
     let time = 0;
@@ -639,16 +639,16 @@ const CosmicCursor = () => {
         celestialsRef.current.push(tiny);
       }
       // Also spawn stars near center continuously
-      if (zoomSpawnTimer % 3 === 0) {
-        const count = isTouch ? 3 : 6;
+      if (zoomSpawnTimer % 2 === 0) {
+        const count = isTouch ? 8 : 15;
         for (let si = 0; si < count; si++) {
           bgStarsRef.current.push({
-            x: cx + (Math.random() - 0.5) * canvas.width * 0.3,
-            y: cy + (Math.random() - 0.5) * canvas.height * 0.3,
+            x: cx + (Math.random() - 0.5) * canvas.width * 0.5,
+            y: cy + (Math.random() - 0.5) * canvas.height * 0.5,
             size: 0.2 + Math.random() * 0.5,
             color: trailColors[Math.floor(Math.random() * trailColors.length)],
             opacity: 0,
-            targetOpacity: 0.3 + Math.random() * 0.5,
+            targetOpacity: 0.3 + Math.random() * 0.6,
             vx: 0,
             vy: 0,
           });
