@@ -37,9 +37,9 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
-          <p className="font-mono text-xs tracking-[0.5em] uppercase text-muted-foreground mb-6"
+          <p className="font-mono text-xs tracking-[0.5em] text-muted-foreground mb-6"
             style={{ textShadow: '0 0 10px rgba(200,220,255,0.3)' }}>
-            {lang === 'tr' ? 'ŞAİR · MÜZİSYEN · Aİ' : 'POET · MUSICIAN · AI'}
+            {lang === 'tr' ? 'ŞAİR · MÜZİSYEN · AI' : 'POET · MUSICIAN · AI'}
           </p>
         </motion.div>
 
