@@ -469,11 +469,18 @@ const CosmicCursor = () => {
       }
     };
 
+    let touchSpawnCounter = 0;
     const onTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       if (!touch) return;
       mouseRef.current = { x: touch.clientX, y: touch.clientY };
       paintDots(touch.clientX, touch.clientY, 2);
+      touchSpawnCounter++;
+      if (touchSpawnCounter % 10 === 0) {
+        const offsetX = touch.clientX + (Math.random() - 0.5) * 50;
+        const offsetY = touch.clientY + (Math.random() - 0.5) * 50;
+        addCelestial(offsetX, offsetY, 0.2);
+      }
     };
 
     // ─── Auto-spawn: medium planet every 5 seconds ───
