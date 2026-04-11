@@ -162,6 +162,8 @@ const StarfieldCanvas = () => {
     return () => {
       cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [initStars, initNebulae]);
