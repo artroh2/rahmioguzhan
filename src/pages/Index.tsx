@@ -42,6 +42,7 @@ const Index = () => {
             <div className="relative w-full max-w-4xl mx-auto px-6 mb-0">
               <div className="relative overflow-hidden">
                 <video
+                  ref={bottomVideoRef}
                   src="/videos/hero-video.mp4"
                   autoPlay
                   loop
