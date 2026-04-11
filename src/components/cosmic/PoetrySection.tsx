@@ -254,6 +254,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
               ];
               const cardColor = cardColors[i % cardColors.length];
               const isExpanded = expandedId === poem.id;
+              const isVisited = visitedIds.has(poem.id);
+              const greenColor = 'rgba(34,197,94,';
               return (
               <motion.div
                 key={`${shuffleKey}-${poem.id}`}
@@ -269,12 +271,16 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   border transition-all duration-500
                   ${isExpanded
                     ? 'border-red-500/60'
-                    : 'hover:border-opacity-40'
+                    : isVisited
+                      ? 'border-green-500/50'
+                      : 'hover:border-green-500/40'
                   }
                 `}
                 style={isExpanded
                   ? { boxShadow: '0 0 30px rgba(239,68,68,0.25), 0 0 60px rgba(239,68,68,0.1), inset 0 0 20px rgba(239,68,68,0.05)', borderColor: 'rgba(239,68,68,0.6)' }
-                  : { borderColor: `${cardColor}22`, boxShadow: `0 0 15px ${cardColor}08` }
+                  : isVisited
+                    ? { borderColor: `${greenColor}0.5)`, boxShadow: `0 0 20px ${greenColor}0.15), 0 0 40px ${greenColor}0.05)` }
+                    : { borderColor: `${cardColor}22`, boxShadow: `0 0 15px ${cardColor}08` }
                 }
                >
                 <div className="flex items-start justify-between gap-2">
