@@ -64,7 +64,7 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
         >
           <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6 text-center"
             style={{ textShadow: '0 0 10px rgba(200,220,255,0.25)' }}>
-            {lang === 'tr' ? 'Tüm Şarkılar, Tüm Platformlar' : 'All Songs, All Platforms'}
+            {lang === 'tr' ? 'Tüm Şarkılar İçin Platformlar' : 'Platforms For All Songs'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
             {PLATFORMS.map((p, idx) => {
