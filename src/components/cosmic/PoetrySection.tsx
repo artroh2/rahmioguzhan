@@ -32,6 +32,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const [translations, setTranslations] = useState<Record<number, { title: string; body: string }>>({});
   const [translatingId, setTranslatingId] = useState<number | null>(null);
   const [showTranslation, setShowTranslation] = useState<Record<number, boolean>>({});
+  const [visitedIds, setVisitedIds] = useState<Set<number>>(new Set());
 
   // Debounce search
   useEffect(() => {
@@ -74,7 +75,14 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const visible = useMemo(() => filtered.slice(0, PAGE_SIZE), [filtered]);
 
   const toggleExpand = useCallback((id: number) => {
-    setExpandedId(prev => prev === id ? null : id);
+    setExpandedId(prev => {
+      if (prev === id) {
+        // Collapsing — mark as visited
+        setVisitedIds(s => new Set(s).add(id));
+        return null;
+      }
+      return id;
+    });
   }, []);
 
   const handleTranslate = useCallback(async (poem: typeof POEMS[0], e: React.MouseEvent) => {
@@ -146,7 +154,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
         >
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3"
             style={{ textShadow: '0 0 12px rgba(168,85,247,0.4)' }}>
-            {lang === 'tr' ? `${POEMS.length} ŞİİR` : `${POEMS.length} POEMS`}
+            {lang === 'tr' ? `${POEMS.length}` : `${POEMS.length}`}
           </p>
           <h2
             className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
@@ -232,14 +240,6 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           )}
         </motion.div>
 
-        {/* Results count */}
-        <div className="text-center mb-6">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase"
-            style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-            {filtered.length} {lang === 'tr' ? 'şiir' : 'poems'}
-            {search && ` — "${search}"`}
-          </p>
-        </div>
 
         {/* Poem Cards */}
         <div className="grid gap-3">
@@ -254,6 +254,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
               ];
               const cardColor = cardColors[i % cardColors.length];
               const isExpanded = expandedId === poem.id;
+              const isVisited = visitedIds.has(poem.id);
+              const greenColor = 'rgba(34,197,94,';
               return (
               <motion.div
                 key={`${shuffleKey}-${poem.id}`}
@@ -269,16 +271,20 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   border transition-all duration-500
                   ${isExpanded
                     ? 'border-red-500/60'
-                    : 'hover:border-opacity-40'
+                    : isVisited
+                      ? 'border-green-500/50'
+                      : 'hover:border-green-500/40'
                   }
                 `}
                 style={isExpanded
                   ? { boxShadow: '0 0 30px rgba(239,68,68,0.25), 0 0 60px rgba(239,68,68,0.1), inset 0 0 20px rgba(239,68,68,0.05)', borderColor: 'rgba(239,68,68,0.6)' }
-                  : { borderColor: `${cardColor}22`, boxShadow: `0 0 15px ${cardColor}08` }
+                  : isVisited
+                    ? { borderColor: `${greenColor}0.5)`, boxShadow: `0 0 20px ${greenColor}0.15), 0 0 40px ${greenColor}0.05)` }
+                    : { borderColor: `${cardColor}22`, boxShadow: `0 0 15px ${cardColor}08` }
                 }
                >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
+                  <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-green-400 transition-colors leading-snug"
                     style={{ textShadow: '0 0 10px rgba(210,200,255,0.2)' }}>
                     {showTranslation[poem.id] && translations[poem.id]
                       ? translations[poem.id].title
