@@ -124,6 +124,40 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
           >
             {showEN ? 'To Count To Two' : "2'ye Saymak"}
           </h2>
+
+          {/* Player under title */}
+          <div className="mt-6 max-w-xs mx-auto">
+            <div className="flex items-center gap-3 justify-center">
+              <button
+                onClick={togglePlay}
+                className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 transition-all duration-300 shrink-0"
+                aria-label={isPlaying ? 'Pause' : 'Play'}
+              >
+                {isPlaying ? (
+                  <Pause className="w-3.5 h-3.5 text-primary" fill="currentColor" />
+                ) : (
+                  <Play className="w-3.5 h-3.5 text-primary ml-0.5" fill="currentColor" />
+                )}
+              </button>
+              <div className="flex-1 min-w-0">
+                <div
+                  onClick={handleSeek}
+                  className="h-1 rounded-full bg-white/10 cursor-pointer group/bar2 relative"
+                >
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
+                    style={{ width: `${progress}%` }}
+                  >
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar2:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="flex justify-between mt-1">
+                  <span className="text-[9px] text-muted-foreground font-mono">{fmt(currentTime)}</span>
+                  <span className="text-[9px] text-muted-foreground font-mono">{fmt(duration)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Translate button */}
