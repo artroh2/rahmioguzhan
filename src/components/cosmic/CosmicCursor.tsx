@@ -378,38 +378,111 @@ const CosmicCursor = () => {
       '40, 200, 180', '255, 120, 50',
     ];
 
-    const paintDots = (px: number, py: number, count: number) => {
+    // Replace paint dots with micro celestials — cursor leaves planets/galaxies/stars
+    const spawnCursorTrail = (px: number, py: number, count: number) => {
       for (let i = 0; i < count; i++) {
-        const dx = px + (Math.random() - 0.5) * 16;
-        const dy = py + (Math.random() - 0.5) * 16;
-        const size = (Math.random() * 2.2 + 0.6) * 2;
-        const color = trailColors[Math.floor(Math.random() * trailColors.length)];
-        pctx.beginPath();
-        pctx.arc(dx, dy, size, 0, Math.PI * 2);
-        pctx.fillStyle = `rgba(${color}, ${0.25 + Math.random() * 0.25})`;
-        pctx.fill();
+        const roll = Math.random();
+        if (roll < 0.5) {
+          // Micro star
+          bgStarsRef.current.push({
+            x: px + (Math.random() - 0.5) * 40,
+            y: py + (Math.random() - 0.5) * 40,
+            size: 0.8 + Math.random() * 2,
+            color: trailColors[Math.floor(Math.random() * trailColors.length)],
+            opacity: 0.6 + Math.random() * 0.4,
+            targetOpacity: 0.5 + Math.random() * 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+          });
+        } else {
+          // Tiny planet or galaxy
+          const ox = px + (Math.random() - 0.5) * 60;
+          const oy = py + (Math.random() - 0.5) * 60;
+          const scale = 0.1 + Math.random() * 0.2;
+          const type = roll < 0.85 ? 'planet' : 'galaxy';
+          addCelestial(ox, oy, scale, type as 'planet' | 'galaxy');
+        }
       }
       if (!hasContent) setHasContent(true);
     };
+
+    // ─── Cosmic Stampede: periodically rush hundreds of celestials from edges toward center ───
+    let stampedeTimer = 0;
+    const triggerStampede = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const cx = w / 2;
+      const cy = h / 2;
+      const count = isTouch ? 60 : 150;
+      
+      for (let i = 0; i < count; i++) {
+        // Spawn from random edge
+        const edge = Math.floor(Math.random() * 4);
+        let sx: number, sy: number;
+        switch (edge) {
+          case 0: sx = Math.random() * w; sy = -50 - Math.random() * 200; break;    // top
+          case 1: sx = w + 50 + Math.random() * 200; sy = Math.random() * h; break; // right
+          case 2: sx = Math.random() * w; sy = h + 50 + Math.random() * 200; break; // bottom
+          default: sx = -50 - Math.random() * 200; sy = Math.random() * h; break;   // left
+        }
+        
+        // Velocity toward center with spread
+        const angle = Math.atan2(cy - sy + (Math.random() - 0.5) * h * 0.3, cx - sx + (Math.random() - 0.5) * w * 0.3);
+        const speed = 1.5 + Math.random() * 3;
+        
+        const isGalaxy = Math.random() > 0.7;
+        const body = spawnCelestial(sx, sy, 0.15 + Math.random() * 0.4, isGalaxy ? 'galaxy' : 'planet');
+        body.vx = Math.cos(angle) * speed;
+        body.vy = Math.sin(angle) * speed;
+        body.opacity = 0;
+        celestialsRef.current.push(body);
+      }
+      
+      // Also spawn a burst of stars
+      for (let i = 0; i < (isTouch ? 100 : 300); i++) {
+        const edge = Math.floor(Math.random() * 4);
+        let sx: number, sy: number;
+        switch (edge) {
+          case 0: sx = Math.random() * w; sy = -Math.random() * 100; break;
+          case 1: sx = w + Math.random() * 100; sy = Math.random() * h; break;
+          case 2: sx = Math.random() * w; sy = h + Math.random() * 100; break;
+          default: sx = -Math.random() * 100; sy = Math.random() * h; break;
+        }
+        const angle = Math.atan2(cy - sy, cx - sx);
+        const speed = 0.5 + Math.random() * 2;
+        bgStarsRef.current.push({
+          x: sx, y: sy,
+          size: 0.5 + Math.random() * 2.5,
+          color: trailColors[Math.floor(Math.random() * trailColors.length)],
+          opacity: 0,
+          targetOpacity: 0.4 + Math.random() * 0.6,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        });
+      }
+      
+      // Throw in a few supernovas for extra chaos
+      for (let i = 0; i < 3; i++) {
+        supernovasRef.current.push(spawnSupernova(
+          w * 0.2 + Math.random() * w * 0.6,
+          h * 0.2 + Math.random() * h * 0.6
+        ));
+      }
+      
+      if (!hasContent) setHasContent(true);
+    };
+    
+    const stampedeInterval = setInterval(() => {
+      stampedeTimer++;
+      if (stampedeTimer % 3 === 0) { // every ~15s (3 x 5s base)
+        triggerStampede();
+      }
+    }, 5000);
 
     const addCelestial = (x: number, y: number, sizeScale = 1, forceType?: 'planet' | 'galaxy') => {
       celestialsRef.current.push(spawnCelestial(x, y, sizeScale, forceType));
       if (!hasContent) setHasContent(true);
     };
-
-    // ─── Random explosions: every 4-8s a random planet explodes ───
-    const randomExplosionInterval = setInterval(() => {
-      const bodies = celestialsRef.current;
-      if (bodies.length < 3) return;
-      // Pick a random planet (not galaxy) to explode
-      const candidates = bodies.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'planet' && b.opacity >= 0.8);
-      if (candidates.length === 0) return;
-      const pick = candidates[Math.floor(Math.random() * candidates.length)];
-      // Spawn supernova at its position
-      supernovasRef.current.push(spawnSupernova(pick.b.x, pick.b.y));
-      // Remove the planet
-      celestialsRef.current.splice(pick.i, 1);
-    }, 4000 + Math.random() * 4000);
 
     // ─── Desktop mouse events ───
     let moveSpawnCounter = 0;
@@ -419,15 +492,10 @@ const CosmicCursor = () => {
       const dy = e.clientY - prev.y;
       const speed = Math.sqrt(dx * dx + dy * dy);
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      if (speed > 2.5) {
-        paintDots(e.clientX, e.clientY, Math.min(Math.floor(speed / 5), 4));
-        // Spawn small celestials along cursor trail
-        moveSpawnCounter++;
-        if (moveSpawnCounter % 8 === 0) {
-          const offsetX = e.clientX + (Math.random() - 0.5) * 60;
-          const offsetY = e.clientY + (Math.random() - 0.5) * 60;
-          addCelestial(offsetX, offsetY, 0.25);
-        }
+      if (speed > 2) {
+        // Spawn celestials & stars along cursor path
+        const intensity = Math.min(Math.floor(speed / 3), 6);
+        spawnCursorTrail(e.clientX, e.clientY, intensity);
       }
     };
 
