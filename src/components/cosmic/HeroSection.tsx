@@ -52,8 +52,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Smooth transition to Music section */}
-      <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-b from-transparent via-[#1a0a35]/40 to-[#0d2a1a]/60 z-[1] pointer-events-none" />
+      {/* Transparent — starfield shows through */}
 
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
