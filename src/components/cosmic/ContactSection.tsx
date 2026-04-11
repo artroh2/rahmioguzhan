@@ -9,11 +9,8 @@ interface ContactSectionProps {
 }
 
 const SOCIALS = [
-  { name: 'Spotify', href: 'https://open.spotify.com/intl-tr/artist/4fQ8VbreLSA4Eaiwm1Elfk', color: '#1DB954' },
-  { name: 'Apple Music', href: 'https://music.apple.com/tr/artist/rahmi-oguzhan/1480581707', color: '#FC3C44' },
   { name: 'Instagram', href: 'https://instagram.com/siir2.0', color: '#E1306C' },
   { name: 'X', href: 'https://x.com/roguzhanh', color: '#F0F4FF' },
-  { name: 'YouTube', href: 'https://www.youtube.com/@Siir2.0', color: '#FF0000' },
 ];
 
 const ContactSection = ({ lang }: ContactSectionProps) => {
