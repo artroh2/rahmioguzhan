@@ -94,7 +94,7 @@ const StarfieldCanvas = () => {
 
     const draw = (timestamp: number) => {
       animFrameRef.current = requestAnimationFrame(draw);
-      if (!isVisible || prefersReduced) return;
+      if (!isVisible || prefersReduced || pausedRef.current) return;
 
       const delta = timestamp - lastTime;
       if (delta < frameInterval) return;
