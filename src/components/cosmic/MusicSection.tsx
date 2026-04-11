@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, ComponentType, SVGProps } from 'react';
 import {
-  SpotifyIcon, AppleMusicIcon, ITunesIcon, AmazonMusicIcon,
+  SpotifyIcon, AppleMusicIcon, AmazonMusicIcon,
   YouTubeMusicIcon, DeezerIcon,
 } from '@/components/icons/PlatformIcons';
 
@@ -19,7 +19,7 @@ type PlatformEntry = {
 const PLATFORMS: PlatformEntry[] = [
   { name: 'Spotify', color: '#1DB954', href: 'https://open.spotify.com/search/Rahmi%20Oguzhan', icon: SpotifyIcon },
   { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/search?term=Rahmi+Oguzhan', icon: AppleMusicIcon },
-  { name: 'iTunes', color: '#EA4CC0', href: 'https://itunes.apple.com/search?term=Rahmi+Oguzhan&media=music', icon: ITunesIcon },
+  
   { name: 'Amazon Music', color: '#25D1DA', href: 'https://music.amazon.com/search/Rahmi+Oguzhan', icon: AmazonMusicIcon },
   { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/search?q=Rahmi+Oguzhan', icon: YouTubeMusicIcon },
   { name: 'Deezer', color: '#A238FF', href: 'https://www.deezer.com/search/Rahmi%20Oguzhan', icon: DeezerIcon },
