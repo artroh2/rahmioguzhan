@@ -34,11 +34,12 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     };
   }, []);
 
-  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
     if (!bar) return;
     const rect = bar.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const clientX = 'touches' in e ? e.touches[0]?.clientX ?? e.changedTouches[0]?.clientX ?? 0 : e.clientX;
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     seek(ratio);
   }, [seek]);
 
@@ -128,7 +129,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
               {isPlaying ? <Pause className="w-3.5 h-3.5 text-primary" fill="currentColor" /> : <Play className="w-3.5 h-3.5 text-primary ml-0.5" fill="currentColor" />}
             </button>
             <div className="flex-1 min-w-0">
-              <div ref={progressRef} onClick={handleSeek} className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative">
+              <div ref={progressRef} onClick={handleSeek} onTouchStart={handleSeek} className="h-2 sm:h-1 rounded-full bg-white/10 cursor-pointer group/bar relative">
                 <div className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative" style={{ width: `${progress}%` }}>
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
                 </div>
