@@ -146,7 +146,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
         >
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-secondary mb-3"
             style={{ textShadow: '0 0 12px rgba(168,85,247,0.4)' }}>
-            {lang === 'tr' ? `${POEMS.length} ŞİİR` : `${POEMS.length} POEMS`}
+            {lang === 'tr' ? `${POEMS.length}` : `${POEMS.length}`}
           </p>
           <h2
             className="font-display text-4xl sm:text-5xl font-bold inline-block animate-gradient-sweep-purple bg-clip-text text-transparent bg-[length:300%_100%]"
@@ -232,14 +232,6 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
           )}
         </motion.div>
 
-        {/* Results count */}
-        <div className="text-center mb-6">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase"
-            style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-            {filtered.length} {lang === 'tr' ? 'şiir' : 'poems'}
-            {search && ` — "${search}"`}
-          </p>
-        </div>
 
         {/* Poem Cards */}
         <div className="grid gap-3">
