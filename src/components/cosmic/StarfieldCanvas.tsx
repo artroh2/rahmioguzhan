@@ -27,6 +27,7 @@ const StarfieldCanvas = () => {
   const starsRef = useRef<Star[]>([]);
   const nebulaeRef = useRef<Nebula[]>([]);
   const timeRef = useRef(0);
+  const pausedRef = useRef(false);
 
   const initStars = useCallback((w: number, h: number) => {
     const isMobile = w < 768;
