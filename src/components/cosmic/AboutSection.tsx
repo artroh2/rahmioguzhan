@@ -202,7 +202,7 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                   "Sessizliğin içinde bir evren var — her kelime bir yıldız, her nota bir galaksi."
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Rahmi Oğuzhan Hacıeyüpoğlu — şair, besteci ve dijital çağın sessiz filozofu.
+                  Rahmi Oğuzhan Hacıeyüpoğlu — şair, müzisyen ve dijital çağın sessiz filozofu.
                   Kelimelerle evrenler inşa eder, notalarla duyguları şekillendirir. 
                   Yapay zeka ile sanatın kesişim noktasında, yeni ifade biçimleri arar.
                 </p>
@@ -217,7 +217,7 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                   "Within silence lies a universe — each word a star, each note a galaxy."
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Rahmi Oğuzhan Hacıeyüpoğlu — poet, composer, and quiet philosopher of the digital age.
+                  Rahmi Oğuzhan Hacıeyüpoğlu — poet, musician, and quiet philosopher of the digital age.
                   He builds universes with words and shapes emotions through melodies.
                   At the intersection of AI and art, he seeks new forms of expression.
                 </p>
