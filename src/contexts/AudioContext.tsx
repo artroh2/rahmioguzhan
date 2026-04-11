@@ -42,7 +42,39 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       playPromise.catch(() => setIsPlaying(false));
     }
 
-    return () => { audio.pause(); audio.src = ''; };
+    // Pause/resume on right-click (desktop) or long-press (mobile via cosmic-pause)
+    let wasPlayingBeforePause = false;
+    const onDown = (e: MouseEvent) => {
+      if (e.button === 2 && audioRef.current) {
+        wasPlayingBeforePause = !audioRef.current.paused;
+        audioRef.current.pause();
+      }
+    };
+    const onUp = (e: MouseEvent) => {
+      if (e.button === 2 && audioRef.current && wasPlayingBeforePause) {
+        audioRef.current.play();
+      }
+    };
+    const onCosmicPause = (e: Event) => {
+      if (!audioRef.current) return;
+      if ((e as CustomEvent).detail) {
+        wasPlayingBeforePause = !audioRef.current.paused;
+        audioRef.current.pause();
+      } else if (wasPlayingBeforePause) {
+        audioRef.current.play();
+      }
+    };
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('cosmic-pause', onCosmicPause);
+
+    return () => {
+      audio.pause();
+      audio.src = '';
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('cosmic-pause', onCosmicPause);
+    };
   }, []);
 
   const togglePlay = useCallback(() => {
