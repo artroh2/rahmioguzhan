@@ -10,8 +10,8 @@ interface HeroSectionProps {
 
 const HeroSection = ({ lang }: HeroSectionProps) => {
   const tagline = lang === 'tr'
-    ? 'Sessizlikte mimar, kelimelerle mühendis.'
-    : 'Architect of Silence, Engineer of Words.';
+    ? 'Sessizlikte Müzisyen, Kelimelerle Mühendis.'
+    : 'Musician in Silence, Engineer of Words.';
 
   const [displayed, setDisplayed] = useState('');
   const [typeDone, setTypeDone] = useState(false);
@@ -114,7 +114,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.5 }}
-          className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8 font-mono min-h-[1.8em]"
+          className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8 font-display italic tracking-wide min-h-[1.8em]"
           style={{ textShadow: '0 0 12px rgba(200,220,255,0.2)' }}
         >
           {displayed}
