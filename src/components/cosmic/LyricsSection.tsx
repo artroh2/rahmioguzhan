@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Play, Pause, Loader2 } from 'lucide-react';
 import { useAudio } from '@/contexts/AudioContext';
 import { supabase } from '@/integrations/supabase/client';
-import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
+
 
 interface LyricsSectionProps {
   lang: 'tr' | 'en';
