@@ -207,8 +207,8 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                   Yapay zeka ile sanatın kesişim noktasında, yeni ifade biçimleri arar.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Her şiir bir kapıdır, her şarkı bir yolculuk.
-                  Karanlıkta yazılan satırlar, ışığa dönüşür.
+                   Her şiir bir kapıdır, her şarkı bir yolculuk.
+                   Karanlıkta yazılan satırlar, ışığa dönüşür. Işıkta aydınlığa...
                 </p>
               </div>
             ) : (
@@ -222,8 +222,8 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
                   At the intersection of AI and art, he seeks new forms of expression.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Every poem is a door, every song a journey.
-                  Lines written in darkness transform into light.
+                   Every poem is a door, every song a journey.
+                   Lines written in darkness transform into light. In light, into brilliance...
                 </p>
               </div>
             )}
