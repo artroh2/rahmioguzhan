@@ -20,16 +20,26 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   useEffect(() => {
     const onDown = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.pause(); };
     const onUp = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.play(); };
+    const onCosmicPause = (e: Event) => {
+      if ((e as CustomEvent).detail) heroVideoRef.current?.pause();
+      else heroVideoRef.current?.play();
+    };
     window.addEventListener('mousedown', onDown);
     window.addEventListener('mouseup', onUp);
-    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('cosmic-pause', onCosmicPause);
+    return () => {
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('cosmic-pause', onCosmicPause);
+    };
   }, []);
 
-  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
     if (!bar) return;
     const rect = bar.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const clientX = 'touches' in e ? e.touches[0]?.clientX ?? e.changedTouches[0]?.clientX ?? 0 : e.clientX;
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     seek(ratio);
   }, [seek]);
 
@@ -54,7 +64,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5 }}
-          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[1.15]"
+          className="font-display text-4xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-[1.15]"
         >
           <span className="inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
             style={{
@@ -119,7 +129,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
               {isPlaying ? <Pause className="w-3.5 h-3.5 text-primary" fill="currentColor" /> : <Play className="w-3.5 h-3.5 text-primary ml-0.5" fill="currentColor" />}
             </button>
             <div className="flex-1 min-w-0">
-              <div ref={progressRef} onClick={handleSeek} className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative">
+              <div ref={progressRef} onClick={handleSeek} onTouchStart={handleSeek} className="h-2 sm:h-1 rounded-full bg-white/10 cursor-pointer group/bar relative">
                 <div className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative" style={{ width: `${progress}%` }}>
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
                 </div>

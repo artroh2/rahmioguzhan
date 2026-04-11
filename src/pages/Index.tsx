@@ -18,14 +18,23 @@ const Index = () => {
   useEffect(() => {
     const onDown = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.pause(); };
     const onUp = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.play(); };
+    const onCosmicPause = (e: Event) => {
+      if ((e as CustomEvent).detail) bottomVideoRef.current?.pause();
+      else bottomVideoRef.current?.play();
+    };
     window.addEventListener('mousedown', onDown);
     window.addEventListener('mouseup', onUp);
-    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('cosmic-pause', onCosmicPause);
+    return () => {
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('cosmic-pause', onCosmicPause);
+    };
   }, []);
 
   return (
     <AudioProvider>
-      <div className="min-h-screen bg-[#030508] text-foreground relative">
+      <div className="min-h-screen bg-[#030508] text-foreground relative" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <StarfieldCanvas />
         <FloatingCelestials />
         <CosmicCursor />

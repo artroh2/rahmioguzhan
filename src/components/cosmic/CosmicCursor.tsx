@@ -602,24 +602,29 @@ const CosmicCursor = () => {
       }
     };
 
-    // ─── Long-press (mobile/tablet): reset everything ───
+    // ─── Long-press (mobile/tablet): pause animation (like desktop right-click) ───
     let longPressTimer: ReturnType<typeof setTimeout> | null = null;
-    const longPressThreshold = 600; // ms
+    const longPressThreshold = 400; // ms
 
     const onTouchStartForLongPress = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       longPressTimer = setTimeout(() => {
         longPressTimer = null;
-        clearAll();
-        setTimeout(spawnBgStars, 100);
+        pausedRef.current = true;
+        // Dispatch custom event so videos/audio can also pause
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: true }));
       }, longPressThreshold);
     };
 
-    const cancelLongPress = () => {
+    const onTouchEndForLongPress = () => {
       if (longPressTimer) {
         clearTimeout(longPressTimer);
         longPressTimer = null;
+      }
+      if (pausedRef.current) {
+        pausedRef.current = false;
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: false }));
       }
     };
 
@@ -637,8 +642,8 @@ const CosmicCursor = () => {
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchstart', onTouchStartForLongPress, { passive: true });
-    window.addEventListener('touchend', cancelLongPress, { passive: true });
-    window.addEventListener('touchmove', cancelLongPress, { passive: true });
+    window.addEventListener('touchend', onTouchEndForLongPress, { passive: true });
+    window.addEventListener('touchcancel', onTouchEndForLongPress, { passive: true });
 
     const zoomSpeed = 0.1; // how fast the universe zooms in
     let zoomSpawnTimer = 0;
@@ -803,7 +808,7 @@ const CosmicCursor = () => {
       clearInterval(autoSpawnInterval);
       clearInterval(bgStarInterval);
       clearInterval(stampedeInterval);
-      cancelLongPress();
+      onTouchEndForLongPress();
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseover', onOver);
@@ -816,8 +821,8 @@ const CosmicCursor = () => {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchstart', onTouchStartForLongPress);
-      window.removeEventListener('touchend', cancelLongPress);
-      window.removeEventListener('touchmove', cancelLongPress);
+      window.removeEventListener('touchend', onTouchEndForLongPress);
+      window.removeEventListener('touchcancel', onTouchEndForLongPress);
       window.removeEventListener('resize', resize);
       if (!isTouch) document.body.style.cursor = '';
     };
@@ -832,7 +837,8 @@ const CosmicCursor = () => {
       {hasContent && (
         <button
           onClick={clearAll}
-          className="fixed bottom-6 right-6 z-[10000] p-3 rounded-full glass border border-border/30 hover:border-ice/30 transition-all duration-300 hover:shadow-[0_0_25px_hsl(213_100%_65%/0.2)] hover:scale-110"
+          className="fixed z-[10000] p-3 rounded-full glass border border-border/30 hover:border-ice/30 transition-all duration-300 hover:shadow-[0_0_25px_hsl(213_100%_65%/0.2)] hover:scale-110"
+          style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))', right: '1.5rem' }}
           aria-label="Clear cosmic canvas"
         >
           <img src={diamondLogo} alt="Clear" className="w-8 h-8 drop-shadow-[0_0_10px_rgba(200,220,255,0.5)] animate-[spin_8s_linear_infinite]" />

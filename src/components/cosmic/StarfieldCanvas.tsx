@@ -89,8 +89,10 @@ const StarfieldCanvas = () => {
 
     const onMouseDown = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = true; };
     const onMouseUp = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = false; };
+    const onCosmicPause = (e: Event) => { pausedRef.current = (e as CustomEvent).detail; };
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('cosmic-pause', onCosmicPause);
 
     let lastTime = 0;
     let isVisible = true;
@@ -164,6 +166,7 @@ const StarfieldCanvas = () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('cosmic-pause', onCosmicPause);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [initStars, initNebulae]);
