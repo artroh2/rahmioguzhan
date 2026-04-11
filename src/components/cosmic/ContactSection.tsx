@@ -32,15 +32,23 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return;
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from('contact_messages').insert({
-        name: form.name,
-        email: form.email,
-        message: form.message,
+        name: form.name || 'Anonim',
+        email: form.email || 'belirtilmedi',
+        message: form.message || '',
       });
       if (error) throw error;
+
+      // Send email notification
+      await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: form.name || 'Anonim',
+          email: form.email || 'belirtilmedi',
+          message: form.message || '(boş mesaj)',
+        },
+      });
       toast({
         title: lang === 'tr' ? 'Mesaj gönderildi!' : 'Message sent!',
         description: lang === 'tr' ? 'En kısa sürede dönüş yapacağım.' : 'I\'ll get back to you soon.',
