@@ -13,6 +13,15 @@ import { AudioProvider } from '@/contexts/AudioContext';
 
 const Index = () => {
   const [lang, setLang] = useState<'tr' | 'en'>('tr');
+  const bottomVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.pause(); };
+    const onUp = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.play(); };
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+  }, []);
 
   return (
     <AudioProvider>
