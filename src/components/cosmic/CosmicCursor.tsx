@@ -564,7 +564,7 @@ const CosmicCursor = () => {
     const spawnBgStars = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const count = isTouch ? 150 : 400;
+      const count = isTouch ? 300 : 800;
       for (let i = 0; i < count; i++) {
         bgStarsRef.current.push({
           x: Math.random() * w,
@@ -723,7 +723,7 @@ const CosmicCursor = () => {
       }
       // Also spawn stars near center continuously
       if (zoomSpawnTimer % 2 === 0) {
-        const count = isTouch ? 8 : 15;
+        const count = isTouch ? 15 : 30;
         for (let si = 0; si < count; si++) {
           bgStarsRef.current.push({
             x: cx + (Math.random() - 0.5) * canvas.width * 0.5,
