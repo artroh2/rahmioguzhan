@@ -320,7 +320,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   )}
                 </AnimatePresence>
               </motion.div>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </div>
 
