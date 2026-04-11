@@ -412,6 +412,7 @@ const CosmicCursor = () => {
     }, 4000 + Math.random() * 4000);
 
     // ─── Desktop mouse events ───
+    let moveSpawnCounter = 0;
     const onMove = (e: MouseEvent) => {
       const prev = mouseRef.current;
       const dx = e.clientX - prev.x;
@@ -420,6 +421,13 @@ const CosmicCursor = () => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       if (speed > 2.5) {
         paintDots(e.clientX, e.clientY, Math.min(Math.floor(speed / 5), 4));
+        // Spawn small celestials along cursor trail
+        moveSpawnCounter++;
+        if (moveSpawnCounter % 8 === 0) {
+          const offsetX = e.clientX + (Math.random() - 0.5) * 60;
+          const offsetY = e.clientY + (Math.random() - 0.5) * 60;
+          addCelestial(offsetX, offsetY, 0.25);
+        }
       }
     };
 
