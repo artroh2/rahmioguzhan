@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { useAudio } from '@/contexts/AudioContext';
-import albumIkiyeSaymak from '@/assets/album-ikiye-saymak.jpg';
+
 
 interface HeroSectionProps {
   lang: 'tr' | 'en';
