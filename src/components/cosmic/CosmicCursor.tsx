@@ -631,13 +631,28 @@ const CosmicCursor = () => {
 
       // ─── Spawn new celestials near center for infinite depth ───
       zoomSpawnTimer++;
-      if (zoomSpawnTimer % (isTouch ? 90 : 60) === 0) {
-        // Spawn a small celestial near center with some randomness
-        const spawnX = cx + (Math.random() - 0.5) * canvas.width * 0.4;
-        const spawnY = cy + (Math.random() - 0.5) * canvas.height * 0.4;
-        const tiny = spawnCelestial(spawnX, spawnY, 0.3);
-        tiny.radius *= 0.4; // start very small (far away)
+      if (zoomSpawnTimer % (isTouch ? 8 : 5) === 0) {
+        const spawnX = cx + (Math.random() - 0.5) * canvas.width * 0.5;
+        const spawnY = cy + (Math.random() - 0.5) * canvas.height * 0.5;
+        const tiny = spawnCelestial(spawnX, spawnY, 0.15);
+        tiny.radius *= 0.2; // start tiny (very far away)
         celestialsRef.current.push(tiny);
+      }
+      // Also spawn stars near center continuously
+      if (zoomSpawnTimer % 3 === 0) {
+        const count = isTouch ? 3 : 6;
+        for (let si = 0; si < count; si++) {
+          bgStarsRef.current.push({
+            x: cx + (Math.random() - 0.5) * canvas.width * 0.3,
+            y: cy + (Math.random() - 0.5) * canvas.height * 0.3,
+            size: 0.2 + Math.random() * 0.5,
+            color: trailColors[Math.floor(Math.random() * trailColors.length)],
+            opacity: 0,
+            targetOpacity: 0.3 + Math.random() * 0.5,
+            vx: 0,
+            vy: 0,
+          });
+        }
       }
 
       // Supernovas
