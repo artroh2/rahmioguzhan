@@ -31,9 +31,9 @@ const MusicSection = ({ lang }: MusicSectionProps) => {
 
   return (
     <section id="muzik" className="relative py-24 sm:py-32">
-      <div className="absolute inset-0 bg-[#0a1f15]/50" />
-      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0d2a1a]/60 via-[#0a1f15]/30 to-transparent z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent via-[#12182a]/40 to-[#1a0a35]/60 z-[1]" />
+      <div className="absolute inset-0 bg-[#050F14]/60" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6" ref={ref}>
         <motion.div
