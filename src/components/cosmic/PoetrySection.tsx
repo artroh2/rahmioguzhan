@@ -75,7 +75,14 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
   const visible = useMemo(() => filtered.slice(0, PAGE_SIZE), [filtered]);
 
   const toggleExpand = useCallback((id: number) => {
-    setExpandedId(prev => prev === id ? null : id);
+    setExpandedId(prev => {
+      if (prev === id) {
+        // Collapsing — mark as visited
+        setVisitedIds(s => new Set(s).add(id));
+        return null;
+      }
+      return id;
+    });
   }, []);
 
   const handleTranslate = useCallback(async (poem: typeof POEMS[0], e: React.MouseEvent) => {
