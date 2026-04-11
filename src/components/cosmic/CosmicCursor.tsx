@@ -639,16 +639,16 @@ const CosmicCursor = () => {
         celestialsRef.current.push(tiny);
       }
       // Also spawn stars near center continuously
-      if (zoomSpawnTimer % 3 === 0) {
-        const count = isTouch ? 3 : 6;
+      if (zoomSpawnTimer % 2 === 0) {
+        const count = isTouch ? 8 : 15;
         for (let si = 0; si < count; si++) {
           bgStarsRef.current.push({
-            x: cx + (Math.random() - 0.5) * canvas.width * 0.3,
-            y: cy + (Math.random() - 0.5) * canvas.height * 0.3,
+            x: cx + (Math.random() - 0.5) * canvas.width * 0.5,
+            y: cy + (Math.random() - 0.5) * canvas.height * 0.5,
             size: 0.2 + Math.random() * 0.5,
             color: trailColors[Math.floor(Math.random() * trailColors.length)],
             opacity: 0,
-            targetOpacity: 0.3 + Math.random() * 0.5,
+            targetOpacity: 0.3 + Math.random() * 0.6,
             vx: 0,
             vy: 0,
           });
