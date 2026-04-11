@@ -13,27 +13,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     ? 'Sessizlikte Müzisyen, Kelimelerle Mühendis.'
     : 'Musician in Silence, Engineer of Words.';
 
-  const [displayed, setDisplayed] = useState('');
-  const [typeDone, setTypeDone] = useState(false);
-
-  const { isPlaying, progress, currentTime, duration, togglePlay, seek } = useAudio();
-  const progressRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setDisplayed('');
-    setTypeDone(false);
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < tagline.length) {
-        setDisplayed(tagline.slice(0, i + 1));
-        i++;
-      } else {
-        setTypeDone(true);
-        clearInterval(interval);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, [tagline]);
 
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
