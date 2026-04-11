@@ -10,8 +10,8 @@ interface HeroSectionProps {
 
 const HeroSection = ({ lang }: HeroSectionProps) => {
   const tagline = lang === 'tr'
-    ? 'Sessizlikte Müzisyen, Kelimelerle Mühendis.'
-    : 'Musician in Silence, Engineer of Words.';
+    ? 'Sessizlikte Kelimelerle Mühendis.'
+    : 'Engineer of Words in Silence.';
 
   const { isPlaying, progress, currentTime, duration, togglePlay, seek } = useAudio();
   const progressRef = useRef<HTMLDivElement>(null);
