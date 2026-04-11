@@ -122,7 +122,7 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
               filter: 'drop-shadow(0 0 18px rgba(200,220,255,0.35)) drop-shadow(0 0 40px rgba(180,200,255,0.15))',
             }}
           >
-            2'ye Saymak
+            {showEN ? 'To Count To Two' : "2'ye Saymak"}
           </h2>
         </motion.div>
 
