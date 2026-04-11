@@ -810,6 +810,8 @@ const CosmicCursor = () => {
         window.removeEventListener('click', onClick);
         window.removeEventListener('dblclick', onDblClick);
         window.removeEventListener('contextmenu', onContextMenu);
+        window.removeEventListener('mousedown', onMouseDown);
+        window.removeEventListener('mouseup', onMouseUp);
       }
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
