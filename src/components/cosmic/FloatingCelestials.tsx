@@ -171,9 +171,16 @@ const FloatingCelestials = () => {
     };
     window.addEventListener('resize', handleResize);
 
+    const onMouseDown = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = true; };
+    const onMouseUp = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = false; };
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
     };
   }, []);
 
