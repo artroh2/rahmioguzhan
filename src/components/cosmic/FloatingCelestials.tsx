@@ -82,6 +82,7 @@ const FloatingCelestials = () => {
       const delta = timestamp - lastTime;
       if (delta < frameInterval) return;
       lastTime = timestamp - (delta % frameInterval);
+      if (pausedRef.current) return;
 
       ctx.clearRect(0, 0, w, h);
       const t = timestamp * 0.001;
