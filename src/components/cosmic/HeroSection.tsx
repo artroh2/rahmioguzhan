@@ -39,7 +39,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
           <p className="font-mono text-xs tracking-[0.5em] uppercase text-muted-foreground mb-6"
             style={{ textShadow: '0 0 10px rgba(200,220,255,0.3)' }}>
-            {lang === 'tr' ? 'ŞAİR · MÜZİSYEN · AI' : 'POET · MUSICIAN · AI'}
+            {lang === 'tr' ? 'ŞAİR · MÜZİSYEN · Aİ' : 'POET · MUSICIAN · AI'}
           </p>
         </motion.div>
 
