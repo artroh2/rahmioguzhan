@@ -639,7 +639,6 @@ const CosmicCursor = () => {
         tiny.radius *= 0.4; // start very small (far away)
         celestialsRef.current.push(tiny);
       }
-      }
 
       // Supernovas
       const snovae = supernovasRef.current;
