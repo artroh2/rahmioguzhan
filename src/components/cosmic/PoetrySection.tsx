@@ -284,7 +284,7 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                 }
                >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
+                  <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-green-400 transition-colors leading-snug"
                     style={{ textShadow: '0 0 10px rgba(210,200,255,0.2)' }}>
                     {showTranslation[poem.id] && translations[poem.id]
                       ? translations[poem.id].title
