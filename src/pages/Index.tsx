@@ -18,9 +18,18 @@ const Index = () => {
   useEffect(() => {
     const onDown = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.pause(); };
     const onUp = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.play(); };
+    const onCosmicPause = (e: Event) => {
+      if ((e as CustomEvent).detail) bottomVideoRef.current?.pause();
+      else bottomVideoRef.current?.play();
+    };
     window.addEventListener('mousedown', onDown);
     window.addEventListener('mouseup', onUp);
-    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('cosmic-pause', onCosmicPause);
+    return () => {
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('cosmic-pause', onCosmicPause);
+    };
   }, []);
 
   return (
