@@ -682,7 +682,12 @@ const CosmicCursor = () => {
       if (!isTouch) {
         const { x, y } = mouseRef.current;
         const hovering = isHoveringRef.current;
-        const radius = hovering ? 18 : 10;
+        // Check if scrolled to bottom empty area (last screen)
+        const scrollBottom = window.scrollY + window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const inBottomZone = scrollBottom >= docHeight - window.innerHeight * 0.5;
+        const sizeMultiplier = inBottomZone ? 2 : 1;
+        const radius = (hovering ? 18 : 10) * sizeMultiplier;
 
         const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 3);
         glow.addColorStop(0, `rgba(74, 158, 255, ${hovering ? 0.2 : 0.1})`);
@@ -701,7 +706,7 @@ const CosmicCursor = () => {
         ctx.beginPath();
         ctx.arc(x, y, radius + 2, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(74, 158, 255, ${hovering ? 0.5 : 0.2})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1 * sizeMultiplier;
         ctx.stroke();
       }
     };
