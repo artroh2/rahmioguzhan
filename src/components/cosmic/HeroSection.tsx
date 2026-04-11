@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { useAudio } from '@/contexts/AudioContext';
 
@@ -15,6 +15,15 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   const { isPlaying, progress, currentTime, duration, togglePlay, seek } = useAudio();
   const progressRef = useRef<HTMLDivElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.pause(); };
+    const onUp = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.play(); };
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+  }, []);
 
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
@@ -126,7 +135,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
         {/* Embedded video */}
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 1.8 }} className="mb-10 mx-auto w-full max-w-3xl">
           <div className="relative overflow-hidden rounded-2xl">
-            <video src="/videos/hero-reel.mp4" autoPlay loop muted playsInline className="w-full aspect-video object-cover" />
+            <video ref={heroVideoRef} src="/videos/hero-reel.mp4" autoPlay loop muted playsInline className="w-full aspect-video object-cover" />
             {/* Fade edges to site background */}
             <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px 40px #030508, inset 0 0 160px 80px #030508' }} />
             <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#030508] to-transparent" />

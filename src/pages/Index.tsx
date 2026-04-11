@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/cosmic/Navbar';
 import HeroSection from '@/components/cosmic/HeroSection';
 import MusicSection from '@/components/cosmic/MusicSection';
@@ -13,6 +13,15 @@ import { AudioProvider } from '@/contexts/AudioContext';
 
 const Index = () => {
   const [lang, setLang] = useState<'tr' | 'en'>('tr');
+  const bottomVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.pause(); };
+    const onUp = (e: MouseEvent) => { if (e.button === 2) bottomVideoRef.current?.play(); };
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+  }, []);
 
   return (
     <AudioProvider>
@@ -33,6 +42,7 @@ const Index = () => {
             <div className="relative w-full max-w-4xl mx-auto px-6 mb-0">
               <div className="relative overflow-hidden">
                 <video
+                  ref={bottomVideoRef}
                   src="/videos/hero-video.mp4"
                   autoPlay
                   loop
