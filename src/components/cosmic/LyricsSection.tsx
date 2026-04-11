@@ -113,7 +113,7 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
         >
           <p className="font-mono text-xs tracking-[0.4em] uppercase text-primary mb-3"
             style={{ textShadow: '0 0 12px rgba(74,158,255,0.4)' }}>
-            {lang === 'tr' ? 'ŞARKININ SÖZLERİ' : 'SONG LYRICS'}
+            {lang === 'tr' ? 'ÇALAN ŞARKININ SÖZLERİ' : 'NOW PLAYING LYRICS'}
           </p>
           <h2
             className="font-display text-3xl sm:text-4xl font-bold inline-block animate-gradient-sweep-blue bg-clip-text text-transparent bg-[length:300%_100%]"
