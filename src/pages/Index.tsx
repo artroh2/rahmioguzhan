@@ -28,8 +28,26 @@ const Index = () => {
           <AboutSection lang={lang} />
           <ContactSection lang={lang} />
           <LyricsSection lang={lang} />
-          {/* Empty space for cosmic canvas creation */}
-          <div className="h-screen" />
+          {/* Bottom cosmic zone with background video */}
+          <div className="h-screen relative flex items-center justify-center">
+            <div className="relative w-full max-w-4xl mx-auto px-6">
+              <div className="relative rounded-none overflow-hidden">
+                <video
+                  src="/videos/hero-video.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full aspect-video object-cover"
+                />
+                {/* Fade to black on all sides */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-[#030508]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#030508] via-transparent to-[#030508]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/60 via-transparent to-[#030508]/60" />
+                <div className="absolute inset-0 bg-gradient-to-l from-[#030508]/60 via-transparent to-[#030508]/60" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </AudioProvider>
