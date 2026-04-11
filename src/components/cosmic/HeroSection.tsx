@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useRef, useCallback } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { useAudio } from '@/contexts/AudioContext';
 
@@ -13,27 +13,8 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     ? 'Sessizlikte Müzisyen, Kelimelerle Mühendis.'
     : 'Musician in Silence, Engineer of Words.';
 
-  const [displayed, setDisplayed] = useState('');
-  const [typeDone, setTypeDone] = useState(false);
-
   const { isPlaying, progress, currentTime, duration, togglePlay, seek } = useAudio();
   const progressRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setDisplayed('');
-    setTypeDone(false);
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < tagline.length) {
-        setDisplayed(tagline.slice(0, i + 1));
-        i++;
-      } else {
-        setTypeDone(true);
-        clearInterval(interval);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, [tagline]);
 
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
@@ -117,8 +98,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8 font-display italic tracking-wide min-h-[1.8em]"
           style={{ textShadow: '0 0 12px rgba(200,220,255,0.2)' }}
         >
-          {displayed}
-          {!typeDone && <span className="animate-pulse text-primary ml-0.5">|</span>}
+          {tagline}
         </motion.p>
 
         {/* Audio Player — minimal */}
