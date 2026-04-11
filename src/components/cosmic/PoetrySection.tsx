@@ -131,8 +131,9 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
 
   return (
     <section id="siir" className="relative py-24 sm:py-32">
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030508] via-[#030508]/80 to-transparent z-[1]" />
+      <div className="absolute inset-0 bg-[#150a28]/40" />
+      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#1a0a35]/60 via-[#150a28]/30 to-transparent z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent via-[#250a1a]/40 to-[#3B1029]/50 z-[1]" />
       <div className="absolute inset-0" style={{
         background: 'radial-gradient(ellipse at 70% 50%, hsl(263 70% 58% / 0.04) 0%, transparent 60%)'
       }} />
