@@ -49,10 +49,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
-  const ctaGlowParams = useMemo(() => [
-    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1, offset: Math.floor(Math.random() * 360) },
-    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1, offset: Math.floor(Math.random() * 360) },
-  ], []);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -173,34 +169,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 2.1 }} className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {[
-            { href: '#muzik', label: lang === 'tr' ? 'Müziği Keşfet' : 'Explore Music', color: 'hsl(213 100% 65%)', enterFrom: 'left' },
-            { href: '#siir', label: lang === 'tr' ? 'Şiirleri Oku' : 'Read Poetry', color: 'hsl(263 70% 58%)', enterFrom: 'right' },
-          ].map((btn, i) => (
-            <motion.a
-              key={btn.href} href={btn.href}
-              initial={{ opacity: 0, x: btn.enterFrom === 'left' ? -40 : 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 2.1 + i * 0.15 }}
-              className="relative group rounded-full p-[1px] overflow-hidden"
-            >
-              <div className="absolute inset-0 rounded-full"
-                style={{
-                  background: `conic-gradient(from ${ctaGlowParams[i].offset}deg, transparent, ${btn.color} / 0.6, transparent, transparent, ${btn.color} / 0.3, transparent)`,
-                  animation: `spin ${ctaGlowParams[i].speed}s linear infinite ${ctaGlowParams[i].dir === -1 ? 'reverse' : ''}`,
-                  willChange: 'transform',
-                }} />
-              <span className="relative z-10 block rounded-full px-6 py-3 text-sm text-foreground bg-[#030508]/90 backdrop-blur-sm transition-all duration-300 group-hover:text-foreground"
-                style={{
-                  boxShadow: `0 0 15px ${btn.color.replace(')', ' / 0.15)')}, inset 0 0 8px ${btn.color.replace(')', ' / 0.05)')}`,
-                  textShadow: `0 0 12px ${btn.color.replace(')', ' / 0.3)')}`,
-                }}>
-                {btn.label}
-              </span>
-            </motion.a>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
