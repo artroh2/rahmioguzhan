@@ -27,6 +27,7 @@ const COLORS = [
 
 const FloatingCelestials = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
