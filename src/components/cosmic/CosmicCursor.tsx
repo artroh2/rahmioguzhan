@@ -327,6 +327,7 @@ const CosmicCursor = () => {
 
   const clickCountRef = useRef(0);
   const bgStarsRef = useRef<BackgroundStar[]>([]);
+  const pausedRef = useRef(false);
 
   const clearAll = useCallback(() => {
     celestialsRef.current = [];
