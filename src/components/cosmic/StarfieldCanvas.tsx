@@ -87,6 +87,11 @@ const StarfieldCanvas = () => {
     resize();
     window.addEventListener('resize', resize);
 
+    const onMouseDown = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = true; };
+    const onMouseUp = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = false; };
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+
     let lastTime = 0;
     let isVisible = true;
 
