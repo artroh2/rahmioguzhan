@@ -56,7 +56,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-[#030508]" />
+      {/* Transparent — starfield shows through */}
 
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
@@ -162,11 +162,14 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
         {/* Embedded video */}
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 1.8 }} className="mb-10 mx-auto w-full max-w-3xl">
-          <div className="relative rounded-2xl overflow-hidden">
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm animate-pulse" style={{ animationDuration: '4s' }} />
-            <div className="relative glass rounded-2xl overflow-hidden border border-white/10">
-              <video src="/videos/hero-reel.mp4" autoPlay loop muted playsInline className="w-full aspect-video object-cover" />
-            </div>
+          <div className="relative overflow-hidden rounded-2xl">
+            <video src="/videos/hero-reel.mp4" autoPlay loop muted playsInline className="w-full aspect-video object-cover" />
+            {/* Fade edges to site background */}
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px 40px #030508, inset 0 0 160px 80px #030508' }} />
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#030508] to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#030508] to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#030508] to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#030508] to-transparent" />
           </div>
         </motion.div>
 
