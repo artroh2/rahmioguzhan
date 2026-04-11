@@ -220,34 +220,11 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
             className="flex flex-col justify-center"
           >
             {(() => {
-              const [showEN, setShowEN] = useState(false);
-              const [translating, setTranslating] = useState(false);
-              const [translation, setTranslation] = useState('');
-
-              const poemTR = `Oturup yine o zihin uçurumunun kenarına\nYine birer birer kelimeler seçiyorum yokluğa fırlatmak için\nNe çok derdi varmış dünyanın, anca varıyorum farkına\nBütün bu yaşananlar ne için, ben kimim?\n\nNormalde yüksekten korkmam kolay kolay\nÖzgürce uçabilirim bulutların arasında, büyük olay\nAma bu sefer tanıyamıyorum seni gökyüzü\nDüşmek var sonrasında\nVe tuhaf, ilk defa üşüyorum.`;
-
-              const handleTranslate = useCallback(async () => {
-                if (showEN) { setShowEN(false); return; }
-                if (translation) { setShowEN(true); return; }
-                setTranslating(true);
-                try {
-                  const { data } = await supabase.functions.invoke('translate-poem', {
-                    body: { title: 'Hakkımda Şiiri', body: poemTR },
-                  });
-                  if (data?.translatedBody) {
-                    setTranslation(data.translatedBody);
-                    setShowEN(true);
-                  }
-                } catch { /* ignore */ }
-                setTranslating(false);
-              }, [showEN, translation, poemTR]);
-
-              const text = showEN && translation ? translation : poemTR;
-
+              const text = showEN && translation ? translation : POEM_TR;
               return (
                 <div className="relative">
                   <button
-                    onClick={handleTranslate}
+                    onClick={handlePoemTranslate}
                     disabled={translating}
                     className="absolute top-0 right-0 px-2 py-0.5 rounded text-[10px] font-mono tracking-wider border border-secondary/30 text-secondary/80 hover:text-secondary hover:border-secondary/60 transition-all duration-300 disabled:opacity-50"
                     style={{ textShadow: '0 0 8px rgba(168,85,247,0.3)' }}
