@@ -15,6 +15,15 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   const { isPlaying, progress, currentTime, duration, togglePlay, seek } = useAudio();
   const progressRef = useRef<HTMLDivElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.pause(); };
+    const onUp = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.play(); };
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); };
+  }, []);
 
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const bar = progressRef.current;
