@@ -21,7 +21,7 @@ const PLATFORMS: PlatformEntry[] = [
   { name: 'Apple Music', color: '#FC3C44', href: 'https://music.apple.com/search?term=Rahmi+Oguzhan', icon: AppleMusicIcon },
   
   { name: 'Amazon Music', color: '#25D1DA', href: 'https://music.amazon.com/search/Rahmi+Oguzhan', icon: AmazonMusicIcon },
-  { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/search?q=Rahmi+Oguzhan', icon: YouTubeMusicIcon },
+  { name: 'YouTube Music', color: '#FF0000', href: 'https://music.youtube.com/channel/UCSnOyGISoALc2jY46nWHYdQ?si=1TRboeEUxYqXJsKy', icon: YouTubeMusicIcon },
   { name: 'Deezer', color: '#A238FF', href: 'https://www.deezer.com/search/Rahmi%20Oguzhan', icon: DeezerIcon },
 ];
 
