@@ -550,7 +550,7 @@ const CosmicCursor = () => {
     window.addEventListener('touchend', cancelLongPress, { passive: true });
     window.addEventListener('touchmove', cancelLongPress, { passive: true });
 
-    const zoomSpeed = 0.2; // how fast the universe zooms in
+    const zoomSpeed = 0.1; // how fast the universe zooms in
     let zoomSpawnTimer = 0;
 
     let time = 0;
