@@ -542,9 +542,9 @@ const CosmicCursor = () => {
       const touch = e.touches[0];
       if (!touch) return;
       mouseRef.current = { x: touch.clientX, y: touch.clientY };
-      paintDots(touch.clientX, touch.clientY, 2);
+      spawnCursorTrail(touch.clientX, touch.clientY, 3);
       touchSpawnCounter++;
-      if (touchSpawnCounter % 10 === 0) {
+      if (touchSpawnCounter % 6 === 0) {
         const offsetX = touch.clientX + (Math.random() - 0.5) * 50;
         const offsetY = touch.clientY + (Math.random() - 0.5) * 50;
         addCelestial(offsetX, offsetY, 0.2);
@@ -785,7 +785,7 @@ const CosmicCursor = () => {
       cancelAnimationFrame(frameRef.current);
       clearInterval(autoSpawnInterval);
       clearInterval(bgStarInterval);
-      clearInterval(randomExplosionInterval);
+      clearInterval(stampedeInterval);
       cancelLongPress();
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
