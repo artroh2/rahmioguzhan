@@ -163,8 +163,8 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
       const { data } = await supabase.functions.invoke('translate-poem', {
         body: { title: 'Hakkımda Şiiri', body: POEM_TR },
       });
-      if (data?.translatedBody) {
-        setTranslation(data.translatedBody);
+      if (data?.translation?.body) {
+        setTranslation(data.translation.body);
         setShowEN(true);
       }
     } catch { /* ignore */ }
