@@ -244,10 +244,20 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
         {/* Poem Cards */}
         <div className="grid gap-3">
           <AnimatePresence mode="popLayout">
-            {visible.map((poem, i) => (
+            {visible.map((poem, i) => {
+              const cardColors = [
+                'hsl(213 80% 55%)',   // blue
+                'hsl(263 70% 58%)',   // purple
+                'hsl(180 60% 45%)',   // teal
+                'hsl(45 80% 55%)',    // gold
+                'hsl(320 60% 55%)',   // pink
+              ];
+              const cardColor = cardColors[i % cardColors.length];
+              const isExpanded = expandedId === poem.id;
+              return (
               <motion.div
                 key={`${shuffleKey}-${poem.id}`}
-                ref={expandedId === poem.id ? expandedRef : undefined}
+                ref={isExpanded ? expandedRef : undefined}
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -257,11 +267,15 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                 className={`
                   glass rounded-xl px-5 py-4 cursor-pointer group
                   border transition-all duration-500
-                  ${expandedId === poem.id
-                    ? 'border-secondary/30 shadow-[0_0_25px_hsl(263_70%_58%/0.08)]'
-                    : 'border-border/20 hover:border-secondary/20'
+                  ${isExpanded
+                    ? 'border-red-500/60'
+                    : 'hover:border-opacity-40'
                   }
                 `}
+                style={isExpanded
+                  ? { boxShadow: '0 0 30px rgba(239,68,68,0.25), 0 0 60px rgba(239,68,68,0.1), inset 0 0 20px rgba(239,68,68,0.05)', borderColor: 'rgba(239,68,68,0.6)' }
+                  : { borderColor: `${cardColor}22`, boxShadow: `0 0 15px ${cardColor}08` }
+                }
                >
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-display text-base sm:text-lg text-foreground/90 group-hover:text-foreground transition-colors leading-snug"
@@ -306,7 +320,8 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
                   )}
                 </AnimatePresence>
               </motion.div>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </div>
 
