@@ -129,7 +129,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="glass rounded-2xl p-6 sm:p-8 space-y-5"
+          className="space-y-5"
         >
           <div className="grid sm:grid-cols-2 gap-4">
             <input
