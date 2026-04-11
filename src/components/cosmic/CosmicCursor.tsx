@@ -380,9 +380,9 @@ const CosmicCursor = () => {
 
     const paintDots = (px: number, py: number, count: number) => {
       for (let i = 0; i < count; i++) {
-        const dx = px + (Math.random() - 0.5) * 8;
-        const dy = py + (Math.random() - 0.5) * 8;
-        const size = Math.random() * 2.2 + 0.6;
+        const dx = px + (Math.random() - 0.5) * 32;
+        const dy = py + (Math.random() - 0.5) * 32;
+        const size = (Math.random() * 2.2 + 0.6) * 4;
         const color = trailColors[Math.floor(Math.random() * trailColors.length)];
         pctx.beginPath();
         pctx.arc(dx, dy, size, 0, Math.PI * 2);
