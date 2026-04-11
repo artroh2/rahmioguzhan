@@ -655,6 +655,8 @@ const CosmicCursor = () => {
       if (delta < frameInterval) return;
       lastTime = timestamp - (delta % frameInterval);
 
+      if (pausedRef.current) return;
+
       time++;
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
