@@ -167,15 +167,6 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
         </motion.form>
 
         {/* Footer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center text-xs text-muted-foreground mt-16"
-          style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}
-        >
-          Rahmi Oğuzhan Hacıeyüpoğlu
-        </motion.p>
       </div>
     </section>
   );
