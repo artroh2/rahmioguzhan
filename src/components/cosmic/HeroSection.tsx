@@ -49,10 +49,6 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
-  const ctaGlowParams = useMemo(() => [
-    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1, offset: Math.floor(Math.random() * 360) },
-    { speed: 3 + Math.random() * 3, dir: Math.random() > 0.5 ? 1 : -1, offset: Math.floor(Math.random() * 360) },
-  ], []);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
