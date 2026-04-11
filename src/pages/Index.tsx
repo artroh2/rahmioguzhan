@@ -34,7 +34,7 @@ const Index = () => {
 
   return (
     <AudioProvider>
-      <div className="min-h-screen bg-[#030508] text-foreground relative">
+      <div className="min-h-screen bg-[#030508] text-foreground relative" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <StarfieldCanvas />
         <FloatingCelestials />
         <CosmicCursor />
