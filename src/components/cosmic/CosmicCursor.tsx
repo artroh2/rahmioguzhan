@@ -602,24 +602,29 @@ const CosmicCursor = () => {
       }
     };
 
-    // ─── Long-press (mobile/tablet): reset everything ───
+    // ─── Long-press (mobile/tablet): pause animation (like desktop right-click) ───
     let longPressTimer: ReturnType<typeof setTimeout> | null = null;
-    const longPressThreshold = 600; // ms
+    const longPressThreshold = 400; // ms
 
     const onTouchStartForLongPress = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       longPressTimer = setTimeout(() => {
         longPressTimer = null;
-        clearAll();
-        setTimeout(spawnBgStars, 100);
+        pausedRef.current = true;
+        // Dispatch custom event so videos/audio can also pause
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: true }));
       }, longPressThreshold);
     };
 
-    const cancelLongPress = () => {
+    const onTouchEndForLongPress = () => {
       if (longPressTimer) {
         clearTimeout(longPressTimer);
         longPressTimer = null;
+      }
+      if (pausedRef.current) {
+        pausedRef.current = false;
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: false }));
       }
     };
 
@@ -637,8 +642,8 @@ const CosmicCursor = () => {
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchstart', onTouchStartForLongPress, { passive: true });
-    window.addEventListener('touchend', cancelLongPress, { passive: true });
-    window.addEventListener('touchmove', cancelLongPress, { passive: true });
+    window.addEventListener('touchend', onTouchEndForLongPress, { passive: true });
+    window.addEventListener('touchcancel', onTouchEndForLongPress, { passive: true });
 
     const zoomSpeed = 0.1; // how fast the universe zooms in
     let zoomSpawnTimer = 0;
@@ -803,7 +808,7 @@ const CosmicCursor = () => {
       clearInterval(autoSpawnInterval);
       clearInterval(bgStarInterval);
       clearInterval(stampedeInterval);
-      cancelLongPress();
+      onTouchEndForLongPress();
       if (!isTouch) {
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseover', onOver);
@@ -816,8 +821,8 @@ const CosmicCursor = () => {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchstart', onTouchStartForLongPress);
-      window.removeEventListener('touchend', cancelLongPress);
-      window.removeEventListener('touchmove', cancelLongPress);
+      window.removeEventListener('touchend', onTouchEndForLongPress);
+      window.removeEventListener('touchcancel', onTouchEndForLongPress);
       window.removeEventListener('resize', resize);
       if (!isTouch) document.body.style.cursor = '';
     };
