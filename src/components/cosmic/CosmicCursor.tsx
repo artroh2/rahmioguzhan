@@ -380,9 +380,9 @@ const CosmicCursor = () => {
 
     const paintDots = (px: number, py: number, count: number) => {
       for (let i = 0; i < count; i++) {
-        const dx = px + (Math.random() - 0.5) * 32;
-        const dy = py + (Math.random() - 0.5) * 32;
-        const size = (Math.random() * 2.2 + 0.6) * 4;
+        const dx = px + (Math.random() - 0.5) * 16;
+        const dy = py + (Math.random() - 0.5) * 16;
+        const size = (Math.random() * 2.2 + 0.6) * 2;
         const color = trailColors[Math.floor(Math.random() * trailColors.length)];
         pctx.beginPath();
         pctx.arc(dx, dy, size, 0, Math.PI * 2);
@@ -412,6 +412,7 @@ const CosmicCursor = () => {
     }, 4000 + Math.random() * 4000);
 
     // ─── Desktop mouse events ───
+    let moveSpawnCounter = 0;
     const onMove = (e: MouseEvent) => {
       const prev = mouseRef.current;
       const dx = e.clientX - prev.x;
@@ -420,6 +421,13 @@ const CosmicCursor = () => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       if (speed > 2.5) {
         paintDots(e.clientX, e.clientY, Math.min(Math.floor(speed / 5), 4));
+        // Spawn small celestials along cursor trail
+        moveSpawnCounter++;
+        if (moveSpawnCounter % 8 === 0) {
+          const offsetX = e.clientX + (Math.random() - 0.5) * 60;
+          const offsetY = e.clientY + (Math.random() - 0.5) * 60;
+          addCelestial(offsetX, offsetY, 0.25);
+        }
       }
     };
 
@@ -461,11 +469,18 @@ const CosmicCursor = () => {
       }
     };
 
+    let touchSpawnCounter = 0;
     const onTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       if (!touch) return;
       mouseRef.current = { x: touch.clientX, y: touch.clientY };
       paintDots(touch.clientX, touch.clientY, 2);
+      touchSpawnCounter++;
+      if (touchSpawnCounter % 10 === 0) {
+        const offsetX = touch.clientX + (Math.random() - 0.5) * 50;
+        const offsetY = touch.clientY + (Math.random() - 0.5) * 50;
+        addCelestial(offsetX, offsetY, 0.2);
+      }
     };
 
     // ─── Auto-spawn: medium planet every 5 seconds ───
