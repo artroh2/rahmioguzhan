@@ -327,6 +327,7 @@ const CosmicCursor = () => {
 
   const clickCountRef = useRef(0);
   const bgStarsRef = useRef<BackgroundStar[]>([]);
+  const pausedRef = useRef(false);
 
   const clearAll = useCallback(() => {
     celestialsRef.current = [];
@@ -586,14 +587,19 @@ const CosmicCursor = () => {
     spawnBgStars();
     const bgStarInterval = setInterval(spawnBgStars, 8000);
 
-    // ─── Right-click (desktop): reset everything ───
+    // ─── Right-click hold (desktop): pause animation ───
     const onContextMenu = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
       e.preventDefault();
-      clearAll();
-      // Re-spawn initial stars
-      setTimeout(spawnBgStars, 100);
+    };
+    const onMouseDown = (e: MouseEvent) => {
+      if (e.button === 2) {
+        pausedRef.current = true;
+      }
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      if (e.button === 2) {
+        pausedRef.current = false;
+      }
     };
 
     // ─── Long-press (mobile/tablet): reset everything ───
@@ -624,7 +630,8 @@ const CosmicCursor = () => {
       window.addEventListener('click', onClick);
       window.addEventListener('dblclick', onDblClick);
       window.addEventListener('contextmenu', onContextMenu);
-    } else {
+      window.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mouseup', onMouseUp);
       window.addEventListener('contextmenu', (e) => e.preventDefault());
     }
     window.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -647,6 +654,8 @@ const CosmicCursor = () => {
       const delta = timestamp - lastTime;
       if (delta < frameInterval) return;
       lastTime = timestamp - (delta % frameInterval);
+
+      if (pausedRef.current) return;
 
       time++;
       const cx = canvas.width / 2;
@@ -801,6 +810,8 @@ const CosmicCursor = () => {
         window.removeEventListener('click', onClick);
         window.removeEventListener('dblclick', onDblClick);
         window.removeEventListener('contextmenu', onContextMenu);
+        window.removeEventListener('mousedown', onMouseDown);
+        window.removeEventListener('mouseup', onMouseUp);
       }
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);

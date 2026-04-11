@@ -27,6 +27,7 @@ const COLORS = [
 
 const FloatingCelestials = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -81,6 +82,7 @@ const FloatingCelestials = () => {
       const delta = timestamp - lastTime;
       if (delta < frameInterval) return;
       lastTime = timestamp - (delta % frameInterval);
+      if (pausedRef.current) return;
 
       ctx.clearRect(0, 0, w, h);
       const t = timestamp * 0.001;
@@ -169,9 +171,16 @@ const FloatingCelestials = () => {
     };
     window.addEventListener('resize', handleResize);
 
+    const onMouseDown = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = true; };
+    const onMouseUp = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = false; };
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
     };
   }, []);
 

@@ -27,6 +27,7 @@ const StarfieldCanvas = () => {
   const starsRef = useRef<Star[]>([]);
   const nebulaeRef = useRef<Nebula[]>([]);
   const timeRef = useRef(0);
+  const pausedRef = useRef(false);
 
   const initStars = useCallback((w: number, h: number) => {
     const isMobile = w < 768;
@@ -86,6 +87,11 @@ const StarfieldCanvas = () => {
     resize();
     window.addEventListener('resize', resize);
 
+    const onMouseDown = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = true; };
+    const onMouseUp = (e: MouseEvent) => { if (e.button === 2) pausedRef.current = false; };
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+
     let lastTime = 0;
     let isVisible = true;
 
@@ -94,7 +100,7 @@ const StarfieldCanvas = () => {
 
     const draw = (timestamp: number) => {
       animFrameRef.current = requestAnimationFrame(draw);
-      if (!isVisible || prefersReduced) return;
+      if (!isVisible || prefersReduced || pausedRef.current) return;
 
       const delta = timestamp - lastTime;
       if (delta < frameInterval) return;
@@ -156,6 +162,8 @@ const StarfieldCanvas = () => {
     return () => {
       cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [initStars, initNebulae]);
