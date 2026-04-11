@@ -191,52 +191,34 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-12 max-w-md mx-auto"
         >
-          <div className="glass rounded-2xl px-5 py-4 border border-border/20">
-            <div className="flex items-center gap-4">
-              <div className="relative shrink-0" style={{ perspective: '600px' }}>
+          <div className="flex items-center gap-3 justify-center">
+            <button
+              onClick={togglePlay}
+              className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 transition-all duration-300 shrink-0"
+              aria-label={isPlaying ? 'Pause' : 'Play'}
+            >
+              {isPlaying ? (
+                <Pause className="w-3.5 h-3.5 text-primary" fill="currentColor" />
+              ) : (
+                <Play className="w-3.5 h-3.5 text-primary ml-0.5" fill="currentColor" />
+              )}
+            </button>
+            <div className="flex-1 min-w-0">
+              <div
+                ref={progressBarRef}
+                onClick={handleSeek}
+                className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative"
+              >
                 <div
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-white/10 shadow-lg"
-                  style={isPlaying ? { animation: 'flipY 4s linear infinite' } : {}}
+                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
+                  style={{ width: `${progress}%` }}
                 >
-                  <img src={albumIkiyeSaymak} alt="2'ye Saymak" className="w-full h-full object-cover" />
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
                 </div>
               </div>
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-1">
-                  <div>
-                    <h3 className="font-display text-sm font-bold text-foreground truncate"
-                      style={{ textShadow: '0 0 10px rgba(200,220,255,0.2)' }}>2'ye Saymak</h3>
-                    <p className="text-[10px] text-muted-foreground">Rahmi Oğuzhan</p>
-                  </div>
-                  <button
-                    onClick={togglePlay}
-                    className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 transition-all duration-300 shrink-0"
-                    aria-label={isPlaying ? 'Pause' : 'Play'}
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-3 h-3 text-primary" fill="currentColor" />
-                    ) : (
-                      <Play className="w-3 h-3 text-primary ml-0.5" fill="currentColor" />
-                    )}
-                  </button>
-                </div>
-                <div
-                  ref={progressBarRef}
-                  onClick={handleSeek}
-                  className="h-1 rounded-full bg-white/10 cursor-pointer group/bar relative"
-                >
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70 transition-[width] duration-100 relative"
-                    style={{ width: `${progress}%` }}
-                  >
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.5)] opacity-0 group-hover/bar:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-                <div className="flex justify-between mt-1">
-                  <span className="text-[9px] text-muted-foreground font-mono">{fmt(currentTime)}</span>
-                  <span className="text-[9px] text-muted-foreground font-mono">{fmt(duration)}</span>
-                </div>
+              <div className="flex justify-between mt-1">
+                <span className="text-[9px] text-muted-foreground font-mono">{fmt(currentTime)}</span>
+                <span className="text-[9px] text-muted-foreground font-mono">{fmt(duration)}</span>
               </div>
             </div>
           </div>
