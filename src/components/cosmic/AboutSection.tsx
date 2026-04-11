@@ -1,5 +1,7 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AboutSectionProps {
   lang: 'tr' | 'en';
@@ -144,9 +146,30 @@ const SolarSystem = () => {
   return <canvas ref={canvasRef} className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] mx-auto" />;
 };
 
+const POEM_TR = `Oturup yine o zihin uçurumunun kenarına\nYine birer birer kelimeler seçiyorum yokluğa fırlatmak için\nNe çok derdi varmış dünyanın, anca varıyorum farkına\nBütün bu yaşananlar ne için, ben kimim?\n\nNormalde yüksekten korkmam kolay kolay\nÖzgürce uçabilirim bulutların arasında, büyük olay\nAma bu sefer tanıyamıyorum seni gökyüzü\nDüşmek var sonrasında\nVe tuhaf, ilk defa üşüyorum.`;
+
 const AboutSection = ({ lang }: AboutSectionProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [showEN, setShowEN] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [translation, setTranslation] = useState('');
+
+  const handlePoemTranslate = useCallback(async () => {
+    if (showEN) { setShowEN(false); return; }
+    if (translation) { setShowEN(true); return; }
+    setTranslating(true);
+    try {
+      const { data } = await supabase.functions.invoke('translate-poem', {
+        body: { title: 'Hakkımda Şiiri', body: POEM_TR },
+      });
+      if (data?.translatedBody) {
+        setTranslation(data.translatedBody);
+        setShowEN(true);
+      }
+    } catch { /* ignore */ }
+    setTranslating(false);
+  }, [showEN, translation]);
 
   return (
     <section id="hakkimda" className="relative py-24 sm:py-32">
@@ -196,37 +219,33 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col justify-center"
           >
-            {lang === 'tr' ? (
-              <div className="space-y-4">
-                <p className="font-display text-lg text-foreground leading-relaxed italic" style={{ textShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
-                  "Sessizliğin içinde bir evren var — her kelime bir yıldız, her nota bir galaksi."
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Rahmi Oğuzhan Hacıeyüpoğlu — şair, müzisyen ve dijital çağın sessiz filozofu.
-                  Kelimelerle evrenler inşa eder, notalarla duyguları şekillendirir. 
-                  Yapay zeka ile sanatın kesişim noktasında, yeni ifade biçimleri arar.
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                   Her şiir bir kapıdır, her şarkı bir yolculuk.
-                   Karanlıkta yazılan satırlar, ışığa dönüşür. Işıkta aydınlığa...
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <p className="font-display text-lg text-foreground leading-relaxed italic" style={{ textShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
-                  "Within silence lies a universe — each word a star, each note a galaxy."
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                  Rahmi Oğuzhan Hacıeyüpoğlu — poet, musician, and quiet philosopher of the digital age.
-                  He builds universes with words and shapes emotions through melodies.
-                  At the intersection of AI and art, he seeks new forms of expression.
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed" style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
-                   Every poem is a door, every song a journey.
-                   Lines written in darkness transform into light. In light, into brilliance...
-                </p>
-              </div>
-            )}
+            {(() => {
+              const text = showEN && translation ? translation : POEM_TR;
+              return (
+                <div className="relative">
+                  <button
+                    onClick={handlePoemTranslate}
+                    disabled={translating}
+                    className="absolute top-0 right-0 px-2 py-0.5 rounded text-[10px] font-mono tracking-wider border border-secondary/30 text-secondary/80 hover:text-secondary hover:border-secondary/60 transition-all duration-300 disabled:opacity-50"
+                    style={{ textShadow: '0 0 8px rgba(168,85,247,0.3)' }}
+                  >
+                    {translating ? <Loader2 className="w-3 h-3 animate-spin" /> : showEN ? 'TR' : 'EN'}
+                  </button>
+                  <div className="space-y-4 pr-10">
+                    {text.split('\n\n').map((stanza, si) => (
+                      <div key={si} className="space-y-1">
+                        {stanza.split('\n').map((line, li) => (
+                          <p key={li} className="font-display text-sm sm:text-base text-muted-foreground leading-relaxed italic"
+                            style={{ textShadow: '0 0 8px rgba(200,220,255,0.15)' }}>
+                            {line}
+                          </p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </motion.div>
         </div>
       </div>
