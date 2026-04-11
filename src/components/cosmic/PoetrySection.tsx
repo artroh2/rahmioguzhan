@@ -40,19 +40,23 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-  // Shuffle poems per category
+  // Shuffle poems per category, prioritizing unvisited
   const poemsByCategory = useMemo(() => {
     const map: Record<string, typeof POEMS> = {};
     for (const p of POEMS) {
       (map[p.category] ??= []).push(p);
     }
     for (const key in map) {
-      const arr = [...map[key]];
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+      const unvisited = map[key].filter(p => !visitedIds.has(p.id));
+      const visited = map[key].filter(p => visitedIds.has(p.id));
+      // Shuffle each group
+      for (const arr of [unvisited, visited]) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
       }
-      map[key] = arr;
+      map[key] = [...unvisited, ...visited];
     }
     return map;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,17 +69,12 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
 
   const filtered = useMemo(() => {
     const list = poemsByCategory[activeCategory] || [];
-    if (!search.trim()) {
-      // Prioritize unvisited poems — push visited ones to the end
-      const unvisited = list.filter(p => !visitedIds.has(p.id));
-      const visited = list.filter(p => visitedIds.has(p.id));
-      return [...unvisited, ...visited];
-    }
+    if (!search.trim()) return list;
     const q = search.toLowerCase();
     return list.filter(p =>
       p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
     );
-  }, [activeCategory, search, poemsByCategory, visitedIds]);
+  }, [activeCategory, search, poemsByCategory]);
 
   const visible = useMemo(() => filtered.slice(0, PAGE_SIZE), [filtered]);
 
