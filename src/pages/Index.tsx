@@ -28,10 +28,10 @@ const Index = () => {
           <AboutSection lang={lang} />
           <ContactSection lang={lang} />
           <LyricsSection lang={lang} />
-          {/* Bottom cosmic zone with background video */}
-          <div className="h-screen relative flex items-center justify-center">
-            <div className="relative w-full max-w-4xl mx-auto px-6">
-              <div className="relative rounded-none overflow-hidden">
+          {/* Bottom video section — anchored to page bottom */}
+          <div className="relative flex items-end justify-center pb-0" style={{ minHeight: '100vh' }}>
+            <div className="relative w-full max-w-4xl mx-auto px-6 mb-0">
+              <div className="relative overflow-hidden">
                 <video
                   src="/videos/hero-video.mp4"
                   autoPlay
@@ -40,11 +40,16 @@ const Index = () => {
                   playsInline
                   className="w-full aspect-video object-cover"
                 />
-                {/* Fade to black on all sides */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030508] via-transparent to-[#030508]" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#030508] via-transparent to-[#030508]" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/60 via-transparent to-[#030508]/60" />
-                <div className="absolute inset-0 bg-gradient-to-l from-[#030508]/60 via-transparent to-[#030508]/60" />
+                {/* Fade to site background (transparent = site bg shows through) */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    boxShadow: 'inset 0 0 80px 40px #030508, inset 0 0 160px 80px #030508',
+                  }}
+                />
+                <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#030508] to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#030508] to-transparent" />
+                <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#030508] to-transparent" />
+                <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#030508] to-transparent" />
               </div>
             </div>
           </div>
