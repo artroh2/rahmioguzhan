@@ -65,12 +65,17 @@ const PoetrySection = ({ lang }: PoetrySectionProps) => {
 
   const filtered = useMemo(() => {
     const list = poemsByCategory[activeCategory] || [];
-    if (!search.trim()) return list;
+    if (!search.trim()) {
+      // Prioritize unvisited poems — push visited ones to the end
+      const unvisited = list.filter(p => !visitedIds.has(p.id));
+      const visited = list.filter(p => visitedIds.has(p.id));
+      return [...unvisited, ...visited];
+    }
     const q = search.toLowerCase();
     return list.filter(p =>
       p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q)
     );
-  }, [activeCategory, search, poemsByCategory]);
+  }, [activeCategory, search, poemsByCategory, visitedIds]);
 
   const visible = useMemo(() => filtered.slice(0, PAGE_SIZE), [filtered]);
 
