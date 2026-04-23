@@ -18,20 +18,12 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const onDown = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.pause(); };
-    const onUp = (e: MouseEvent) => { if (e.button === 2) heroVideoRef.current?.play(); };
     const onCosmicPause = (e: Event) => {
       if ((e as CustomEvent).detail) heroVideoRef.current?.pause();
       else heroVideoRef.current?.play();
     };
-    window.addEventListener('mousedown', onDown);
-    window.addEventListener('mouseup', onUp);
     window.addEventListener('cosmic-pause', onCosmicPause);
-    return () => {
-      window.removeEventListener('mousedown', onDown);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('cosmic-pause', onCosmicPause);
-    };
+    return () => window.removeEventListener('cosmic-pause', onCosmicPause);
   }, []);
 
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {

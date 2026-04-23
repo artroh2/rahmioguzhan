@@ -86,6 +86,9 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           >
             {lang === 'tr' ? 'BAĞLANTI KUR' : 'GET IN TOUCH'}
           </h2>
+          <p className="mt-4 text-sm text-muted-foreground/80 font-mono tracking-wider">
+            {lang === 'tr' ? 'Anonim kalabilirsin.' : 'You can stay anonymous.'}
+          </p>
         </motion.div>
 
 

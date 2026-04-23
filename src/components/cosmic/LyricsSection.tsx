@@ -181,44 +181,50 @@ const LyricsSection = ({ lang }: LyricsSectionProps) => {
           </button>
         </motion.div>
 
-        {/* Lyrics stanzas */}
-        <div className="space-y-8">
-          {stanzas.map((stanza, si) => (
-            <motion.div
-              key={si}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + si * 0.1 }}
-              className="relative glass rounded-2xl px-6 py-5 sm:px-8 sm:py-6 border border-border/20"
-              style={{
-                boxShadow: `0 0 40px ${stanzaColors[si % stanzaColors.length]}, inset 0 0 30px ${stanzaColors[si % stanzaColors.length]}`,
-              }}
-            >
-              {/* Subtle planet glow behind each stanza */}
-              <div
-                className="absolute -z-10 rounded-full blur-3xl opacity-30"
-                style={{
-                  width: '120px',
-                  height: '120px',
-                  background: `radial-gradient(circle, ${stanzaColors[si % stanzaColors.length].replace('0.06', '0.4').replace('0.05', '0.4')}, transparent 70%)`,
-                  top: si % 2 === 0 ? '-20px' : 'auto',
-                  bottom: si % 2 !== 0 ? '-20px' : 'auto',
-                  right: si % 2 === 0 ? '-30px' : 'auto',
-                  left: si % 2 !== 0 ? '-30px' : 'auto',
-                }}
-              />
-              {stanza.map((line, li) => (
-                <p
-                  key={li}
-                  className="font-display text-sm sm:text-base text-foreground/90 leading-relaxed italic"
-                  style={{ textShadow: '0 0 10px rgba(200,220,255,0.15)' }}
-                >
-                  {line || <br />}
-                </p>
-              ))}
-            </motion.div>
-          ))}
-        </div>
+        {/* Lyrics — single unified block, paragraphs separated */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="relative glass rounded-2xl px-6 py-8 sm:px-10 sm:py-10 border border-border/20"
+          style={{
+            boxShadow: `0 0 50px ${stanzaColors[0]}, inset 0 0 40px ${stanzaColors[1]}`,
+          }}
+        >
+          {/* Soft planet glows */}
+          <div
+            className="absolute -z-10 rounded-full blur-3xl opacity-30 pointer-events-none"
+            style={{
+              width: '180px', height: '180px',
+              background: `radial-gradient(circle, ${stanzaColors[1].replace('0.06', '0.4')}, transparent 70%)`,
+              top: '-40px', right: '-40px',
+            }}
+          />
+          <div
+            className="absolute -z-10 rounded-full blur-3xl opacity-30 pointer-events-none"
+            style={{
+              width: '180px', height: '180px',
+              background: `radial-gradient(circle, ${stanzaColors[3].replace('0.05', '0.4')}, transparent 70%)`,
+              bottom: '-40px', left: '-40px',
+            }}
+          />
+
+          <div className="space-y-6">
+            {stanzas.map((stanza, si) => (
+              <div key={si} className="space-y-1">
+                {stanza.map((line, li) => (
+                  <p
+                    key={li}
+                    className="font-display text-sm sm:text-base text-foreground/90 leading-relaxed italic"
+                    style={{ textShadow: '0 0 10px rgba(200,220,255,0.15)' }}
+                  >
+                    {line || <br />}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Bottom synced player */}
         <motion.div

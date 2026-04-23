@@ -5,6 +5,7 @@ interface AudioContextType {
   progress: number;
   currentTime: number;
   duration: number;
+  loopCount: number;
   togglePlay: () => void;
   seek: (ratio: number) => void;
   audioRef: React.MutableRefObject<HTMLAudioElement | null>;
@@ -24,6 +25,8 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [loopCount, setLoopCount] = useState(0);
+  const lastTimeRef = useRef(0);
 
   useEffect(() => {
     const audio = new Audio('/audio/ikiye-saymak.mp3');
@@ -33,8 +36,14 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
 
     audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
     audio.addEventListener('timeupdate', () => {
-      setCurrentTime(audio.currentTime);
-      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
+      const t = audio.currentTime;
+      // Detect loop wrap-around: time jumps from near-end back to near-start
+      if (lastTimeRef.current > 0 && t + 1 < lastTimeRef.current) {
+        setLoopCount(c => c + 1);
+      }
+      lastTimeRef.current = t;
+      setCurrentTime(t);
+      if (audio.duration) setProgress((t / audio.duration) * 100);
     });
 
     const playPromise = audio.play();
@@ -42,38 +51,9 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       playPromise.catch(() => setIsPlaying(false));
     }
 
-    // Pause/resume on right-click (desktop) or long-press (mobile via cosmic-pause)
-    let wasPlayingBeforePause = false;
-    const onDown = (e: MouseEvent) => {
-      if (e.button === 2 && audioRef.current) {
-        wasPlayingBeforePause = !audioRef.current.paused;
-        audioRef.current.pause();
-      }
-    };
-    const onUp = (e: MouseEvent) => {
-      if (e.button === 2 && audioRef.current && wasPlayingBeforePause) {
-        audioRef.current.play();
-      }
-    };
-    const onCosmicPause = (e: Event) => {
-      if (!audioRef.current) return;
-      if ((e as CustomEvent).detail) {
-        wasPlayingBeforePause = !audioRef.current.paused;
-        audioRef.current.pause();
-      } else if (wasPlayingBeforePause) {
-        audioRef.current.play();
-      }
-    };
-    window.addEventListener('mousedown', onDown);
-    window.addEventListener('mouseup', onUp);
-    window.addEventListener('cosmic-pause', onCosmicPause);
-
     return () => {
       audio.pause();
       audio.src = '';
-      window.removeEventListener('mousedown', onDown);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('cosmic-pause', onCosmicPause);
     };
   }, []);
 
@@ -91,7 +71,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AudioCtx.Provider value={{ isPlaying, progress, currentTime, duration, togglePlay, seek, audioRef }}>
+    <AudioCtx.Provider value={{ isPlaying, progress, currentTime, duration, loopCount, togglePlay, seek, audioRef }}>
       {children}
     </AudioCtx.Provider>
   );
