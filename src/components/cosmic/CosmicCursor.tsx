@@ -587,32 +587,42 @@ const CosmicCursor = () => {
     spawnBgStars();
     const bgStarInterval = setInterval(spawnBgStars, 8000);
 
-    // ─── Right-click hold (desktop): pause animation ───
+    // Helper: detect if pointer is in the bottom "space" zone (last screen — empty area)
+    const isInBottomZone = (clientY: number) => {
+      const scrollBottom = window.scrollY + clientY;
+      const docHeight = document.documentElement.scrollHeight;
+      return scrollBottom >= docHeight - window.innerHeight * 0.6;
+    };
+
+    // ─── Right-click hold (desktop): pause animation ONLY in bottom zone ───
     const onContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
+      if (isInBottomZone(e.clientY)) e.preventDefault();
     };
     const onMouseDown = (e: MouseEvent) => {
-      if (e.button === 2) {
+      if (e.button === 2 && isInBottomZone(e.clientY)) {
         pausedRef.current = true;
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: true }));
       }
     };
     const onMouseUp = (e: MouseEvent) => {
-      if (e.button === 2) {
+      if (e.button === 2 && pausedRef.current) {
         pausedRef.current = false;
+        window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: false }));
       }
     };
 
-    // ─── Long-press (mobile/tablet): pause animation (like desktop right-click) ───
+    // ─── Long-press (mobile/tablet): pause animation ONLY in bottom zone ───
     let longPressTimer: ReturnType<typeof setTimeout> | null = null;
-    const longPressThreshold = 400; // ms
+    const longPressThreshold = 500; // ms
 
     const onTouchStartForLongPress = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], input, textarea, select, [tabindex], form')) return;
+      const touch = e.touches[0];
+      if (!touch || !isInBottomZone(touch.clientY)) return;
       longPressTimer = setTimeout(() => {
         longPressTimer = null;
         pausedRef.current = true;
-        // Dispatch custom event so videos/audio can also pause
         window.dispatchEvent(new CustomEvent('cosmic-pause', { detail: true }));
       }, longPressThreshold);
     };
