@@ -647,7 +647,7 @@ const CosmicCursor = () => {
       window.addEventListener('contextmenu', onContextMenu);
       window.addEventListener('mousedown', onMouseDown);
       window.addEventListener('mouseup', onMouseUp);
-      window.addEventListener('contextmenu', (e) => e.preventDefault());
+      
     }
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
