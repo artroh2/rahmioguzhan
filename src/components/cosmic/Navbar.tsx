@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import diamondLogo from '@/assets/diamond-logo.png';
 
 interface NavbarProps {
@@ -14,12 +15,14 @@ const NAV_ITEMS = {
     { label: 'Şiir', href: '#siir' },
     { label: 'Hakkımda', href: '#hakkimda' },
     { label: 'İletişim', href: '#iletisim' },
+    { label: 'Projeler', href: '/projeler', route: true },
   ],
   en: [
     { label: 'Music', href: '#muzik' },
     { label: 'Poetry', href: '#siir' },
     { label: 'About', href: '#hakkimda' },
     { label: 'Contact', href: '#iletisim' },
+    { label: 'Projects', href: '/projeler', route: true },
   ],
 };
 
