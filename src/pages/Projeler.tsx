@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Lock } from 'lucide-react';
 import Navbar from '@/components/cosmic/Navbar';
 import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
 import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
@@ -10,6 +10,7 @@ import logoMulkex from '@/assets/logos/mulkex.png';
 import logoAiqrace from '@/assets/logos/aiqrace.png';
 import logoWorldmeets from '@/assets/logos/worldmeets.png';
 import logoMukemmell from '@/assets/logos/mukemmell.png';
+import logoClassified from '@/assets/logos/classified.png';
 
 const PROJECTS = [
   {
@@ -41,6 +42,13 @@ const PROJECTS = [
     description: 'Mükemmeliyetçiler İçin Danışmanlık Platformu',
     url: 'https://mukemmell-3ix2lw9nt-world-meets-org.vercel.app',
     logo: logoMukemmell,
+  },
+  {
+    name: '[REDACTED]',
+    description: 'Savunma Sanayi için geliştirilmiş gizli proje. Detaylar paylaşılamaz.',
+    url: '',
+    logo: logoClassified,
+    classified: true,
   },
 ];
 
