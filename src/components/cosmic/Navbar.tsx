@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import diamondLogo from '@/assets/diamond-logo.png';
 
 interface NavbarProps {
@@ -14,12 +15,14 @@ const NAV_ITEMS = {
     { label: 'Şiir', href: '#siir' },
     { label: 'Hakkımda', href: '#hakkimda' },
     { label: 'İletişim', href: '#iletisim' },
+    { label: 'Projeler', href: '/projeler', route: true },
   ],
   en: [
     { label: 'Music', href: '#muzik' },
     { label: 'Poetry', href: '#siir' },
     { label: 'About', href: '#hakkimda' },
     { label: 'Contact', href: '#iletisim' },
+    { label: 'Projects', href: '/projeler', route: true },
   ],
 };
 
@@ -74,10 +77,13 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          {items.map((item) => (
-            <a
+          {items.map((item) => {
+            const Tag: any = item.route ? Link : 'a';
+            const linkProps = item.route ? { to: item.href } : { href: item.href };
+            return (
+            <Tag
               key={item.href}
-              href={item.href}
+              {...linkProps}
               className="relative text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"
             >
               {activeSection === item.href && (
@@ -90,8 +96,9 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
               <span className={activeSection === item.href ? 'text-primary' : ''}>
                 {item.label}
               </span>
-            </a>
-          ))}
+            </Tag>
+            );
+          })}
           <button
             onClick={onToggleLang}
             className="text-xs font-semibold px-3 py-1.5 rounded-full border border-border hover:border-primary hover:text-primary text-muted-foreground transition-all duration-300"
@@ -122,10 +129,13 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
           className="md:hidden bg-[#030508]/95 backdrop-blur-xl border-t border-border"
         >
           <div className="px-6 py-4 flex flex-col gap-4">
-            {items.map((item) => (
-              <a
+            {items.map((item) => {
+              const Tag: any = item.route ? Link : 'a';
+              const linkProps = item.route ? { to: item.href } : { href: item.href };
+              return (
+              <Tag
                 key={item.href}
-                href={item.href}
+                {...linkProps}
                 onClick={() => setMobileOpen(false)}
                 className={`text-sm transition-colors flex items-center gap-2 ${
                   activeSection === item.href ? 'text-primary' : 'text-muted-foreground hover:text-primary'
@@ -135,8 +145,9 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(74,158,255,0.6)]" />
                 )}
                 {item.label}
-              </a>
-            ))}
+              </Tag>
+              );
+            })}
           </div>
         </motion.div>
       )}
