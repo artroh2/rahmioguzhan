@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { AudioProvider } from "@/contexts/AudioContext";
 import ReactPixel from "react-facebook-pixel";
 import Index from "./pages/Index";
 import Manifesto from "./pages/Manifesto";
@@ -34,21 +35,23 @@ const PageViewTracker = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageViewTracker />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/manifesto" element={<Manifesto />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/projeler" element={<Projeler />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <AudioProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageViewTracker />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/manifesto" element={<Manifesto />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/projeler" element={<Projeler />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AudioProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );

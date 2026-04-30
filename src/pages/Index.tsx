@@ -10,7 +10,7 @@ import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
 import CosmicCursor from '@/components/cosmic/CosmicCursor';
 import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
 import StreamingLinksPopup from '@/components/cosmic/StreamingLinksPopup';
-import { AudioProvider, useAudio } from '@/contexts/AudioContext';
+import { useAudio } from '@/contexts/AudioContext';
 
 const LOOP_CUT_SECONDS = 2; // skip last 2s "coming soon" frame
 
@@ -84,24 +84,22 @@ const Index = () => {
   const [lang, setLang] = useState<'tr' | 'en'>('tr');
 
   return (
-    <AudioProvider>
-      <div className="min-h-screen bg-[#030508] text-foreground relative" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-        <StarfieldCanvas />
-        <FloatingCelestials />
-        <CosmicCursor />
-        <div className="relative z-10">
-          <Navbar lang={lang} onToggleLang={() => setLang(l => l === 'tr' ? 'en' : 'tr')} />
-          <HeroSection lang={lang} />
-          <MusicSection lang={lang} />
-          <PoetrySection lang={lang} />
-          <AboutSection lang={lang} />
-          <ContactSection lang={lang} />
-          <LyricsSection lang={lang} />
-          <BottomVideo />
-        </div>
-        <StreamingPopupTrigger />
+    <div className="min-h-screen bg-[#030508] text-foreground relative" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <StarfieldCanvas />
+      <FloatingCelestials />
+      <CosmicCursor />
+      <div className="relative z-10">
+        <Navbar lang={lang} onToggleLang={() => setLang(l => l === 'tr' ? 'en' : 'tr')} />
+        <HeroSection lang={lang} />
+        <MusicSection lang={lang} />
+        <PoetrySection lang={lang} />
+        <AboutSection lang={lang} />
+        <ContactSection lang={lang} />
+        <LyricsSection lang={lang} />
+        <BottomVideo />
       </div>
-    </AudioProvider>
+      <StreamingPopupTrigger />
+    </div>
   );
 };
 
