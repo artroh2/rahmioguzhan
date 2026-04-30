@@ -5,32 +5,42 @@ import Navbar from '@/components/cosmic/Navbar';
 import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
 import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
 import CosmicCursor from '@/components/cosmic/CosmicCursor';
+import logoArayor from '@/assets/logos/arayor.png';
+import logoMulkex from '@/assets/logos/mulkex.png';
+import logoAiqrace from '@/assets/logos/aiqrace.png';
+import logoWorldmeets from '@/assets/logos/worldmeets.png';
+import logoMukemmell from '@/assets/logos/mukemmell.png';
 
 const PROJECTS = [
   {
     name: 'Arayor',
     description: 'Yapay Zeka Destekli Araç Platformu',
     url: 'https://arayor-m0pdq3agz-world-meets-org.vercel.app',
+    logo: logoArayor,
   },
   {
     name: 'Mulkex',
     description: 'AI Destekli Emlak Analiz Platformu',
     url: 'https://mulkex-ai-insights-main-gk3qmmgit-world-meets-org.vercel.app',
+    logo: logoMulkex,
   },
   {
     name: 'AIQRace',
     description: 'Yapay Zeka Model Yarışı ve Karşılaştırma',
     url: 'https://ai-model-race-main-c0xirumzf-world-meets-org.vercel.app',
+    logo: logoAiqrace,
   },
   {
     name: 'WorldMeets',
     description: 'Global Etkinlik ve Toplantı Platformu',
     url: 'https://world-meet-up-53-main-8ywy3hw8w-world-meets-org.vercel.app',
+    logo: logoWorldmeets,
   },
   {
     name: 'Mukemmell',
     description: 'Mükemmeliyetçiler İçin Danışmanlık Platformu',
     url: 'https://mukemmell-3ix2lw9nt-world-meets-org.vercel.app',
+    logo: logoMukemmell,
   },
 ];
 
