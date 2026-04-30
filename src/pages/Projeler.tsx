@@ -5,32 +5,42 @@ import Navbar from '@/components/cosmic/Navbar';
 import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
 import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
 import CosmicCursor from '@/components/cosmic/CosmicCursor';
+import logoArayor from '@/assets/logos/arayor.png';
+import logoMulkex from '@/assets/logos/mulkex.png';
+import logoAiqrace from '@/assets/logos/aiqrace.png';
+import logoWorldmeets from '@/assets/logos/worldmeets.png';
+import logoMukemmell from '@/assets/logos/mukemmell.png';
 
 const PROJECTS = [
   {
     name: 'Arayor',
     description: 'Yapay Zeka Destekli Araç Platformu',
     url: 'https://arayor-m0pdq3agz-world-meets-org.vercel.app',
+    logo: logoArayor,
   },
   {
     name: 'Mulkex',
     description: 'AI Destekli Emlak Analiz Platformu',
     url: 'https://mulkex-ai-insights-main-gk3qmmgit-world-meets-org.vercel.app',
+    logo: logoMulkex,
   },
   {
     name: 'AIQRace',
     description: 'Yapay Zeka Model Yarışı ve Karşılaştırma',
     url: 'https://ai-model-race-main-c0xirumzf-world-meets-org.vercel.app',
+    logo: logoAiqrace,
   },
   {
     name: 'WorldMeets',
     description: 'Global Etkinlik ve Toplantı Platformu',
     url: 'https://world-meet-up-53-main-8ywy3hw8w-world-meets-org.vercel.app',
+    logo: logoWorldmeets,
   },
   {
     name: 'Mukemmell',
     description: 'Mükemmeliyetçiler İçin Danışmanlık Platformu',
     url: 'https://mukemmell-3ix2lw9nt-world-meets-org.vercel.app',
+    logo: logoMukemmell,
   },
 ];
 
@@ -76,25 +86,15 @@ const Projeler = () => {
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="shrink-0 w-11 h-11 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center overflow-hidden group-hover:border-amber-400/30 transition-colors duration-500">
+                      <div className="shrink-0 w-12 h-12 rounded-xl border border-amber-400/20 bg-gradient-to-br from-amber-400/[0.08] to-amber-900/[0.05] flex items-center justify-center overflow-hidden group-hover:border-amber-400/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all duration-500">
                         <img
-                          src={`https://www.google.com/s2/favicons?domain=${new URL(p.url).hostname}&sz=64`}
+                          src={p.logo}
                           alt={`${p.name} logo`}
-                          className="w-7 h-7 object-contain"
+                          width={48}
+                          height={48}
+                          className="w-9 h-9 object-contain"
                           loading="lazy"
-                          onError={(e) => {
-                            const t = e.currentTarget;
-                            t.style.display = 'none';
-                            const fb = t.nextElementSibling as HTMLElement | null;
-                            if (fb) fb.style.display = 'flex';
-                          }}
                         />
-                        <span
-                          aria-hidden
-                          className="hidden w-7 h-7 items-center justify-center text-sm font-bold text-amber-300/90"
-                        >
-                          {p.name.charAt(0)}
-                        </span>
                       </div>
                       <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500 truncate">
                         {p.name}
