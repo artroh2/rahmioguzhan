@@ -86,25 +86,15 @@ const Projeler = () => {
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="shrink-0 w-11 h-11 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center overflow-hidden group-hover:border-amber-400/30 transition-colors duration-500">
+                      <div className="shrink-0 w-12 h-12 rounded-xl border border-amber-400/20 bg-gradient-to-br from-amber-400/[0.08] to-amber-900/[0.05] flex items-center justify-center overflow-hidden group-hover:border-amber-400/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all duration-500">
                         <img
-                          src={`https://www.google.com/s2/favicons?domain=${new URL(p.url).hostname}&sz=64`}
+                          src={p.logo}
                           alt={`${p.name} logo`}
-                          className="w-7 h-7 object-contain"
+                          width={48}
+                          height={48}
+                          className="w-9 h-9 object-contain"
                           loading="lazy"
-                          onError={(e) => {
-                            const t = e.currentTarget;
-                            t.style.display = 'none';
-                            const fb = t.nextElementSibling as HTMLElement | null;
-                            if (fb) fb.style.display = 'flex';
-                          }}
                         />
-                        <span
-                          aria-hidden
-                          className="hidden w-7 h-7 items-center justify-center text-sm font-bold text-amber-300/90"
-                        >
-                          {p.name.charAt(0)}
-                        </span>
                       </div>
                       <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500 truncate">
                         {p.name}
