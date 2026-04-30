@@ -44,7 +44,7 @@ const PROJECTS = [
     logo: logoMukemmell,
   },
   {
-    name: '[REDACTED]',
+    name: '',
     description: 'Savunma Sanayi için geliştirilen gizli proje. Detaylar paylaşılamaz.',
     url: '',
     logo: logoClassified,
