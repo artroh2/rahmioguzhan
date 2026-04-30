@@ -44,7 +44,7 @@ const PROJECTS = [
     logo: logoMukemmell,
   },
   {
-    name: '[REDACTED]',
+    name: '',
     description: 'Savunma Sanayi için geliştirilen gizli proje. Detaylar paylaşılamaz.',
     url: '',
     logo: logoClassified,
@@ -104,9 +104,11 @@ const Projeler = () => {
                           loading="lazy"
                         />
                       </div>
-                      <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500 truncate">
-                        {p.name}
-                      </h2>
+                      {p.name && (
+                        <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500 truncate">
+                          {p.name}
+                        </h2>
+                      )}
                     </div>
                     {p.classified ? (
                       <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-red-500/40 text-red-300/90 bg-red-500/10">
