@@ -74,10 +74,32 @@ const Projeler = () => {
                 className="group relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 md:p-7 flex flex-col justify-between min-h-[200px] hover:border-amber-400/30 hover:bg-white/[0.05] transition-all duration-500 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)]"
               >
                 <div>
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500">
-                      {p.name}
-                    </h2>
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="shrink-0 w-11 h-11 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center overflow-hidden group-hover:border-amber-400/30 transition-colors duration-500">
+                        <img
+                          src={`https://www.google.com/s2/favicons?domain=${new URL(p.url).hostname}&sz=64`}
+                          alt={`${p.name} logo`}
+                          className="w-7 h-7 object-contain"
+                          loading="lazy"
+                          onError={(e) => {
+                            const t = e.currentTarget;
+                            t.style.display = 'none';
+                            const fb = t.nextElementSibling as HTMLElement | null;
+                            if (fb) fb.style.display = 'flex';
+                          }}
+                        />
+                        <span
+                          aria-hidden
+                          className="hidden w-7 h-7 items-center justify-center text-sm font-bold text-amber-300/90"
+                        >
+                          {p.name.charAt(0)}
+                        </span>
+                      </div>
+                      <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500 truncate">
+                        {p.name}
+                      </h2>
+                    </div>
                     <span className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-amber-400/30 text-amber-300/90 bg-amber-400/5">
                       Yakında
                     </span>
