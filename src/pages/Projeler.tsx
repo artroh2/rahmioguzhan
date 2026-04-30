@@ -45,7 +45,7 @@ const PROJECTS = [
   },
   {
     name: '[REDACTED]',
-    description: 'Savunma Sanayi için geliştirilmiş gizli proje. Detaylar paylaşılamaz.',
+    description: 'Savunma Sanayi için geliştirilen gizli proje. Detaylar paylaşılamaz.',
     url: '',
     logo: logoClassified,
     classified: true,
