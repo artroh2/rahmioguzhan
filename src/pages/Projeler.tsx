@@ -57,7 +57,7 @@ const Projeler = () => {
             className="text-center mb-16"
           >
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-foreground">
-              Üzerinde Çalıştığım SaaS Projeler
+              Üzerinde Çalıştığım S<span style={{ color: '#5C3A1E', filter: 'drop-shadow(0 0 10px rgba(92,58,30,0.4))' }}>a</span><span style={{ color: '#F59E0B', filter: 'drop-shadow(0 0 10px rgba(245,158,11,0.5))' }}>a</span>S Projeler
             </h1>
             <p className="mt-4 text-sm md:text-base text-muted-foreground tracking-wide">
               Yasal yükümlülükler tamamlandığında canlıya alınacak.
