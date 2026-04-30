@@ -10,7 +10,7 @@ import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
 import CosmicCursor from '@/components/cosmic/CosmicCursor';
 import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
 import StreamingLinksPopup from '@/components/cosmic/StreamingLinksPopup';
-import { AudioProvider, useAudio } from '@/contexts/AudioContext';
+import { useAudio } from '@/contexts/AudioContext';
 
 const LOOP_CUT_SECONDS = 2; // skip last 2s "coming soon" frame
 
