@@ -9,6 +9,7 @@ import ReactPixel from "react-facebook-pixel";
 import Index from "./pages/Index";
 import Manifesto from "./pages/Manifesto";
 import Privacy from "./pages/Privacy";
+import Projeler from "./pages/Projeler";
 import NotFound from "./pages/NotFound";
 
 const PIXEL_ID = "1901323140522127";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/manifesto" element={<Manifesto />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/projeler" element={<Projeler />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

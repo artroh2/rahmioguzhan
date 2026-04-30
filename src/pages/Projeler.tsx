@@ -1,0 +1,106 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import Navbar from '@/components/cosmic/Navbar';
+import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
+import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
+import CosmicCursor from '@/components/cosmic/CosmicCursor';
+
+const PROJECTS = [
+  {
+    name: 'Arayor',
+    description: 'Yapay Zeka Destekli Araç Platformu',
+    url: 'https://arayor-m0pdq3agz-world-meets-org.vercel.app',
+  },
+  {
+    name: 'Mulkex',
+    description: 'AI Destekli Emlak Analiz Platformu',
+    url: 'https://mulkex-ai-insights-main-gk3qmmgit-world-meets-org.vercel.app',
+  },
+  {
+    name: 'AIQRace',
+    description: 'Yapay Zeka Model Yarışı ve Karşılaştırma',
+    url: 'https://ai-model-race-main-c0xirumzf-world-meets-org.vercel.app',
+  },
+  {
+    name: 'WorldMeets',
+    description: 'Global Etkinlik ve Toplantı Platformu',
+    url: 'https://world-meet-up-53-main-8ywy3hw8w-world-meets-org.vercel.app',
+  },
+  {
+    name: 'Mukemmell',
+    description: 'Mükemmeliyetçiler İçin Danışmanlık Platformu',
+    url: 'https://mukemmell-3ix2lw9nt-world-meets-org.vercel.app',
+  },
+];
+
+const Projeler = () => {
+  const [lang, setLang] = useState<'tr' | 'en'>('tr');
+
+  return (
+    <div
+      className="min-h-screen bg-[#030508] text-foreground relative"
+      style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
+      <StarfieldCanvas />
+      <FloatingCelestials />
+      <CosmicCursor />
+
+      <div className="relative z-10">
+        <Navbar lang={lang} onToggleLang={() => setLang((l) => (l === 'tr' ? 'en' : 'tr'))} />
+
+        <main className="max-w-6xl mx-auto px-6 pt-32 pb-24">
+          <motion.header
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
+            <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-foreground">
+              Üzerinde Çalıştığım SaaS Projeler
+            </h1>
+            <p className="mt-4 text-sm md:text-base text-muted-foreground tracking-wide">
+              Yasal yükümlülükler tamamlandığında canlıya alınacak.
+            </p>
+          </motion.header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROJECTS.map((p, i) => (
+              <motion.article
+                key={p.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
+                className="group relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 md:p-7 flex flex-col justify-between min-h-[200px] hover:border-amber-400/30 hover:bg-white/[0.05] transition-all duration-500 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)]"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h2 className="text-2xl font-bold text-foreground group-hover:text-amber-300/90 transition-colors duration-500">
+                      {p.name}
+                    </h2>
+                    <span className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-amber-400/30 text-amber-300/90 bg-amber-400/5">
+                      Yakında
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
+                </div>
+
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm text-amber-300/80 hover:text-amber-200 transition-colors duration-300 self-start"
+                >
+                  Önizleme
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </motion.article>
+            ))}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default Projeler;
