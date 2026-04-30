@@ -108,22 +108,36 @@ const Projeler = () => {
                         {p.name}
                       </h2>
                     </div>
-                    <span className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-amber-400/30 text-amber-300/90 bg-amber-400/5">
-                      Yakında
-                    </span>
+                    {p.classified ? (
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-red-500/40 text-red-300/90 bg-red-500/10">
+                        <Lock className="w-2.5 h-2.5" />
+                        Classified
+                      </span>
+                    ) : (
+                      <span className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase border border-amber-400/30 text-amber-300/90 bg-amber-400/5">
+                        Yakında
+                      </span>
+                    )}
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
                 </div>
 
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-1.5 text-sm text-amber-300/80 hover:text-amber-200 transition-colors duration-300 self-start"
-                >
-                  Önizleme
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                {p.classified ? (
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-sm text-red-300/70 self-start tracking-[0.15em] uppercase text-[11px]">
+                    <Lock className="w-3 h-3" />
+                    Top Secret
+                  </span>
+                ) : (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm text-amber-300/80 hover:text-amber-200 transition-colors duration-300 self-start"
+                  >
+                    Önizleme
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
               </motion.article>
             ))}
           </div>
