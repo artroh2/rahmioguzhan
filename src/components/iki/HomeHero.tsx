@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Music, PenLine, Bell, BellRing } from 'lucide-react';
+import { Music, PenLine } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroBg from '@/assets/hero-bg.jpg';
 import type { TabId } from './BottomNav';
@@ -9,41 +8,6 @@ interface HomeHeroProps {
 }
 
 const HomeHero = ({ onNavigate }: HomeHeroProps) => {
-  const [notifState, setNotifState] = useState<'idle' | 'granted' | 'denied'>('idle');
-
-  useEffect(() => {
-    const saved = localStorage.getItem('roh2_notif');
-    if (saved === 'granted') setNotifState('granted');
-  }, []);
-
-  const requestNotifications = async () => {
-    try {
-      // Try Capacitor first
-      const { PushNotifications } = await import('@capacitor/push-notifications');
-      const result = await PushNotifications.requestPermissions();
-      if (result.receive === 'granted') {
-        await PushNotifications.register();
-        setNotifState('granted');
-        localStorage.setItem('roh2_notif', 'granted');
-      } else {
-        setNotifState('denied');
-      }
-    } catch {
-      // Fallback to Web Notification API
-      if ('Notification' in window) {
-        const perm = await Notification.requestPermission();
-        if (perm === 'granted') {
-          setNotifState('granted');
-          localStorage.setItem('roh2_notif', 'granted');
-        } else {
-          setNotifState('denied');
-        }
-      } else {
-        setNotifState('denied');
-      }
-    }
-  };
-
   return (
     <div className="relative h-full flex flex-col overflow-hidden">
       <div className="absolute inset-0">
@@ -91,45 +55,18 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => {
         >
           <button
             onClick={() => onNavigate('muzik')}
-            className="flex items-center justify-center gap-2.5 bg-primary hover:bg-primary/80 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.4)] hover:scale-[1.03] text-primary-foreground font-semibold py-4 rounded-xl transition-all duration-300 text-sm active:scale-95"
+            className="flex items-center justify-center gap-2.5 bg-transparent hover:bg-primary/10 text-foreground hover:text-primary font-semibold py-4 rounded-xl border-2 border-primary/60 shadow-[0_0_12px_rgba(198,130,40,0.4)] hover:shadow-[0_0_24px_rgba(198,130,40,0.7)] hover:border-primary hover:scale-[1.03] transition-all duration-300 text-sm active:scale-95"
           >
             <Music size={18} />
             Music
           </button>
           <button
             onClick={() => onNavigate('siirler')}
-            className="flex items-center justify-center gap-2.5 bg-card hover:bg-secondary hover:border-primary/50 hover:shadow-[0_0_20px_hsl(34_66%_47%/0.2)] hover:scale-[1.03] text-foreground font-semibold py-4 rounded-xl border border-border transition-all duration-300 text-sm active:scale-95"
+            className="flex items-center justify-center gap-2.5 bg-transparent hover:bg-primary/10 text-foreground hover:text-primary font-semibold py-4 rounded-xl border-2 border-primary/60 shadow-[0_0_12px_rgba(198,130,40,0.4)] hover:shadow-[0_0_24px_rgba(198,130,40,0.7)] hover:border-primary hover:scale-[1.03] transition-all duration-300 text-sm active:scale-95"
           >
             <PenLine size={18} />
             Poetry
           </button>
-        </motion.div>
-
-        {/* Notification Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mb-5"
-        >
-          {notifState === 'granted' ? (
-            <div className="flex items-center justify-center gap-2 text-xs text-primary">
-              <BellRing size={14} />
-              <span>You're in! 🔔 Notifications enabled</span>
-            </div>
-          ) : notifState === 'denied' ? (
-            <p className="text-center text-xs text-muted-foreground">
-              You can enable notifications in Settings anytime
-            </p>
-          ) : (
-            <button
-              onClick={requestNotifications}
-              className="w-full flex items-center justify-center gap-2 bg-card/80 backdrop-blur-xl border border-border hover:border-primary/40 text-foreground text-xs py-2.5 rounded-xl transition-all duration-300"
-            >
-              <Bell size={14} className="text-primary" />
-              Get notified on new music, poetry & updates
-            </button>
-          )}
         </motion.div>
 
         {/* Tagline */}
