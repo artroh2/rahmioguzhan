@@ -4,6 +4,8 @@ import HeroSection from '@/components/cosmic/HeroSection';
 import MusicSection from '@/components/cosmic/MusicSection';
 import PoetrySection from '@/components/cosmic/PoetrySection';
 import AboutSection from '@/components/cosmic/AboutSection';
+import ExperienceSection from '@/components/cosmic/ExperienceSection';
+import SupportSection from '@/components/cosmic/SupportSection';
 import ContactSection from '@/components/cosmic/ContactSection';
 import LyricsSection from '@/components/cosmic/LyricsSection';
 import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
@@ -94,6 +96,8 @@ const Index = () => {
         <MusicSection lang={lang} />
         <PoetrySection lang={lang} />
         <AboutSection lang={lang} />
+        <ExperienceSection lang={lang} />
+        <SupportSection lang={lang} />
         <ContactSection lang={lang} />
         <LyricsSection lang={lang} />
         <BottomVideo />
