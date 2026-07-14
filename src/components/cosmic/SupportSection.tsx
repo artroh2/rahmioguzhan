@@ -97,10 +97,10 @@ const SupportSection = ({ lang }: SupportSectionProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.message.trim()) {
+    if (!form.name.trim() || !form.message.trim()) {
       toast({
-        title: lang === 'tr' ? 'Mesaj gerekli' : 'Message required',
-        description: lang === 'tr' ? 'Lütfen bir öneri yaz.' : 'Please write a suggestion.',
+        title: lang === 'tr' ? 'Eksik alan' : 'Missing field',
+        description: lang === 'tr' ? 'Lütfen isim ve öneri gir.' : 'Please provide your name and a suggestion.',
         variant: 'destructive',
       });
       return;
@@ -108,7 +108,7 @@ const SupportSection = ({ lang }: SupportSectionProps) => {
     setSubmitting(true);
     try {
       const { error } = await supabase.from('support_suggestions').insert({
-        name: form.name.trim() || null,
+        name: form.name.trim(),
         type: form.type,
         message: form.message.trim(),
       });
@@ -116,7 +116,7 @@ const SupportSection = ({ lang }: SupportSectionProps) => {
       // Also forward as email notification
       supabase.functions.invoke('send-contact-email', {
         body: {
-          name: form.name.trim() || `Destek Önerisi (${form.type})`,
+          name: form.name.trim(),
           email: 'destek@rahmioguzhan.com',
           message: `[${form.type}]\n\n${form.message.trim()}`,
         },
@@ -282,14 +282,12 @@ const SupportSection = ({ lang }: SupportSectionProps) => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="max-w-2xl mx-auto space-y-5"
         >
-          <p className="text-center text-xs text-muted-foreground/80 font-mono tracking-wider">
-            {lang === 'tr' ? 'Anonim kalabilirsin.' : 'You can stay anonymous.'}
-          </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <input
               type="text"
-              placeholder={lang === 'tr' ? 'İsim (opsiyonel)' : 'Name (optional)'}
+              placeholder={lang === 'tr' ? 'İsim' : 'Name'}
               value={form.name}
+              required
               maxLength={100}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full bg-muted/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_rgba(74,158,255,0.15)] transition-all duration-300"
