@@ -17,9 +17,8 @@ const NAV_GROUPS: Record<'tr' | 'en', NavGroup[]> = {
     {
       label: 'Sanat',
       items: [
-        { label: 'Müzik', href: '/#muzik' },
-        { label: 'Şiir', href: '/#siir' },
-        { label: 'Hakkımda', href: '/#hakkimda' },
+        { label: 'Şarkılar & Albümler', href: '/#muzik' },
+        { label: 'Şiirler', href: '/#siir' },
       ],
     },
     {
@@ -39,9 +38,8 @@ const NAV_GROUPS: Record<'tr' | 'en', NavGroup[]> = {
     {
       label: 'Art',
       items: [
-        { label: 'Music', href: '/#muzik' },
-        { label: 'Poetry', href: '/#siir' },
-        { label: 'About', href: '/#hakkimda' },
+        { label: 'Songs & Albums', href: '/#muzik' },
+        { label: 'Poems', href: '/#siir' },
       ],
     },
     {
