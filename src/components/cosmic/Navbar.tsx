@@ -39,7 +39,7 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = ['iletisim', 'hakkimda', 'siir', 'muzik'];
+      const sections = ['iletisim', 'destek', 'deneyim', 'hakkimda', 'siir', 'muzik'];
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
