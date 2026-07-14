@@ -113,6 +113,14 @@ const SupportSection = ({ lang }: SupportSectionProps) => {
         message: form.message.trim(),
       });
       if (error) throw error;
+      // Also forward as email notification
+      supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: form.name.trim() || `Destek Önerisi (${form.type})`,
+          email: 'destek@rahmioguzhan.com',
+          message: `[${form.type}]\n\n${form.message.trim()}`,
+        },
+      }).catch(() => {});
       toast({
         title: lang === 'tr' ? 'Öneri iletildi' : 'Suggestion sent',
         description: lang === 'tr' ? 'Teşekkürler.' : 'Thank you.',

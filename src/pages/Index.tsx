@@ -8,27 +8,12 @@ import ExperienceSection from '@/components/cosmic/ExperienceSection';
 import SupportSection from '@/components/cosmic/SupportSection';
 import ContactSection from '@/components/cosmic/ContactSection';
 import LyricsSection from '@/components/cosmic/LyricsSection';
-import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
-import CosmicCursor from '@/components/cosmic/CosmicCursor';
-import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
-import StreamingLinksPopup from '@/components/cosmic/StreamingLinksPopup';
-import { useAudio } from '@/contexts/AudioContext';
 
-const LOOP_CUT_SECONDS = 2; // skip last 2s "coming soon" frame
+const LOOP_CUT_SECONDS = 2;
 
 const BottomVideo = () => {
   const bottomVideoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const onCosmicPause = (e: Event) => {
-      if ((e as CustomEvent).detail) bottomVideoRef.current?.pause();
-      else bottomVideoRef.current?.play();
-    };
-    window.addEventListener('cosmic-pause', onCosmicPause);
-    return () => window.removeEventListener('cosmic-pause', onCosmicPause);
-  }, []);
-
-  // Loop early — skip last 2s ("coming soon" frame)
   const handleTimeUpdate = () => {
     const v = bottomVideoRef.current;
     if (!v || !v.duration) return;
@@ -67,42 +52,35 @@ const BottomVideo = () => {
   );
 };
 
-const StreamingPopupTrigger = () => {
-  const { loopCount } = useAudio();
-  const [open, setOpen] = useState(false);
-  const shownRef = useRef(false);
-
-  useEffect(() => {
-    if (loopCount >= 3 && !shownRef.current) {
-      shownRef.current = true;
-      setOpen(true);
-    }
-  }, [loopCount]);
-
-  return <StreamingLinksPopup open={open} onClose={() => setOpen(false)} />;
-};
-
 const Index = () => {
   const [lang, setLang] = useState<'tr' | 'en'>('tr');
 
+  // Group markers used by nav dropdowns to hop to a section anchor
   return (
     <div className="min-h-screen bg-[#030508] text-foreground relative" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      <StarfieldCanvas />
-      <FloatingCelestials />
-      <CosmicCursor />
       <div className="relative z-10">
         <Navbar lang={lang} onToggleLang={() => setLang(l => l === 'tr' ? 'en' : 'tr')} />
         <HeroSection lang={lang} />
-        <MusicSection lang={lang} />
-        <PoetrySection lang={lang} />
-        <AboutSection lang={lang} />
-        <ExperienceSection lang={lang} />
-        <SupportSection lang={lang} />
+
+        {/* SANAT */}
+        <div id="sanat">
+          <MusicSection lang={lang} />
+          <PoetrySection lang={lang} />
+          <AboutSection lang={lang} />
+          <LyricsSection lang={lang} />
+        </div>
+
+        {/* BUSINESS */}
+        <div id="business">
+          <ExperienceSection lang={lang} />
+          <SupportSection lang={lang} />
+        </div>
+
+        {/* İLETİŞİM */}
         <ContactSection lang={lang} />
-        <LyricsSection lang={lang} />
+
         <BottomVideo />
       </div>
-      <StreamingPopupTrigger />
     </div>
   );
 };
