@@ -14,6 +14,8 @@ const NAV_ITEMS = {
     { label: 'Müzik', href: '#muzik' },
     { label: 'Şiir', href: '#siir' },
     { label: 'Hakkımda', href: '#hakkimda' },
+    { label: 'Deneyim', href: '#deneyim' },
+    { label: 'Destek', href: '#destek' },
     { label: 'İletişim', href: '#iletisim' },
     { label: 'Projeler', href: '/projeler', route: true },
   ],
@@ -21,6 +23,8 @@ const NAV_ITEMS = {
     { label: 'Music', href: '#muzik' },
     { label: 'Poetry', href: '#siir' },
     { label: 'About', href: '#hakkimda' },
+    { label: 'Experience', href: '#deneyim' },
+    { label: 'Support', href: '#destek' },
     { label: 'Contact', href: '#iletisim' },
     { label: 'Projects', href: '/projeler', route: true },
   ],
@@ -35,7 +39,7 @@ const Navbar = ({ lang, onToggleLang }: NavbarProps) => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = ['iletisim', 'hakkimda', 'siir', 'muzik'];
+      const sections = ['iletisim', 'destek', 'deneyim', 'hakkimda', 'siir', 'muzik'];
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
