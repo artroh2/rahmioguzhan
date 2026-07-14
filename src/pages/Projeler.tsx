@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Lock } from 'lucide-react';
 import Navbar from '@/components/cosmic/Navbar';
-import StarfieldCanvas from '@/components/cosmic/StarfieldCanvas';
-import FloatingCelestials from '@/components/cosmic/FloatingCelestials';
-import CosmicCursor from '@/components/cosmic/CosmicCursor';
 import logoArayor from '@/assets/logos/arayor.png';
 import logoMulkex from '@/assets/logos/mulkex.png';
 import logoAiqrace from '@/assets/logos/aiqrace.png';
@@ -60,9 +57,6 @@ const Projeler = () => {
       className="min-h-screen bg-[#030508] text-foreground relative"
       style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <StarfieldCanvas />
-      <FloatingCelestials />
-      <CosmicCursor />
 
       <div className="relative z-10">
         <Navbar lang={lang} onToggleLang={() => setLang((l) => (l === 'tr' ? 'en' : 'tr'))} />
