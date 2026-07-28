@@ -15,9 +15,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Playfair Display", "serif"],
-        mono: ["Space Mono", "monospace"],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
