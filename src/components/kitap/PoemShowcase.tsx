@@ -17,7 +17,7 @@ const pick = (poems: { title: string; body: string }[]): ShownPoem => {
 const PoemShowcase = () => {
   const [pool, setPool] = useState<{ title: string; body: string }[]>([]);
   const [poem, setPoem] = useState<ShownPoem | null>(null);
-  const [total, setTotal] = useState(1000);
+  
 
   useEffect(() => {
     let alive = true;
@@ -25,7 +25,7 @@ const PoemShowcase = () => {
       if (!alive) return;
       const usable = POEMS.filter(p => p.body && p.body.split('\n').length > 3);
       setPool(usable);
-      setTotal(POEMS.length);
+      
       setPoem(pick(usable));
     });
     return () => { alive = false; };
