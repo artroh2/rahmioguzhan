@@ -38,7 +38,7 @@ const BookSection = () => (
         </motion.p>
       </div>
 
-      <motion.div {...fade(0.5)} className="mt-12 flex flex-wrap items-center gap-4">
+      <motion.div {...fade(0.5)} className="mt-12">
         <button
           disabled
           className="group inline-flex items-center gap-3 border border-accent/40 text-accent/90 px-7 py-3.5 rounded-full text-sm tracking-wide hover:bg-accent/10 transition-colors duration-500 disabled:opacity-70"
@@ -47,7 +47,6 @@ const BookSection = () => (
           Kitabı Oku
           <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Yakında</span>
         </button>
-        <span className="text-xs text-muted-foreground">Yayınevi ile anlaşma sağlandığında paylaşılacak.</span>
       </motion.div>
     </div>
   </section>
