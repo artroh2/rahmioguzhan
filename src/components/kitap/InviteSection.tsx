@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Coffee, Instagram, Music2, Youtube, Mail } from 'lucide-react';
+import { Coffee, Instagram, Music2, Youtube, Mail, Guitar } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -83,6 +83,9 @@ const InviteSection = () => {
           <div className="flex items-center gap-3">
             <span className="font-display text-accent/70 text-base leading-none w-4 text-center">2</span>
             Masa tenisinde karşılaşalım.
+          </div>
+          <div className="flex items-center gap-3">
+            <Guitar className="w-4 h-4 text-accent/70" /> Spor ya da müzik yapalım.
           </div>
         </div>
 
