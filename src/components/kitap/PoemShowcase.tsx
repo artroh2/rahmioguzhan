@@ -17,7 +17,7 @@ const pick = (poems: { title: string; body: string }[]): ShownPoem => {
 const PoemShowcase = () => {
   const [pool, setPool] = useState<{ title: string; body: string }[]>([]);
   const [poem, setPoem] = useState<ShownPoem | null>(null);
-  const [total, setTotal] = useState(1000);
+  
 
   useEffect(() => {
     let alive = true;
@@ -25,7 +25,7 @@ const PoemShowcase = () => {
       if (!alive) return;
       const usable = POEMS.filter(p => p.body && p.body.split('\n').length > 3);
       setPool(usable);
-      setTotal(POEMS.length);
+      
       setPoem(pick(usable));
     });
     return () => { alive = false; };
@@ -41,7 +41,7 @@ const PoemShowcase = () => {
     <section id="siirler" className="relative py-28 sm:py-40 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <p className="text-[10px] tracking-[0.5em] uppercase text-accent/70 mb-3">Şiirler</p>
-        <p className="text-xs text-muted-foreground mb-12">{total}+ eserden birkaç dize</p>
+        <p className="text-xs text-muted-foreground mb-12">1299+ eserden birkaç dize</p>
 
         <div className="relative border border-border/60 rounded-sm px-6 sm:px-12 py-14 min-h-[320px] flex flex-col items-center justify-center bg-card/40">
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-3 font-display text-accent/60 text-sm">2</span>

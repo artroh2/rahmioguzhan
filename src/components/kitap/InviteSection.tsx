@@ -81,10 +81,6 @@ const InviteSection = () => {
             <Coffee className="w-4 h-4 text-accent/70" /> Bir kahve içelim.
           </div>
           <div className="flex items-center gap-3">
-            <span className="font-display text-accent/70 text-base leading-none w-4 text-center">2</span>
-            Masa tenisinde karşılaşalım.
-          </div>
-          <div className="flex items-center gap-3">
             <Guitar className="w-4 h-4 text-accent/70" /> Spor ya da müzik yapalım.
           </div>
         </div>

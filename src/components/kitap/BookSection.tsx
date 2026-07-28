@@ -47,7 +47,7 @@ const BookSection = () => (
           Kitabı Oku
           <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Yakında</span>
         </button>
-        <span className="text-xs text-muted-foreground">İlk bölüm hazırlanıyor.</span>
+        <span className="text-xs text-muted-foreground">Yayınevi ile anlaşma sağlandığında paylaşılacak.</span>
       </motion.div>
     </div>
   </section>
